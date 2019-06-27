@@ -1,0 +1,6 @@
+framework module SwinjectStoryboard {
+  umbrella header "SwinjectStoryboard-umbrella.h"
+
+  export *
+  module * { export * }
+}
