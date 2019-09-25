@@ -18,3 +18,9 @@ How to Contribute
 ----------------------
 
 Please report any found issues or feed free to fork the repo and open pull requests with fixes, features or updates. 
+
+License
+----------------------
+
+Bouncer is distributed under MIT [license | https://github.com/afterxleep/Bouncer/blob/master/LICENSE]
+
