@@ -7,14 +7,21 @@ Different to other apps, Bouncer does not share, upload or send any of your pers
 
 Messages text is checked against a simple user defined blacklist.
 
+Building
+----------------------
+
+CocoaPods is used as dependency manager.   If you don't have CocoaPods installed, try the [Getting Started Guide](https://guides.cocoapods.org/using/getting-started.html)
+
+Run `pod install` to install dependencies, open the .workspace file in XCode.
+
+
 Latest Release
 ----------------------
 
 The app is available for free in the [App Store](https://apps.apple.com/us/app/bouncer-sms-block-list/id1457476313)
 
 
-
-How to Contribute
+Contribute
 ----------------------
 
 Please report any found issues or feed free to fork the repo and open pull requests with fixes, features or updates. 
