@@ -12,7 +12,7 @@ Building
 
 CocoaPods is used as dependency manager.   If you don't have CocoaPods installed, try the [Getting Started Guide](https://guides.cocoapods.org/using/getting-started.html)
 
-Run `pod install` to install dependencies, open the .workspace file in XCode.
+Run `pod install` in the project root to install dependencies, and then open the .workspace file in XCode.
 
 
 Latest Release
