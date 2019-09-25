@@ -14,10 +14,10 @@ The app is available for free in the App Store, here:
 https://apps.apple.com/us/app/bouncer-sms-block-list/id1457476313
 
 
-Contribute
+How to Contribute
 ----------------------
 
-If you find issues, or want to add a feature, simply fork this repo and open a Pull Request.
+Please report any found issues or feed free to fork the repo and open pull requests with fixes, features or updates. 
 
 
 License
