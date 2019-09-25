@@ -10,8 +10,8 @@ Messages text is checked against a simple user defined blacklist.
 Latest Release
 ----------------------
 
-The app is available for free in the App Store, here:
-https://apps.apple.com/us/app/bouncer-sms-block-list/id1457476313
+The app is available for free in the [App Store](https://apps.apple.com/us/app/bouncer-sms-block-list/id1457476313)
+
 
 
 How to Contribute
@@ -22,5 +22,5 @@ Please report any found issues or feed free to fork the repo and open pull reque
 License
 ----------------------
 
-Bouncer is distributed under MIT [license | https://github.com/afterxleep/Bouncer/blob/master/LICENSE]
+Bouncer is distributed under [MIT license](https://github.com/afterxleep/Bouncer/blob/master/LICENSE)
 
