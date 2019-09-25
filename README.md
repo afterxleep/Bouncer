@@ -18,7 +18,7 @@ Run `pod install` in the project root to install dependencies, and then open the
 Latest Release
 ----------------------
 
-The app is available for free in the [App Store](https://apps.apple.com/us/app/bouncer-sms-block-list/id1457476313)
+Too lazy to build it yourself?  Download the latest release in the [App Store](https://apps.apple.com/us/app/bouncer-sms-block-list/id1457476313) for free.
 
 
 Contribute
