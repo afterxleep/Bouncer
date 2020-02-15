@@ -215,7 +215,7 @@
                                     <constraint firstItem="pga-FI-GcF" firstAttribute="centerX" secondItem="9HM-w8-9XQ" secondAttribute="centerX" id="abQ-pZ-EKx"/>
                                 </constraints>
                             </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sgb-ac-y4v">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sgb-ac-y4v">
                                 <rect key="frame" x="34" y="50" width="346" height="59"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="59" id="jMS-GU-0OI"/>

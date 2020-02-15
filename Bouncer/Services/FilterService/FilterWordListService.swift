@@ -17,14 +17,17 @@ final class FilterWordListService: FilterService {
         self.wordListService = wordListService
     }
     
-    func isValidMessage(message: String?) -> Bool {
-        guard let messageBody = message?.lowercased() else { return false }
+    func isValidMessage(sender: String?, message: String?) -> Bool {
+        guard let sender = sender?.lowercased() else { return false }
+        guard let messageBody = message?.lowercased() else { return false }        
         let wordList = wordListService.read()
+        
         for word in wordList {
-            if messageBody.contains(word.lowercased()) {
+            if sender.contains(word.lowercased()) || messageBody.contains(word.lowercased()) {
                 return false
             }
         }
+        
         return true
     }
 }

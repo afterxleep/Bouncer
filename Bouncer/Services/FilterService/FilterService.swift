@@ -9,5 +9,5 @@
 import Foundation
 
 protocol FilterService {
-    func isValidMessage(message: String?) -> Bool
+    func isValidMessage(sender: String?, message: String?) -> Bool
 }
