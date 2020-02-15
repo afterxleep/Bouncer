@@ -13,22 +13,27 @@ class BaseNavController : UINavigationController {
     //MARK: - Deisgn vars
     let tintColor = UIColor.white
     let titleColor = UIColor.white
-    let bgColor = UIColor.init(hex: 0x495C73, alpha: 1)
+    let accentColor = UIColor(named: "AccentColor")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // General Tint
         UINavigationBar.appearance().tintColor = tintColor
+        UINavigationBar.appearance().prefersLargeTitles = true
         
         // General Appearance
         let standardAppearance = UINavigationBarAppearance()
-        standardAppearance.configureWithOpaqueBackground()
-        standardAppearance.backgroundColor = bgColor
+        standardAppearance.backgroundColor = accentColor
         standardAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: titleColor]
         standardAppearance.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: titleColor]
-        UINavigationBar.appearance().standardAppearance = standardAppearance
         
+        UINavigationBar.appearance().standardAppearance = standardAppearance
+        UINavigationBar.appearance().compactAppearance = standardAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = standardAppearance
+
+        
+
     }
 }
     

@@ -32,7 +32,7 @@
 		D662CE072249B0C30032B137 /* UserDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D662CE062249B0C30032B137 /* UserDataService.swift */; };
 		D662CE0A2249B1510032B137 /* UserDataDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D662CE092249B1510032B137 /* UserDataDefaultsService.swift */; };
 		D662D6FB22590B5E0070D4D3 /* BaseNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D662D6FA22590B5E0070D4D3 /* BaseNavController.swift */; };
-		D662D7042259744F0070D4D3 /* UIColor+hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = D662D7032259744F0070D4D3 /* UIColor+hex.swift */; };
+		D662D7042259744F0070D4D3 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D662D7032259744F0070D4D3 /* UIColor.swift */; };
 		D67EFE682235588C0036A761 /* WordListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67EFE672235588C0036A761 /* WordListService.swift */; };
 		D67EFE692235588C0036A761 /* WordListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67EFE672235588C0036A761 /* WordListService.swift */; };
 		D67EFE6B22355A660036A761 /* WordListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67EFE6A22355A660036A761 /* WordListView.swift */; };
@@ -141,7 +141,7 @@
 		D662CE062249B0C30032B137 /* UserDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataService.swift; sourceTree = "<group>"; };
 		D662CE092249B1510032B137 /* UserDataDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataDefaultsService.swift; sourceTree = "<group>"; };
 		D662D6FA22590B5E0070D4D3 /* BaseNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavController.swift; sourceTree = "<group>"; };
-		D662D7032259744F0070D4D3 /* UIColor+hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hex.swift"; sourceTree = "<group>"; };
+		D662D7032259744F0070D4D3 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		D67EFE672235588C0036A761 /* WordListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListService.swift; sourceTree = "<group>"; };
 		D67EFE6A22355A660036A761 /* WordListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListView.swift; sourceTree = "<group>"; };
 		D67EFE7022355AED0036A761 /* WordListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListPresenter.swift; sourceTree = "<group>"; };
@@ -396,7 +396,7 @@
 		D662D7022259743E0070D4D3 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				D662D7032259744F0070D4D3 /* UIColor+hex.swift */,
+				D662D7032259744F0070D4D3 /* UIColor.swift */,
 				D614A3B3225AD61A008EE7FE /* Strings+NSLocalized.swift */,
 			);
 			path = Extensions;
@@ -770,7 +770,7 @@
 				81869222223A081B004B070A /* DataSource.swift in Sources */,
 				D68D16232235D448004B8AAA /* WordListAddViewController.swift in Sources */,
 				D662D6FB22590B5E0070D4D3 /* BaseNavController.swift in Sources */,
-				D662D7042259744F0070D4D3 /* UIColor+hex.swift in Sources */,
+				D662D7042259744F0070D4D3 /* UIColor.swift in Sources */,
 				D67EFE6B22355A660036A761 /* WordListView.swift in Sources */,
 				D69A04A3224B229400DB1ED9 /* AppDelegate+MainInjection.swift in Sources */,
 				D68D160D22356D25004B8AAA /* BasePresenter.swift in Sources */,

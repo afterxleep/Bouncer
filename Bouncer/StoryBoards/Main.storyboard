@@ -3,6 +3,7 @@
     <device id="retina5_5" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -40,7 +41,7 @@
                             <outlet property="delegate" destination="oed-XU-Mwv" id="jSk-Wo-FMk"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Block List" largeTitleDisplayMode="always" id="AkW-l8-hZs">
+                    <navigationItem key="navigationItem" title="Block List" id="AkW-l8-hZs">
                         <barButtonItem key="leftBarButtonItem" title="Item" image="help-icon" style="done" id="Ea1-Ah-GKU">
                             <connections>
                                 <action selector="showHelp:" destination="oed-XU-Mwv" id="Shf-dR-x4i"/>
@@ -82,7 +83,7 @@
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
-                        <color key="backgroundColor" red="0.2274509804" green="0.31372549020000001" blue="0.41960784309999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" name="AccentColor"/>
                         <constraints>
                             <constraint firstItem="KQc-Ea-QHe" firstAttribute="leading" secondItem="yJV-jC-hqx" secondAttribute="leading" constant="16" id="Hzk-Wr-Zqy"/>
                             <constraint firstItem="smV-Ox-8uS" firstAttribute="leading" secondItem="yJV-jC-hqx" secondAttribute="leading" constant="16" id="KVd-Qq-dUs"/>
@@ -94,7 +95,7 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="yJV-jC-hqx"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Add Word or Phrase" id="a84-XC-161">
+                    <navigationItem key="navigationItem" title="Add Word or Phrase" largeTitleDisplayMode="always" id="a84-XC-161">
                         <barButtonItem key="leftBarButtonItem" style="done" systemItem="cancel" id="jrz-Ob-lRh">
                             <connections>
                                 <action selector="cancel" destination="fQ2-MI-gNr" id="QlB-g2-iGg"/>
@@ -214,33 +215,22 @@
                                     <constraint firstItem="pga-FI-GcF" firstAttribute="centerX" secondItem="9HM-w8-9XQ" secondAttribute="centerX" id="abQ-pZ-EKx"/>
                                 </constraints>
                             </view>
-                            <navigationBar userInteractionEnabled="NO" contentMode="scaleAspectFit" largeTitles="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MDQ-a0-mLM">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="96"/>
-                                <rect key="contentStretch" x="0.40000000000000002" y="0.0" width="1" height="1"/>
-                                <viewLayoutGuide key="safeArea" id="FPQ-ts-sww"/>
-                                <color key="barTintColor" red="0.2274509804" green="0.31372549020000001" blue="0.41960784309999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <textAttributes key="titleTextAttributes">
-                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </textAttributes>
-                                <textAttributes key="largeTitleTextAttributes">
-                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </textAttributes>
-                                <items>
-                                    <navigationItem title="Welcome!" largeTitleDisplayMode="always" id="ir1-Sb-BN1"/>
-                                </items>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="barPosition">
-                                        <integer key="value" value="3"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                            </navigationBar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontForContentSizeCategory="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sgb-ac-y4v">
+                                <rect key="frame" x="34" y="50" width="346" height="59"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="59" id="jMS-GU-0OI"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="39"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
-                        <color key="backgroundColor" red="0.2274509804" green="0.31372549020000001" blue="0.41960784309999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" name="AccentColor"/>
                         <constraints>
-                            <constraint firstItem="MDQ-a0-mLM" firstAttribute="top" secondItem="3HO-KP-uLZ" secondAttribute="top" id="7TW-g1-6wy"/>
-                            <constraint firstItem="MDQ-a0-mLM" firstAttribute="leading" secondItem="3HO-KP-uLZ" secondAttribute="leading" id="EMw-Ks-pQQ"/>
+                            <constraint firstItem="sgb-ac-y4v" firstAttribute="top" secondItem="3HO-KP-uLZ" secondAttribute="top" constant="50" id="80C-cL-dQ6"/>
+                            <constraint firstItem="3HO-KP-uLZ" firstAttribute="trailing" secondItem="sgb-ac-y4v" secondAttribute="trailing" constant="34" id="8q2-g8-1av"/>
+                            <constraint firstItem="sgb-ac-y4v" firstAttribute="leading" secondItem="3HO-KP-uLZ" secondAttribute="leading" constant="34" id="C5v-8i-yDJ"/>
                             <constraint firstItem="3HO-KP-uLZ" firstAttribute="bottom" secondItem="9HM-w8-9XQ" secondAttribute="bottom" constant="151" id="G88-fi-SRW"/>
-                            <constraint firstItem="MDQ-a0-mLM" firstAttribute="trailing" secondItem="3HO-KP-uLZ" secondAttribute="trailing" id="Sfh-pG-ReZ"/>
                             <constraint firstItem="9HM-w8-9XQ" firstAttribute="top" secondItem="3HO-KP-uLZ" secondAttribute="top" constant="117" id="UXg-i4-iC0"/>
                             <constraint firstItem="3HO-KP-uLZ" firstAttribute="trailing" secondItem="9HM-w8-9XQ" secondAttribute="trailing" constant="34" id="Xhy-JX-icI"/>
                             <constraint firstItem="9HM-w8-9XQ" firstAttribute="leading" secondItem="3HO-KP-uLZ" secondAttribute="leading" constant="34" id="pDG-Xm-uQK"/>
@@ -253,9 +243,9 @@
                         <outlet property="didItBtn" destination="Btg-iE-SEg" id="qQq-Xp-oeQ"/>
                         <outlet property="introTxtView" destination="vf3-NJ-pTd" id="Ptl-Z5-jCg"/>
                         <outlet property="msgsLbl" destination="yJs-zP-4Zu" id="DuM-XJ-hd0"/>
-                        <outlet property="navigationBar" destination="MDQ-a0-mLM" id="6pD-Sd-lbU"/>
                         <outlet property="settingsLbl" destination="Mfc-bI-O3M" id="TbS-cS-Bwq"/>
                         <outlet property="spamLbl" destination="FZD-GV-O3u" id="4Bn-eW-XAq"/>
+                        <outlet property="titleLbl" destination="sgb-ac-y4v" id="kMj-iQ-hxf"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Y1c-NB-jbH" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -269,6 +259,9 @@
         <image name="settings-icon" width="44" height="44"/>
         <image name="tap-icon" width="30" height="50"/>
         <image name="toggle-icon" width="50" height="31"/>
+        <namedColor name="AccentColor">
+            <color red="0.28627450980392155" green="0.36078431372549019" blue="0.45098039215686275" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
     </resources>
     <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
 </document>
