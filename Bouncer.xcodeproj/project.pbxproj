@@ -3,12 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		51A10EE7C7FBA17E226E8980 /* Pods_BouncerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 962D89C00537C8F9BBEAFF73 /* Pods_BouncerUITests.framework */; };
-		7994E156C0B2A9AE6343E547 /* Pods_Bouncer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2670CAFCA1E1FD1A4DA6A2AF /* Pods_Bouncer.framework */; };
+		7994E156C0B2A9AE6343E547 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		81861A2A223F24C200ADB7F8 /* SwinjectStoryboard+MainInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81861A29223F24C200ADB7F8 /* SwinjectStoryboard+MainInjection.swift */; };
 		81869222223A081B004B070A /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81869221223A081B004B070A /* DataSource.swift */; };
 		81869223223A0822004B070A /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81869221223A081B004B070A /* DataSource.swift */; };
@@ -19,7 +19,6 @@
 		D60D2F8F22342B9900ABB037 /* MessageFilterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60D2F8E22342B9900ABB037 /* MessageFilterExtension.swift */; };
 		D60D2F9322342B9900ABB037 /* smsfilter.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D60D2F8C22342B9900ABB037 /* smsfilter.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D614A3B4225AD61A008EE7FE /* Strings+NSLocalized.swift in Sources */ = {isa = PBXBuildFile; fileRef = D614A3B3225AD61A008EE7FE /* Strings+NSLocalized.swift */; };
-		D6385E7A2246F0D200486AED /* Pods_Bouncer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2670CAFCA1E1FD1A4DA6A2AF /* Pods_Bouncer.framework */; };
 		D6385E892247278600486AED /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = D6385E882247278600486AED /* Podfile */; };
 		D662CDD9224883090032B137 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D662CDD7224883090032B137 /* Localizable.strings */; };
 		D662CDDE224887120032B137 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D662CDDC224887120032B137 /* LaunchScreen.storyboard */; };
@@ -33,7 +32,7 @@
 		D662CE072249B0C30032B137 /* UserDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D662CE062249B0C30032B137 /* UserDataService.swift */; };
 		D662CE0A2249B1510032B137 /* UserDataDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D662CE092249B1510032B137 /* UserDataDefaultsService.swift */; };
 		D662D6FB22590B5E0070D4D3 /* BaseNavController.swift in Sources */ = {isa = PBXBuildFile; fileRef = D662D6FA22590B5E0070D4D3 /* BaseNavController.swift */; };
-		D662D7042259744F0070D4D3 /* UIColor+hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = D662D7032259744F0070D4D3 /* UIColor+hex.swift */; };
+		D662D7042259744F0070D4D3 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D662D7032259744F0070D4D3 /* UIColor.swift */; };
 		D67EFE682235588C0036A761 /* WordListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67EFE672235588C0036A761 /* WordListService.swift */; };
 		D67EFE692235588C0036A761 /* WordListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67EFE672235588C0036A761 /* WordListService.swift */; };
 		D67EFE6B22355A660036A761 /* WordListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67EFE6A22355A660036A761 /* WordListView.swift */; };
@@ -102,7 +101,6 @@
 
 /* Begin PBXFileReference section */
 		00254BC9AC7D06DDC6B40817 /* Pods-Bouncer.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bouncer.release.xcconfig"; path = "Pods/Target Support Files/Pods-Bouncer/Pods-Bouncer.release.xcconfig"; sourceTree = "<group>"; };
-		2670CAFCA1E1FD1A4DA6A2AF /* Pods_Bouncer.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Bouncer.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3CD4A8B90717EB6A3FB51A3C /* Pods-BouncerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BouncerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BouncerTests/Pods-BouncerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		4E1605407839E09858FD6110 /* Pods-Bouncer.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Bouncer.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Bouncer/Pods-Bouncer.debug.xcconfig"; sourceTree = "<group>"; };
 		6813B316F125F4EA5A9D5305 /* Pods-smsfilter.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-smsfilter.debug.xcconfig"; path = "Pods/Target Support Files/Pods-smsfilter/Pods-smsfilter.debug.xcconfig"; sourceTree = "<group>"; };
@@ -143,7 +141,7 @@
 		D662CE062249B0C30032B137 /* UserDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataService.swift; sourceTree = "<group>"; };
 		D662CE092249B1510032B137 /* UserDataDefaultsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDataDefaultsService.swift; sourceTree = "<group>"; };
 		D662D6FA22590B5E0070D4D3 /* BaseNavController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNavController.swift; sourceTree = "<group>"; };
-		D662D7032259744F0070D4D3 /* UIColor+hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+hex.swift"; sourceTree = "<group>"; };
+		D662D7032259744F0070D4D3 /* UIColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		D67EFE672235588C0036A761 /* WordListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListService.swift; sourceTree = "<group>"; };
 		D67EFE6A22355A660036A761 /* WordListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListView.swift; sourceTree = "<group>"; };
 		D67EFE7022355AED0036A761 /* WordListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WordListPresenter.swift; sourceTree = "<group>"; };
@@ -170,7 +168,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7994E156C0B2A9AE6343E547 /* Pods_Bouncer.framework in Frameworks */,
+				7994E156C0B2A9AE6343E547 /* (null) in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -194,7 +192,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D6385E7A2246F0D200486AED /* Pods_Bouncer.framework in Frameworks */,
 				93C43336AFAC31840F395515 /* Pods_smsfilter.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -206,7 +203,6 @@
 			isa = PBXGroup;
 			children = (
 				D6385E7B2246F0E100486AED /* Swinject.framework */,
-				2670CAFCA1E1FD1A4DA6A2AF /* Pods_Bouncer.framework */,
 				933DAB8D491E6C9FB8AE14DE /* Pods_BouncerTests.framework */,
 				962D89C00537C8F9BBEAFF73 /* Pods_BouncerUITests.framework */,
 				BF4AE6E9204FFB431CA934F3 /* Pods_smsfilter.framework */,
@@ -400,7 +396,7 @@
 		D662D7022259743E0070D4D3 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
-				D662D7032259744F0070D4D3 /* UIColor+hex.swift */,
+				D662D7032259744F0070D4D3 /* UIColor.swift */,
 				D614A3B3225AD61A008EE7FE /* Strings+NSLocalized.swift */,
 			);
 			path = Extensions;
@@ -750,23 +746,16 @@
 			buildActionMask = 2147483647;
 			files = (
 			);
-			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-Bouncer/Pods-Bouncer-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/Swinject/Swinject.framework",
-				"${BUILT_PRODUCTS_DIR}/SwinjectStoryboard/SwinjectStoryboard.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Bouncer/Pods-Bouncer-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Swinject.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwinjectStoryboard.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-Bouncer/Pods-Bouncer-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Bouncer/Pods-Bouncer-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Bouncer/Pods-Bouncer-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -781,7 +770,7 @@
 				81869222223A081B004B070A /* DataSource.swift in Sources */,
 				D68D16232235D448004B8AAA /* WordListAddViewController.swift in Sources */,
 				D662D6FB22590B5E0070D4D3 /* BaseNavController.swift in Sources */,
-				D662D7042259744F0070D4D3 /* UIColor+hex.swift in Sources */,
+				D662D7042259744F0070D4D3 /* UIColor.swift in Sources */,
 				D67EFE6B22355A660036A761 /* WordListView.swift in Sources */,
 				D69A04A3224B229400DB1ED9 /* AppDelegate+MainInjection.swift in Sources */,
 				D68D160D22356D25004B8AAA /* BasePresenter.swift in Sources */,
@@ -1004,7 +993,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = JM9222EF99;
 				INFOPLIST_FILE = "Bouncer/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1029,7 +1018,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JM9222EF99;
 				INFOPLIST_FILE = "Bouncer/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

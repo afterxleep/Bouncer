@@ -33,6 +33,7 @@ final class TutorialViewController: UIViewController, TutorialView, Storyboarded
     @IBOutlet weak private var msgsLbl: UILabel!
     @IBOutlet weak private var spamLbl: UILabel!
     @IBOutlet weak private var bouncerLbl: UILabel!
+    @IBOutlet weak var titleLbl: UILabel!
     
     //MARK: - Life Cycle
     
@@ -40,7 +41,7 @@ final class TutorialViewController: UIViewController, TutorialView, Storyboarded
         super.viewDidLoad()
         presenter?.attachView(view: self)
         
-        navigationBar.topItem?.title = title
+        titleLbl.text = title        
         introTxtView.text = introText
         didItBtn.setTitle(buttonText, for: .normal)
         settingsLbl.text = settingsText

@@ -17,7 +17,7 @@ extension AppDelegate {
         
         // Main Coordinator
         container?.register(MainCoordinator.self) { resolver in
-            let navController = BaseNavController(navigationBarClass: nil, toolbarClass: nil)
+            let navController = BaseNavController()
             let userDataService = resolver.resolve(UserDataService.self) ?? UserDataDefaultsService()
             return MainCoordinator(navigationController: navController, userDataService: userDataService)
         }
