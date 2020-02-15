@@ -31,10 +31,10 @@ extension MessageFilterExtension: ILMessageFilterQueryHandling {
     }
     
     private func offlineAction(for queryRequest: ILMessageFilterQueryRequest) -> ILMessageFilterAction {
-        
+                              
         guard let sender = queryRequest.sender else { return .none }
         guard let messageBody = queryRequest.messageBody else { return .none }
-
+        
         if(filterService.isValidMessage(sender: sender, message: messageBody)) {
             return .allow
         }

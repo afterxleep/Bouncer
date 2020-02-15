@@ -20,9 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
         registerDependencies()  // Swinject injection
         
-        // FIXME: This is deprecated
-        UIApplication.shared.statusBarStyle = .lightContent
-        
         // create a basic UIWindow, attach the Coordinator Nav Controller an show
         let mainCoordinator = container?.resolve(MainCoordinator.self)
         mainCoordinator?.start()
