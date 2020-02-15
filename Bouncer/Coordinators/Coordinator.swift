@@ -12,7 +12,6 @@ protocol Coordinator: class {
     
     var userDataService: UserDataService { get }
     var childCoordinators: [Coordinator] { get set }
-    
     func start()
 }
 

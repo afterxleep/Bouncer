@@ -3,12 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		51A10EE7C7FBA17E226E8980 /* Pods_BouncerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 962D89C00537C8F9BBEAFF73 /* Pods_BouncerUITests.framework */; };
-		7994E156C0B2A9AE6343E547 /* Pods_Bouncer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2670CAFCA1E1FD1A4DA6A2AF /* Pods_Bouncer.framework */; };
+		7994E156C0B2A9AE6343E547 /* (null) in Frameworks */ = {isa = PBXBuildFile; };
 		81861A2A223F24C200ADB7F8 /* SwinjectStoryboard+MainInjection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81861A29223F24C200ADB7F8 /* SwinjectStoryboard+MainInjection.swift */; };
 		81869222223A081B004B070A /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81869221223A081B004B070A /* DataSource.swift */; };
 		81869223223A0822004B070A /* DataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81869221223A081B004B070A /* DataSource.swift */; };
@@ -168,7 +168,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7994E156C0B2A9AE6343E547 /* Pods_Bouncer.framework in Frameworks */,
+				7994E156C0B2A9AE6343E547 /* (null) in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -993,7 +993,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = JM9222EF99;
 				INFOPLIST_FILE = "Bouncer/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1018,7 +1018,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JM9222EF99;
 				INFOPLIST_FILE = "Bouncer/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

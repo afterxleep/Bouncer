@@ -12,35 +12,24 @@ class BaseNavController : UINavigationController {
     
     //MARK: - Deisgn vars
     let tintColor = UIColor.white
-    let largeTitle = true
     let titleColor = UIColor.white
     let bgColor = UIColor.init(hex: 0x495C73, alpha: 1)
     
-    //MARK: - Superview Inits
-    
-    override init(rootViewController : UIViewController) {
-        super.init(rootViewController : rootViewController)
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        // General Tint
+        UINavigationBar.appearance().tintColor = tintColor
+        
+        // General Appearance
+        let standardAppearance = UINavigationBarAppearance()
+        standardAppearance.configureWithOpaqueBackground()
+        standardAppearance.backgroundColor = bgColor
+        standardAppearance.titleTextAttributes = [NSAttributedString.Key.foregroundColor: titleColor]
+        standardAppearance.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: titleColor]
+        UINavigationBar.appearance().standardAppearance = standardAppearance
+        
     }
-    
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
-        self.navigationBar.isTranslucent = false
-        self.navigationBar.tintColor = tintColor
-        self.navigationBar.barTintColor = bgColor
-        self.navigationBar.prefersLargeTitles = largeTitle
-        self.navigationBar.titleTextAttributes = [NSAttributedString.Key.foregroundColor: titleColor]
-        self.navigationBar.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: titleColor]
-    }
-    
-    override init(navigationBarClass: AnyClass?, toolbarClass: AnyClass?) {
-        super.init(navigationBarClass : navigationBarClass, toolbarClass : toolbarClass)
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
-
 }
     
 
