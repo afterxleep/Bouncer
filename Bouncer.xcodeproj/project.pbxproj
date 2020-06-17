@@ -125,7 +125,7 @@
 		D60D2F9022342B9900ABB037 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D60D2F982234BDDE00ABB037 /* Bouncer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bouncer.entitlements; sourceTree = "<group>"; };
 		D60D2F992234BDE500ABB037 /* smsfilter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = smsfilter.entitlements; sourceTree = "<group>"; };
-		D614A3B3225AD61A008EE7FE /* Strings+NSLocalized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Strings+NSLocalized.swift"; path = "/Users/afterxleep/Dev/Bouncer/Bouncer/Extensions/Strings+NSLocalized.swift"; sourceTree = "<absolute>"; };
+		D614A3B3225AD61A008EE7FE /* Strings+NSLocalized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "Strings+NSLocalized.swift"; path = "Bouncer/Extensions/Strings+NSLocalized.swift"; sourceTree = "<group>"; };
 		D6385E7B2246F0E100486AED /* Swinject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Swinject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6385E882247278600486AED /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		D662CDD8224883090032B137 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Bouncer/Base.lproj/Localizable.strings; sourceTree = SOURCE_ROOT; };
