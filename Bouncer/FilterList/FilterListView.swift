@@ -86,7 +86,8 @@ struct FilterListView: View {
                                 Image(systemName: "questionmark.circle").imageScale(.large)
                             }
                             .sheet(isPresented: $showingSettings) {
-                                TutorialView()
+                                TutorialView(firstLaunch: false)
+                                    .environmentObject(appSettings)
                         },
                     trailing:
                         Button(

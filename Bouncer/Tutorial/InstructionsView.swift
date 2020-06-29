@@ -8,12 +8,16 @@
 import SwiftUI
 
 struct InstructionsView: View {
+    
     @EnvironmentObject var appSettings: UserSettingsDefaults
+    @Environment(\.presentationMode) var presentationMode
+    var firstLaunch: Bool = true
     
     enum LocalizedStrings: LocalizedStringKey {
         case lets = "Let's "
+        case howTo = "Here's how to "
         case enableSMS = "enable SMS Filtering"
-        case onYouriPhone = " on your iPhone!"
+        case onYouriPhone = " on your iPhone"
         case open = "Open "
         case the = "the"
         case settingsApp = "'Settings App'"
@@ -23,26 +27,34 @@ struct InstructionsView: View {
         case toggle = "Toggle"
         case bouncer = "'Bouncer'"
         case takeMeToSettings = "Take me to Settings!"
+        case gotIt = "Got it!"
     }    
     
     let separatorColor = Color(red: 0.294, green: 0.357, blue: 0.455)
     let boxBackground = Color(red: 0.004, green: 0.004, blue: 0.004).opacity(0.1)
     
-    func navigateToSettings() {
-        appSettings.hasLaunchedApp = true
-        if let settingsURL = URL(string: UIApplication.openSettingsURLString),
-            UIApplication.shared.canOpenURL(settingsURL) {
-            UIApplication.shared.open(settingsURL, options: [:])}            
+    func respondToActionButton() {
+        if(firstLaunch) {
+            appSettings.hasLaunchedApp = true
+            if let settingsURL = URL(string: UIApplication.openSettingsURLString),
+                UIApplication.shared.canOpenURL(settingsURL) {
+                UIApplication.shared.open(settingsURL, options: [:])}
+        }
+        else {
+            self.presentationMode.wrappedValue.dismiss()
+        }
+                    
     }
     
     var body: some View {
         VStack(alignment: .center) {
             Group() {
-                Text(LocalizedStrings.lets.rawValue).foregroundColor(DESIGN.TEXT.DARK.DEFAULT_COLOR) +
-                    Text(LocalizedStrings.enableSMS.rawValue)
+                Text((firstLaunch) ? LocalizedStrings.lets.rawValue : LocalizedStrings.howTo.rawValue)
+                    .foregroundColor(DESIGN.TEXT.DARK.DEFAULT_COLOR) +
+                Text(LocalizedStrings.enableSMS.rawValue)
                     .foregroundColor(DESIGN.TEXT.DARK.DEFAULT_COLOR)
                     .fontWeight(.bold) +
-                    Text(LocalizedStrings.onYouriPhone.rawValue).foregroundColor(DESIGN.TEXT.DARK.DEFAULT_COLOR)
+                Text(LocalizedStrings.onYouriPhone.rawValue).foregroundColor(DESIGN.TEXT.DARK.DEFAULT_COLOR)
             }
             .padding(.horizontal, 40.0)
             .padding(.top, 40)
@@ -81,7 +93,7 @@ struct InstructionsView: View {
                         .foregroundColor(DESIGN.TEXT.DARK.HG_COLOR)
                         .bold() +
                         Text(LocalizedStrings.unknownAndSpam.rawValue).foregroundColor(DESIGN.TEXT.DARK.DEFAULT_COLOR)
-                }.frame(width: nil, height: 30, alignment: .bottom)
+                }.frame(width: nil, height: 28, alignment: .bottom)
                 
                 HStack {
                     Text("4.").foregroundColor(DESIGN.TEXT.DARK.DEFAULT_COLOR)
@@ -95,9 +107,9 @@ struct InstructionsView: View {
             .padding(.bottom, 35)
             
             Button(action: {
-                navigateToSettings()
+                respondToActionButton()
             }) {
-                Text(LocalizedStrings.takeMeToSettings.rawValue)
+                Text((firstLaunch) ? LocalizedStrings.takeMeToSettings.rawValue : LocalizedStrings.gotIt.rawValue)
                     .foregroundColor(DESIGN.BUTTON.DARK.TEXT_COLOR)
                     .frame(minWidth: 300, maxWidth: 300, minHeight: 0, maxHeight: 50)
                     .background(DESIGN.BUTTON.DARK.BG_COLOR)
