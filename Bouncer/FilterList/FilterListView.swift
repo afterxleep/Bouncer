@@ -8,8 +8,9 @@
 import SwiftUI
 
 struct FilterListView: View {
-        
-    @ObservedObject var viewModel = FilterListViewModel()
+
+    @EnvironmentObject var appSettings: UserSettingsDefaults
+    @ObservedObject var viewModel = FilterListViewModel()    
     @State private var showingSettings = false
     @State private var showingAddForm = false
     
@@ -19,7 +20,10 @@ struct FilterListView: View {
         case senderIs = "Sender is: "
         case messageIs = "Text is: "
         case anyContains = "Anything contains: "
-        case filters = "Filters"
+        case filters = "Block List"
+        case welcomeAlertTitle = "You're ready to go!"
+        case welcomeAlertMessage = "Bouncer will use your block list to filter SMS messages from unknown senders and people not in your contact list."
+        case gotIt = "Got it!"
     }
     
     func getFilterTypeString(filter: Filter) -> LocalizedStringKey {
@@ -41,31 +45,48 @@ struct FilterListView: View {
         }
     }
     
+    var shouldDisplayList: Bool {
+        print(viewModel.filters.count)
+        if(viewModel.filters.count > 0) {
+            return true
+        }
+        return false
+    }
+    
     var body: some View {
         ZStack {
             BackgroundView()
             NavigationView {
-                List {
-                    ForEach(viewModel.filters) { item in
-                        Text(getFilterTypeString(filter: item))
-                            .italic()
-                            .foregroundColor(.secondary)
-                            .fontWeight(.regular)
-                            +
-                        Text("'\(item.phrase)'")
-                            .bold()
-                    }.onDelete(perform: deleteItems)
+                Group {
+                    if(shouldDisplayList) {
+                        List {
+                            ForEach(viewModel.filters) { item in
+                                Text(getFilterTypeString(filter: item))
+                                    .italic()
+                                    .foregroundColor(.secondary)
+                                    .fontWeight(.regular)
+                                    +
+                                Text("'\(item.phrase)'")
+                                    .bold()
+                            }.onDelete(perform: deleteItems)
+                        }
+                        .listStyle(PlainListStyle())
+                    } else {
+                        EmptyListView()                        
+                    }
                 }
-                .listStyle(PlainListStyle())
                 .navigationBarTitle(LocalizedStrings.filters.rawValue)
                 .navigationBarItems(
                     leading:
                         Button(
-                            action: { self.showingSettings = true }) {
-                                Image(systemName: "gear").imageScale(.large)
+                            action: {
+                                self.showingSettings = true
+                                
+                            }) {
+                                Image(systemName: "questionmark.circle").imageScale(.large)
                             }
                             .sheet(isPresented: $showingSettings) {
-                                Text("Showing the settings window!")
+                                TutorialView()
                         },
                     trailing:
                         Button(
@@ -73,8 +94,8 @@ struct FilterListView: View {
                                 Image(systemName: "plus.circle").imageScale(.large)
                             }
                             .sheet(isPresented: $showingAddForm) {
-                                AddFilterView(showingAddForm: $showingAddForm)
-                                    .environmentObject(viewModel)
+                                AddFilterView(showingAddForm: $showingAddForm,
+                                              viewModel: self.viewModel)
                             }
                 )
             }.accentColor(DESIGN.UI.DARK.ACCENT_COLOR)

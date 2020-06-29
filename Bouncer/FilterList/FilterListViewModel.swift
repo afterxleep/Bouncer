@@ -17,22 +17,36 @@ final class FilterListViewModel: ObservableObject {
     
     private var filterListView : FilterListView?
     let filterListService: FilterFileStore = FilterFileStore()
-    var cancellable: AnyCancellable?
+    let userSettingsService: UserSettingsDefaults = UserSettingsDefaults()
+    var filterListcancellable: AnyCancellable?
+    var defaultsCancellable: AnyCancellable?
     
     @Published var filters: [Filter] = []
+    @Published var hasAddedFilters: Bool = true
+    @Published var isFirstLaunch: Bool = false
     
     //MARK: - Initializer
     init() {
-        cancellable = filterListService
+        filterListcancellable = filterListService
             .$filters
                 .receive(on: RunLoop.main)
                 .sink { [weak self] filters in
-                    self?.filters = filters
+                    self?.filters = filters                    
+                    self?.isFirstLaunch = (filters.count == 0 && self?.hasAddedFilters == false) ? true : false
                 }
+        
+        defaultsCancellable = userSettingsService
+            .$hasAddedFilters
+                .receive(on: RunLoop.main)
+                .sink { [weak self ] hasAddedFilters in
+                    self?.hasAddedFilters = hasAddedFilters
+                }
+        
     }
     
     func add(type: FilterType, phrase: String, exactMatch: Bool) {
         filterListService.add(filter: Filter(id: UUID(), type: type, phrase: phrase, exactMatch: exactMatch))
+        userSettingsService.hasAddedFilters = true
     }
     
     func remove(at offsets: IndexSet) {

@@ -9,9 +9,13 @@ import SwiftUI
 
 @main
 struct BouncerApp: App {
+    
+    var appSettings: UserSettingsDefaults = UserSettingsDefaults()
+    
     var body: some Scene {
         WindowGroup {
             BaseView()
+                .environmentObject(appSettings)
         }
     }
 }

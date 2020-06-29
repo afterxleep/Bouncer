@@ -17,6 +17,7 @@
 		D6233A8124A6538D00B37A6A /* SMSFilterLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6233A7D24A651A200B37A6A /* SMSFilterLocal.swift */; };
 		D6233A8324A653F200B37A6A /* FilterFileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FC824A54ADE009AE3FF /* FilterFileStore.swift */; };
 		D6233A8424A653FB00B37A6A /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FD124A54D8C009AE3FF /* Filter.swift */; };
+		D6379EB324AA852500FFD400 /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6379EB224AA852500FFD400 /* EmptyListView.swift */; };
 		D6529F7324A41371009AE3FF /* BouncerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529F7224A41371009AE3FF /* BouncerApp.swift */; };
 		D6529F7724A41372009AE3FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6529F7624A41372009AE3FF /* Assets.xcassets */; };
 		D6529F7A24A41372009AE3FF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6529F7924A41372009AE3FF /* Preview Assets.xcassets */; };
@@ -24,16 +25,14 @@
 		D6529F9024A41372009AE3FF /* BouncerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529F8F24A41372009AE3FF /* BouncerUITests.swift */; };
 		D6529F9F24A413A6009AE3FF /* TutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529F9E24A413A6009AE3FF /* TutorialView.swift */; };
 		D6529FA424A413EB009AE3FF /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FA324A413EB009AE3FF /* BackgroundView.swift */; };
-		D6529FA724A4140F009AE3FF /* DesignConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FA624A4140F009AE3FF /* DesignConstants.swift */; };
-		D6529FA924A4F14B009AE3FF /* TutorialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FA824A4F14B009AE3FF /* TutorialViewModel.swift */; };
 		D6529FAE24A4F246009AE3FF /* UserSettingsDefaultsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FAC24A4F246009AE3FF /* UserSettingsDefaultsService.swift */; };
-		D6529FB524A4F38D009AE3FF /* BaseViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FB424A4F38D009AE3FF /* BaseViewModel.swift */; };
 		D6529FB724A50B1F009AE3FF /* InstructionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FB624A50B1F009AE3FF /* InstructionsView.swift */; };
 		D6529FC324A54AAD009AE3FF /* FilterListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FC224A54AAD009AE3FF /* FilterListView.swift */; };
 		D6529FC524A54ABA009AE3FF /* FilterListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FC424A54ABA009AE3FF /* FilterListViewModel.swift */; };
 		D6529FCA24A54ADE009AE3FF /* FilterDummyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FC724A54ADE009AE3FF /* FilterDummyStore.swift */; };
 		D6529FCB24A54ADE009AE3FF /* FilterFileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FC824A54ADE009AE3FF /* FilterFileStore.swift */; };
 		D6529FD224A54D8C009AE3FF /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FD124A54D8C009AE3FF /* Filter.swift */; };
+		D679D67424AA758C00579223 /* DesignConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D679D67324AA758C00579223 /* DesignConstants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +83,7 @@
 		D6233A7D24A651A200B37A6A /* SMSFilterLocal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSFilterLocal.swift; sourceTree = "<group>"; };
 		D6233A8524A6553C00B37A6A /* Bouncer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bouncer.entitlements; sourceTree = "<group>"; };
 		D6233A8624A655BF00B37A6A /* SMSFilter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SMSFilter.entitlements; sourceTree = "<group>"; };
+		D6379EB224AA852500FFD400 /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
 		D6529F6F24A41371009AE3FF /* Bouncer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bouncer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6529F7224A41371009AE3FF /* BouncerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BouncerApp.swift; sourceTree = "<group>"; };
 		D6529F7624A41372009AE3FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -97,16 +97,14 @@
 		D6529F9124A41372009AE3FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6529F9E24A413A6009AE3FF /* TutorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialView.swift; sourceTree = "<group>"; };
 		D6529FA324A413EB009AE3FF /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
-		D6529FA624A4140F009AE3FF /* DesignConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignConstants.swift; sourceTree = "<group>"; };
-		D6529FA824A4F14B009AE3FF /* TutorialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewModel.swift; sourceTree = "<group>"; };
 		D6529FAC24A4F246009AE3FF /* UserSettingsDefaultsService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserSettingsDefaultsService.swift; sourceTree = "<group>"; };
-		D6529FB424A4F38D009AE3FF /* BaseViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewModel.swift; sourceTree = "<group>"; };
 		D6529FB624A50B1F009AE3FF /* InstructionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsView.swift; sourceTree = "<group>"; };
 		D6529FC224A54AAD009AE3FF /* FilterListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListView.swift; sourceTree = "<group>"; };
 		D6529FC424A54ABA009AE3FF /* FilterListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListViewModel.swift; sourceTree = "<group>"; };
 		D6529FC724A54ADE009AE3FF /* FilterDummyStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterDummyStore.swift; sourceTree = "<group>"; };
 		D6529FC824A54ADE009AE3FF /* FilterFileStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterFileStore.swift; sourceTree = "<group>"; };
 		D6529FD124A54D8C009AE3FF /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
+		D679D67324AA758C00579223 /* DesignConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,11 +182,11 @@
 		D6529F7124A41371009AE3FF /* Bouncer */ = {
 			isa = PBXGroup;
 			children = (
+				D679D67224AA758400579223 /* Config */,
 				D6529FD324A550A9009AE3FF /* Models */,
-				D6529FB324A4F353009AE3FF /* Protocols */,
-				D6529FA524A413FE009AE3FF /* Config */,
 				D6529FAA24A4F237009AE3FF /* Services */,
 				D6529FA224A413D5009AE3FF /* SharedViews */,
+				D679D66F24AA749000579223 /* BaseView */,
 				D6529FC124A54A92009AE3FF /* FilterList */,
 				D6529F9D24A4139A009AE3FF /* Tutorial */,
 				D6529F7224A41371009AE3FF /* BouncerApp.swift */,
@@ -229,9 +227,8 @@
 		D6529F9D24A4139A009AE3FF /* Tutorial */ = {
 			isa = PBXGroup;
 			children = (
-				D6529FB224A4F320009AE3FF /* SubViews */,
+				D6529FB624A50B1F009AE3FF /* InstructionsView.swift */,
 				D6529F9E24A413A6009AE3FF /* TutorialView.swift */,
-				D6529FA824A4F14B009AE3FF /* TutorialViewModel.swift */,
 			);
 			path = Tutorial;
 			sourceTree = "<group>";
@@ -239,18 +236,9 @@
 		D6529FA224A413D5009AE3FF /* SharedViews */ = {
 			isa = PBXGroup;
 			children = (
-				D615898924A55FF800FE710A /* BaseView.swift */,
 				D6529FA324A413EB009AE3FF /* BackgroundView.swift */,
 			);
 			path = SharedViews;
-			sourceTree = "<group>";
-		};
-		D6529FA524A413FE009AE3FF /* Config */ = {
-			isa = PBXGroup;
-			children = (
-				D6529FA624A4140F009AE3FF /* DesignConstants.swift */,
-			);
-			path = Config;
 			sourceTree = "<group>";
 		};
 		D6529FAA24A4F237009AE3FF /* Services */ = {
@@ -261,22 +249,6 @@
 				D6529FBE24A5419E009AE3FF /* UserSettings */,
 			);
 			path = Services;
-			sourceTree = "<group>";
-		};
-		D6529FB224A4F320009AE3FF /* SubViews */ = {
-			isa = PBXGroup;
-			children = (
-				D6529FB624A50B1F009AE3FF /* InstructionsView.swift */,
-			);
-			path = SubViews;
-			sourceTree = "<group>";
-		};
-		D6529FB324A4F353009AE3FF /* Protocols */ = {
-			isa = PBXGroup;
-			children = (
-				D6529FB424A4F38D009AE3FF /* BaseViewModel.swift */,
-			);
-			path = Protocols;
 			sourceTree = "<group>";
 		};
 		D6529FBE24A5419E009AE3FF /* UserSettings */ = {
@@ -293,6 +265,7 @@
 				D6233A6524A59F2800B37A6A /* AddFilterView.swift */,
 				D6529FC224A54AAD009AE3FF /* FilterListView.swift */,
 				D6529FC424A54ABA009AE3FF /* FilterListViewModel.swift */,
+				D6379EB224AA852500FFD400 /* EmptyListView.swift */,
 			);
 			path = FilterList;
 			sourceTree = "<group>";
@@ -313,6 +286,22 @@
 				D60A19C624A69F1F0002E8BD /* SMSMessage.swift */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		D679D66F24AA749000579223 /* BaseView */ = {
+			isa = PBXGroup;
+			children = (
+				D615898924A55FF800FE710A /* BaseView.swift */,
+			);
+			path = BaseView;
+			sourceTree = "<group>";
+		};
+		D679D67224AA758400579223 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				D679D67324AA758C00579223 /* DesignConstants.swift */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -487,18 +476,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6233A7F24A651A200B37A6A /* SMSFilterLocal.swift in Sources */,
-				D6529FA924A4F14B009AE3FF /* TutorialViewModel.swift in Sources */,
 				D6529F9F24A413A6009AE3FF /* TutorialView.swift in Sources */,
 				D60A19C724A69F1F0002E8BD /* SMSMessage.swift in Sources */,
 				D6529FCB24A54ADE009AE3FF /* FilterFileStore.swift in Sources */,
-				D6529FA724A4140F009AE3FF /* DesignConstants.swift in Sources */,
+				D6379EB324AA852500FFD400 /* EmptyListView.swift in Sources */,
 				D6529FD224A54D8C009AE3FF /* Filter.swift in Sources */,
-				D6529FB524A4F38D009AE3FF /* BaseViewModel.swift in Sources */,
 				D6233A6624A59F2800B37A6A /* AddFilterView.swift in Sources */,
 				D6529FC324A54AAD009AE3FF /* FilterListView.swift in Sources */,
 				D6529FA424A413EB009AE3FF /* BackgroundView.swift in Sources */,
 				D6529FAE24A4F246009AE3FF /* UserSettingsDefaultsService.swift in Sources */,
 				D6529FB724A50B1F009AE3FF /* InstructionsView.swift in Sources */,
+				D679D67424AA758C00579223 /* DesignConstants.swift in Sources */,
 				D6529F7324A41371009AE3FF /* BouncerApp.swift in Sources */,
 				D6529FC524A54ABA009AE3FF /* FilterListViewModel.swift in Sources */,
 				D615898A24A55FF800FE710A /* BaseView.swift in Sources */,

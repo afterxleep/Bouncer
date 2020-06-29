@@ -34,7 +34,8 @@ struct AddFilterView: View {
     @State var filterOption: FilterOption = .senderAndMessage
     @State var filterTerm: String = ""
     @State var exactMatch: Bool = false
-    @EnvironmentObject var viewModel: FilterListViewModel
+    @EnvironmentObject var appSettings: UserSettingsDefaults
+    var viewModel: FilterListViewModel
     
     var body: some View {
         NavigationView {
@@ -100,7 +101,8 @@ struct AddFilterView: View {
 
 
 struct AddFilterView_Previews: PreviewProvider {
+    static var viewModel = FilterListViewModel()
     static var previews: some View {
-        AddFilterView(showingAddForm: .constant(true))
+        AddFilterView(showingAddForm: .constant(true), viewModel: viewModel)
     }
 }

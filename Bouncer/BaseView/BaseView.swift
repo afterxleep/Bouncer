@@ -8,13 +8,22 @@
 import SwiftUI
 
 struct BaseView: View {
-   
+    
+    @EnvironmentObject var appSettings: UserSettingsDefaults
+    
     init() {
         customizeNavbar()
     }
     
     var body: some View {
-        FilterListView().background(DESIGN.UI.DARK.MAIN_BG_COLOR)
+        Group {
+            if(!appSettings.hasLaunchedApp) {
+                TutorialView()
+            } else {
+                FilterListView()
+                    .background(DESIGN.UI.DARK.MAIN_BG_COLOR)
+            }
+        }
     }
     
     func customizeNavbar() {

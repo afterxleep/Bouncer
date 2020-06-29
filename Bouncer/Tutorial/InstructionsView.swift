@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct InstructionsView: View {
-    var viewModel: TutorialViewModel
+    @EnvironmentObject var appSettings: UserSettingsDefaults
     
     enum LocalizedStrings: LocalizedStringKey {
         case lets = "Let's "
@@ -28,11 +28,11 @@ struct InstructionsView: View {
     let separatorColor = Color(red: 0.294, green: 0.357, blue: 0.455)
     let boxBackground = Color(red: 0.004, green: 0.004, blue: 0.004).opacity(0.1)
     
-    func navigateToSettings() {        
+    func navigateToSettings() {
+        appSettings.hasLaunchedApp = true
         if let settingsURL = URL(string: UIApplication.openSettingsURLString),
             UIApplication.shared.canOpenURL(settingsURL) {
-            UIApplication.shared.open(settingsURL, options: [:])}
-            viewModel.firstLaunchCompleted()
+            UIApplication.shared.open(settingsURL, options: [:])}            
     }
     
     var body: some View {
@@ -115,7 +115,7 @@ struct InstructionsView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             BackgroundView()
-            InstructionsView(viewModel: TutorialViewModel())
+            InstructionsView()
         }
         
     }

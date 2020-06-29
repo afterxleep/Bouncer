@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-struct TutorialView: View {    
-    @ObservedObject var viewModel: TutorialViewModel = TutorialViewModel()
+struct TutorialView: View {
+        
+    @EnvironmentObject var appSettings: UserSettingsDefaults
     
     enum LocalizedStrings: LocalizedStringKey {
         case helloThere = "Hello There!"
@@ -31,7 +32,7 @@ struct TutorialView: View {
                             .foregroundColor(DESIGN.TEXT.DARK.DEFAULT_COLOR)
                             .padding(.bottom, 60.0)
                 }
-                InstructionsView(viewModel: viewModel)
+                InstructionsView()
             }
         }
     }
