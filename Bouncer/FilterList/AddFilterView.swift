@@ -60,7 +60,7 @@ struct AddFilterView: View {
                     }
                 }
             }
-            .navigationTitle(LocalizedString.addFilter.rawValue)
+            .navigationBarTitle(LocalizedString.addFilter.rawValue)
             .navigationBarItems(
                 leading:
                     Button(
@@ -91,11 +91,13 @@ struct AddFilterView: View {
     }
     
     func saveFilter() {
-        viewModel.add(type: ruleTypeFrom(filterOption: filterOption),
-                            phrase: filterTerm,
-                            exactMatch: exactMatch)
- 
-        self.showingAddForm = false
+        if(filterTerm.count > 0) {
+            viewModel.add(type: ruleTypeFrom(filterOption: filterOption),
+                                phrase: filterTerm,
+                                exactMatch: exactMatch)
+     
+            self.showingAddForm = false
+        }
     }
 }
 

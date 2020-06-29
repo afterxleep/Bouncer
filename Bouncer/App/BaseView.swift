@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BaseView: View {
     
-    @EnvironmentObject var appSettings: UserSettingsDefaults
+    var appSettings: UserSettingsDefaults = UserSettingsDefaults()
     
     init() {
         customizeNavbar()
@@ -19,17 +19,29 @@ struct BaseView: View {
         Group {
             if(!appSettings.hasLaunchedApp) {
                 TutorialView()
+                    .environmentObject(appSettings)
             } else {
                 FilterListView()
                     .background(Color("MainBackgroundColor"))
+                    .environmentObject(appSettings)
             }
         }
     }
     
     func customizeNavbar() {
+        
+        let image = UIImage.gradientImageWithBounds(
+            bounds: CGRect(x: 0, y: 0, width: 1, height: 11),
+            colors: [
+                UIColor(named: "NavigationBarGradient1Color")!.cgColor,
+                UIColor(named: "NavigationBarGradient2Color")!.cgColor
+            ]
+        )
+        
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
         appearance.backgroundColor = UIColor(named: "NavigationBarBackgroundColor")
+        appearance.backgroundImage = image
         let attrs: [NSAttributedString.Key: Any] = [
             .foregroundColor: UIColor(named: "TextDefaultColor") ?? .white
         ]

@@ -7,11 +7,12 @@
 
 import SwiftUI
 
-@main
+//@main
 struct BouncerApp: App {
     
     var appSettings: UserSettingsDefaults = UserSettingsDefaults()
     
+    @available(iOS 14.0, *)
     var body: some Scene {
         WindowGroup {
             BaseView()
