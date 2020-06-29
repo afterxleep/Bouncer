@@ -28,17 +28,17 @@ struct TutorialView: View {
                         Text(LocalizedStrings.helloThere.rawValue)
                             .font(.largeTitle)
                             .fontWeight(.bold)
-                            .foregroundColor(DESIGN.TEXT.DARK.HG_COLOR)
+                            .foregroundColor(Color("TextHighLightColor"))
                         Text(LocalizedStrings.welcomeToBouncer.rawValue)
                             .font(.largeTitle)
-                            .foregroundColor(DESIGN.TEXT.DARK.DEFAULT_COLOR)
+                            .foregroundColor(Color("TextDefaultColor"))
                             .padding(.bottom, 60.0)
                     }
                     else {
                         Text(LocalizedStrings.help.rawValue)
                             .font(.largeTitle)
                             .fontWeight(.bold)
-                            .foregroundColor(DESIGN.TEXT.DARK.HG_COLOR)
+                            .foregroundColor(Color("TextHighLightColor"))
                             .padding(.bottom, 20.0)
                     }
                 }

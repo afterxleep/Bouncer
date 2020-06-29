@@ -99,7 +99,8 @@ struct FilterListView: View {
                                               viewModel: self.viewModel)
                             }
                 )
-            }.accentColor(DESIGN.UI.DARK.ACCENT_COLOR)
+            }            
+            
         }
     }
 

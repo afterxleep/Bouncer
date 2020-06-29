@@ -50,11 +50,11 @@ struct InstructionsView: View {
         VStack(alignment: .center) {
             Group() {
                 Text((firstLaunch) ? LocalizedStrings.lets.rawValue : LocalizedStrings.howTo.rawValue)
-                    .foregroundColor(DESIGN.TEXT.DARK.DEFAULT_COLOR) +
+                    .foregroundColor(Color("TextDefaultColor")) +
                 Text(LocalizedStrings.enableSMS.rawValue)
-                    .foregroundColor(DESIGN.TEXT.DARK.DEFAULT_COLOR)
+                    .foregroundColor(Color("TextDefaultColor"))
                     .fontWeight(.bold) +
-                Text(LocalizedStrings.onYouriPhone.rawValue).foregroundColor(DESIGN.TEXT.DARK.DEFAULT_COLOR)
+                Text(LocalizedStrings.onYouriPhone.rawValue).foregroundColor(Color("TextDefaultColor"))
             }
             .padding(.horizontal, 40.0)
             .padding(.top, 40)
@@ -69,39 +69,39 @@ struct InstructionsView: View {
             
             VStack(alignment: .leading) {
                 HStack {
-                    Text("1.").foregroundColor(DESIGN.TEXT.DARK.DEFAULT_COLOR)
+                    Text("1.").foregroundColor(Color("TextDefaultColor"))
                     Text(LocalizedStrings.open.rawValue)
-                        .foregroundColor(DESIGN.TEXT.DARK.HG_COLOR)
+                        .foregroundColor(Color("TextHighLightColor"))
                         .bold() +
-                        Text(LocalizedStrings.the.rawValue).foregroundColor(DESIGN.TEXT.DARK.DEFAULT_COLOR)
+                        Text(LocalizedStrings.the.rawValue).foregroundColor(Color("TextDefaultColor"))
                     Image("settings-icon")
-                    Text(LocalizedStrings.settingsApp.rawValue).foregroundColor(DESIGN.TEXT.DARK.DEFAULT_COLOR)
+                    Text(LocalizedStrings.settingsApp.rawValue).foregroundColor(Color("TextDefaultColor"))
                 }
                 
                 HStack {
-                    Text("2.").foregroundColor(DESIGN.TEXT.DARK.DEFAULT_COLOR)
+                    Text("2.").foregroundColor(Color("TextDefaultColor"))
                     Text(LocalizedStrings.tap.rawValue)
-                        .foregroundColor(DESIGN.TEXT.DARK.HG_COLOR)
+                        .foregroundColor(Color("TextHighLightColor"))
                         .bold()
                     Image("messages-icon")
-                    Text(LocalizedStrings.messages.rawValue).foregroundColor(DESIGN.TEXT.DARK.DEFAULT_COLOR)
+                    Text(LocalizedStrings.messages.rawValue).foregroundColor(Color("TextDefaultColor"))
                 }
                 
                 HStack {
-                    Text("3.").foregroundColor(DESIGN.TEXT.DARK.DEFAULT_COLOR)
+                    Text("3.").foregroundColor(Color("TextDefaultColor"))
                     Text(LocalizedStrings.tap.rawValue)
-                        .foregroundColor(DESIGN.TEXT.DARK.HG_COLOR)
+                        .foregroundColor(Color("TextHighLightColor"))
                         .bold() +
-                        Text(LocalizedStrings.unknownAndSpam.rawValue).foregroundColor(DESIGN.TEXT.DARK.DEFAULT_COLOR)
+                        Text(LocalizedStrings.unknownAndSpam.rawValue).foregroundColor(Color("TextDefaultColor"))
                 }.frame(width: nil, height: 28, alignment: .bottom)
                 
                 HStack {
-                    Text("4.").foregroundColor(DESIGN.TEXT.DARK.DEFAULT_COLOR)
+                    Text("4.").foregroundColor(Color("TextDefaultColor"))
                     Text(LocalizedStrings.toggle.rawValue)
-                        .foregroundColor(DESIGN.TEXT.DARK.HG_COLOR)
+                        .foregroundColor(Color("TextHighLightColor"))
                         .bold()
                     Image("toggle-icon")
-                    Text(LocalizedStrings.bouncer.rawValue).foregroundColor(DESIGN.TEXT.DARK.DEFAULT_COLOR)
+                    Text(LocalizedStrings.bouncer.rawValue).foregroundColor(Color("TextDefaultColor"))
                 }
             }
             .padding(.bottom, 35)
@@ -110,9 +110,9 @@ struct InstructionsView: View {
                 respondToActionButton()
             }) {
                 Text((firstLaunch) ? LocalizedStrings.takeMeToSettings.rawValue : LocalizedStrings.gotIt.rawValue)
-                    .foregroundColor(DESIGN.BUTTON.DARK.TEXT_COLOR)
+                    .foregroundColor(Color("TextDefaultColor"))
                     .frame(minWidth: 300, maxWidth: 300, minHeight: 0, maxHeight: 50)
-                    .background(DESIGN.BUTTON.DARK.BG_COLOR)
+                    .background(Color("ButtonBackgroundColor"))
                     .cornerRadius(DESIGN.BUTTON.CORNER_RADIUS)
                     .padding(.bottom, 40)
             }

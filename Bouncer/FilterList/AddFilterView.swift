@@ -17,8 +17,8 @@ struct AddFilterView: View {
         case cancel = "Cancel"
         case advanced = "Advanced"
         case exactMatch = "Exact Match"
-        case exactMatchExplanationSender = "Turn on to filter messages only when the body is exactly equal to the provided word or phrase."
-        case exactMatchExplanationBody = "Turn on to filter messages only when the body is exactly equal to the provided word or phrase"
+        case exactMatchExplanationSender = "Filter messages only when the sender exactly matches the provided word or phrase."
+        case exactMatchExplanationBody = "Filter messages only when the text exactly matches the provided word or phrase."
         case filterInformation = "Filter Information"
         case sender = "sender"
         case body = "body"
@@ -75,7 +75,7 @@ struct AddFilterView: View {
                         Text(LocalizedString.save.rawValue)
                     }
             )
-        }.accentColor(DESIGN.UI.DARK.ACCENT_COLOR)
+        }
         
     }
     

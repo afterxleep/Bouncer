@@ -21,7 +21,7 @@ struct BaseView: View {
                 TutorialView()
             } else {
                 FilterListView()
-                    .background(DESIGN.UI.DARK.MAIN_BG_COLOR)
+                    .background(Color("MainBackgroundColor"))
             }
         }
     }
@@ -29,12 +29,12 @@ struct BaseView: View {
     func customizeNavbar() {
         let appearance = UINavigationBarAppearance()
         appearance.configureWithTransparentBackground()
-        appearance.backgroundColor = DESIGN.NAVIGATIONBAR.DARK.BACKGROUND_COLOR
+        appearance.backgroundColor = UIColor(named: "NavigationBarBackgroundColor")
         let attrs: [NSAttributedString.Key: Any] = [
-            .foregroundColor: DESIGN.NAVIGATIONBAR.DARK.TITLE_COLOR
+            .foregroundColor: UIColor(named: "TextDefaultColor") ?? .white
         ]
         appearance.largeTitleTextAttributes = attrs
-        UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        UINavigationBar.appearance().scrollEdgeAppearance = appearance                
     }
 }
 

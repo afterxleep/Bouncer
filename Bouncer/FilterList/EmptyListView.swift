@@ -22,7 +22,7 @@ struct EmptyListView: View {
                     }
                 }.frame(width: 260)
             }
-            .foregroundColor(DESIGN.TEXT.DARK.HG_COLOR)
+            .foregroundColor(Color("TextHighLightColor"))
             .multilineTextAlignment(.center)
         }.padding(.bottom, 200)
     }
