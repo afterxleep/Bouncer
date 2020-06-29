@@ -9,40 +9,31 @@
 import IdentityLookup
 
 class MessageFilterExtension: ILMessageFilterExtension {
-    let filterService: FilterService = FilterWordListService()
+    let filterService: SMSFilterLocal = SMSFilterLocal()
 }
-
 
 extension MessageFilterExtension: ILMessageFilterQueryHandling {
     
     func handle(_ queryRequest: ILMessageFilterQueryRequest, context: ILMessageFilterExtensionContext, completion: @escaping (ILMessageFilterQueryResponse) -> Void) {
         
-        // First, check whether to filter using offline data (if possible).
         let offlineAction = self.offlineAction(for: queryRequest)
-        
-        switch offlineAction {
-        case .none, .allow, .filter:
-            let response = ILMessageFilterQueryResponse()
-            response.action = offlineAction
-            completion(response)
-        @unknown default:
-            print("Unknown handled case")
-        }
+        let response = ILMessageFilterQueryResponse()
+        response.action = offlineAction
+        completion(response)
     }
     
     private func offlineAction(for queryRequest: ILMessageFilterQueryRequest) -> ILMessageFilterAction {
-                              
         guard let sender = queryRequest.sender else { return .none }
         guard let messageBody = queryRequest.messageBody else { return .none }
+        let message = SMSMessage(sender: sender, text: messageBody)
         
-        if(filterService.isValidMessage(sender: sender, message: messageBody)) {
+        if(filterService.isValidMessage(message: message)) {
             return .allow
         }
-        return .filter
+        return .junk
     }
     
     private func action(for networkResponse: ILNetworkResponse) -> ILMessageFilterAction {
-        // Replace with logic to parse the HTTP response and data payload of `networkResponse` to return an action.
         return .none
     }
     
