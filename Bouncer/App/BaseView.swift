@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BaseView: View {
     
-    var appSettings: UserSettingsDefaults = UserSettingsDefaults()
+    @EnvironmentObject var appSettings: UserSettingsDefaults
     
     init() {
         customizeNavbar()
@@ -19,11 +19,9 @@ struct BaseView: View {
         Group {
             if(!appSettings.hasLaunchedApp) {
                 TutorialView()
-                    .environmentObject(appSettings)
             } else {
                 FilterListView()
                     .background(Color("MainBackgroundColor"))
-                    .environmentObject(appSettings)
             }
         }
     }

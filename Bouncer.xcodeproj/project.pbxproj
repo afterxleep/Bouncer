@@ -34,9 +34,6 @@
 		D664B24424AA92AA00EB826D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D664B24324AA92AA00EB826D /* Colors.xcassets */; };
 		D664B24624AA92D200EB826D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D664B24524AA92D200EB826D /* Assets.xcassets */; };
 		D664B24824AA998700EB826D /* UIImage+Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D664B24724AA998700EB826D /* UIImage+Gradient.swift */; };
-		D664B28924AA9E8A00EB826D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D664B28724AA9E8A00EB826D /* SceneDelegate.swift */; };
-		D664B28A24AA9E8A00EB826D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D664B28824AA9E8A00EB826D /* AppDelegate.swift */; };
-		D664B28C24AA9EE400EB826D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D664B28B24AA9EE400EB826D /* LaunchScreen.storyboard */; };
 		D679D67424AA758C00579223 /* DesignConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D679D67324AA758C00579223 /* DesignConstants.swift */; };
 /* End PBXBuildFile section */
 
@@ -111,9 +108,6 @@
 		D664B24324AA92AA00EB826D /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		D664B24524AA92D200EB826D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D664B24724AA998700EB826D /* UIImage+Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Gradient.swift"; sourceTree = "<group>"; };
-		D664B28724AA9E8A00EB826D /* SceneDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		D664B28824AA9E8A00EB826D /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		D664B28B24AA9EE400EB826D /* LaunchScreen.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D679D67324AA758C00579223 /* DesignConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -312,9 +306,6 @@
 			children = (
 				D6529F7224A41371009AE3FF /* BouncerApp.swift */,
 				D615898924A55FF800FE710A /* BaseView.swift */,
-				D664B28824AA9E8A00EB826D /* AppDelegate.swift */,
-				D664B28724AA9E8A00EB826D /* SceneDelegate.swift */,
-				D664B28B24AA9EE400EB826D /* LaunchScreen.storyboard */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -461,7 +452,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D664B24424AA92AA00EB826D /* Colors.xcassets in Resources */,
-				D664B28C24AA9EE400EB826D /* LaunchScreen.storyboard in Resources */,
 				D664B24624AA92D200EB826D /* Assets.xcassets in Resources */,
 				D6529F7A24A41372009AE3FF /* Preview Assets.xcassets in Resources */,
 			);
@@ -502,7 +492,6 @@
 			files = (
 				D6233A7F24A651A200B37A6A /* SMSFilterLocal.swift in Sources */,
 				D6529F9F24A413A6009AE3FF /* TutorialView.swift in Sources */,
-				D664B28A24AA9E8A00EB826D /* AppDelegate.swift in Sources */,
 				D60A19C724A69F1F0002E8BD /* SMSMessage.swift in Sources */,
 				D664B24824AA998700EB826D /* UIImage+Gradient.swift in Sources */,
 				D6529FCB24A54ADE009AE3FF /* FilterFileStore.swift in Sources */,
@@ -512,7 +501,6 @@
 				D6529FC324A54AAD009AE3FF /* FilterListView.swift in Sources */,
 				D6529FA424A413EB009AE3FF /* BackgroundView.swift in Sources */,
 				D6529FAE24A4F246009AE3FF /* UserSettingsDefaultsService.swift in Sources */,
-				D664B28924AA9E8A00EB826D /* SceneDelegate.swift in Sources */,
 				D6529FB724A50B1F009AE3FF /* InstructionsView.swift in Sources */,
 				D679D67424AA758C00579223 /* DesignConstants.swift in Sources */,
 				D6529F7324A41371009AE3FF /* BouncerApp.swift in Sources */,
@@ -650,7 +638,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -705,7 +693,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -727,7 +715,7 @@
 				DEVELOPMENT_TEAM = JM9222EF99;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Bouncer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -751,7 +739,7 @@
 				DEVELOPMENT_TEAM = JM9222EF99;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Bouncer/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

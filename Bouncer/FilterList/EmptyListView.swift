@@ -11,7 +11,7 @@ struct EmptyListView: View {
     var body: some View {
         VStack(alignment: .center) {
             Group() {
-                Text("This is your Block List").font(.title).bold().padding()
+                Text("This is your Block List").font(.title2).bold().padding()
                 Group {
                     Text("Bouncer will block SMS messages from unknown senders using the filters you add here.")
                     HStack(spacing: 0) {

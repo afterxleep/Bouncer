@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-//@main
+@main
 struct BouncerApp: App {
     
     var appSettings: UserSettingsDefaults = UserSettingsDefaults()
