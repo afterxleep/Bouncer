@@ -9,7 +9,7 @@
 import Foundation
 import Combine
 
-final class UserSettingsDefaults: ObservableObject {
+final class UserSettings: ObservableObject {
     
     private enum keys: String {
         case hasLaunchedApp

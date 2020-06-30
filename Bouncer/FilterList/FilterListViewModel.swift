@@ -17,7 +17,7 @@ final class FilterListViewModel: ObservableObject {
     
     private var filterListView : FilterListView?
     let filterListService: FilterFileStore = FilterFileStore()
-    let userSettingsService: UserSettingsDefaults = UserSettingsDefaults()
+    let userSettingsService: UserSettings = UserSettings()
     var filterListcancellable: AnyCancellable?
     var defaultsCancellable: AnyCancellable?
     

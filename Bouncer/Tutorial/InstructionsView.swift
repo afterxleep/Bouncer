@@ -9,33 +9,16 @@ import SwiftUI
 
 struct InstructionsView: View {
     
-    @EnvironmentObject var appSettings: UserSettingsDefaults
+    @EnvironmentObject var userSettings: UserSettings
     @Environment(\.presentationMode) var presentationMode
     var firstLaunch: Bool = true
-    
-    enum LocalizedStrings: LocalizedStringKey {
-        case lets = "Let's "
-        case howTo = "Here's how to "
-        case enableSMS = "enable SMS Filtering"
-        case onYouriPhone = " on your iPhone"
-        case open = "Open "
-        case the = "the"
-        case settingsApp = "'Settings App'"
-        case tap = "Tap "
-        case messages = "'Messages'"
-        case unknownAndSpam = "'Unknown and Spam'"
-        case toggle = "Toggle"
-        case bouncer = "'Bouncer'"
-        case takeMeToSettings = "Take me to Settings!"
-        case gotIt = "Got it!"
-    }    
     
     let separatorColor = Color(red: 0.294, green: 0.357, blue: 0.455)
     let boxBackground = Color(red: 0.004, green: 0.004, blue: 0.004).opacity(0.1)
     
     func respondToActionButton() {
         if(firstLaunch) {
-            appSettings.hasLaunchedApp = true
+            userSettings.hasLaunchedApp = true
             if let settingsURL = URL(string: UIApplication.openSettingsURLString),
                 UIApplication.shared.canOpenURL(settingsURL) {
                 UIApplication.shared.open(settingsURL, options: [:])}
@@ -49,12 +32,12 @@ struct InstructionsView: View {
     var body: some View {
         VStack(alignment: .center) {
             Group() {
-                Text((firstLaunch) ? LocalizedStrings.lets.rawValue : LocalizedStrings.howTo.rawValue)
+                Text((firstLaunch) ? "LETS" : "HERE_IS_HOW")
                     .foregroundColor(Color("TextDefaultColor")) +
-                Text(LocalizedStrings.enableSMS.rawValue)
+                Text("ENABLE_SMS_FILTERING")
                     .foregroundColor(Color("TextDefaultColor"))
                     .fontWeight(.bold) +
-                Text(LocalizedStrings.onYouriPhone.rawValue).foregroundColor(Color("TextDefaultColor"))
+                Text("ON_YOUR_IPHONE").foregroundColor(Color("TextDefaultColor"))
             }
             .padding(.horizontal, 40.0)
             .padding(.top, 40)
@@ -70,38 +53,38 @@ struct InstructionsView: View {
             VStack(alignment: .leading) {
                 HStack {
                     Text("1.").foregroundColor(Color("TextDefaultColor"))
-                    Text(LocalizedStrings.open.rawValue)
+                    Text("OPEN_SPACE")
                         .foregroundColor(Color("TextHighLightColor"))
                         .bold() +
-                        Text(LocalizedStrings.the.rawValue).foregroundColor(Color("TextDefaultColor"))
+                        Text("THE_APP").foregroundColor(Color("TextDefaultColor"))
                     Image("settings-icon")
-                    Text(LocalizedStrings.settingsApp.rawValue).foregroundColor(Color("TextDefaultColor"))
+                    Text("SETTINGS_APP").foregroundColor(Color("TextDefaultColor"))
                 }
                 
                 HStack {
                     Text("2.").foregroundColor(Color("TextDefaultColor"))
-                    Text(LocalizedStrings.tap.rawValue)
+                    Text("TAP")
                         .foregroundColor(Color("TextHighLightColor"))
                         .bold()
                     Image("messages-icon")
-                    Text(LocalizedStrings.messages.rawValue).foregroundColor(Color("TextDefaultColor"))
+                    Text("MESSAGES_APP").foregroundColor(Color("TextDefaultColor"))
                 }
                 
                 HStack {
                     Text("3.").foregroundColor(Color("TextDefaultColor"))
-                    Text(LocalizedStrings.tap.rawValue)
+                    Text("TAP")
                         .foregroundColor(Color("TextHighLightColor"))
                         .bold() +
-                        Text(LocalizedStrings.unknownAndSpam.rawValue).foregroundColor(Color("TextDefaultColor"))
+                        Text("UNKNOWN_SOURCES").foregroundColor(Color("TextDefaultColor"))
                 }.frame(width: nil, height: 28, alignment: .bottom)
                 
                 HStack {
                     Text("4.").foregroundColor(Color("TextDefaultColor"))
-                    Text(LocalizedStrings.toggle.rawValue)
+                    Text("TOGGLE")
                         .foregroundColor(Color("TextHighLightColor"))
                         .bold()
                     Image("toggle-icon")
-                    Text(LocalizedStrings.bouncer.rawValue).foregroundColor(Color("TextDefaultColor"))
+                    Text( "'Bouncer'").foregroundColor(Color("TextDefaultColor"))
                 }
             }
             .padding(.bottom, 35)
@@ -109,7 +92,7 @@ struct InstructionsView: View {
             Button(action: {
                 respondToActionButton()
             }) {
-                Text((firstLaunch) ? LocalizedStrings.takeMeToSettings.rawValue : LocalizedStrings.gotIt.rawValue)
+                Text((firstLaunch) ? "BUTTON_FIRST_LAUNCH_TEXT" : "BUTTON_TUTORIAL_HELP_TEXT")
                     .foregroundColor(Color("TextDefaultColor"))
                     .frame(minWidth: 300, maxWidth: 300, minHeight: 0, maxHeight: 50)
                     .background(Color("ButtonBackgroundColor"))

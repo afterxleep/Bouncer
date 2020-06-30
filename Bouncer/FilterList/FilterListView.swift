@@ -9,21 +9,17 @@ import SwiftUI
 
 struct FilterListView: View {
 
-    @EnvironmentObject var appSettings: UserSettingsDefaults
+    @EnvironmentObject var userSettings: UserSettings
     @ObservedObject var viewModel = FilterListViewModel()    
     @State private var showingSettings = false
     @State private var showingAddForm = false
     
     enum LocalizedStrings: LocalizedStringKey {
-        case senderContains = "Sender contains: "
-        case messageContains = "Text contains: "
-        case senderIs = "Sender is: "
-        case messageIs = "Text is: "
-        case anyContains = "Sender or Text contain: "
-        case filters = "Block List"
-        case welcomeAlertTitle = "You're ready to go!"
-        case welcomeAlertMessage = "Bouncer will use your block list to filter SMS messages from unknown senders and people not in your contact list."
-        case gotIt = "Got it!"
+        case senderContains = "SENDER_CONTAINS_PREFFIX"
+        case messageContains = "MESSAGE_CONTAINS_PREFFIX"
+        case senderIs = "SENDER_IS_PREFFIX"
+        case messageIs = "MESSAGE_IS_PREFFIX"
+        case anyContains = "SENDER_OR_TEXT_CONTAINS_PREFFIX"
     }
     
     func getFilterTypeString(filter: Filter) -> LocalizedStringKey {
@@ -74,7 +70,7 @@ struct FilterListView: View {
                         EmptyListView()                        
                     }
                 }
-                .navigationBarTitle(LocalizedStrings.filters.rawValue)
+                .navigationBarTitle("LIST_VIEW_TITLE")
                 .navigationBarItems(
                     leading:
                         Button(
@@ -86,7 +82,7 @@ struct FilterListView: View {
                             }
                             .sheet(isPresented: $showingSettings) {
                                 TutorialView(firstLaunch: false)
-                                    .environmentObject(appSettings)
+                                    .environmentObject(userSettings)
                         },
                     trailing:
                         Button(

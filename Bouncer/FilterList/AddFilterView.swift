@@ -8,71 +8,56 @@
 import SwiftUI
 
 struct AddFilterView: View {
-    
-    enum LocalizedString: LocalizedStringKey {
-        case selectAFilterType = "Filter using:"
-        case enterWordOrPhrase = "Enter a word or Phrase to filter"
-        case addFilter = "Add Filter"
-        case save = "Save"
-        case cancel = "Cancel"
-        case advanced = "Advanced"
-        case exactMatch = "Exact Match"
-        case exactMatchExplanationSender = "Filter messages only when the sender exactly matches the provided word or phrase."
-        case exactMatchExplanationBody = "Filter messages only when the text exactly matches the provided word or phrase."
-        case filterInformation = "Filter Information"
-    }
-    
+        
     enum FilterOption: LocalizedStringKey, Equatable, CaseIterable {
-        case senderAndMessage = "Sender and Text"
-        case senderOnly = "Sender"
-        case messageOnly = "Text"
+        case senderAndMessage = "SENDER_AND_TEXT"
+        case senderOnly = "SENDER"
+        case messageOnly = "TEXT"
     }
     
     @Binding var showingAddForm :Bool
     @State var filterOption: FilterOption = .senderAndMessage
     @State var filterTerm: String = ""
     @State var exactMatch: Bool = false
-    @EnvironmentObject var appSettings: UserSettingsDefaults
+    @EnvironmentObject var userSettings: UserSettings
     var viewModel: FilterListViewModel
     
     var body: some View {
         NavigationView {
             Form {
-                Section(header: Text(LocalizedString.filterInformation.rawValue)) {
-                    Picker(LocalizedString.selectAFilterType.rawValue, selection: $filterOption) {
+                Section(header: Text("FILTER_INFORMATION")) {
+                    Picker("FILTER_TYPE_SELECTION_LABEL", selection: $filterOption) {
                         ForEach(FilterOption.allCases, id: \.self) { value in
                             Text(value.rawValue)
                         }
                     }.pickerStyle(DefaultPickerStyle())
-                    TextField(LocalizedString.enterWordOrPhrase.rawValue, text: $filterTerm)
+                    TextField("FILTER_ADD_TEXT_PLACEHOLDER", text: $filterTerm)
                         .autocapitalization(.none)
                         .disableAutocorrection(.none)
                         
                 }
                 if(filterOption != FilterOption.senderAndMessage) {
-                    Section(header: Text(LocalizedString.advanced.rawValue),
-                            footer: Text(filterOption == FilterOption.senderOnly
-                                            ? LocalizedString.exactMatchExplanationSender.rawValue
-                                            : LocalizedString.exactMatchExplanationBody.rawValue)) {
+                    Section(header: Text("ADVANCED"),
+                            footer: Text("EXACT_MATCH_CAPTION")) {
                         Toggle(isOn: $exactMatch, label: {
-                            Text(LocalizedString.exactMatch.rawValue)
+                            Text("EXACT_MATCH")
                         })
                     }
                 }
             }
-            .navigationBarTitle(LocalizedString.addFilter.rawValue)
+            .navigationBarTitle("FILTER_ADD_VIEW_TITLE")
             .navigationBarItems(
                 leading:
                     Button(
                         action: {
                             self.showingAddForm = false
                         }) {
-                        Text(LocalizedString.cancel.rawValue)
+                        Text("CANCEL")
                 },
                 trailing:
                     Button(
                         action: {saveFilter()}) {
-                        Text(LocalizedString.save.rawValue)
+                        Text("SAVE")
                     }
             )
         }

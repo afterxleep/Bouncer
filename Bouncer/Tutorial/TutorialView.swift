@@ -9,14 +9,8 @@ import SwiftUI
 
 struct TutorialView: View {
         
-    @EnvironmentObject var appSettings: UserSettingsDefaults
+    @EnvironmentObject var userSettings: UserSettings
     var firstLaunch: Bool = true
-    
-    enum LocalizedStrings: LocalizedStringKey {
-        case helloThere = "Hello There!"
-        case welcomeToBouncer = "Welcome to Bouncer!"
-        case help = "Help"
-    }
     
     var body: some View {
         ZStack {
@@ -25,17 +19,17 @@ struct TutorialView: View {
                 VStack {
                     Image("welcome_icon").padding()
                     if(firstLaunch) {
-                        Text(LocalizedStrings.helloThere.rawValue)
+                        Text("WELCOME_TITLE")
                             .font(.largeTitle)
                             .fontWeight(.bold)
                             .foregroundColor(Color("TextHighLightColor"))
-                        Text(LocalizedStrings.welcomeToBouncer.rawValue)
+                        Text("WELCOME_SUBTITLE")
                             .font(.largeTitle)
                             .foregroundColor(Color("TextDefaultColor"))
                             .padding(.bottom, 60.0)
                     }
                     else {
-                        Text(LocalizedStrings.help.rawValue)
+                        Text("HELP")
                             .font(.largeTitle)
                             .fontWeight(.bold)
                             .foregroundColor(Color("TextHighLightColor"))

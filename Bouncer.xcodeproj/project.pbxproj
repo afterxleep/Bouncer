@@ -29,7 +29,6 @@
 		D6529FB724A50B1F009AE3FF /* InstructionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FB624A50B1F009AE3FF /* InstructionsView.swift */; };
 		D6529FC324A54AAD009AE3FF /* FilterListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FC224A54AAD009AE3FF /* FilterListView.swift */; };
 		D6529FC524A54ABA009AE3FF /* FilterListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FC424A54ABA009AE3FF /* FilterListViewModel.swift */; };
-		D6529FCA24A54ADE009AE3FF /* FilterDummyStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FC724A54ADE009AE3FF /* FilterDummyStore.swift */; };
 		D6529FCB24A54ADE009AE3FF /* FilterFileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FC824A54ADE009AE3FF /* FilterFileStore.swift */; };
 		D6529FD224A54D8C009AE3FF /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FD124A54D8C009AE3FF /* Filter.swift */; };
 		D664B24424AA92AA00EB826D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D664B24324AA92AA00EB826D /* Colors.xcassets */; };
@@ -80,6 +79,7 @@
 		D60A19C624A69F1F0002E8BD /* SMSMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSMessage.swift; sourceTree = "<group>"; };
 		D615898924A55FF800FE710A /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		D621CB4424ABABF6008883AA /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D621CB4724ABC56E008883AA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D6233A6524A59F2800B37A6A /* AddFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFilterView.swift; sourceTree = "<group>"; };
 		D6233A6F24A650B700B37A6A /* SMSFilter.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SMSFilter.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6233A7124A650B700B37A6A /* MessageFilterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFilterExtension.swift; sourceTree = "<group>"; };
@@ -104,7 +104,6 @@
 		D6529FB624A50B1F009AE3FF /* InstructionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsView.swift; sourceTree = "<group>"; };
 		D6529FC224A54AAD009AE3FF /* FilterListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListView.swift; sourceTree = "<group>"; };
 		D6529FC424A54ABA009AE3FF /* FilterListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListViewModel.swift; sourceTree = "<group>"; };
-		D6529FC724A54ADE009AE3FF /* FilterDummyStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterDummyStore.swift; sourceTree = "<group>"; };
 		D6529FC824A54ADE009AE3FF /* FilterFileStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterFileStore.swift; sourceTree = "<group>"; };
 		D6529FD124A54D8C009AE3FF /* Filter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Filter.swift; sourceTree = "<group>"; };
 		D664B24324AA92AA00EB826D /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
@@ -281,7 +280,6 @@
 		D6529FC624A54AC7009AE3FF /* FilterStore */ = {
 			isa = PBXGroup;
 			children = (
-				D6529FC724A54ADE009AE3FF /* FilterDummyStore.swift */,
 				D6529FC824A54ADE009AE3FF /* FilterFileStore.swift */,
 			);
 			path = FilterStore;
@@ -429,6 +427,7 @@
 			knownRegions = (
 				en,
 				es,
+				Base,
 			);
 			mainGroup = D6529F6624A41371009AE3FF;
 			productRefGroup = D6529F7024A41371009AE3FF /* Products */;
@@ -534,7 +533,6 @@
 				D6529F7324A41371009AE3FF /* BouncerApp.swift in Sources */,
 				D6529FC524A54ABA009AE3FF /* FilterListViewModel.swift in Sources */,
 				D615898A24A55FF800FE710A /* BaseView.swift in Sources */,
-				D6529FCA24A54ADE009AE3FF /* FilterDummyStore.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -579,6 +577,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				D621CB4424ABABF6008883AA /* es */,
+				D621CB4724ABC56E008883AA /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

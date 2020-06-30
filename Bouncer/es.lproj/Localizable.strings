@@ -6,55 +6,49 @@
   
 */
 /* Add Filter View */
+"FILTER_TYPE_SELECTION_LABEL" = "Filtar usando:";
+"FILTER_ADD_TEXT_PLACEHOLDER" = "Ingresa una palabra o frase";
+"FILTER_ADD_VIEW_TITLE" = "Agregar Filtro";
+"SAVE" = "Guardar";
+"CANCEL" = "Cancelar";
+"ADVANCED" = "Avanzado";
+"FILTER_INFORMATION" = "Información del filtro";
+"EXACT_MATCH" = "Ocurrencia Exacta";
+"EXACT_MATCH_CAPTION" = "Filtra los mensajes solo cuando el remitente/mensaje es exactamente igual a la palabra o frase especificada arriba.";
 
-"Filter using:" = "Filtar usando:";
-"Enter a word or Phrase to filter" = "Ingresa una palabra o frase";
-"Add Filter" = "Agregar Filtro";
-"Save" = "Guardar";
-"Cancel" = "Cancelar";
-"Advanced" = "Avanzado";
-"Exact Match" = "Ocurrencia Exacta";
-"Filter Information" = "Información del filtro";
-
-"Sender and Text" = "Remitente o Mensaje contiene";
-"Sender" = "Remitente contiene";
-"Text" = "Mensaje contiene";
-
+"SENDER_AND_TEXT" = "Remitente o Mensaje";
+"SENDER" = "Remitente";
+"TEXT" = "Mensaje";
 
 /* Filter List */
-"Sender contains: " = "El Remitente contiene: ";
-"Text contains: " = "El Mensaje contiene: ";
-"Sender is: " = "El Remitente es: ";
-"Text is: " = "El mensaje es:";
-"Sender or Text contain: " = "El remitente o el mensaje contienent: ";
-"Block List" = "Lista de Bloqueo";
-"You're ready to go!" = "Todo listo!";
-"Got it!" = "Hecho!";
-
-"Your Block List is Empty" = "Tu lista de bloqueo está vacía";
-"Bouncer will block SMS messages from unknown senders using the filters you add here." = "Bouncer bloqueará los mensajes de remitentes desconocidos que agregues aquí.";
-"Tap '" = "Toca '";
-"' to add a filter." = "' para agregar un filtro.";
-
+"LIST_VIEW_TITLE" = "Lista de Bloqueo";
+"SENDER_CONTAINS_PREFFIX " = "El Remitente contiene: ";
+"MESSAGE_CONTAINS_PREFFIX " = "El Mensaje contiene: ";
+"SENDER_IS_PREFFIX " = "El Remitente es: ";
+"MESSAGE_IS_PREFFIX" = "El mensaje es:";
+"SENDER_OR_TEXT_CONTAINS_PREFFIX" = "El remitente o el mensaje contienen: ";
+"EMPTY_LIST_TITLE" = "Tu lista de bloqueo está vacía";
+"EMPTY_LIST_MESSAGE" = "Bouncer bloqueará los mensajes de remitentes desconocidos que agregues aquí.";
+"TAP_SPACE" = "Toca '";
+"TO_ADD_A_FILTER_SPACE" = "' para agregar un filtro.";
 
 /* Tutorial */
-"Hello There!" = "Hola!";
-"Welcome to Bouncer!" = "Bienvenid@ a Bouncer!";
-"Help" = "Ayuda";
+"WELCOME_TITLE" = "Hola!";
+"WELCOME_SUBTITLE" = "Bienvenid@ a Bouncer!";
+"HELP" = "Ayuda";
 
 /* Instructions */
-
-"Let's " = "Vamos a";
-"Here's how to " = "Para ";
-"enable SMS Filtering" = "configurar el filtrado SMS";
-" on your iPhone" = " en tu iPhone:";
-"Open " = "Abre ";
-"the" = "la";
-"'Settings App'" = "aplicación 'Preferencias'";
-"Tap " = "Toca ";
-"'Messages'" = "'Mensajes'";
-"'Unknown and Spam'" = "'Desconocidos y No deseado'";
-"Toggle" = "Activa";
-"Take me to Settings!" = "Abrir ajustes";
-"Got it!" = "Hecho";
+"LETS " = "Vamos a";
+"HERE_IS_HOW" = "Para ";
+"ENABLE_SMS_FILTERING" = "configurar el filtrado SMS";
+"ON_YOUR_IPHONE" = " en tu iPhone:";
+"OPEN_SPACE" = "Abre ";
+"THE_APP" = "la aplicación";
+"SETTINGS_APP" = "'Preferencias'";
+"TAP" = "Toca";
+"MESSAGES_APP" = " 'Mensajes'";
+"UNKNOWN_SOURCES" = " 'Desconocidos y No deseado'";
+"TOGGLE" = "Activa";
+"BUTTON_TUTORIAL_FIRST_LAUNCH_TEXT" = "Llévame a Ajustes!";
+"BUTTON_TUTORIAL_HELP_TEXT" = "Hecho!";
     

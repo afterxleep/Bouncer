@@ -11,13 +11,13 @@ struct EmptyListView: View {
     var body: some View {
         VStack(alignment: .center) {
             Group() {
-                Text("Your Block List is Empty").font(.title2).bold().padding()
+                Text("EMPTY_LIST_TITLE").font(.title2).bold().padding()
                 Group {
-                    Text("Bouncer will block SMS messages from unknown senders using the filters you add here.")
+                    Text("EMPTY_LIST_MESSAGE")
                     HStack(spacing: 0) {
-                        Text("Tap '")
+                        Text("TAP_SPACE")
                         Image(systemName: "plus.circle")
-                        Text("' to add a filter.")
+                        Text("TO_ADD_A_FILTER_SPACE")
                     }
                 }.frame(width: 260)
             }

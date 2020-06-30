@@ -1,59 +1,54 @@
-/* 
+/*
   Localizable.strings
   Bouncer
 
   Created by Daniel Bernal on 6/30/20.
-  
+
 */
+
 /* Add Filter View */
+"FILTER_TYPE_SELECTION_LABEL" = "Filter using:";
+"FILTER_ADD_TEXT_PLACEHOLDER" = "Enter a word or phrase";
+"FILTER_ADD_VIEW_TITLE" = "Add Filter";
+"SAVE" = "Save";
+"CANCEL" = "Cancel";
+"ADVANCED" = "Advanced";
+"FILTER_INFORMATION" = "Filter settings";
+"EXACT_MATCH" = "Exact match";
+"EXACT_MATCH_CAPTION" = "Filter messages only when the sender/message are an exact match to the provided word or phrase.";
 
-"Filter using:"
-"Enter a word or Phrase to filter"
-"Add Filter"
-"Save"
-"Cancel"
-"Advanced"
-"Exact Match"
-"Filter messages only when the sender exactly matches the provided word or phrase."
-"Filter messages only when the text exactly matches the provided word or phrase."
-"Filter Information"
-
-"Sender and Text"
-"Sender"
-"Text"
-
+"SENDER_AND_TEXT" = "Sender or Message";
+"SENDER" = "Sender";
+"TEXT" = "Message";
 
 /* Filter List */
-"Sender contains: "
-"Text contains: "
-"Sender is: "
-"Text is: "
-"Sender or Text contain: "
-"Block List"
-"You're ready to go!"
-"Bouncer will use your block list to filter SMS messages from unknown senders and people not in your contact list."
-"Got it!"
-
+"LIST_VIEW_TITLE" = "Block List";
+"SENDER_CONTAINS_PREFFIX " = "Sender contains: ";
+"MESSAGE_CONTAINS_PREFFIX " = "Message contains: ";
+"SENDER_IS_PREFFIX " = "Sender is: ";
+"MESSAGE_IS_PREFFIX" = "Message is:";
+"SENDER_OR_TEXT_CONTAINS_PREFFIX" = "Sender or message contain: ";
+"EMPTY_LIST_TITLE" = "Your Block List is empty";
+"EMPTY_LIST_MESSAGE" = "Bouncer will block SMS from unknown senders using the filters you adde here.";
+"TAP_SPACE" = "Tap '";
+"TO_ADD_A_FILTER_SPACE" = "' to add a filter.";
 
 /* Tutorial */
-"Hello There!"
-"Welcome to Bouncer!"
-"Help"
+"WELCOME_TITLE" = "Hello there!";
+"WELCOME_SUBTITLE" = "Welcome to Bouncer";
+"HELP" = "Help";
 
 /* Instructions */
-
-"Let's "
-"Here's how to "
-"enable SMS Filtering"
-" on your iPhone"
-"Open "
-"the"
-"'Settings App'"
-"Tap "
-"'Messages'"
-"'Unknown and Spam'"
-"Toggle"
-"'Bouncer'"
-"Take me to Settings!"
-"Got it!"
-    
+"LETS " = "Let's ";
+"HERE_IS_HOW" = "To ";
+"ENABLE_SMS_FILTERING" = "enable SMS filtering";
+"ON_YOUR_IPHONE" = " on your iPhone:";
+"OPEN_SPACE" = "Open ";
+"THE_APP" = "the";
+"SETTINGS_APP" = "'Settings' app";
+"TAP" = "Tap";
+"MESSAGES_APP" = " 'Messages'";
+"UNKNOWN_SOURCES" = " 'Unknown and Spam'";
+"TOGGLE" = "Toggle";
+"BUTTON_TUTORIAL_FIRST_LAUNCH_TEXT" = "Take me to Settings!";
+"BUTTON_TUTORIAL_HELP_TEXT" = "Got it!";
