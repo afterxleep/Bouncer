@@ -26,7 +26,7 @@
 "MESSAGE_CONTAINS_PREFFIX " = "El Mensaje contiene: ";
 "SENDER_IS_PREFFIX " = "El Remitente es: ";
 "MESSAGE_IS_PREFFIX" = "El mensaje es:";
-"SENDER_OR_TEXT_CONTAINS_PREFFIX" = "El remitente o el mensaje contienen: ";
+"SENDER_OR_TEXT_CONTAINS_PREFFIX" = "";
 "EMPTY_LIST_TITLE" = "Tu lista de bloqueo está vacía";
 "EMPTY_LIST_MESSAGE" = "Bouncer bloqueará los mensajes de remitentes desconocidos que agregues aquí.";
 "TAP_SPACE" = "Toca '";

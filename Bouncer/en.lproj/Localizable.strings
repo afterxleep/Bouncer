@@ -27,7 +27,7 @@
 "MESSAGE_CONTAINS_PREFFIX " = "Message contains: ";
 "SENDER_IS_PREFFIX " = "Sender is: ";
 "MESSAGE_IS_PREFFIX" = "Message is:";
-"SENDER_OR_TEXT_CONTAINS_PREFFIX" = "Sender or message contain: ";
+"SENDER_OR_TEXT_CONTAINS_PREFFIX" = "";
 "EMPTY_LIST_TITLE" = "Your Block List is empty";
 "EMPTY_LIST_MESSAGE" = "Bouncer will block SMS from unknown senders using the filters you adde here.";
 "TAP_SPACE" = "Tap '";

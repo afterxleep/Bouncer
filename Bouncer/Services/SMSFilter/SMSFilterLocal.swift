@@ -12,19 +12,13 @@ import Combine
 final class SMSFilterLocal {
         
     let filterListService: FilterFileStore = FilterFileStore()
-    var cancellable: AnyCancellable?
     
     var filters: [Filter] = []
     
     //MARK: - Initializer
     init() {
         filterListService.migrateFromV1()
-        cancellable = filterListService
-            .$filters
-                .receive(on: RunLoop.main)
-                .sink { [weak self] filters in
-                    self?.filters = filters
-                }
+        self.filters = filterListService.filters
     }
     
     func applyFilter(filter: Filter, message: SMSMessage) -> Bool {
@@ -41,11 +35,12 @@ final class SMSFilterLocal {
     }
     
     func isValidMessage(message: SMSMessage) -> Bool {
-        var result = true
         for filter in filters {
-            result = applyFilter(filter: filter, message: message)
+            if(applyFilter(filter: filter, message: message)) {
+                return true
+            }
         }
-        return result
+        return false
         
     }
 
