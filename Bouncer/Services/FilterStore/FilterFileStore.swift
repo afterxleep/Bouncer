@@ -35,25 +35,6 @@ final class FilterFileStore: ObservableObject {
         filters = []
         saveToDisk()
     }
-    
-    func migrateFromV1() {
-        let wordListFile = "wordlist.filter"
-        let storePath = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Self.groupContainer)
-        let oldStore = storePath!.appendingPathComponent(wordListFile)
-        if (FileManager.default.fileExists(atPath: oldStore.path)) {
-            guard let wordData = NSMutableData(contentsOf: oldStore) else { return }
-            do {
-                if let loadedStrings = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(wordData as Data) as? [String] {
-                    for s in loadedStrings {
-                        self.add(filter: Filter(id: UUID(), type: .any, phrase: s, exactMatch: false))
-                    }
-                    try? FileManager.default.removeItem(atPath: oldStore.path)
-                }
-            } catch {
-                return
-            }
-        }
-    }
 
     private var fileURL: URL? {
         return FileManager.default
@@ -84,6 +65,25 @@ final class FilterFileStore: ObservableObject {
                 .write(to: url)
         } catch {
             print(error)
+        }
+    }
+    
+    func migrateFromV1() {
+        let wordListFile = "wordlist.filter"
+        let storePath = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Self.groupContainer)
+        let oldStore = storePath!.appendingPathComponent(wordListFile)
+        if (FileManager.default.fileExists(atPath: oldStore.path)) {
+            guard let wordData = NSMutableData(contentsOf: oldStore) else { return }
+            do {
+                if let loadedStrings = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(wordData as Data) as? [String] {
+                    for s in loadedStrings {
+                        self.add(filter: Filter(id: UUID(), type: .any, phrase: s, exactMatch: false))
+                    }
+                    try? FileManager.default.removeItem(atPath: oldStore.path)
+                }
+            } catch {
+                return
+            }
         }
     }
 }

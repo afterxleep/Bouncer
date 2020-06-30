@@ -45,8 +45,7 @@ struct FilterListView: View {
         }
     }
     
-    var shouldDisplayList: Bool {
-        print(viewModel.filters.count)
+    var shouldDisplayList: Bool {        
         if(viewModel.filters.count > 0) {
             return true
         }
