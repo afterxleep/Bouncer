@@ -420,12 +420,11 @@
 				};
 			};
 			buildConfigurationList = D6529F6A24A41371009AE3FF /* Build configuration list for PBXProject "Bouncer" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 12.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 			);
 			mainGroup = D6529F6624A41371009AE3FF;
 			productRefGroup = D6529F7024A41371009AE3FF /* Products */;
