@@ -33,7 +33,8 @@ struct AddFilterView: View {
                     }.pickerStyle(DefaultPickerStyle())
                     TextField("FILTER_ADD_TEXT_PLACEHOLDER", text: $filterTerm)
                         .autocapitalization(.none)
-                        .disableAutocorrection(.none)
+                        .disableAutocorrection(true)
+                        
                         
                 }
                 if(filterOption != FilterOption.senderAndMessage) {
