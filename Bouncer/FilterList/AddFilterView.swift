@@ -20,8 +20,6 @@ struct AddFilterView: View {
         case exactMatchExplanationSender = "Filter messages only when the sender exactly matches the provided word or phrase."
         case exactMatchExplanationBody = "Filter messages only when the text exactly matches the provided word or phrase."
         case filterInformation = "Filter Information"
-        case sender = "sender"
-        case body = "body"
     }
     
     enum FilterOption: LocalizedStringKey, Equatable, CaseIterable {
@@ -53,7 +51,9 @@ struct AddFilterView: View {
                 }
                 if(filterOption != FilterOption.senderAndMessage) {
                     Section(header: Text(LocalizedString.advanced.rawValue),
-                            footer: Text(filterOption == FilterOption.senderOnly ? LocalizedString.exactMatchExplanationSender.rawValue : LocalizedString.exactMatchExplanationBody.rawValue)) {
+                            footer: Text(filterOption == FilterOption.senderOnly
+                                            ? LocalizedString.exactMatchExplanationSender.rawValue
+                                            : LocalizedString.exactMatchExplanationBody.rawValue)) {
                         Toggle(isOn: $exactMatch, label: {
                             Text(LocalizedString.exactMatch.rawValue)
                         })

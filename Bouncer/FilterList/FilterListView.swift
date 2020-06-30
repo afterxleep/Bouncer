@@ -19,7 +19,7 @@ struct FilterListView: View {
         case messageContains = "Text contains: "
         case senderIs = "Sender is: "
         case messageIs = "Text is: "
-        case anyContains = "Anything contains: "
+        case anyContains = "Sender or Text contain: "
         case filters = "Block List"
         case welcomeAlertTitle = "You're ready to go!"
         case welcomeAlertMessage = "Bouncer will use your block list to filter SMS messages from unknown senders and people not in your contact list."

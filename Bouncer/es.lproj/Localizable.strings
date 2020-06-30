@@ -1,0 +1,60 @@
+/*
+  Localizable.strings
+  Bouncer
+
+  Created by Daniel Bernal on 6/30/20.
+  
+*/
+/* Add Filter View */
+
+"Filter using:" = "Filtar usando:";
+"Enter a word or Phrase to filter" = "Ingresa una palabra o frase";
+"Add Filter" = "Agregar Filtro";
+"Save" = "Guardar";
+"Cancel" = "Cancelar";
+"Advanced" = "Avanzado";
+"Exact Match" = "Ocurrencia Exacta";
+"Filter Information" = "Información del filtro";
+
+"Sender and Text" = "Remitente o Mensaje contiene";
+"Sender" = "Remitente contiene";
+"Text" = "Mensaje contiene";
+
+
+/* Filter List */
+"Sender contains: " = "El Remitente contiene: ";
+"Text contains: " = "El Mensaje contiene: ";
+"Sender is: " = "El Remitente es: ";
+"Text is: " = "El mensaje es:";
+"Sender or Text contain: " = "El remitente o el mensaje contienent: ";
+"Block List" = "Lista de Bloqueo";
+"You're ready to go!" = "Todo listo!";
+"Got it!" = "Hecho!";
+
+"Your Block List is Empty" = "Tu lista de bloqueo está vacía";
+"Bouncer will block SMS messages from unknown senders using the filters you add here." = "Bouncer bloqueará los mensajes de remitentes desconocidos que agregues aquí.";
+"Tap '" = "Toca '";
+"' to add a filter." = "' para agregar un filtro.";
+
+
+/* Tutorial */
+"Hello There!" = "Hola!";
+"Welcome to Bouncer!" = "Bienvenid@ a Bouncer!";
+"Help" = "Ayuda";
+
+/* Instructions */
+
+"Let's " = "Vamos a";
+"Here's how to " = "Para ";
+"enable SMS Filtering" = "configurar el filtrado SMS";
+" on your iPhone" = " en tu iPhone:";
+"Open " = "Abre ";
+"the" = "la";
+"'Settings App'" = "aplicación 'Preferencias'";
+"Tap " = "Toca ";
+"'Messages'" = "'Mensajes'";
+"'Unknown and Spam'" = "'Desconocidos y No deseado'";
+"Toggle" = "Activa";
+"Take me to Settings!" = "Abrir ajustes";
+"Got it!" = "Hecho";
+    

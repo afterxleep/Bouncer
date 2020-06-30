@@ -15,10 +15,9 @@ struct EmptyListView: View {
                 Group {
                     Text("Bouncer will block SMS messages from unknown senders using the filters you add here.")
                     HStack(spacing: 0) {
-                        Text("Tap the '")
+                        Text("Tap '")
                         Image(systemName: "plus.circle")
-                        Text("' icon")
-                        Text(" to add a filter.")
+                        Text("' to add a filter.")
                     }
                 }.frame(width: 260)
             }

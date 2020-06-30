@@ -1,0 +1,59 @@
+/* 
+  Localizable.strings
+  Bouncer
+
+  Created by Daniel Bernal on 6/30/20.
+  
+*/
+/* Add Filter View */
+
+"Filter using:"
+"Enter a word or Phrase to filter"
+"Add Filter"
+"Save"
+"Cancel"
+"Advanced"
+"Exact Match"
+"Filter messages only when the sender exactly matches the provided word or phrase."
+"Filter messages only when the text exactly matches the provided word or phrase."
+"Filter Information"
+
+"Sender and Text"
+"Sender"
+"Text"
+
+
+/* Filter List */
+"Sender contains: "
+"Text contains: "
+"Sender is: "
+"Text is: "
+"Sender or Text contain: "
+"Block List"
+"You're ready to go!"
+"Bouncer will use your block list to filter SMS messages from unknown senders and people not in your contact list."
+"Got it!"
+
+
+/* Tutorial */
+"Hello There!"
+"Welcome to Bouncer!"
+"Help"
+
+/* Instructions */
+
+"Let's "
+"Here's how to "
+"enable SMS Filtering"
+" on your iPhone"
+"Open "
+"the"
+"'Settings App'"
+"Tap "
+"'Messages'"
+"'Unknown and Spam'"
+"Toggle"
+"'Bouncer'"
+"Take me to Settings!"
+"Got it!"
+    
