@@ -18,6 +18,7 @@ final class SMSFilterLocal {
     
     //MARK: - Initializer
     init() {
+        filterListService.migrateFromV1()
         cancellable = filterListService
             .$filters
                 .receive(on: RunLoop.main)

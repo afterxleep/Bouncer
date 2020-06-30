@@ -42,7 +42,7 @@ final class FilterListViewModel: ObservableObject {
                     self?.hasAddedFilters = hasAddedFilters
                 }
         
-        migrateFromPreviousVersion()
+        migrateFromV1()
         
     }
     
@@ -61,9 +61,8 @@ final class FilterListViewModel: ObservableObject {
         filterListService.reset()
     }
     
-    func migrateFromPreviousVersion() {
-        let store = FilterFileStore()
-        store.migrateFromPreviousVersion()
+    func migrateFromV1() {
+        filterListService.migrateFromV1()
     }
 
         

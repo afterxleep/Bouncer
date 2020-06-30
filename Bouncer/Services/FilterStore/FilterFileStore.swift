@@ -36,26 +36,29 @@ final class FilterFileStore: ObservableObject {
         saveToDisk()
     }
     
-    func migrateFromPreviousVersion() {
+    func migrateFromV1() {
         let wordListFile = "wordlist.filter"
-        let fileManager = FileManager.default
-        let store = fileManager.containerURL(forSecurityApplicationGroupIdentifier: Self.groupContainer)!.appendingPathComponent(wordListFile)
-        if (fileManager.fileExists(atPath: store.absoluteString)) {
-            print("exists")
-        } else {
-            print("fuck!")
+        let storePath = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Self.groupContainer)
+        let oldStore = storePath!.appendingPathComponent(wordListFile)
+        if (FileManager.default.fileExists(atPath: oldStore.path)) {
+            guard let wordData = NSMutableData(contentsOf: oldStore) else { return }
+            do {
+                if let loadedStrings = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(wordData as Data) as? [String] {
+                    for s in loadedStrings {
+                        self.add(filter: Filter(id: UUID(), type: .any, phrase: s, exactMatch: false))
+                    }
+                    try? FileManager.default.removeItem(atPath: oldStore.path)
+                }
+            } catch {
+                return
+            }
         }
     }
 
     private var fileURL: URL? {
-        do {
-            let fileURL = try FileManager.default
-                .url(for: .applicationSupportDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
-                .appendingPathComponent(Self.filterListFile)
-                return fileURL
-        } catch {
-            return nil
-        }
+        return FileManager.default
+            .containerURL(forSecurityApplicationGroupIdentifier: Self.groupContainer)?
+            .appendingPathComponent(Self.filterListFile)
     }
     
     private func readFromDisk() {
