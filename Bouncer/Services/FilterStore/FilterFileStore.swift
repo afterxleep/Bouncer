@@ -35,6 +35,17 @@ final class FilterFileStore: ObservableObject {
         filters = []
         saveToDisk()
     }
+    
+    func migrateFromPreviousVersion() {
+        let wordListFile = "wordlist.filter"
+        let fileManager = FileManager.default
+        let store = fileManager.containerURL(forSecurityApplicationGroupIdentifier: Self.groupContainer)!.appendingPathComponent(wordListFile)
+        if (fileManager.fileExists(atPath: store.absoluteString)) {
+            print("exists")
+        } else {
+            print("fuck!")
+        }
+    }
 
     private var fileURL: URL? {
         do {

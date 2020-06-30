@@ -42,6 +42,8 @@ final class FilterListViewModel: ObservableObject {
                     self?.hasAddedFilters = hasAddedFilters
                 }
         
+        migrateFromPreviousVersion()
+        
     }
     
     func add(type: FilterType, phrase: String, exactMatch: Bool) {
@@ -58,6 +60,12 @@ final class FilterListViewModel: ObservableObject {
     func reset() {
         filterListService.reset()
     }
+    
+    func migrateFromPreviousVersion() {
+        let store = FilterFileStore()
+        store.migrateFromPreviousVersion()
+    }
+
         
 }
 
