@@ -92,7 +92,7 @@ struct InstructionsView: View {
             Button(action: {
                 respondToActionButton()
             }) {
-                Text((firstLaunch) ? "BUTTON_FIRST_LAUNCH_TEXT" : "BUTTON_TUTORIAL_HELP_TEXT")
+                Text((firstLaunch) ? "BUTTON_TUTORIAL_FIRST_LAUNCH_TEXT" : "BUTTON_TUTORIAL_HELP_TEXT")
                     .foregroundColor(Color("TextDefaultColor"))
                     .frame(minWidth: 300, maxWidth: 300, minHeight: 0, maxHeight: 50)
                     .background(Color("ButtonBackgroundColor"))
