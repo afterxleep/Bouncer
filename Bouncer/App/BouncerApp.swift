@@ -9,15 +9,10 @@ import SwiftUI
 
 @main
 struct BouncerApp: App {
-    
-    var userSettings: UserSettings = UserSettings()
-    var filterStore: FilterFileStore = FilterFileStore()
-    
-    @available(iOS 14.0, *)
+
     var body: some Scene {
         WindowGroup {
             BaseView()
-                .environmentObject(userSettings)
         }
     }
 }

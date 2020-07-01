@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct TutorialView: View {
-        
-    @EnvironmentObject var userSettings: UserSettings
+    
     var firstLaunch: Bool = true
     
     var body: some View {

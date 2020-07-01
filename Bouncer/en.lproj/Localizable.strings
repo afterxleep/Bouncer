@@ -38,7 +38,7 @@
 "WELCOME_TITLE" = "Hello there!";
 "WELCOME_SUBTITLE" = "Welcome to Bouncer";
 "HELP" = "Help";
-"LETS " = "Let's ";
+"LETS" = "Let's ";
 "HERE_IS_HOW" = "To ";
 "ENABLE_SMS_FILTERING" = "enable SMS filtering";
 "ON_YOUR_IPHONE" = " on your iPhone:";

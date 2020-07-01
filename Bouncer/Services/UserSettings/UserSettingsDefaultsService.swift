@@ -7,25 +7,14 @@
 //
 
 import Foundation
-import Combine
 
-final class UserSettings: ObservableObject {
+final class UserSettings {
     
-    private enum keys: String {
-        case hasLaunchedApp
-        case hasAddedFilters
-    }
-    
-    @Published var hasLaunchedApp: Bool {
-        didSet { UserDefaults.standard.set(hasLaunchedApp, forKey: keys.hasLaunchedApp.rawValue) }
-    }
-    
-    @Published var hasAddedFilters: Bool {
-        didSet { UserDefaults.standard.set(hasAddedFilters, forKey: keys.hasAddedFilters.rawValue) }
+    var hasLaunchedApp: Bool {
+        didSet { UserDefaults.standard.set(hasLaunchedApp, forKey: APP_STORAGE_KEYS.HAS_LAUNCHED_APP.rawValue) }
     }
     
     init() {
-        self.hasLaunchedApp = UserDefaults.standard.bool(forKey: keys.hasLaunchedApp.rawValue)
-        self.hasAddedFilters = UserDefaults.standard.bool(forKey: keys.hasAddedFilters.rawValue)
+        self.hasLaunchedApp = UserDefaults.standard.bool(forKey: APP_STORAGE_KEYS.HAS_LAUNCHED_APP.rawValue)
     }
 }

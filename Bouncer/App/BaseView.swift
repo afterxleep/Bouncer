@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct BaseView: View {
-    
-    @EnvironmentObject var userSettings: UserSettings
+        
+    @AppStorage(APP_STORAGE_KEYS.HAS_LAUNCHED_APP.rawValue) var hasLaunchedApp = false
     
     init() {
         customizeNavbar()
@@ -17,7 +17,7 @@ struct BaseView: View {
     
     var body: some View {
         Group {
-            if(!userSettings.hasLaunchedApp) {
+            if(!hasLaunchedApp) {
                 TutorialView()
             } else {
                 FilterListView()

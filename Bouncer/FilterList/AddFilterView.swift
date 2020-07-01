@@ -40,8 +40,7 @@ struct AddFilterView: View {
     @State var filterType: FilterType = .any
     @State var filterAction: FilterAction = .junk
     @State var filterTerm: String = ""
-    @State var exactMatch: Bool = false
-    @EnvironmentObject var userSettings: UserSettings
+    @State var exactMatch: Bool = false    
     var viewModel: FilterListViewModel
     
     var body: some View {

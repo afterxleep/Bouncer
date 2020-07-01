@@ -16,8 +16,7 @@ final class FilterListViewModel: ObservableObject {
     }
     
     private var filterListView : FilterListView?
-    let filterListService: FilterFileStore = FilterFileStore()
-    let userSettingsService: UserSettings = UserSettings()
+    let filterListService: FilterFileStore = FilterFileStore()    
     var filterListcancellable: AnyCancellable?
     var defaultsCancellable: AnyCancellable?
     
@@ -31,23 +30,13 @@ final class FilterListViewModel: ObservableObject {
             .$filters
                 .receive(on: RunLoop.main)
                 .sink { [weak self] filters in
-                    self?.filters = filters                    
-                    self?.isFirstLaunch = (filters.count == 0 && self?.hasAddedFilters == false) ? true : false
+                    self?.filters = filters
                 }
-        
-        defaultsCancellable = userSettingsService
-            .$hasAddedFilters
-                .receive(on: RunLoop.main)
-                .sink { [weak self ] hasAddedFilters in
-                    self?.hasAddedFilters = hasAddedFilters
-                }
-        
         migrateFromV1()
     }
         
     func add(type: FilterType, phrase: String, action: FilterAction) {
         filterListService.add(filter: Filter(id: UUID(), phrase: phrase, type: type, action: action))
-        userSettingsService.hasAddedFilters = true
     }
     
     func remove(at offsets: IndexSet) {

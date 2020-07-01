@@ -35,6 +35,7 @@
 		D664B24624AA92D200EB826D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D664B24524AA92D200EB826D /* Assets.xcassets */; };
 		D664B24824AA998700EB826D /* UIImage+Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D664B24724AA998700EB826D /* UIImage+Gradient.swift */; };
 		D679D67424AA758C00579223 /* DesignConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D679D67324AA758C00579223 /* DesignConstants.swift */; };
+		D696B9E324AD15F300EF0373 /* AppStoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D696B9E224AD15F300EF0373 /* AppStoreConstants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -110,6 +111,7 @@
 		D664B24524AA92D200EB826D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D664B24724AA998700EB826D /* UIImage+Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Gradient.swift"; sourceTree = "<group>"; };
 		D679D67324AA758C00579223 /* DesignConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignConstants.swift; sourceTree = "<group>"; };
+		D696B9E224AD15F300EF0373 /* AppStoreConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreConstants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -315,6 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				D679D67324AA758C00579223 /* DesignConstants.swift */,
+				D696B9E224AD15F300EF0373 /* AppStoreConstants.swift */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -523,6 +526,7 @@
 				D664B24824AA998700EB826D /* UIImage+Gradient.swift in Sources */,
 				D6529FCB24A54ADE009AE3FF /* FilterFileStore.swift in Sources */,
 				D6379EB324AA852500FFD400 /* EmptyListView.swift in Sources */,
+				D696B9E324AD15F300EF0373 /* AppStoreConstants.swift in Sources */,
 				D6529FD224A54D8C009AE3FF /* Filter.swift in Sources */,
 				D6233A6624A59F2800B37A6A /* AddFilterView.swift in Sources */,
 				D6529FC324A54AAD009AE3FF /* FilterListView.swift in Sources */,

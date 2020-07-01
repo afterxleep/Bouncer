@@ -35,8 +35,7 @@ extension FilterAction {
 
 
 struct FilterListView: View {
-
-    @EnvironmentObject var userSettings: UserSettings
+    
     @ObservedObject var viewModel = FilterListViewModel()    
     @State private var showingSettings = false
     @State private var showingAddForm = false
@@ -123,8 +122,7 @@ struct FilterListView: View {
                                 Image(systemName: "questionmark.circle").imageScale(.large)
                             }
                             .sheet(isPresented: $showingSettings) {
-                                TutorialView(firstLaunch: false)
-                                    .environmentObject(userSettings)
+                                TutorialView(firstLaunch: false)                                    
                         },
                     trailing:
                         Button(
