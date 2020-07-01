@@ -9,12 +9,17 @@
 import Foundation
 import Combine
 
-final class FilterFileStore: ObservableObject {
+final class FilterStoreFile: FilterStore, ObservableObject {
+    
+    @Published var filters: [Filter] = []
+    
+    // When using combile, we need to use the explicitly debscribed
+    // properties
+    var filtersPublished: Published<[Filter]> { _filters }
+    var filtersPublisher: Published<[Filter]>.Publisher { $filters }
     
     static let filterListFile = "filters.json"
     static let groupContainer = "group.com.banshai.bouncer"
-    
-    @Published private(set) var filters: [Filter] = []
     
     init() {
         readFromDisk()

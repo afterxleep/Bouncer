@@ -34,14 +34,12 @@ extension FilterAction {
 }
 
 struct AddFilterView: View {
-    
-     
     @Binding var showingAddForm :Bool
     @State var filterType: FilterType = .any
     @State var filterAction: FilterAction = .junk
     @State var filterTerm: String = ""
     @State var exactMatch: Bool = false    
-    var viewModel: FilterListViewModel
+    var viewModel: FilterViewModel
     
     var body: some View {
         NavigationView {
@@ -100,7 +98,7 @@ struct AddFilterView: View {
 }
 
 struct AddFilterView_Previews: PreviewProvider {
-    static var viewModel = FilterListViewModel()
+    static var viewModel = FilterViewModel()
     static var previews: some View {
         AddFilterView(showingAddForm: .constant(true), viewModel: viewModel)
     }

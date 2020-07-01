@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-final class FilterListViewModel: ObservableObject {
+final class FilterViewModel: ObservableObject {
         
     enum strings: String {
         case blockList
@@ -16,7 +16,7 @@ final class FilterListViewModel: ObservableObject {
     }
     
     private var filterListView : FilterListView?
-    let filterListService: FilterFileStore = FilterFileStore()    
+    let filterListService: FilterStore
     var filterListcancellable: AnyCancellable?
     var defaultsCancellable: AnyCancellable?
     
@@ -25,13 +25,16 @@ final class FilterListViewModel: ObservableObject {
     @Published var isFirstLaunch: Bool = false
     
     //MARK: - Initializer
-    init() {
+    init(filterListService: FilterStore = FilterStoreFile()) {
+        self.filterListService = filterListService
+        
         filterListcancellable = filterListService
-            .$filters
+            .filtersPublisher
                 .receive(on: RunLoop.main)
                 .sink { [weak self] filters in
                     self?.filters = filters
                 }
+        
         migrateFromV1()
     }
         

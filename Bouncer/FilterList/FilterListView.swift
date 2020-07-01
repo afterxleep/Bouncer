@@ -35,8 +35,7 @@ extension FilterAction {
 
 
 struct FilterListView: View {
-    
-    @ObservedObject var viewModel = FilterListViewModel()    
+    @StateObject var viewModel = FilterViewModel()
     @State private var showingSettings = false
     @State private var showingAddForm = false
     

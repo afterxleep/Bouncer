@@ -11,14 +11,15 @@ import IdentityLookup
 
 final class SMSFilterLocal {
         
-    let filterListService: FilterFileStore = FilterFileStore()
+    let filterListStore: FilterStore
     
     var filters: [Filter] = []
     
     //MARK: - Initializer
-    init() {
-        filterListService.migrateFromV1()
-        self.filters = filterListService.filters
+    init(filterListStore: FilterStore = FilterStoreFile()) {
+        self.filterListStore = filterListStore
+        filterListStore.migrateFromV1()
+        self.filters = filterListStore.filters
     }
     
     func applyFilter(filter: Filter, message: SMSMessage) -> Bool {
