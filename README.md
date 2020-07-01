@@ -7,6 +7,15 @@ Different to other apps, Bouncer does not share, upload or send any of your pers
 
 Messages text is checked against a simple user defined blacklist.
 
+Features
+----------------------
+* Filter SMS messages using a simple list of words
+* Catalog filtered messages in iOS 14+ categories (Junk, Transaction, Promotion)
+* Unlimmited number of filter rules
+* Automatic migration of filters from Version 1.x
+* Localized in English and Spanish
+
+
 Building
 ----------------------
 
