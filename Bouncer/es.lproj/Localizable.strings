@@ -5,7 +5,7 @@
   Created by Daniel Bernal on 6/30/20.
   
 */
-/* Add Filter View */
+
 "FILTER_TYPE_SELECTION_LABEL" = "Filtar usando:";
 "FILTER_ADD_TEXT_PLACEHOLDER" = "Ingresa una palabra o frase";
 "FILTER_ADD_VIEW_TITLE" = "Agregar Filtro";
@@ -15,12 +15,14 @@
 "FILTER_INFORMATION" = "Información del filtro";
 "EXACT_MATCH" = "Ocurrencia Exacta";
 "EXACT_MATCH_CAPTION" = "Filtra los mensajes solo cuando el remitente/mensaje es exactamente igual a la palabra o frase especificada arriba.";
-
+"FILTER_ACTION_LABEL" = "Marcar Como";
+"CONTAINS_LABEL" = "Contiene";
+"JUNK_ACTION" = "Spam";
+"TRANSACTION_ACTION" = "Transacción";
+"PROMOTION_ACTION" = "Promoción";
 "SENDER_AND_TEXT" = "Remitente o Mensaje";
 "SENDER" = "Remitente";
 "TEXT" = "Mensaje";
-
-/* Filter List */
 "LIST_VIEW_TITLE" = "Lista de Bloqueo";
 "SENDER_CONTAINS_PREFFIX " = "El Remitente contiene: ";
 "MESSAGE_CONTAINS_PREFFIX " = "El Mensaje contiene: ";
@@ -31,13 +33,9 @@
 "EMPTY_LIST_MESSAGE" = "Bouncer bloqueará los mensajes de remitentes desconocidos que agregues aquí.";
 "TAP_SPACE" = "Toca '";
 "TO_ADD_A_FILTER_SPACE" = "' para agregar un filtro.";
-
-/* Tutorial */
 "WELCOME_TITLE" = "Hola!";
 "WELCOME_SUBTITLE" = "Bienvenid@ a Bouncer!";
 "HELP" = "Ayuda";
-
-/* Instructions */
 "LETS " = "Vamos a";
 "HERE_IS_HOW" = "Para ";
 "ENABLE_SMS_FILTERING" = "configurar el filtrado SMS";

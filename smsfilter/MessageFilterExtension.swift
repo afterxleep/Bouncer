@@ -25,12 +25,8 @@ extension MessageFilterExtension: ILMessageFilterQueryHandling {
     private func offlineAction(for queryRequest: ILMessageFilterQueryRequest) -> ILMessageFilterAction {
         guard let sender = queryRequest.sender else { return .none }
         guard let messageBody = queryRequest.messageBody else { return .none }
-        let message = SMSMessage(sender: sender, text: messageBody)
-        
-        if(filterService.isValidMessage(message: message)) {
-            return .allow
-        }
-        return .junk
+        let message = SMSMessage(sender: sender, text: messageBody)        
+        return filterService.filterMessage(message: message)
     }
     
     private func action(for networkResponse: ILNetworkResponse) -> ILMessageFilterAction {

@@ -7,6 +7,33 @@
 
 import SwiftUI
 
+extension FilterType {
+    var listDescription: (image: String, color: Color) {
+        switch self {
+        case .any:
+            return ("message", Color.green)
+        case .sender:
+            return ("person", Color.blue)
+        case .message:
+            return ("text.quote", Color.pink)
+        }
+    }
+}
+
+extension FilterAction {
+    var listDescription: (image: String, color: Color, text: LocalizedStringKey) {
+        switch self {
+        case .junk:
+            return ("bin.xmark", Color.red, "JUNK_ACTION")
+        case .transaction:
+            return ("arrow.right.arrow.left", Color.blue, "TRANSACTION_ACTION")
+        case .promotion:
+            return ("tag", Color.green, "PROMOTION_ACTION")
+        }
+    }
+}
+
+
 struct FilterListView: View {
 
     @EnvironmentObject var userSettings: UserSettings
@@ -14,31 +41,30 @@ struct FilterListView: View {
     @State private var showingSettings = false
     @State private var showingAddForm = false
     
-    enum LocalizedStrings: LocalizedStringKey {
-        case senderContains = "SENDER_CONTAINS_PREFFIX"
-        case messageContains = "MESSAGE_CONTAINS_PREFFIX"
-        case senderIs = "SENDER_IS_PREFFIX"
-        case messageIs = "MESSAGE_IS_PREFFIX"
-        case anyContains = "SENDER_OR_TEXT_CONTAINS_PREFFIX"
-    }
-    
-    func getFilterTypeString(filter: Filter) -> LocalizedStringKey {
-        if(filter.exactMatch) {
-            switch(filter.type) {
-                case .sender:
-                    return LocalizedStrings.senderIs.rawValue
-                default:
-                    return LocalizedStrings.messageIs.rawValue
-            }
-        }
+    func getFilterTypeDecoration(filter: Filter) -> (image: String, color: Color) {
+        var data: (image: String, color: Color)
         switch(filter.type) {
             case .sender:
-                return LocalizedStrings.senderContains.rawValue
+                data = FilterType.sender.listDescription
             case .message:
-                return LocalizedStrings.messageContains.rawValue
+                data = FilterType.message.listDescription
             default:
-                return LocalizedStrings.anyContains.rawValue
+                data = FilterType.any.listDescription
         }
+        return (data.image, data.color)
+    }
+    
+    func getFilterActionDecoration(filter: Filter) -> (image: String, color: Color, text: LocalizedStringKey) {
+        var data: (image: String, color: Color, text: LocalizedStringKey)
+        switch (filter.action) {
+            case .junk:
+                data = FilterAction.junk.listDescription
+            case .promotion:
+                data = FilterAction.promotion.listDescription
+            case .transaction:
+                data = FilterAction.transaction.listDescription
+            }
+            return (data.image, data.color, data.text)
     }
     
     var shouldDisplayList: Bool {        
@@ -56,13 +82,29 @@ struct FilterListView: View {
                     if(shouldDisplayList) {
                         List {
                             ForEach(viewModel.filters) { item in
-                                Text(getFilterTypeString(filter: item))
-                                    .italic()
-                                    .foregroundColor(.secondary)
-                                    .fontWeight(.regular)
-                                    +
-                                Text("'\(item.phrase)'")
-                                    .bold()
+                                let typeDecoration = getFilterTypeDecoration(filter: item)
+                                let actionDecoration = getFilterActionDecoration(filter: item)
+                                HStack(spacing: 10) {
+                                    Image(systemName: typeDecoration.image)
+                                        .foregroundColor(typeDecoration.color)
+                                        .aspectRatio(contentMode: .fit)
+                                    Text("'\(item.phrase)'")
+                                            .bold()
+                                    Spacer()
+                                    HStack(spacing: 4) {
+                                        Image(systemName: actionDecoration.image)
+                                        Text(actionDecoration.text)
+                                    }
+                                    .font(.caption2)
+                                    .padding(.horizontal, 6)
+                                    .padding(.vertical, 4)
+                                    .foregroundColor(.gray)
+                                    .overlay(
+                                        RoundedRectangle(cornerRadius: 5)
+                                            .stroke(Color.gray, lineWidth: 1)
+                                        )
+                                }.padding(.vertical, 8)
+                                .font(.headline)
                             }.onDelete(perform: deleteItems)
                         }
                         .listStyle(PlainListStyle())

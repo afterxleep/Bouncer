@@ -77,7 +77,7 @@ final class FilterFileStore: ObservableObject {
             do {
                 if let loadedStrings = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(wordData as Data) as? [String] {
                     for s in loadedStrings {
-                        self.add(filter: Filter(id: UUID(), type: .any, phrase: s, exactMatch: false))
+                        self.add(filter: Filter(id: UUID(), phrase: s))
                     }
                     try? FileManager.default.removeItem(atPath: oldStore.path)
                 }

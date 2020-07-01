@@ -43,11 +43,10 @@ final class FilterListViewModel: ObservableObject {
                 }
         
         migrateFromV1()
-        
     }
-    
-    func add(type: FilterType, phrase: String, exactMatch: Bool) {
-        filterListService.add(filter: Filter(id: UUID(), type: type, phrase: phrase, exactMatch: exactMatch))
+        
+    func add(type: FilterType, phrase: String, action: FilterAction) {
+        filterListService.add(filter: Filter(id: UUID(), phrase: phrase, type: type, action: action))
         userSettingsService.hasAddedFilters = true
     }
     

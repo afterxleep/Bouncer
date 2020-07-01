@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import IdentityLookup
 
 final class SMSFilterLocal {
         
@@ -30,17 +31,20 @@ final class SMSFilterLocal {
             default:
                 txt = "\(message.sender.lowercased()) \(message.text.lowercased())"
         }
-        return (filter.exactMatch) ? txt == filter.phrase : txt.contains(filter.phrase)
+        return txt.contains(filter.phrase)
     }
     
-    func isValidMessage(message: SMSMessage) -> Bool {
+    func filterMessage(message: SMSMessage) -> ILMessageFilterAction {
         for filter in filters {
             if(applyFilter(filter: filter, message: message)) {
-                return true
+                switch (filter.action) {
+                    case .junk: return .junk
+                    case .promotion: return .promotion
+                    case .transaction: return .transaction
+                }
             }
         }
-        return false
-        
+        return .none
     }
 
 }

@@ -7,16 +7,38 @@
 
 import SwiftUI
 
-struct AddFilterView: View {
-        
-    enum FilterOption: LocalizedStringKey, Equatable, CaseIterable {
-        case senderAndMessage = "SENDER_AND_TEXT"
-        case senderOnly = "SENDER"
-        case messageOnly = "TEXT"
+extension FilterType {
+    var formDescription: (label: LocalizedStringKey, image: String, color: Color) {
+        switch self {
+        case .any:
+            return ("SENDER_AND_TEXT", "message", Color.green)
+        case .sender:
+            return ("SENDER", "person", Color.blue)
+        case .message:
+            return ("TEXT", "text.quote", Color.pink)
+        }
     }
+}
+
+extension FilterAction {
+    var formDescription: (label: LocalizedStringKey, image: String, color: Color) {
+        switch self {
+        case .junk:
+            return ("JUNK_ACTION", "bin.xmark", Color.red)
+        case .transaction:
+            return ("TRANSACTION_ACTION", "arrow.right.arrow.left", Color.blue)
+        case .promotion:
+            return ("PROMOTION_ACTION", "tag", Color.green)
+        }
+    }
+}
+
+struct AddFilterView: View {
     
+     
     @Binding var showingAddForm :Bool
-    @State var filterOption: FilterOption = .senderAndMessage
+    @State var filterType: FilterType = .any
+    @State var filterAction: FilterAction = .junk
     @State var filterTerm: String = ""
     @State var exactMatch: Bool = false
     @EnvironmentObject var userSettings: UserSettings
@@ -26,24 +48,30 @@ struct AddFilterView: View {
         NavigationView {
             Form {
                 Section(header: Text("FILTER_INFORMATION")) {
-                    Picker("FILTER_TYPE_SELECTION_LABEL", selection: $filterOption) {
-                        ForEach(FilterOption.allCases, id: \.self) { value in
-                            Text(value.rawValue)
+                    Picker("FILTER_TYPE_SELECTION_LABEL", selection: $filterType) {
+                        ForEach(FilterType.allCases, id: \.self) { value in
+                            HStack {
+                                Image(systemName: value.formDescription.image).foregroundColor(value.formDescription.color)
+                                Text(value.formDescription.label)
+                            }
                         }
                     }.pickerStyle(DefaultPickerStyle())
-                    TextField("FILTER_ADD_TEXT_PLACEHOLDER", text: $filterTerm)
-                        .autocapitalization(.none)
-                        .disableAutocorrection(true)
-                        
-                        
-                }
-                if(filterOption != FilterOption.senderAndMessage) {
-                    Section(header: Text("ADVANCED"),
-                            footer: Text("EXACT_MATCH_CAPTION")) {
-                        Toggle(isOn: $exactMatch, label: {
-                            Text("EXACT_MATCH")
-                        })
+                    HStack {
+                        Text("CONTAINS_LABEL")
+                        Spacer()
+                        TextField("FILTER_ADD_TEXT_PLACEHOLDER", text: $filterTerm)
+                            .autocapitalization(.none)
+                            .disableAutocorrection(true)
+                            .multilineTextAlignment(.trailing)
                     }
+                    Picker("FILTER_ACTION_LABEL", selection: $filterAction) {
+                        ForEach(FilterAction.allCases, id: \.self) { value in
+                            HStack {
+                                Image(systemName: value.formDescription.image).foregroundColor(value.formDescription.color)
+                                Text(value.formDescription.label)
+                            }
+                        }
+                    }.pickerStyle(DefaultPickerStyle())
                 }
             }
             .navigationBarTitle("FILTER_ADD_VIEW_TITLE")
@@ -62,31 +90,15 @@ struct AddFilterView: View {
                     }
             )
         }
-        
-    }
-    
-    func ruleTypeFrom(filterOption: FilterOption) -> FilterType {
-        switch(filterOption) {
-            case .senderOnly:
-                return .sender
-            case .messageOnly:
-                return .message
-            default:
-                return .any
-        }
     }
     
     func saveFilter() {
-        if(filterTerm.count > 0) {
-            viewModel.add(type: ruleTypeFrom(filterOption: filterOption),
-                                phrase: filterTerm,
-                                exactMatch: exactMatch)
-     
+        if(filterTerm.count > 0) {            
+            self.viewModel.add(type: filterType, phrase: filterTerm, action: filterAction)
             self.showingAddForm = false
         }
     }
 }
-
 
 struct AddFilterView_Previews: PreviewProvider {
     static var viewModel = FilterListViewModel()
