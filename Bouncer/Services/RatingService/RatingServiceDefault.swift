@@ -8,7 +8,7 @@
 import Foundation
 import StoreKit
 
-struct RatingServiceStoreKit: RatingService {
+struct ReviewServiceStoreKit: ReviewService {
     
     var launchesRequired: Int = 3
     let userSettings: UserSettings

@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol RatingService {
+protocol ReviewService {
     
     var launchesRequired: Int { get }
     var userSettings: UserSettings { get }

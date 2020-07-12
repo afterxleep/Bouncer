@@ -18,7 +18,7 @@ final class FilterViewModel: ObservableObject {
     private var filterListView : FilterListView?
     let filterListService: FilterStore
     var userSettingsService: UserSettings
-    var ratingService: RatingService
+    var ratingService: ReviewService
     var filterListcancellable: AnyCancellable?
     var defaultsCancellable: AnyCancellable?
     
@@ -30,7 +30,7 @@ final class FilterViewModel: ObservableObject {
     init(
         filterListService: FilterStore = FilterStoreFile(),
         userSettingsService: UserSettings = UserSettingsDefaults(),
-        ratingService: RatingService = RatingServiceStoreKit()) {
+        ratingService: ReviewService = ReviewServiceStoreKit()) {
         
         self.filterListService = filterListService
         self.userSettingsService = userSettingsService
