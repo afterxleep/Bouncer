@@ -9,7 +9,7 @@ import SwiftUI
 
 struct BaseView: View {
         
-    @AppStorage(APP_STORAGE_KEYS.HAS_LAUNCHED_APP.rawValue) var hasLaunchedApp = false
+    @AppStorage(APP_STORAGE_KEYS.HAS_LAUNCHED_APP.rawValue) var hasLaunchedApp = false    
     
     init() {
         customizeNavbar()

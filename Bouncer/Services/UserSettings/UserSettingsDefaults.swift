@@ -14,7 +14,17 @@ final class UserSettingsDefaults: UserSettings {
         didSet { UserDefaults.standard.set(hasLaunchedApp, forKey: APP_STORAGE_KEYS.HAS_LAUNCHED_APP.rawValue) }
     }
     
+    var numberOfLaunches: Int {
+        didSet { UserDefaults.standard.set(numberOfLaunches, forKey: APP_STORAGE_KEYS.NUMBER_OF_LAUNCHES.rawValue) }
+    }
+    
+    var lastVersionPromptedForReview: String {
+        didSet { UserDefaults.standard.set(lastVersionPromptedForReview, forKey: APP_STORAGE_KEYS.LAST_VERSION_PROMPTED_FOR_REVIEW.rawValue) }
+    }
+    
     init() {
         self.hasLaunchedApp = UserDefaults.standard.bool(forKey: APP_STORAGE_KEYS.HAS_LAUNCHED_APP.rawValue)
+        self.numberOfLaunches = UserDefaults.standard.integer(forKey: APP_STORAGE_KEYS.NUMBER_OF_LAUNCHES.rawValue)
+        self.lastVersionPromptedForReview = UserDefaults.standard.string(forKey: APP_STORAGE_KEYS.LAST_VERSION_PROMPTED_FOR_REVIEW.rawValue) ?? ""
     }
 }

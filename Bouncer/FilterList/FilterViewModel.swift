@@ -17,6 +17,8 @@ final class FilterViewModel: ObservableObject {
     
     private var filterListView : FilterListView?
     let filterListService: FilterStore
+    var userSettingsService: UserSettings
+    var ratingService: RatingService
     var filterListcancellable: AnyCancellable?
     var defaultsCancellable: AnyCancellable?
     
@@ -25,8 +27,14 @@ final class FilterViewModel: ObservableObject {
     @Published var isFirstLaunch: Bool = false
     
     //MARK: - Initializer
-    init(filterListService: FilterStore = FilterStoreFile()) {
+    init(
+        filterListService: FilterStore = FilterStoreFile(),
+        userSettingsService: UserSettings = UserSettingsDefaults(),
+        ratingService: RatingService = RatingServiceStoreKit()) {
+        
         self.filterListService = filterListService
+        self.userSettingsService = userSettingsService
+        self.ratingService = ratingService
         
         filterListcancellable = filterListService
             .filtersPublisher
@@ -36,6 +44,8 @@ final class FilterViewModel: ObservableObject {
                 }
         
         migrateFromV1()
+        saveHasLaunchedApp()
+        requestReview()
     }
         
     func add(type: FilterType, phrase: String, action: FilterAction) {
@@ -54,6 +64,15 @@ final class FilterViewModel: ObservableObject {
     
     func migrateFromV1() {
         filterListService.migrateFromV1()
+    }
+    
+    func saveHasLaunchedApp() {
+        userSettingsService.hasLaunchedApp = true
+        userSettingsService.numberOfLaunches = userSettingsService.numberOfLaunches + 1
+    }
+    
+    func requestReview() {
+        self.ratingService.requestReview()
     }
 
         

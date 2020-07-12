@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct InstructionsView: View {
-    
-    @AppStorage(APP_STORAGE_KEYS.HAS_LAUNCHED_APP.rawValue) var hasLaunchedApp = false
+        
     @Environment(\.presentationMode) var presentationMode
     var firstLaunch: Bool = true
     
@@ -18,7 +17,6 @@ struct InstructionsView: View {
     
     func respondToActionButton() {
         if(firstLaunch) {
-            hasLaunchedApp = true
             if let settingsURL = URL(string: UIApplication.openSettingsURLString),
                 UIApplication.shared.canOpenURL(settingsURL) {
                 UIApplication.shared.open(settingsURL, options: [:])}

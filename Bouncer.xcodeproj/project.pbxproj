@@ -18,6 +18,8 @@
 		D6233A8124A6538D00B37A6A /* SMSFilterLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6233A7D24A651A200B37A6A /* SMSFilterLocal.swift */; };
 		D6233A8324A653F200B37A6A /* FilterStoreFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FC824A54ADE009AE3FF /* FilterStoreFile.swift */; };
 		D6233A8424A653FB00B37A6A /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FD124A54D8C009AE3FF /* Filter.swift */; };
+		D62B331B24BAB16C002DFB81 /* RatingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62B331A24BAB16C002DFB81 /* RatingService.swift */; };
+		D62B331D24BAB18E002DFB81 /* RatingServiceDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62B331C24BAB18E002DFB81 /* RatingServiceDefault.swift */; };
 		D6379EB324AA852500FFD400 /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6379EB224AA852500FFD400 /* EmptyListView.swift */; };
 		D6529F7324A41371009AE3FF /* BouncerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529F7224A41371009AE3FF /* BouncerApp.swift */; };
 		D6529F7A24A41372009AE3FF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6529F7924A41372009AE3FF /* Preview Assets.xcassets */; };
@@ -92,6 +94,8 @@
 		D6233A7D24A651A200B37A6A /* SMSFilterLocal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSFilterLocal.swift; sourceTree = "<group>"; };
 		D6233A8524A6553C00B37A6A /* Bouncer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bouncer.entitlements; sourceTree = "<group>"; };
 		D6233A8624A655BF00B37A6A /* SMSFilter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SMSFilter.entitlements; sourceTree = "<group>"; };
+		D62B331A24BAB16C002DFB81 /* RatingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingService.swift; sourceTree = "<group>"; };
+		D62B331C24BAB18E002DFB81 /* RatingServiceDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingServiceDefault.swift; sourceTree = "<group>"; };
 		D6379EB224AA852500FFD400 /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
 		D6529F6F24A41371009AE3FF /* Bouncer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bouncer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6529F7224A41371009AE3FF /* BouncerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BouncerApp.swift; sourceTree = "<group>"; };
@@ -170,6 +174,15 @@
 				D6233A7D24A651A200B37A6A /* SMSFilterLocal.swift */,
 			);
 			path = SMSFilter;
+			sourceTree = "<group>";
+		};
+		D62B331924BAB15C002DFB81 /* RatingService */ = {
+			isa = PBXGroup;
+			children = (
+				D62B331A24BAB16C002DFB81 /* RatingService.swift */,
+				D62B331C24BAB18E002DFB81 /* RatingServiceDefault.swift */,
+			);
+			path = RatingService;
 			sourceTree = "<group>";
 		};
 		D6529F6624A41371009AE3FF = {
@@ -261,6 +274,7 @@
 		D6529FAA24A4F237009AE3FF /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				D62B331924BAB15C002DFB81 /* RatingService */,
 				D6233A7B24A6519200B37A6A /* SMSFilter */,
 				D6529FC624A54AC7009AE3FF /* FilterStore */,
 				D6529FBE24A5419E009AE3FF /* UserSettings */,
@@ -564,12 +578,14 @@
 				D6529FA424A413EB009AE3FF /* BackgroundView.swift in Sources */,
 				D6529FAE24A4F246009AE3FF /* UserSettingsDefaults.swift in Sources */,
 				D6EA9A8724AD27ED000135E7 /* UserSettings.swift in Sources */,
+				D62B331B24BAB16C002DFB81 /* RatingService.swift in Sources */,
 				D6529FB724A50B1F009AE3FF /* InstructionsView.swift in Sources */,
 				D679D67424AA758C00579223 /* DesignConstants.swift in Sources */,
 				D6529F7324A41371009AE3FF /* BouncerApp.swift in Sources */,
 				D6EA9A8224AD2201000135E7 /* SMSFilter.swift in Sources */,
 				D6529FC524A54ABA009AE3FF /* FilterViewModel.swift in Sources */,
 				D615898A24A55FF800FE710A /* BaseView.swift in Sources */,
+				D62B331D24BAB18E002DFB81 /* RatingServiceDefault.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -639,7 +655,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -660,7 +676,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};

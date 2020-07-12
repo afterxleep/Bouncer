@@ -8,5 +8,7 @@
 import Foundation
 
 protocol UserSettings {
-    var hasLaunchedApp: Bool { get }
+    var hasLaunchedApp: Bool { get set }
+    var numberOfLaunches: Int { get set }
+    var lastVersionPromptedForReview: String { get set }
 }
