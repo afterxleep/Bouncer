@@ -66,8 +66,7 @@ final class FilterViewModel: ObservableObject {
         filterListService.migrateFromV1()
     }
     
-    func saveHasLaunchedApp() {
-        userSettingsService.hasLaunchedApp = true
+    func saveHasLaunchedApp() {        
         userSettingsService.numberOfLaunches = userSettingsService.numberOfLaunches + 1
     }
     
