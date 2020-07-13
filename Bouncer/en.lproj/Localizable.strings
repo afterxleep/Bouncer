@@ -32,7 +32,7 @@
 "MESSAGE_IS_PREFFIX" = "Message is:";
 "SENDER_OR_TEXT_CONTAINS_PREFFIX" = "";
 "EMPTY_LIST_TITLE" = "Your Block List is empty";
-"EMPTY_LIST_MESSAGE" = "Bouncer will block SMS from unknown senders using the filters you adde here.";
+"EMPTY_LIST_MESSAGE" = "Bouncer will filter SMS from unknown senders using the filters you add here.";
 "TAP_SPACE" = "Tap '";
 "TO_ADD_A_FILTER_SPACE" = "' to add a filter.";
 "WELCOME_TITLE" = "Hello there!";
