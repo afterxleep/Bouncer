@@ -9,6 +9,9 @@ import SwiftUI
 
 struct TutorialView: View {
     
+    @AppStorage(APP_STORAGE_KEYS.HAS_LAUNCHED_APP.rawValue) var hasLaunchedApp = false
+    @StateObject var viewModel: TutorialViewModel = TutorialViewModel()
+    
     var firstLaunch: Bool = true
     
     var body: some View {
@@ -17,7 +20,7 @@ struct TutorialView: View {
             VStack {
                 VStack {
                     Image("welcome_icon").padding()
-                    if(firstLaunch) {
+                    if(!hasLaunchedApp) {
                         Text("WELCOME_TITLE")
                             .font(.largeTitle)
                             .fontWeight(.bold)
@@ -35,7 +38,7 @@ struct TutorialView: View {
                             .padding(.bottom, 20.0)
                     }
                 }
-                InstructionsView(firstLaunch: firstLaunch)
+                InstructionsView(viewModel: viewModel)
             }
         }
     }

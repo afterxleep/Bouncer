@@ -9,17 +9,17 @@ import SwiftUI
 
 struct InstructionsView: View {
         
+    @AppStorage(APP_STORAGE_KEYS.HAS_LAUNCHED_APP.rawValue) var hasLaunchedApp = false
+    @StateObject var viewModel: TutorialViewModel
     @Environment(\.presentationMode) var presentationMode
-    var firstLaunch: Bool = true
     
     let separatorColor = Color(red: 0.294, green: 0.357, blue: 0.455)
     let boxBackground = Color(red: 0.004, green: 0.004, blue: 0.004).opacity(0.1)
     
     func respondToActionButton() {
-        if(firstLaunch) {
-            if let settingsURL = URL(string: UIApplication.openSettingsURLString),
-                UIApplication.shared.canOpenURL(settingsURL) {
-                UIApplication.shared.open(settingsURL, options: [:])}
+        if(!hasLaunchedApp) {
+            viewModel.openSettings()
+            hasLaunchedApp = true
         }
         else {
             self.presentationMode.wrappedValue.dismiss()
@@ -29,7 +29,7 @@ struct InstructionsView: View {
     var body: some View {
         VStack(alignment: .center) {
             Group() {
-                Text((firstLaunch) ? "LETS" : "HERE_IS_HOW")
+                Text((!hasLaunchedApp) ? "LETS" : "HERE_IS_HOW")
                     .foregroundColor(Color("TextDefaultColor")) +
                 Text("ENABLE_SMS_FILTERING")
                     .foregroundColor(Color("TextDefaultColor"))
@@ -89,7 +89,7 @@ struct InstructionsView: View {
             Button(action: {
                 respondToActionButton()
             }) {
-                Text((firstLaunch) ? "BUTTON_TUTORIAL_FIRST_LAUNCH_TEXT" : "BUTTON_TUTORIAL_HELP_TEXT")
+                Text((!hasLaunchedApp) ? "BUTTON_TUTORIAL_FIRST_LAUNCH_TEXT" : "BUTTON_TUTORIAL_HELP_TEXT")
                     .foregroundColor(Color("TextDefaultColor"))
                     .frame(minWidth: 300, maxWidth: 300, minHeight: 0, maxHeight: 50)
                     .background(Color("ButtonBackgroundColor"))
@@ -107,7 +107,7 @@ struct InstructionsView_Previews: PreviewProvider {
     static var previews: some View {
         ZStack {
             BackgroundView()
-            InstructionsView()
+            //InstructionsView()
         }
         
     }

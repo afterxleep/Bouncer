@@ -20,6 +20,7 @@
 		D6233A8424A653FB00B37A6A /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FD124A54D8C009AE3FF /* Filter.swift */; };
 		D62B331B24BAB16C002DFB81 /* ReviewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62B331A24BAB16C002DFB81 /* ReviewService.swift */; };
 		D62B331D24BAB18E002DFB81 /* RatingServiceDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62B331C24BAB18E002DFB81 /* RatingServiceDefault.swift */; };
+		D630D13B24BC1EF100FB8ED7 /* TutorialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D630D13A24BC1EF100FB8ED7 /* TutorialViewModel.swift */; };
 		D6379EB324AA852500FFD400 /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6379EB224AA852500FFD400 /* EmptyListView.swift */; };
 		D6529F7324A41371009AE3FF /* BouncerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529F7224A41371009AE3FF /* BouncerApp.swift */; };
 		D6529F7A24A41372009AE3FF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6529F7924A41372009AE3FF /* Preview Assets.xcassets */; };
@@ -96,6 +97,7 @@
 		D6233A8624A655BF00B37A6A /* SMSFilter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SMSFilter.entitlements; sourceTree = "<group>"; };
 		D62B331A24BAB16C002DFB81 /* ReviewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewService.swift; sourceTree = "<group>"; };
 		D62B331C24BAB18E002DFB81 /* RatingServiceDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingServiceDefault.swift; sourceTree = "<group>"; };
+		D630D13A24BC1EF100FB8ED7 /* TutorialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewModel.swift; sourceTree = "<group>"; };
 		D6379EB224AA852500FFD400 /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
 		D6529F6F24A41371009AE3FF /* Bouncer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bouncer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6529F7224A41371009AE3FF /* BouncerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BouncerApp.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 			children = (
 				D6529FB624A50B1F009AE3FF /* InstructionsView.swift */,
 				D6529F9E24A413A6009AE3FF /* TutorialView.swift */,
+				D630D13A24BC1EF100FB8ED7 /* TutorialViewModel.swift */,
 			);
 			path = Tutorial;
 			sourceTree = "<group>";
@@ -569,6 +572,7 @@
 				D60A19C724A69F1F0002E8BD /* SMSMessage.swift in Sources */,
 				D664B24824AA998700EB826D /* UIImage+Gradient.swift in Sources */,
 				D6529FCB24A54ADE009AE3FF /* FilterStoreFile.swift in Sources */,
+				D630D13B24BC1EF100FB8ED7 /* TutorialViewModel.swift in Sources */,
 				D6379EB324AA852500FFD400 /* EmptyListView.swift in Sources */,
 				D696B9E324AD15F300EF0373 /* AppStoreConstants.swift in Sources */,
 				D6529FD224A54D8C009AE3FF /* Filter.swift in Sources */,
