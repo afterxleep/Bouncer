@@ -3,7 +3,7 @@
   Bouncer
 
   Created by Daniel Bernal on 6/30/20.
-  
+   
 */
 
 "FILTER_TYPE_SELECTION_LABEL" = "Filtar usando:";
@@ -30,7 +30,7 @@
 "MESSAGE_IS_PREFFIX" = "El mensaje es:";
 "SENDER_OR_TEXT_CONTAINS_PREFFIX" = "";
 "EMPTY_LIST_TITLE" = "Tu lista de bloqueo está vacía";
-"EMPTY_LIST_MESSAGE" = "Bouncer bloqueará los mensajes de remitentes desconocidos que agregues aquí.";
+"EMPTY_LIST_MESSAGE" = "Bouncer bloqueará los mensajes de remitentes desconocidos usando los filtros que agregues aquí.";
 "TAP_SPACE" = "Toca '";
 "TO_ADD_A_FILTER_SPACE" = "' para agregar un filtro.";
 "WELCOME_TITLE" = "Hola!";

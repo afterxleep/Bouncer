@@ -48,7 +48,7 @@ struct AddFilterView: View {
                     Picker("FILTER_TYPE_SELECTION_LABEL", selection: $filterType) {
                         ForEach(FilterType.allCases, id: \.self) { value in
                             HStack {
-                                Image(systemName: value.formDescription.image).foregroundColor(value.formDescription.color)
+                                Image(systemName: value.formDescription.image).foregroundColor(.gray)
                                 Text(value.formDescription.label)
                             }
                         }

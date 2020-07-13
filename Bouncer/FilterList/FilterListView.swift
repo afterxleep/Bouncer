@@ -84,7 +84,7 @@ struct FilterListView: View {
                                 let actionDecoration = getFilterActionDecoration(filter: item)
                                 HStack(spacing: 10) {
                                     Image(systemName: typeDecoration.image)
-                                        .foregroundColor(typeDecoration.color)
+                                        .foregroundColor(.gray)
                                         .aspectRatio(contentMode: .fit)
                                     Text("'\(item.phrase)'")
                                             .bold()
@@ -96,10 +96,10 @@ struct FilterListView: View {
                                     .font(.caption2)
                                     .padding(.horizontal, 6)
                                     .padding(.vertical, 4)
-                                    .foregroundColor(.gray)
+                                    .foregroundColor(actionDecoration.color)
                                     .overlay(
                                         RoundedRectangle(cornerRadius: 5)
-                                            .stroke(Color.gray, lineWidth: 1)
+                                            .stroke(actionDecoration.color, lineWidth: 1)
                                         )
                                 }.padding(.vertical, 8)
                                 .font(.headline)
