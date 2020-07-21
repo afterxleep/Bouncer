@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol FilterStore {
+protocol FilterStoreProtocol {
     var filters: [Filter] {get set}
     
     // Property wrapper @Published is not supported in protocols,

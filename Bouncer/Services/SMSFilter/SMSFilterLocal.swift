@@ -11,12 +11,12 @@ import IdentityLookup
 
 final class SMSFilterLocal {
         
-    let filterListStore: FilterStore
+    let filterListStore: FilterStoreProtocol
     
     var filters: [Filter] = []
     
     //MARK: - Initializer
-    init(filterListStore: FilterStore = FilterStoreFile()) {
+    init(filterListStore: FilterStoreProtocol = FilterStoreFile()) {
         self.filterListStore = filterListStore
         filterListStore.migrateFromV1()
         self.filters = filterListStore.filters

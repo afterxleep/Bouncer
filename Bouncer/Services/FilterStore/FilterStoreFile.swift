@@ -9,7 +9,7 @@
 import Foundation
 import Combine
 
-final class FilterStoreFile: FilterStore, ObservableObject {
+final class FilterStoreFile: FilterStoreProtocol, ObservableObject {
     
     @Published var filters: [Filter] = []
     

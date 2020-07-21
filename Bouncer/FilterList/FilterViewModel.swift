@@ -16,9 +16,9 @@ final class FilterViewModel: ObservableObject {
     }
     
     private var filterListView : FilterListView?
-    let filterListService: FilterStore
-    var userSettingsService: UserSettings
-    var ratingService: ReviewService
+    let filterListService: FilterStoreProtocol
+    var userSettingsService: UserSettingsProtocol
+    var ratingService: ReviewServiceProtocol
     var filterListcancellable: AnyCancellable?
     var defaultsCancellable: AnyCancellable?
     
@@ -28,9 +28,9 @@ final class FilterViewModel: ObservableObject {
     
     //MARK: - Initializer
     init(
-        filterListService: FilterStore = FilterStoreFile(),
-        userSettingsService: UserSettings = UserSettingsDefaults(),
-        ratingService: ReviewService = ReviewServiceStoreKit()) {
+        filterListService: FilterStoreProtocol = FilterStoreFile(),
+        userSettingsService: UserSettingsProtocol = UserSettingsDefaults(),
+        ratingService: ReviewServiceProtocol = ReviewServiceStoreKit()) {
         
         self.filterListService = filterListService
         self.userSettingsService = userSettingsService

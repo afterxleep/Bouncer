@@ -8,8 +8,8 @@
 import Foundation
 import IdentityLookup
 
-protocol SMSFilter {
-    var filterListService: FilterStore { get }
+protocol SMSFilterProtocol {
+    var filterListService: FilterStoreProtocol { get }
     var filters: [Filter] { get }
     func applyFilter(filter: Filter, message: SMSMessage) -> Bool
     func filterMessage(message: SMSMessage) -> ILMessageFilterAction

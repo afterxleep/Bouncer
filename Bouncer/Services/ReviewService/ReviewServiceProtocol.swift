@@ -7,10 +7,10 @@
 
 import Foundation
 
-protocol ReviewService {
+protocol ReviewServiceProtocol {
     
     var launchesRequired: Int { get }
-    var userSettings: UserSettings { get }
+    var userSettings: UserSettingsProtocol { get }
     
     func requestReview()
 }

@@ -8,7 +8,7 @@
 
 import Foundation
 
-final class UserSettingsDefaults: UserSettings {
+final class UserSettingsDefaults: UserSettingsProtocol {
     
     var hasLaunchedApp: Bool {
         didSet { UserDefaults.standard.set(hasLaunchedApp, forKey: APP_STORAGE_KEYS.HAS_LAUNCHED_APP.rawValue) }

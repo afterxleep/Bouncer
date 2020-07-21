@@ -18,7 +18,7 @@
 		D6233A8124A6538D00B37A6A /* SMSFilterLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6233A7D24A651A200B37A6A /* SMSFilterLocal.swift */; };
 		D6233A8324A653F200B37A6A /* FilterStoreFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FC824A54ADE009AE3FF /* FilterStoreFile.swift */; };
 		D6233A8424A653FB00B37A6A /* Filter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FD124A54D8C009AE3FF /* Filter.swift */; };
-		D62B331B24BAB16C002DFB81 /* ReviewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62B331A24BAB16C002DFB81 /* ReviewService.swift */; };
+		D62B331B24BAB16C002DFB81 /* ReviewServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62B331A24BAB16C002DFB81 /* ReviewServiceProtocol.swift */; };
 		D62B331D24BAB18E002DFB81 /* RatingServiceDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62B331C24BAB18E002DFB81 /* RatingServiceDefault.swift */; };
 		D630D13B24BC1EF100FB8ED7 /* TutorialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D630D13A24BC1EF100FB8ED7 /* TutorialViewModel.swift */; };
 		D6379EB324AA852500FFD400 /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6379EB224AA852500FFD400 /* EmptyListView.swift */; };
@@ -37,12 +37,11 @@
 		D664B24424AA92AA00EB826D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D664B24324AA92AA00EB826D /* Colors.xcassets */; };
 		D664B24624AA92D200EB826D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D664B24524AA92D200EB826D /* Assets.xcassets */; };
 		D664B24824AA998700EB826D /* UIImage+Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D664B24724AA998700EB826D /* UIImage+Gradient.swift */; };
-		D679D67424AA758C00579223 /* DesignConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D679D67324AA758C00579223 /* DesignConstants.swift */; };
-		D696B9E324AD15F300EF0373 /* AppStoreConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D696B9E224AD15F300EF0373 /* AppStoreConstants.swift */; };
-		D6EA9A8224AD2201000135E7 /* SMSFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EA9A8124AD2201000135E7 /* SMSFilter.swift */; };
-		D6EA9A8424AD2244000135E7 /* FilterStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EA9A8324AD2244000135E7 /* FilterStore.swift */; };
-		D6EA9A8524AD2319000135E7 /* FilterStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EA9A8324AD2244000135E7 /* FilterStore.swift */; };
-		D6EA9A8724AD27ED000135E7 /* UserSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EA9A8624AD27ED000135E7 /* UserSettings.swift */; };
+		D679D67424AA758C00579223 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D679D67324AA758C00579223 /* Constants.swift */; };
+		D6EA9A8224AD2201000135E7 /* SMSFilterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EA9A8124AD2201000135E7 /* SMSFilterProtocol.swift */; };
+		D6EA9A8424AD2244000135E7 /* FilterStoreProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EA9A8324AD2244000135E7 /* FilterStoreProtocol.swift */; };
+		D6EA9A8524AD2319000135E7 /* FilterStoreProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EA9A8324AD2244000135E7 /* FilterStoreProtocol.swift */; };
+		D6EA9A8724AD27ED000135E7 /* UserSettingsProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EA9A8624AD27ED000135E7 /* UserSettingsProtocol.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,7 +94,7 @@
 		D6233A7D24A651A200B37A6A /* SMSFilterLocal.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSFilterLocal.swift; sourceTree = "<group>"; };
 		D6233A8524A6553C00B37A6A /* Bouncer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bouncer.entitlements; sourceTree = "<group>"; };
 		D6233A8624A655BF00B37A6A /* SMSFilter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SMSFilter.entitlements; sourceTree = "<group>"; };
-		D62B331A24BAB16C002DFB81 /* ReviewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewService.swift; sourceTree = "<group>"; };
+		D62B331A24BAB16C002DFB81 /* ReviewServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewServiceProtocol.swift; sourceTree = "<group>"; };
 		D62B331C24BAB18E002DFB81 /* RatingServiceDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingServiceDefault.swift; sourceTree = "<group>"; };
 		D630D13A24BC1EF100FB8ED7 /* TutorialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewModel.swift; sourceTree = "<group>"; };
 		D6379EB224AA852500FFD400 /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
@@ -120,11 +119,10 @@
 		D664B24324AA92AA00EB826D /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		D664B24524AA92D200EB826D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D664B24724AA998700EB826D /* UIImage+Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Gradient.swift"; sourceTree = "<group>"; };
-		D679D67324AA758C00579223 /* DesignConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DesignConstants.swift; sourceTree = "<group>"; };
-		D696B9E224AD15F300EF0373 /* AppStoreConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStoreConstants.swift; sourceTree = "<group>"; };
-		D6EA9A8124AD2201000135E7 /* SMSFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSFilter.swift; sourceTree = "<group>"; };
-		D6EA9A8324AD2244000135E7 /* FilterStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterStore.swift; sourceTree = "<group>"; };
-		D6EA9A8624AD27ED000135E7 /* UserSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettings.swift; sourceTree = "<group>"; };
+		D679D67324AA758C00579223 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D6EA9A8124AD2201000135E7 /* SMSFilterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSFilterProtocol.swift; sourceTree = "<group>"; };
+		D6EA9A8324AD2244000135E7 /* FilterStoreProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterStoreProtocol.swift; sourceTree = "<group>"; };
+		D6EA9A8624AD27ED000135E7 /* UserSettingsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsProtocol.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -172,19 +170,19 @@
 		D6233A7B24A6519200B37A6A /* SMSFilter */ = {
 			isa = PBXGroup;
 			children = (
-				D6EA9A8124AD2201000135E7 /* SMSFilter.swift */,
+				D6EA9A8124AD2201000135E7 /* SMSFilterProtocol.swift */,
 				D6233A7D24A651A200B37A6A /* SMSFilterLocal.swift */,
 			);
 			path = SMSFilter;
 			sourceTree = "<group>";
 		};
-		D62B331924BAB15C002DFB81 /* RatingService */ = {
+		D62B331924BAB15C002DFB81 /* ReviewService */ = {
 			isa = PBXGroup;
 			children = (
-				D62B331A24BAB16C002DFB81 /* ReviewService.swift */,
+				D62B331A24BAB16C002DFB81 /* ReviewServiceProtocol.swift */,
 				D62B331C24BAB18E002DFB81 /* RatingServiceDefault.swift */,
 			);
-			path = RatingService;
+			path = ReviewService;
 			sourceTree = "<group>";
 		};
 		D6529F6624A41371009AE3FF = {
@@ -277,7 +275,7 @@
 		D6529FAA24A4F237009AE3FF /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				D62B331924BAB15C002DFB81 /* RatingService */,
+				D62B331924BAB15C002DFB81 /* ReviewService */,
 				D6233A7B24A6519200B37A6A /* SMSFilter */,
 				D6529FC624A54AC7009AE3FF /* FilterStore */,
 				D6529FBE24A5419E009AE3FF /* UserSettings */,
@@ -288,7 +286,7 @@
 		D6529FBE24A5419E009AE3FF /* UserSettings */ = {
 			isa = PBXGroup;
 			children = (
-				D6EA9A8624AD27ED000135E7 /* UserSettings.swift */,
+				D6EA9A8624AD27ED000135E7 /* UserSettingsProtocol.swift */,
 				D6529FAC24A4F246009AE3FF /* UserSettingsDefaults.swift */,
 			);
 			path = UserSettings;
@@ -308,7 +306,7 @@
 		D6529FC624A54AC7009AE3FF /* FilterStore */ = {
 			isa = PBXGroup;
 			children = (
-				D6EA9A8324AD2244000135E7 /* FilterStore.swift */,
+				D6EA9A8324AD2244000135E7 /* FilterStoreProtocol.swift */,
 				D6529FC824A54ADE009AE3FF /* FilterStoreFile.swift */,
 			);
 			path = FilterStore;
@@ -343,8 +341,7 @@
 		D679D67224AA758400579223 /* Config */ = {
 			isa = PBXGroup;
 			children = (
-				D679D67324AA758C00579223 /* DesignConstants.swift */,
-				D696B9E224AD15F300EF0373 /* AppStoreConstants.swift */,
+				D679D67324AA758C00579223 /* Constants.swift */,
 			);
 			path = Config;
 			sourceTree = "<group>";
@@ -555,7 +552,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D6233A8324A653F200B37A6A /* FilterStoreFile.swift in Sources */,
-				D6EA9A8524AD2319000135E7 /* FilterStore.swift in Sources */,
+				D6EA9A8524AD2319000135E7 /* FilterStoreProtocol.swift in Sources */,
 				D60A19C824A6A2C80002E8BD /* SMSMessage.swift in Sources */,
 				D6233A8424A653FB00B37A6A /* Filter.swift in Sources */,
 				D6233A8124A6538D00B37A6A /* SMSFilterLocal.swift in Sources */,
@@ -574,19 +571,18 @@
 				D6529FCB24A54ADE009AE3FF /* FilterStoreFile.swift in Sources */,
 				D630D13B24BC1EF100FB8ED7 /* TutorialViewModel.swift in Sources */,
 				D6379EB324AA852500FFD400 /* EmptyListView.swift in Sources */,
-				D696B9E324AD15F300EF0373 /* AppStoreConstants.swift in Sources */,
 				D6529FD224A54D8C009AE3FF /* Filter.swift in Sources */,
-				D6EA9A8424AD2244000135E7 /* FilterStore.swift in Sources */,
+				D6EA9A8424AD2244000135E7 /* FilterStoreProtocol.swift in Sources */,
 				D6233A6624A59F2800B37A6A /* AddFilterView.swift in Sources */,
 				D6529FC324A54AAD009AE3FF /* FilterListView.swift in Sources */,
 				D6529FA424A413EB009AE3FF /* BackgroundView.swift in Sources */,
 				D6529FAE24A4F246009AE3FF /* UserSettingsDefaults.swift in Sources */,
-				D6EA9A8724AD27ED000135E7 /* UserSettings.swift in Sources */,
-				D62B331B24BAB16C002DFB81 /* ReviewService.swift in Sources */,
+				D6EA9A8724AD27ED000135E7 /* UserSettingsProtocol.swift in Sources */,
+				D62B331B24BAB16C002DFB81 /* ReviewServiceProtocol.swift in Sources */,
 				D6529FB724A50B1F009AE3FF /* InstructionsView.swift in Sources */,
-				D679D67424AA758C00579223 /* DesignConstants.swift in Sources */,
+				D679D67424AA758C00579223 /* Constants.swift in Sources */,
 				D6529F7324A41371009AE3FF /* BouncerApp.swift in Sources */,
-				D6EA9A8224AD2201000135E7 /* SMSFilter.swift in Sources */,
+				D6EA9A8224AD2201000135E7 /* SMSFilterProtocol.swift in Sources */,
 				D6529FC524A54ABA009AE3FF /* FilterViewModel.swift in Sources */,
 				D615898A24A55FF800FE710A /* BaseView.swift in Sources */,
 				D62B331D24BAB18E002DFB81 /* RatingServiceDefault.swift in Sources */,

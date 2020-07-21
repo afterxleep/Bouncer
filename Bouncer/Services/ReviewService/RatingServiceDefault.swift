@@ -8,12 +8,12 @@
 import Foundation
 import StoreKit
 
-struct ReviewServiceStoreKit: ReviewService {
+struct ReviewServiceStoreKit: ReviewServiceProtocol {
     
     var launchesRequired: Int = 3
-    let userSettings: UserSettings
+    let userSettings: UserSettingsProtocol
     
-    init(userSettings: UserSettings = UserSettingsDefaults()) {
+    init(userSettings: UserSettingsProtocol = UserSettingsDefaults()) {
         self.userSettings = userSettings
     }
     

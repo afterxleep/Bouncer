@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol UserSettings {
+protocol UserSettingsProtocol {
     var hasLaunchedApp: Bool { get set }
     var numberOfLaunches: Int { get set }
     var lastVersionPromptedForReview: String { get set }

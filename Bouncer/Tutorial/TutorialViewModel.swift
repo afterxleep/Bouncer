@@ -10,6 +10,12 @@ import SwiftUI
 
 class TutorialViewModel: ObservableObject {
     
+    var userSettingsService: UserSettingsProtocol
+    
+    init(userSettingsService: UserSettingsProtocol = UserSettingsDefaults()) {
+        self.userSettingsService = userSettingsService
+    }
+    
     func saveHasLaunchedApp() {
         userSettingsService.numberOfLaunches = userSettingsService.numberOfLaunches + 1
     }
