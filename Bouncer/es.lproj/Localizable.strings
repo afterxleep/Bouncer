@@ -49,4 +49,5 @@
 "TOGGLE" = "Activa";
 "BUTTON_TUTORIAL_FIRST_LAUNCH_TEXT" = "Llévame a Ajustes!";
 "BUTTON_TUTORIAL_HELP_TEXT" = "Hecho!";
-    
+"PAYMENT_PAGE_TITLE" = "Obtén más filtros!";
+"PAYMENT_PAGE_MESSAGE" = "La versión gratuita de Bouncer está limitada a 10 filtros, pero no te preocupes, puedes conseguir más con un toque.";

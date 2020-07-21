@@ -13,9 +13,6 @@ struct InstructionsView: View {
     @StateObject var viewModel: TutorialViewModel
     @Environment(\.presentationMode) var presentationMode
     
-    let separatorColor = Color(red: 0.294, green: 0.357, blue: 0.455)
-    let boxBackground = Color(red: 0.004, green: 0.004, blue: 0.004).opacity(0.1)
-    
     func respondToActionButton() {
         if(!hasLaunchedApp) {
             viewModel.openSettings()
@@ -43,7 +40,7 @@ struct InstructionsView: View {
             
             Rectangle()
                 .frame(width: 300, height: 1)
-                .foregroundColor(separatorColor)
+                .foregroundColor(Color("separatorLineColor"))
                 .padding(.top, 10)
                 .padding(.bottom,  15)
             
@@ -98,7 +95,7 @@ struct InstructionsView: View {
             }
         }
         .padding(.horizontal)
-        .background(boxBackground)
+        .background(Color("messageBoxBackgroundColor"))
         .cornerRadius(40)
     }
 }

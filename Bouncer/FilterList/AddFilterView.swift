@@ -7,32 +7,6 @@
 
 import SwiftUI
 
-extension FilterType {
-    var formDescription: (label: LocalizedStringKey, image: String, color: Color) {
-        switch self {
-        case .any:
-            return ("SENDER_AND_TEXT", "message", Color.green)
-        case .sender:
-            return ("SENDER", "person", Color.blue)
-        case .message:
-            return ("TEXT", "text.quote", Color.pink)
-        }
-    }
-}
-
-extension FilterAction {
-    var formDescription: (label: LocalizedStringKey, image: String, color: Color) {
-        switch self {
-        case .junk:
-            return ("JUNK_ACTION", "bin.xmark", Color.red)
-        case .transaction:
-            return ("TRANSACTION_ACTION", "arrow.right.arrow.left", Color.blue)
-        case .promotion:
-            return ("PROMOTION_ACTION", "tag", Color.green)
-        }
-    }
-}
-
 struct AddFilterView: View {
     @Binding var showingAddForm :Bool
     @State var filterType: FilterType = .any
@@ -48,8 +22,8 @@ struct AddFilterView: View {
                     Picker("FILTER_TYPE_SELECTION_LABEL", selection: $filterType) {
                         ForEach(FilterType.allCases, id: \.self) { value in
                             HStack {
-                                Image(systemName: value.formDescription.image).foregroundColor(.gray)
-                                Text(value.formDescription.label)
+                                Image(systemName: value.formDescription.decoration.image).foregroundColor(value.formDescription.decoration.color)
+                                Text(value.formDescription.text)
                             }
                         }
                     }.pickerStyle(DefaultPickerStyle())
@@ -64,8 +38,8 @@ struct AddFilterView: View {
                     Picker("FILTER_ACTION_LABEL", selection: $filterAction) {
                         ForEach(FilterAction.allCases, id: \.self) { value in
                             HStack {
-                                Image(systemName: value.formDescription.image).foregroundColor(value.formDescription.color)
-                                Text(value.formDescription.label)
+                                Image(systemName: value.formDescription.decoration.image).foregroundColor(value.formDescription.decoration.color)
+                                Text(value.formDescription.text)
                             }
                         }
                     }.pickerStyle(DefaultPickerStyle())

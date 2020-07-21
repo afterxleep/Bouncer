@@ -37,6 +37,8 @@
 		D664B24424AA92AA00EB826D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D664B24324AA92AA00EB826D /* Colors.xcassets */; };
 		D664B24624AA92D200EB826D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D664B24524AA92D200EB826D /* Assets.xcassets */; };
 		D664B24824AA998700EB826D /* UIImage+Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D664B24724AA998700EB826D /* UIImage+Gradient.swift */; };
+		D673E75224C68404008B1072 /* FilterTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D673E75124C68404008B1072 /* FilterTypes.swift */; };
+		D673E75424C686CF008B1072 /* UnlockAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D673E75324C686CF008B1072 /* UnlockAppView.swift */; };
 		D679D67424AA758C00579223 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D679D67324AA758C00579223 /* Constants.swift */; };
 		D6EA9A8224AD2201000135E7 /* SMSFilterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EA9A8124AD2201000135E7 /* SMSFilterProtocol.swift */; };
 		D6EA9A8424AD2244000135E7 /* FilterStoreProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EA9A8324AD2244000135E7 /* FilterStoreProtocol.swift */; };
@@ -119,6 +121,8 @@
 		D664B24324AA92AA00EB826D /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		D664B24524AA92D200EB826D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D664B24724AA998700EB826D /* UIImage+Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Gradient.swift"; sourceTree = "<group>"; };
+		D673E75124C68404008B1072 /* FilterTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTypes.swift; sourceTree = "<group>"; };
+		D673E75324C686CF008B1072 /* UnlockAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockAppView.swift; sourceTree = "<group>"; };
 		D679D67324AA758C00579223 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D6EA9A8124AD2201000135E7 /* SMSFilterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSFilterProtocol.swift; sourceTree = "<group>"; };
 		D6EA9A8324AD2244000135E7 /* FilterStoreProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterStoreProtocol.swift; sourceTree = "<group>"; };
@@ -218,6 +222,7 @@
 				D6529FA224A413D5009AE3FF /* SharedViews */,
 				D6529FC124A54A92009AE3FF /* FilterList */,
 				D6529F9D24A4139A009AE3FF /* Tutorial */,
+				D6B471B124C669350047D9D8 /* UnlockApp */,
 				D6233A8524A6553C00B37A6A /* Bouncer.entitlements */,
 				D664B24524AA92D200EB826D /* Assets.xcassets */,
 				D664B24324AA92AA00EB826D /* Colors.xcassets */,
@@ -295,6 +300,7 @@
 		D6529FC124A54A92009AE3FF /* FilterList */ = {
 			isa = PBXGroup;
 			children = (
+				D673E75124C68404008B1072 /* FilterTypes.swift */,
 				D6233A6524A59F2800B37A6A /* AddFilterView.swift */,
 				D6529FC224A54AAD009AE3FF /* FilterListView.swift */,
 				D6529FC424A54ABA009AE3FF /* FilterViewModel.swift */,
@@ -344,6 +350,14 @@
 				D679D67324AA758C00579223 /* Constants.swift */,
 			);
 			path = Config;
+			sourceTree = "<group>";
+		};
+		D6B471B124C669350047D9D8 /* UnlockApp */ = {
+			isa = PBXGroup;
+			children = (
+				D673E75324C686CF008B1072 /* UnlockAppView.swift */,
+			);
+			path = UnlockApp;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -568,6 +582,7 @@
 				D6529F9F24A413A6009AE3FF /* TutorialView.swift in Sources */,
 				D60A19C724A69F1F0002E8BD /* SMSMessage.swift in Sources */,
 				D664B24824AA998700EB826D /* UIImage+Gradient.swift in Sources */,
+				D673E75224C68404008B1072 /* FilterTypes.swift in Sources */,
 				D6529FCB24A54ADE009AE3FF /* FilterStoreFile.swift in Sources */,
 				D630D13B24BC1EF100FB8ED7 /* TutorialViewModel.swift in Sources */,
 				D6379EB324AA852500FFD400 /* EmptyListView.swift in Sources */,
@@ -577,6 +592,7 @@
 				D6529FC324A54AAD009AE3FF /* FilterListView.swift in Sources */,
 				D6529FA424A413EB009AE3FF /* BackgroundView.swift in Sources */,
 				D6529FAE24A4F246009AE3FF /* UserSettingsDefaults.swift in Sources */,
+				D673E75424C686CF008B1072 /* UnlockAppView.swift in Sources */,
 				D6EA9A8724AD27ED000135E7 /* UserSettingsProtocol.swift in Sources */,
 				D62B331B24BAB16C002DFB81 /* ReviewServiceProtocol.swift in Sources */,
 				D6529FB724A50B1F009AE3FF /* InstructionsView.swift in Sources */,

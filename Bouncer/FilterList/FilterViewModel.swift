@@ -7,6 +7,8 @@
 
 import Foundation
 import Combine
+import SwiftUI
+
 
 final class FilterViewModel: ObservableObject {
         
@@ -73,7 +75,46 @@ final class FilterViewModel: ObservableObject {
     func requestReview() {
         self.ratingService.requestReview()
     }
-
+    
+    func getFilterTypeDecoration(filter: Filter) -> SystemImage {
+        var data: SystemImage
+        switch(filter.type) {
+            case .sender:
+                data = FilterType.sender.listDescription
+            case .message:
+                data = FilterType.message.listDescription
+            default:
+                data = FilterType.any.listDescription
+        }
+        return data
+    }
+    
+    func getFilterActionDecoration(filter: Filter) -> FilterActionDecoration {
+        var data: FilterActionDecoration
+        switch (filter.action) {
+            case .junk:
+                data = FilterAction.junk.listDescription
+            case .promotion:
+                data = FilterAction.promotion.listDescription
+            case .transaction:
+                data = FilterAction.transaction.listDescription
+            }
+        return data
+    }
+    
+    var shouldDisplayList: Bool {
+        if(filters.count > 0) {
+            return true
+        }
+        return false
+    }
+    
+    var shouldDisplayInApp: Bool {
+        if(filters.count > 9) {
+            return true
+        }
+        return true
+    }
         
 }
 
