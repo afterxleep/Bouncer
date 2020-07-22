@@ -28,7 +28,6 @@ struct ReviewServiceStoreKit: ReviewServiceProtocol {
         if userSettings.numberOfLaunches >= launchesRequired && currentVersion != lastVersionPromptedForReview {
             SKStoreReviewController.requestReview()
         }
-
     }
     
 }

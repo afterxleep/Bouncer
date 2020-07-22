@@ -51,8 +51,8 @@
 "TOGGLE" = "Toggle";
 "BUTTON_TUTORIAL_FIRST_LAUNCH_TEXT" = "Take me to Settings!";
 "BUTTON_TUTORIAL_HELP_TEXT" = "Got it!";
-"PAYMENT_PAGE_TITLE" = "Get more filters!";
-"PAYMENT_PAGE_MESSAGE" = "This free version is limited to 10 filters, but don't worry you can get more with a tap.";
-"UPGRADE_BUTTON_TEXT" = "Upgrade for @%";
+"PAYMENT_PAGE_TITLE" = "Ready to Upgrade?";
+"PAYMENT_PAGE_MESSAGE" = "The free version of Bouncer is limited to 10 filters.";
+"UPGRADE_BUTTON_TEXT" = "Upgrade for ";
 "RESTORE_PURCHASE" = "Restore purchase";
-"UPGRADE_EXPLANATION" = "Your payment will allow me to continue supporting Bouncer, adding new features and making sure it gets updated with every iOS release";
+"UPGRADE_EXPLANATION" = "Upgrade to get unlimited filters and help me keep improving the app.";

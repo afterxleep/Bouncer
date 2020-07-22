@@ -20,8 +20,11 @@ struct BaseView: View {
             if(!hasLaunchedApp) {
                 TutorialView()
             } else {
+                UnlockAppView()
+                /*
                 FilterListView()
                     .background(Color("MainBackgroundColor"))
+                */
             }
         }
     }
