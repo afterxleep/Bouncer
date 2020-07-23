@@ -44,6 +44,11 @@
 		D673E75224C68404008B1072 /* FilterTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D673E75124C68404008B1072 /* FilterTypes.swift */; };
 		D673E75424C686CF008B1072 /* UnlockAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D673E75324C686CF008B1072 /* UnlockAppView.swift */; };
 		D679D67424AA758C00579223 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D679D67324AA758C00579223 /* Constants.swift */; };
+		D67D58FF24C9371500626995 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67D58FE24C9371500626995 /* Protocols.swift */; };
+		D67D590324C93DD100626995 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67D590124C93DD100626995 /* StoreManager.swift */; };
+		D67D590424C93DD100626995 /* StoreObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67D590224C93DD100626995 /* StoreObserver.swift */; };
+		D67D590724C93E0B00626995 /* DataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67D590624C93E0B00626995 /* DataTypes.swift */; };
+		D67D590924C93F6E00626995 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67D590824C93F6E00626995 /* Extensions.swift */; };
 		D6EA9A8224AD2201000135E7 /* SMSFilterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EA9A8124AD2201000135E7 /* SMSFilterProtocol.swift */; };
 		D6EA9A8424AD2244000135E7 /* FilterStoreProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EA9A8324AD2244000135E7 /* FilterStoreProtocol.swift */; };
 		D6EA9A8524AD2319000135E7 /* FilterStoreProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EA9A8324AD2244000135E7 /* FilterStoreProtocol.swift */; };
@@ -132,6 +137,11 @@
 		D673E75124C68404008B1072 /* FilterTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTypes.swift; sourceTree = "<group>"; };
 		D673E75324C686CF008B1072 /* UnlockAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockAppView.swift; sourceTree = "<group>"; };
 		D679D67324AA758C00579223 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		D67D58FE24C9371500626995 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		D67D590124C93DD100626995 /* StoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
+		D67D590224C93DD100626995 /* StoreObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreObserver.swift; sourceTree = "<group>"; };
+		D67D590624C93E0B00626995 /* DataTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTypes.swift; sourceTree = "<group>"; };
+		D67D590824C93F6E00626995 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		D6EA9A8124AD2201000135E7 /* SMSFilterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSFilterProtocol.swift; sourceTree = "<group>"; };
 		D6EA9A8324AD2244000135E7 /* FilterStoreProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterStoreProtocol.swift; sourceTree = "<group>"; };
 		D6EA9A8624AD27ED000135E7 /* UserSettingsProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsProtocol.swift; sourceTree = "<group>"; };
@@ -209,6 +219,7 @@
 		D63B546024C75344005D4DAA /* StoreService */ = {
 			isa = PBXGroup;
 			children = (
+				D67D590024C9377400626995 /* StoreManager */,
 				D61D9BEE24C7EBAA0058935B /* StoreServiceProtocol.swift */,
 				D61D9BF024C7EBEC0058935B /* StoreServiceDefault.swift */,
 			);
@@ -378,6 +389,18 @@
 				D679D67324AA758C00579223 /* Constants.swift */,
 			);
 			path = Config;
+			sourceTree = "<group>";
+		};
+		D67D590024C9377400626995 /* StoreManager */ = {
+			isa = PBXGroup;
+			children = (
+				D67D590124C93DD100626995 /* StoreManager.swift */,
+				D67D590224C93DD100626995 /* StoreObserver.swift */,
+				D67D58FE24C9371500626995 /* Protocols.swift */,
+				D67D590624C93E0B00626995 /* DataTypes.swift */,
+				D67D590824C93F6E00626995 /* Extensions.swift */,
+			);
+			path = StoreManager;
 			sourceTree = "<group>";
 		};
 		D6B471B124C669350047D9D8 /* UnlockApp */ = {
@@ -610,6 +633,7 @@
 				D6233A7F24A651A200B37A6A /* SMSFilterLocal.swift in Sources */,
 				D6529F9F24A413A6009AE3FF /* TutorialView.swift in Sources */,
 				D60A19C724A69F1F0002E8BD /* SMSMessage.swift in Sources */,
+				D67D590324C93DD100626995 /* StoreManager.swift in Sources */,
 				D664B24824AA998700EB826D /* UIImage+Gradient.swift in Sources */,
 				D673E75224C68404008B1072 /* FilterTypes.swift in Sources */,
 				D6529FCB24A54ADE009AE3FF /* FilterStoreFile.swift in Sources */,
@@ -617,10 +641,12 @@
 				D6379EB324AA852500FFD400 /* EmptyListView.swift in Sources */,
 				D6529FD224A54D8C009AE3FF /* Filter.swift in Sources */,
 				D6EA9A8424AD2244000135E7 /* FilterStoreProtocol.swift in Sources */,
+				D67D590424C93DD100626995 /* StoreObserver.swift in Sources */,
 				D61D9BF124C7EBEC0058935B /* StoreServiceDefault.swift in Sources */,
 				D6233A6624A59F2800B37A6A /* AddFilterView.swift in Sources */,
 				D6529FC324A54AAD009AE3FF /* FilterListView.swift in Sources */,
 				D6529FA424A413EB009AE3FF /* BackgroundView.swift in Sources */,
+				D67D58FF24C9371500626995 /* Protocols.swift in Sources */,
 				D63B546C24C77972005D4DAA /* UnlockAppViewModel.swift in Sources */,
 				D6529FAE24A4F246009AE3FF /* UserSettingsDefaults.swift in Sources */,
 				D673E75424C686CF008B1072 /* UnlockAppView.swift in Sources */,
@@ -628,8 +654,10 @@
 				D62B331B24BAB16C002DFB81 /* ReviewServiceProtocol.swift in Sources */,
 				D6529FB724A50B1F009AE3FF /* InstructionsView.swift in Sources */,
 				D679D67424AA758C00579223 /* Constants.swift in Sources */,
+				D67D590724C93E0B00626995 /* DataTypes.swift in Sources */,
 				D6529F7324A41371009AE3FF /* BouncerApp.swift in Sources */,
 				D6EA9A8224AD2201000135E7 /* SMSFilterProtocol.swift in Sources */,
+				D67D590924C93F6E00626995 /* Extensions.swift in Sources */,
 				D6529FC524A54ABA009AE3FF /* FilterViewModel.swift in Sources */,
 				D615898A24A55FF800FE710A /* BaseView.swift in Sources */,
 				D62B331D24BAB18E002DFB81 /* RatingServiceDefault.swift in Sources */,

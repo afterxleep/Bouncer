@@ -43,16 +43,16 @@ struct UnlockAppView: View {
                         .padding(.top, 10)
                         .padding(.bottom,  15)
                     VStack {
-                        if(viewModel.products.count > 0) {
-                            Text("Upgrade to get unlimited filters and help me keep improving the app.")
-                                .foregroundColor(Color("TextHighLightColor"))
+                            Text("UPGRADE_EXPLANATION")
+                                .foregroundColor(Color("TextDefaultColor"))
                                 .padding(.horizontal, 20)
                                 .padding(.bottom, 30)
-                                .lineLimit(3)
+                                .lineLimit(nil)
                                 .minimumScaleFactor(0.5)
-                            ForEach(viewModel.products, id: \.self.identifier) { product in
-                                Button(action: {}) {
-                                Group() {
+                        if(viewModel.products.count > 0) {
+                        ForEach(viewModel.products, id: \.self.identifier) { product in
+                                Button(action: { }) {
+                                Group() { 
                                         Text("UPGRADE_BUTTON_TEXT") +
                                         Text("\(product.price)")
                                     }
@@ -69,13 +69,14 @@ struct UnlockAppView: View {
                                     .foregroundColor(Color("TextDefaultColor"))
                             }
                         } else {
-                            ProgressView()
+                            ProgressView().foregroundColor(Color("TextHighLightColor"))
                         }
                     }
                     .padding(.horizontal, 20)
                     .padding(.vertical, 30)
                     .background(Color("messageBoxBackgroundColor"))
                     .cornerRadius(40)
+                Spacer()
                 Spacer()
             }
             .padding(.horizontal)

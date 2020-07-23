@@ -6,10 +6,20 @@
 //
 
 import SwiftUI
+import StoreKit
 
 @main
 struct BouncerApp: App {
-
+    
+    // Store Payments Observer
+    let storeObserver = StoreObserver.shared
+    let storeService: StoreServiceProtocol = StoreServiceDefault()
+    
+    init() {
+        // Add the storeObserver to the queue        
+        SKPaymentQueue.default().add(storeObserver)
+    }
+    
     var body: some Scene {
         WindowGroup {
             BaseView()
