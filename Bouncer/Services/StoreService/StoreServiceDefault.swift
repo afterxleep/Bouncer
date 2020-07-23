@@ -25,25 +25,39 @@ enum TransactionState {
 }
 
 class StoreServiceDefault: ObservableObject {
+
+    internal var storeManager = StoreManager.shared
+    internal var storeObserver = StoreObserver.shared
+    private var skProducts: [SKProduct] = []
     
     var productIdentifiers = ["com.banshai.bouncer.unlimited_filters"]
-    var storeManager = StoreManager.shared
+    var productsCancellable: AnyCancellable?
+    var storeObserverCancellable: AnyCancellable?
     
     // Publishers
     @Published private(set) var products: [Product] = []
     var productsPublisher: Published<[Product]>.Publisher { $products }
-    @Published var purchasedProducts: [Product] = []
-    
-    var productsCancellable: AnyCancellable?
     
     init() {
+        print("initializing")
         productsCancellable =
             storeManager
                 .$availableProducts
                 .receive(on: RunLoop.main)
-                .sink { [weak self] products in                    
+                .sink { [weak self] products in
+                    self?.skProducts = products
                     self?.products = self?.parseProducts(from: products) ?? []
             }
+        
+        storeObserverCancellable =
+            storeObserver
+                .$transactionResult
+            .receive(on: RunLoop.main)
+            .sink { [weak self] transactionResult in
+                print(transactionResult)
+            }
+        
+        self.fetchProducts()
     }
 }
 
@@ -53,14 +67,20 @@ extension StoreServiceDefault: StoreServiceProtocol {
         storeManager.startProductRequest(with: productIdentifiers)
     }
     
-    func startPurchase(product: Product) {}
-    func completePurchase(result: TransactionState) {}
-}
-
-extension StoreServiceDefault: StoreObserverDelegate {
+    func startPurchase(product: Product) {
+        guard let product = skProducts.first(
+                where: { $0.productIdentifier == product.identifier})
+        else {
+            print("Product not found")
+            return
+        }
+                
+        
+        
+        StoreObserver.shared.buy(product)
+    }
     
-    func storeObserverRestoreDidSucceed() {}
-    func storeObserverDidReceiveMessage(_ message: String) {}
+    func completePurchase(result: TransactionState) {}
 }
     
 extension StoreServiceDefault {

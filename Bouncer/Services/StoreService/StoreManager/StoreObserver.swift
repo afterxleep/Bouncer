@@ -1,7 +1,7 @@
 import StoreKit
 import Foundation
 
-class StoreObserver: NSObject {
+class StoreObserver: NSObject, ObservableObject {
     // MARK: - Types
     
     static let shared = StoreObserver()
@@ -18,15 +18,15 @@ class StoreObserver: NSObject {
     }
     
     /// Keeps track of all purchases.
-    var purchased = [SKPaymentTransaction]()
+    @Published var purchased = [SKPaymentTransaction]()
     
     /// Keeps track of all restored purchases.
-    var restored = [SKPaymentTransaction]()
+    @Published var restored = [SKPaymentTransaction]()
+        
+    @Published var transactionResult: (result: Bool, message: String?)?
     
     /// Indicates whether there are restorable purchases.
     fileprivate var hasRestorablePurchases = false
-    
-    weak var delegate: StoreObserverDelegate?
     
     // MARK: - Initializer
     
@@ -55,9 +55,7 @@ class StoreObserver: NSObject {
     /// Handles successful purchase transactions.
     fileprivate func handlePurchased(_ transaction: SKPaymentTransaction) {
         purchased.append(transaction)
-        print("\(Messages.deliverContent) \(transaction.payment.productIdentifier).")
-        
-        // Finish the successful transaction.
+        self.transactionResult = (true, nil)
         SKPaymentQueue.default().finishTransaction(transaction)
     }
     
@@ -67,14 +65,12 @@ class StoreObserver: NSObject {
         
         if let error = transaction.error {
             message += "\n\(Messages.error) \(error.localizedDescription)"
-            print("\(Messages.error) \(error.localizedDescription)")
+            self.transactionResult = (false, message)
         }
         
         // Do not send any notifications when the user cancels the purchase.
         if (transaction.error as? SKError)?.code != .paymentCancelled {
-            DispatchQueue.main.async {
-                self.delegate?.storeObserverDidReceiveMessage(message)
-            }
+            self.transactionResult = (false, Messages.userCancelled)
         }
         // Finish the failed transaction.
         SKPaymentQueue.default().finishTransaction(transaction)
@@ -84,12 +80,7 @@ class StoreObserver: NSObject {
     fileprivate func handleRestored(_ transaction: SKPaymentTransaction) {
         hasRestorablePurchases = true
         restored.append(transaction)
-        print("\(Messages.restoreContent) \(transaction.payment.productIdentifier).")
-        
-        DispatchQueue.main.async {
-            self.delegate?.storeObserverRestoreDidSucceed()
-        }
-        // Finishes the restored transaction.
+        self.transactionResult = (true, nil)
         SKPaymentQueue.default().finishTransaction(transaction)
     }
 }
@@ -101,16 +92,25 @@ extension StoreObserver: SKPaymentTransactionObserver {
     /// Called when there are transactions in the payment queue.
     func paymentQueue(_ queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         for transaction in transactions {
+            
             switch transaction.transactionState {
             case .purchasing: break
+            
             // Do not block the UI. Allow the user to continue using the app.
-            case .deferred: print(Messages.deferred)
+            case .deferred:
+                print(Messages.deferred)
+            
             // The purchase was successful.
-            case .purchased: handlePurchased(transaction)
+            case .purchased:
+                handlePurchased(transaction)
+            
             // The transaction failed.
-            case .failed: handleFailed(transaction)
+            case .failed:
+                handleFailed(transaction)
+            
             // There're restored products.
-            case .restored: handleRestored(transaction)
+            case .restored:
+                handleRestored(transaction)
             @unknown default: fatalError(Messages.unknownPaymentTransaction)
             }
         }
@@ -127,7 +127,7 @@ extension StoreObserver: SKPaymentTransactionObserver {
     func paymentQueue(_ queue: SKPaymentQueue, restoreCompletedTransactionsFailedWithError error: Error) {
         if let error = error as? SKError, error.code != .paymentCancelled {
             DispatchQueue.main.async {
-                self.delegate?.storeObserverDidReceiveMessage(error.localizedDescription)
+                self.transactionResult = (false, error.localizedDescription)
             }
         }
     }
@@ -138,7 +138,7 @@ extension StoreObserver: SKPaymentTransactionObserver {
         
         if !hasRestorablePurchases {
             DispatchQueue.main.async {
-                self.delegate?.storeObserverDidReceiveMessage(Messages.noRestorablePurchases)
+                self.transactionResult = (false, Messages.noRestorablePurchases)
             }
         }
     }

@@ -55,6 +55,7 @@ struct Messages {
     static let useStoreRestore = "Use Store > Restore to restore your previously bought non-consumable products and auto-renewable subscriptions."
     static let viewControllerDoesNotExist = "The main content view controller does not exist."
     static let windowDoesNotExist = "The window does not exist."
+    static let userCancelled = "The user has cancelled the transaction"
 }
 
 /// An enumeration of all the types of products or purchases.

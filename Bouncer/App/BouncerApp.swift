@@ -12,8 +12,7 @@ import StoreKit
 struct BouncerApp: App {
     
     // Store Payments Observer
-    let storeObserver = StoreObserver.shared
-    let storeService: StoreServiceProtocol = StoreServiceDefault()
+    let storeObserver = StoreObserver.shared    
     
     init() {
         // Add the storeObserver to the queue        

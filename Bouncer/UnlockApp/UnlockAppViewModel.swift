@@ -26,7 +26,11 @@ class UnlockAppViewModel: ObservableObject {
                 .receive(on: RunLoop.main)
                 .sink { [weak self] products in
                     self?.products = products
-            }
-        storeService.fetchProducts()
+            }        
     }
+    
+    func purchase(product: Product) {    
+        storeService.startPurchase(product: product)
+    }
+        
 }

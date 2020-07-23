@@ -51,7 +51,9 @@ struct UnlockAppView: View {
                                 .minimumScaleFactor(0.5)
                         if(viewModel.products.count > 0) {
                         ForEach(viewModel.products, id: \.self.identifier) { product in
-                                Button(action: { }) {
+                                Button(action: {
+                                    viewModel.purchase(product: product)
+                                }) {
                                 Group() { 
                                         Text("UPGRADE_BUTTON_TEXT") +
                                         Text("\(product.price)")
