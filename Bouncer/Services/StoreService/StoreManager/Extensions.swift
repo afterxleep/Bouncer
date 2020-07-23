@@ -28,15 +28,6 @@ extension DateFormatter {
     }
 }
 
-// MARK: - Section
-
-extension ProductSection {
-    /// - returns: A Section object matching the specified name in the data array.
-    static func parse(_ data: [ProductSection], for type: SectionType) -> ProductSection? {
-        let section = (data.filter({ (item: ProductSection) in item.type == type }))
-        return (!section.isEmpty) ? section.first : nil
-    }
-}
 
 // MARK: - SKProduct
 extension SKProduct {

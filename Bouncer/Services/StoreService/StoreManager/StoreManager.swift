@@ -16,10 +16,7 @@ class StoreManager: NSObject, ObservableObject {
         
     /// Keeps a strong reference to the product request.
     fileprivate var productRequest: SKProductsRequest!
-    
-    /// Keeps track of all valid products (these products are available for sale in the App Store) and of all invalid product identifiers.
-    fileprivate var storeResponse = [ProductSection]()
-    
+        
     // MARK: - Initializer
     
     private override init() {}
@@ -74,9 +71,6 @@ class StoreManager: NSObject, ObservableObject {
 extension StoreManager: SKProductsRequestDelegate {
     
     func productsRequest(_ request: SKProductsRequest, didReceive response: SKProductsResponse) {
-        if !storeResponse.isEmpty {
-            storeResponse.removeAll()
-        }
         
         if !response.products.isEmpty {
             availableProducts = response.products

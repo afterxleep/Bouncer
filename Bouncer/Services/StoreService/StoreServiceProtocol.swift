@@ -15,7 +15,11 @@ protocol StoreServiceProtocol {
     var products: [Product] { get }
     var productsPublisher: Published<[Product]>.Publisher { get }
     
+    var transactionState: StoreTransactionState { get }
+    var transactionStatePublisher: Published<StoreTransactionState>.Publisher { get }
+    
     func fetchProducts()
     func startPurchase(product: Product)
+    func restorePurchases()
     
 }

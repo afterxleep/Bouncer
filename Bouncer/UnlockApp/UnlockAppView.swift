@@ -10,6 +10,11 @@ import SwiftUI
 struct UnlockAppView: View {
     
     @StateObject var viewModel = UnlockAppViewModel()
+    @Environment(\.presentationMode) var presentationMode
+    
+    func dismissView() {
+        self.presentationMode.wrappedValue.dismiss()
+    }
     
     var body: some View {
         ZStack {
@@ -17,7 +22,9 @@ struct UnlockAppView: View {
             VStack() {
                 HStack() {
                     Spacer()
-                    Button(action: {}) {
+                    Button(action: {
+                        self.dismissView()
+                    }) {
                         Image(systemName: SYSTEM_IMAGES.CLOSE.image)
                             .foregroundColor(SYSTEM_IMAGES.CLOSE.color)
                             .font(.title2)
@@ -49,8 +56,8 @@ struct UnlockAppView: View {
                                 .padding(.bottom, 30)
                                 .lineLimit(nil)
                                 .minimumScaleFactor(0.5)
-                        if(viewModel.products.count > 0) {
-                        ForEach(viewModel.products, id: \.self.identifier) { product in
+                        if(viewModel.products.count > 0 && viewModel.shouldDisplayBuyButton) {
+                            ForEach(viewModel.products, id: \.self.identifier) { product in
                                 Button(action: {
                                     viewModel.purchase(product: product)
                                 }) {
@@ -65,7 +72,9 @@ struct UnlockAppView: View {
                                     .padding(.bottom, 10)
                                 }
                             }
-                            Button(action: {}) {
+                            Button(action: {
+                                viewModel.restorePurchases()
+                            }) {
                                 Text("RESTORE_PURCHASE")
                                     .font(.caption)
                                     .foregroundColor(Color("TextDefaultColor"))

@@ -19,12 +19,9 @@ struct BaseView: View {
         Group {
             if(!hasLaunchedApp) {
                 TutorialView()
-            } else {
-                UnlockAppView()
-                /*
+            } else {                
                 FilterListView()
                     .background(Color("MainBackgroundColor"))
-                */
             }
         }
     }

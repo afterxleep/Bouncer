@@ -32,14 +32,16 @@ class StoreServiceDefault: ObservableObject {
     
     var productIdentifiers = ["com.banshai.bouncer.unlimited_filters"]
     var productsCancellable: AnyCancellable?
-    var storeObserverCancellable: AnyCancellable?
+    var transactionStateCancellable: AnyCancellable?
     
     // Publishers
     @Published private(set) var products: [Product] = []
     var productsPublisher: Published<[Product]>.Publisher { $products }
+    @Published private(set) var transactionState: StoreTransactionState = .notInitiated
+    var transactionStatePublisher: Published<StoreTransactionState>.Publisher { $transactionState }
+    
     
     init() {
-        print("initializing")
         productsCancellable =
             storeManager
                 .$availableProducts
@@ -49,13 +51,14 @@ class StoreServiceDefault: ObservableObject {
                     self?.products = self?.parseProducts(from: products) ?? []
             }
         
-        storeObserverCancellable =
+        transactionStateCancellable =
             storeObserver
                 .$transactionResult
-            .receive(on: RunLoop.main)
-            .sink { [weak self] transactionResult in
-                print(transactionResult)
-            }
+                .receive(on: RunLoop.main)
+                .sink { [weak self] state in
+                    self?.transactionState = state
+                    print(state)
+                }
         
         self.fetchProducts()
     }
@@ -74,13 +77,12 @@ extension StoreServiceDefault: StoreServiceProtocol {
             print("Product not found")
             return
         }
-                
-        
-        
         StoreObserver.shared.buy(product)
     }
     
-    func completePurchase(result: TransactionState) {}
+    func restorePurchases() {
+        StoreObserver.shared.restore()
+    }
 }
     
 extension StoreServiceDefault {
