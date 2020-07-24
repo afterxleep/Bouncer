@@ -12,16 +12,25 @@ import StoreKit
 struct BouncerApp: App {
     
     // Store Payments Observer
-    let storeObserver = StoreObserver.shared    
+    let storeObserver = StoreObserver.shared
     
+    let store = AppStore(initialState: .init(),
+                         reducer: appReducer,
+                         environment: AppEnvironment())
+        
     init() {
-        // Add the storeObserver to the queue        
+        
+        // Add the storeObserver to the queue
         SKPaymentQueue.default().add(storeObserver)
+        
+        // Initial State
+        store.send(.filter(action: .load))
+        
     }
     
     var body: some Scene {
         WindowGroup {
-            BaseView()
+            BaseView().environmentObject(store)
         }
     }
 }

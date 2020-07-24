@@ -9,6 +9,7 @@ import SwiftUI
 
 struct FilterListView: View {
     @StateObject var viewModel = FilterViewModel()
+    @EnvironmentObject var store: AppStore
     @State private var showingSettings = false
     @State private var showingAddForm = false
     @State private var showingInApp = false
@@ -20,7 +21,7 @@ struct FilterListView: View {
                 Group {
                     if(viewModel.shouldDisplayList) {
                         List {
-                            ForEach(viewModel.filters) { item in
+                            ForEach(store.state.filter.list) { item in
                                 let typeDecoration = viewModel.getFilterTypeDecoration(filter: item)
                                 let actionDecoration = viewModel.getFilterDestinationDecoration(filter: item)
                                 HStack(spacing: 10) {

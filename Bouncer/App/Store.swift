@@ -7,17 +7,22 @@
 
 import Foundation
 
-final class Store<State, Action>: ObservableObject {
+final class Store<State, Action, Environment>: ObservableObject {
     @Published private(set) var state: State
 
-    private let reducer: Reducer<State, Action>
+    private let environment: Environment
+    private let reducer: Reducer<State, Action, Environment>
 
-    init(initialState: State, reducer: @escaping Reducer<State, Action>) {
+    init(initialState: State,
+         reducer: @escaping Reducer<State, Action, Environment>,
+         environment: Environment
+    ) {
         self.state = initialState
         self.reducer = reducer
+        self.environment = environment        
     }
 
     func send(_ action: Action) {
-        reducer(&state, action)
+        reducer(&state, action, environment)
     }
 }

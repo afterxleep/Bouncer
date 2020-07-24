@@ -10,6 +10,7 @@ import SwiftUI
 struct BaseView: View {
         
     @AppStorage(APP_STORAGE_KEYS.HAS_LAUNCHED_APP.rawValue) var hasLaunchedApp = false    
+    @EnvironmentObject var store: AppStore
     
     init() {
         customizeNavbar()
@@ -21,6 +22,7 @@ struct BaseView: View {
                 TutorialView()
             } else {                
                 FilterListView()
+                    .environmentObject(store)
                     .background(Color("MainBackgroundColor"))
             }
         }
