@@ -50,7 +50,7 @@ final class FilterViewModel: ObservableObject {
         requestReview()
     }
         
-    func add(type: FilterType, phrase: String, action: FilterAction) {
+    func add(type: FilterType, phrase: String, action: FilterDestination) {
         filterListService.add(filter: Filter(id: UUID(), phrase: phrase, type: type, action: action))
     }
     
@@ -89,15 +89,15 @@ final class FilterViewModel: ObservableObject {
         return data
     }
     
-    func getFilterActionDecoration(filter: Filter) -> FilterActionDecoration {
-        var data: FilterActionDecoration
+    func getFilterDestinationDecoration(filter: Filter) -> FilterDestinationDecoration {
+        var data: FilterDestinationDecoration
         switch (filter.action) {
             case .junk:
-                data = FilterAction.junk.listDescription
+                data = FilterDestination.junk.listDescription
             case .promotion:
-                data = FilterAction.promotion.listDescription
+                data = FilterDestination.promotion.listDescription
             case .transaction:
-                data = FilterAction.transaction.listDescription
+                data = FilterDestination.transaction.listDescription
             }
         return data
     }

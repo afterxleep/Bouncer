@@ -9,13 +9,9 @@
 import Foundation
 import Combine
 
-final class FilterStoreFile: FilterStoreProtocol, ObservableObject {
+final class FilterStoreFile: FilterStoreProtocol {
     
     @Published var filters: [Filter] = []
-    
-    // When using combile, we need to use the explicitly debscribed
-    // properties
-    var filtersPublished: Published<[Filter]> { _filters }
     var filtersPublisher: Published<[Filter]>.Publisher { $filters }
     
     static let filterListFile = "filters.json"
@@ -23,22 +19,6 @@ final class FilterStoreFile: FilterStoreProtocol, ObservableObject {
     
     init() {
         readFromDisk()
-    }
-        
-    func add(filter: Filter) {        
-        filters.append(filter)
-        filters = filters.sorted(by: { $1.phrase > $0.phrase })
-        saveToDisk()
-    }
-    
-    func remove(id: UUID) {
-        filters = filters.filter{$0.id != id}
-        saveToDisk()
-    }
-    
-    func reset() {
-        filters = []
-        saveToDisk()
     }
 
     private var fileURL: URL? {
@@ -71,6 +51,25 @@ final class FilterStoreFile: FilterStoreProtocol, ObservableObject {
         } catch {
             print(error)
         }
+    }
+}
+
+extension FilterStoreFile {
+    
+    func add(filter: Filter) {
+        filters.append(filter)
+        filters = filters.sorted(by: { $1.phrase > $0.phrase })
+        saveToDisk()
+    }
+    
+    func remove(id: UUID) {
+        filters = filters.filter{$0.id != id}
+        saveToDisk()
+    }
+    
+    func reset() {
+        filters = []
+        saveToDisk()
     }
     
     func migrateFromV1() {

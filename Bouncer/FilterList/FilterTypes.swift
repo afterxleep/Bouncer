@@ -13,7 +13,7 @@ struct SystemImage {
     var color: Color
 }
 
-struct FilterActionDecoration {
+struct FilterDestinationDecoration {
     var decoration: SystemImage
     var text: LocalizedStringKey
 }
@@ -30,38 +30,38 @@ extension FilterType {
         }
     }
     
-    var formDescription: FilterActionDecoration {
+    var formDescription: FilterDestinationDecoration {
         switch self {
         case .any:
-            return FilterActionDecoration(decoration: SYSTEM_IMAGES.ENTIRE_MESSAGE, text: "SENDER_AND_TEXT")
+            return FilterDestinationDecoration(decoration: SYSTEM_IMAGES.ENTIRE_MESSAGE, text: "SENDER_AND_TEXT")
         case .sender:
-            return FilterActionDecoration(decoration: SYSTEM_IMAGES.SENDER, text: "SENDER")
+            return FilterDestinationDecoration(decoration: SYSTEM_IMAGES.SENDER, text: "SENDER")
         case .message:
-            return FilterActionDecoration(decoration: SYSTEM_IMAGES.MESSAGE_TEXT, text: "TEXT")
+            return FilterDestinationDecoration(decoration: SYSTEM_IMAGES.MESSAGE_TEXT, text: "TEXT")
         }
     }
 }
 
-extension FilterAction {
-    var listDescription: FilterActionDecoration {
+extension FilterDestination {
+    var listDescription: FilterDestinationDecoration {
         switch self {
         case .junk:
-            return FilterActionDecoration(decoration: SYSTEM_IMAGES.SPAM, text: "JUNK_ACTION")
+            return FilterDestinationDecoration(decoration: SYSTEM_IMAGES.SPAM, text: "JUNK_ACTION")
         case .transaction:
-            return FilterActionDecoration(decoration: SYSTEM_IMAGES.TRANSACTION, text: "TRANSACTION_ACTION")
+            return FilterDestinationDecoration(decoration: SYSTEM_IMAGES.TRANSACTION, text: "TRANSACTION_ACTION")
         case .promotion:
-            return FilterActionDecoration(decoration: SYSTEM_IMAGES.PROMOTION, text: "PROMOTION_ACTION")
+            return FilterDestinationDecoration(decoration: SYSTEM_IMAGES.PROMOTION, text: "PROMOTION_ACTION")
         }
     }
     
-    var formDescription: FilterActionDecoration {
+    var formDescription: FilterDestinationDecoration {
         switch self {
         case .junk:
-            return FilterActionDecoration(decoration: SYSTEM_IMAGES.SPAM, text: "JUNK_ACTION")
+            return FilterDestinationDecoration(decoration: SYSTEM_IMAGES.SPAM, text: "JUNK_ACTION")
         case .transaction:
-            return FilterActionDecoration(decoration: SYSTEM_IMAGES.TRANSACTION, text: "TRANSACTION_ACTION")
+            return FilterDestinationDecoration(decoration: SYSTEM_IMAGES.TRANSACTION, text: "TRANSACTION_ACTION")
         case .promotion:
-            return FilterActionDecoration(decoration: SYSTEM_IMAGES.PROMOTION, text: "PROMOTION_ACTION")
+            return FilterDestinationDecoration(decoration: SYSTEM_IMAGES.PROMOTION, text: "PROMOTION_ACTION")
         }
     }
 }

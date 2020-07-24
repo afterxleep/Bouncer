@@ -10,9 +10,9 @@ import SwiftUI
 struct AddFilterView: View {
     @Binding var showingAddForm :Bool
     @State var filterType: FilterType = .any
-    @State var filterAction: FilterAction = .junk
+    @State var filterDestination: FilterDestination = .junk
     @State var filterTerm: String = ""
-    @State var exactMatch: Bool = false    
+    @State var exactMatch: Bool = false
     var viewModel: FilterViewModel
     
     var body: some View {
@@ -35,8 +35,8 @@ struct AddFilterView: View {
                             .disableAutocorrection(true)
                             .multilineTextAlignment(.trailing)
                     }
-                    Picker("FILTER_ACTION_LABEL", selection: $filterAction) {
-                        ForEach(FilterAction.allCases, id: \.self) { value in
+                    Picker("FILTER_ACTION_LABEL", selection: $filterDestination) {
+                        ForEach(FilterDestination.allCases, id: \.self) { value in
                             HStack {
                                 Image(systemName: value.formDescription.decoration.image).foregroundColor(value.formDescription.decoration.color)
                                 Text(value.formDescription.text)
@@ -64,8 +64,8 @@ struct AddFilterView: View {
     }
     
     func saveFilter() {
-        if(filterTerm.count > 0) {            
-            self.viewModel.add(type: filterType, phrase: filterTerm, action: filterAction)
+        if(filterTerm.count > 0) {
+            self.viewModel.add(type: filterType, phrase: filterTerm, action: filterDestination)
             self.showingAddForm = false
         }
     }

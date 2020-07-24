@@ -22,7 +22,7 @@ struct FilterListView: View {
                         List {
                             ForEach(viewModel.filters) { item in
                                 let typeDecoration = viewModel.getFilterTypeDecoration(filter: item)
-                                let actionDecoration = viewModel.getFilterActionDecoration(filter: item)
+                                let actionDecoration = viewModel.getFilterDestinationDecoration(filter: item)
                                 HStack(spacing: 10) {
                                     Image(systemName: typeDecoration.image)
                                         .foregroundColor(.gray)
