@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import Combine
 
 enum FilterType: String, Codable, Equatable, CaseIterable {
     case any
@@ -33,15 +34,19 @@ struct Filter: Identifiable, Equatable, Codable {
     }
 }
 
+enum FilterStoreError: Error {
+    case loadError
+    case decodingError
+    case addError
+    case deleteError
+    case other
+}
+
+
 protocol FilterStoreProtocol {
-    var filters: [Filter] {get set}
-    
-    // Property wrapper @Published is not supported in protocols,
-    // so we need to explicitly describe the synthesized props    
-    var filtersPublisher: Published<[Filter]>.Publisher { get }
-    
+    func get() -> AnyPublisher<[Filter], FilterStoreError>
     func add(filter: Filter)
-    func remove(id: UUID)
+    func remove(id: UUID) -> Empty<Any, Never>
     func reset()
     func migrateFromV1()
 }

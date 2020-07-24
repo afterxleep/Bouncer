@@ -21,7 +21,7 @@ struct BaseView: View {
             if(!hasLaunchedApp) {
                 TutorialView()
             } else {                
-                FilterListView()
+                FilterListContainerView()
                     .environmentObject(store)
                     .background(Color("MainBackgroundColor"))
             }

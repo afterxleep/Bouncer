@@ -38,12 +38,14 @@ final class FilterViewModel: ObservableObject {
         self.userSettingsService = userSettingsService
         self.ratingService = ratingService
         
+        /*
         filterListcancellable = filterListService
             .filtersPublisher
                 .receive(on: RunLoop.main)
                 .sink { [weak self] filters in
                     self?.filters = filters
                 }
+         */
         
         migrateFromV1()
         saveHasLaunchedApp()
@@ -74,46 +76,6 @@ final class FilterViewModel: ObservableObject {
     
     func requestReview() {
         self.ratingService.requestReview()
-    }
-    
-    func getFilterTypeDecoration(filter: Filter) -> SystemImage {
-        var data: SystemImage
-        switch(filter.type) {
-            case .sender:
-                data = FilterType.sender.listDescription
-            case .message:
-                data = FilterType.message.listDescription
-            default:
-                data = FilterType.any.listDescription
-        }
-        return data
-    }
-    
-    func getFilterDestinationDecoration(filter: Filter) -> FilterDestinationDecoration {
-        var data: FilterDestinationDecoration
-        switch (filter.action) {
-            case .junk:
-                data = FilterDestination.junk.listDescription
-            case .promotion:
-                data = FilterDestination.promotion.listDescription
-            case .transaction:
-                data = FilterDestination.transaction.listDescription
-            }
-        return data
-    }
-    
-    var shouldDisplayList: Bool {
-        if(filters.count > 0) {
-            return true
-        }
-        return false
-    }
-    
-    var shouldDisplayInApp: Bool {
-        if(filters.count > 9) {
-            return true
-        }
-        return true
     }
         
 }

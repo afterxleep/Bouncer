@@ -11,33 +11,19 @@ import Combine
 
 final class FilterStoreFile: FilterStoreProtocol {
     
-    @Published var filters: [Filter] = []
-    var filtersPublisher: Published<[Filter]>.Publisher { $filters }
-    
+    var filters: [Filter] = []
     static let filterListFile = "filters.json"
     static let groupContainer = "group.com.banshai.bouncer"
     
     init() {
-        readFromDisk()
+        let testFilter = Filter(id: UUID(), phrase: "test", type: .any, action: .promotion)
+        self.add(filter: testFilter)
     }
 
     private var fileURL: URL? {
         return FileManager.default
             .containerURL(forSecurityApplicationGroupIdentifier: Self.groupContainer)?
             .appendingPathComponent(Self.filterListFile)
-    }
-    
-    private func readFromDisk() {
-        guard let url = fileURL else {  // File does not exist yet
-            filters = []
-            return
-        }
-        do {
-            let data = try Data(contentsOf: url)
-            filters = try JSONDecoder().decode([Filter].self, from: data)
-        } catch {
-            print(error)
-        }
     }
     
     private func saveToDisk() {
@@ -54,7 +40,23 @@ final class FilterStoreFile: FilterStoreProtocol {
     }
 }
 
+
 extension FilterStoreFile {
+    
+    func get() -> AnyPublisher<[Filter], FilterStoreError> {
+        var filters: [Filter] = []
+        guard let url = fileURL else {  // File does not exist yet
+            return Fail(error: .loadError).eraseToAnyPublisher()
+        }
+        do {
+            let data = try Data(contentsOf: url)
+            filters = try JSONDecoder().decode([Filter].self, from: data)
+        } catch {
+            return Fail(error: .decodingError).eraseToAnyPublisher()
+        }
+        return Just(filters).setFailureType(to: FilterStoreError.self).eraseToAnyPublisher()
+        
+    }
     
     func add(filter: Filter) {
         filters.append(filter)
@@ -62,9 +64,10 @@ extension FilterStoreFile {
         saveToDisk()
     }
     
-    func remove(id: UUID) {
+    func remove(id: UUID) -> AnyPublisher<Void, FilterStoreError> {
         filters = filters.filter{$0.id != id}
         saveToDisk()
+        return Just(()).setFailureType(to: FilterStoreError.self).eraseToAnyPublisher()
     }
     
     func reset() {

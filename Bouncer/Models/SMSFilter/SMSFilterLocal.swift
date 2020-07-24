@@ -19,7 +19,8 @@ final class SMSFilterLocal {
     init(filterListStore: FilterStoreProtocol = FilterStoreFile()) {
         self.filterListStore = filterListStore
         filterListStore.migrateFromV1()
-        self.filters = filterListStore.filters
+        //self.filters = filterListStore.filters
+        self.filters = []
     }
     
     func applyFilter(filter: Filter, message: SMSMessage) -> Bool {

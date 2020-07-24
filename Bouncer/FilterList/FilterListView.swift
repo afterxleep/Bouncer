@@ -7,45 +7,45 @@
 
 import SwiftUI
 
-struct FilterListView: View {
-    @StateObject var viewModel = FilterViewModel()
+struct FilterListContainerView: View {
     @EnvironmentObject var store: AppStore
+    
+    var body: some View {
+        FilterListView(
+            filters: store.state.filterState.filters,
+            purchasedApp: false,
+            onDelete: delete
+        )
+    }
+    
+    func delete(at indexes: IndexSet) {
+        for indexes as i {
+            
+        }
+        store.send(.filter(action: .remove(uuid: <#T##UUID#>
+    }
+    
+}
+
+struct FilterListView: View {
+    @State var filters: [Filter]
+    @State var purchasedApp: Bool
     @State private var showingSettings = false
     @State private var showingAddForm = false
     @State private var showingInApp = false
+    
+    let onDelete: ((IndexSet) -> Void)?
     
     var body: some View {
         ZStack {
             BackgroundView()
             NavigationView {
                 Group {
-                    if(viewModel.shouldDisplayList) {
+                    if(filters.count > 0) {
                         List {
-                            ForEach(store.state.filter.list) { item in
-                                let typeDecoration = viewModel.getFilterTypeDecoration(filter: item)
-                                let actionDecoration = viewModel.getFilterDestinationDecoration(filter: item)
-                                HStack(spacing: 10) {
-                                    Image(systemName: typeDecoration.image)
-                                        .foregroundColor(.gray)
-                                        .aspectRatio(contentMode: .fit)
-                                    Text("'\(item.phrase)'")
-                                            .bold()
-                                    Spacer()
-                                    HStack(spacing: 4) {
-                                        Image(systemName: actionDecoration.decoration.image)
-                                        Text(actionDecoration.text)
-                                    }
-                                    .font(.caption2)
-                                    .padding(.horizontal, 6)
-                                    .padding(.vertical, 4)
-                                    .foregroundColor(Color.red)
-                                    .overlay(
-                                        RoundedRectangle(cornerRadius: 5)
-                                            .stroke(Color.red, lineWidth: 1)
-                                        )
-                                }.padding(.vertical, 8)
-                                .font(.headline)
-                            }.onDelete(perform: deleteItems)
+                            ForEach(filters) { filter in
+                               FilterRowView(filter: filter)
+                            }.onDelete(perform: onDelete)
                         }
                         .listStyle(PlainListStyle())
                     } else {
@@ -67,7 +67,7 @@ struct FilterListView: View {
                         },
                     trailing:
                         Group {
-                            if (viewModel.shouldDisplayInApp) {
+                            if (purchasedApp) {
                                 Button(
                                     action: { self.showingInApp = true }) {
                                         Image(systemName: SYSTEM_IMAGES.ADD.image).imageScale(.large)
@@ -81,8 +81,7 @@ struct FilterListView: View {
                                         Image(systemName: SYSTEM_IMAGES.ADD.image).imageScale(.large)
                                     }
                                     .sheet(isPresented: $showingAddForm) {
-                                        AddFilterView(showingAddForm: $showingAddForm,
-                                                      viewModel: self.viewModel)
+                                       
                                     }
                             }
                         }                        
@@ -92,13 +91,15 @@ struct FilterListView: View {
         }
     }
 
-    func deleteItems(at offsets: IndexSet) {
-        viewModel.remove(at: offsets)
-    }
 }
+
+
 
 struct FilterListView_Previews: PreviewProvider {
     static var previews: some View {
-        FilterListView()
+        FilterListView(filters: [],
+                       purchasedApp: false,
+                       onDelete: nil
+        )
     }
 }
