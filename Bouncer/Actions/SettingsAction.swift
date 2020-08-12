@@ -10,10 +10,7 @@ import SwiftUI
 enum SettingsAction {
 
     case fetchSettings
-    case updateStateFromSettings(hasLaunchedApp: Bool,
-                                 NumberOfLaunches: Int,
-                                 lastVersionPromptedForReview: String)
-    case setHasLaunchedApp
+    case setHasLaunchedApp(status: Bool)
     case setNumberOfLaunches(number: Int)
     case setLastVersionPromptedForReview(version: String)
 }
