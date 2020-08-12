@@ -15,9 +15,12 @@ func settingsMiddleware(appSettings: AppSettingsStore) -> Middleware<AppState, A
         switch action {
 
             case .settings(action: .fetchSettings):
-                let hasLaunched = Just(AppAction.settings(action: .setHasLaunchedApp(status: appSettings.hasLaunchedApp)))
-                let numberOfLaunches = Just(AppAction.settings(action: .setNumberOfLaunches(number: appSettings.numberOfLaunches)))
-                let lastVersion = Just(AppAction.settings(action: .setLastVersionPromptedForReview(version: appSettings.lastVersionPromptedForReview)))
+                let hasLaunched = Just(AppAction.settings(action:
+                                            .setHasLaunchedApp(status: appSettings.hasLaunchedApp)))
+                let numberOfLaunches = Just(AppAction.settings(action:
+                                            .setNumberOfLaunches(number: appSettings.numberOfLaunches)))
+                let lastVersion = Just(AppAction.settings(action:
+                                            .setLastVersionPromptedForReview(version: appSettings.lastVersionPromptedForReview)))
                 return hasLaunched.merge(with: numberOfLaunches, lastVersion).eraseToAnyPublisher()
 
             case .settings(action: .setHasLaunchedApp(let status)):
