@@ -2,27 +2,26 @@
 //  FilterListView.swift
 //  Bouncer
 //
-//  Created by Daniel Bernal on 6/25/20.
-//
 
 import SwiftUI
 
 struct FilterListContainerView: View {
     @EnvironmentObject var store: AppStore
     
-    var body: some View {
+    var body: some View {        
         FilterListView(
-            filters: store.state.filterState.filters,
+            filters: store.state.filters.filters,
             purchasedApp: false,
             onDelete: delete
         )
     }
     
     func delete(at indexes: IndexSet) {
-        for indexes as i {
-            
+        
+        for o in indexes {
+            let id = store.state.filters.filters[o].id
+            //store.send(.filter(action: .remove(uuid: id)))
         }
-        store.send(.filter(action: .remove(uuid: <#T##UUID#>
     }
     
 }

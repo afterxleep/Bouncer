@@ -71,9 +71,12 @@ struct AddFilterView: View {
     }
 }
 
+/*
 struct AddFilterView_Previews: PreviewProvider {
-    static var viewModel = FilterViewModel()
+    static var viewModel = FilterViewModel(filterListService: <#FilterStore#>, appSettings: <#AppSettingsStore#>, ratingService: <#ReviewService#>)
     static var previews: some View {
         AddFilterView(showingAddForm: .constant(true), viewModel: viewModel)
     }
+
 }
+ */

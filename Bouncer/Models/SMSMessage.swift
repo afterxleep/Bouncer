@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 struct SMSMessage {
     var sender: String
     var text: String

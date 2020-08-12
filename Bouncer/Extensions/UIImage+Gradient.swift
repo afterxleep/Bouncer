@@ -2,8 +2,6 @@
 //  UIImage+Gradient.swift
 //  Bouncer
 //
-//  Created by Daniel Bernal on 6/29/20.
-//
 
 import Foundation
 import UIKit

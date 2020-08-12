@@ -2,8 +2,6 @@
 //  BouncerApp.swift
 //  Bouncer
 //
-//  Created by Daniel Bernal on 6/24/20.
-//
 
 import SwiftUI
 import StoreKit
@@ -14,17 +12,20 @@ struct BouncerApp: App {
     // Store Payments Observer
     let storeObserver = StoreObserver.shared
     
-    let store = AppStore(initialState: .init(),
-                         reducer: appReducer,
-                         environment: AppEnvironment())
-        
+    let store = AppStore(initialState: .init(
+                            filters: FilterState()
+                        ),
+                      reducer: appReducer,
+                      middlewares: []
+    )
+
     init() {
         
         // Add the storeObserver to the queue
-        SKPaymentQueue.default().add(storeObserver)
+        //SKPaymentQueue.default().add(storeObserver)
         
         // Initial State
-        store.send(.filter(action: .load))
+        store.dispatch(.filter(action: .load))
         
     }
     

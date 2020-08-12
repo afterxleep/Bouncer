@@ -2,14 +2,12 @@
 //  BaseView.swift
 //  Bouncer
 //
-//  Created by Daniel Bernal on 6/25/20.
-//
 
 import SwiftUI
 
 struct BaseView: View {
         
-    @AppStorage(APP_STORAGE_KEYS.HAS_LAUNCHED_APP.rawValue) var hasLaunchedApp = false    
+    @State var hasLaunchedApp = false    
     @EnvironmentObject var store: AppStore
     
     init() {
@@ -21,9 +19,11 @@ struct BaseView: View {
             if(!hasLaunchedApp) {
                 TutorialView()
             } else {                
+                /*
                 FilterListContainerView()
                     .environmentObject(store)
                     .background(Color("MainBackgroundColor"))
+                */
             }
         }
     }

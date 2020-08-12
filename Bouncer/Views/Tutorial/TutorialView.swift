@@ -9,8 +9,8 @@ import SwiftUI
 
 struct TutorialView: View {
     
-    @AppStorage(APP_STORAGE_KEYS.HAS_LAUNCHED_APP.rawValue) var hasLaunchedApp = false
-    @StateObject var viewModel: TutorialViewModel = TutorialViewModel()
+    @State var hasLaunchedApp = false
+    //@StateObject var viewModel: TutorialViewModel = TutorialViewModel()
     
     var firstLaunch: Bool = true
     
@@ -38,7 +38,7 @@ struct TutorialView: View {
                             .padding(.bottom, 20.0)
                     }
                 }
-                InstructionsView(viewModel: viewModel)
+                //InstructionsView(viewModel: viewModel)
             }
         }
     }

@@ -2,8 +2,6 @@
 //  FilterStoreService.swift
 //  Bouncer
 //
-//  Created by Daniel Bernal on 7/1/20.
-//
 
 import Foundation
 import Combine
@@ -39,14 +37,15 @@ enum FilterStoreError: Error {
     case decodingError
     case addError
     case deleteError
+    case migrationError
     case other
 }
 
 
-protocol FilterStoreProtocol {
+protocol FilterStore {
     func get() -> AnyPublisher<[Filter], FilterStoreError>
-    func add(filter: Filter)
-    func remove(id: UUID) -> Empty<Any, Never>
-    func reset()
-    func migrateFromV1()
+    func add(filter: Filter) -> AnyPublisher<Void, FilterStoreError>
+    func remove(uuid: UUID) -> AnyPublisher<Void, FilterStoreError>
+    func reset() -> AnyPublisher<Void, FilterStoreError>
+    func migrateFromV1() -> AnyPublisher<Void, FilterStoreError>
 }

@@ -18,9 +18,9 @@ final class FilterViewModel: ObservableObject {
     }
     
     private var filterListView : FilterListView?
-    let filterListService: FilterStoreProtocol
-    var userSettingsService: UserSettingsProtocol
-    var ratingService: ReviewServiceProtocol
+    let filterListService: FilterStore
+    var appSettings: AppSettingsStore
+    var ratingService: ReviewService
     var filterListcancellable: AnyCancellable?
     var defaultsCancellable: AnyCancellable?
     
@@ -30,12 +30,12 @@ final class FilterViewModel: ObservableObject {
     
     //MARK: - Initializer
     init(
-        filterListService: FilterStoreProtocol = FilterStoreFile(),
-        userSettingsService: UserSettingsProtocol = UserSettingsDefaults(),
-        ratingService: ReviewServiceProtocol = ReviewServiceStoreKit()) {
+        filterListService: FilterStore,
+        appSettings: AppSettingsStore,
+        ratingService: ReviewService) {
         
         self.filterListService = filterListService
-        self.userSettingsService = userSettingsService
+        self.appSettings = appSettings
         self.ratingService = ratingService
         
         /*
@@ -58,7 +58,7 @@ final class FilterViewModel: ObservableObject {
     
     func remove(at offsets: IndexSet) {
         for o in offsets {
-            filterListService.remove(id: filters[o].id)
+            filterListService.remove(uuid: filters[o].id)
         }
     }
     
@@ -71,7 +71,7 @@ final class FilterViewModel: ObservableObject {
     }
     
     func saveHasLaunchedApp() {        
-        userSettingsService.numberOfLaunches = userSettingsService.numberOfLaunches + 1
+        appSettings.numberOfLaunches = appSettings.numberOfLaunches + 1
     }
     
     func requestReview() {

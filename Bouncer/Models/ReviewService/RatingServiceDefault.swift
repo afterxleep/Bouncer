@@ -8,13 +8,13 @@
 import Foundation
 import StoreKit
 
-struct ReviewServiceStoreKit: ReviewServiceProtocol {
+struct ReviewServiceStoreKit: ReviewService {
     
     var launchesRequired: Int = 3
-    let userSettings: UserSettingsProtocol
+    let appSettings: AppSettingsStore
     
-    init(userSettings: UserSettingsProtocol = UserSettingsDefaults()) {
-        self.userSettings = userSettings
+    init(appSettings: AppSettingsStore) {
+        self.appSettings = appSettings
     }
     
     func requestReview() {
@@ -22,10 +22,10 @@ struct ReviewServiceStoreKit: ReviewServiceProtocol {
         guard let currentVersion = Bundle.main.object(forInfoDictionaryKey: infoDictionaryKey) as? String
             else { fatalError("Expected to find a bundle version in the info dictionary") }
         
-        let lastVersionPromptedForReview = userSettings.lastVersionPromptedForReview
+        let lastVersionPromptedForReview = appSettings.lastVersionPromptedForReview
         
         // Has the process been completed several times and the user has not already been prompted for this version?
-        if userSettings.numberOfLaunches >= launchesRequired && currentVersion != lastVersionPromptedForReview {
+        if appSettings.numberOfLaunches >= launchesRequired && currentVersion != lastVersionPromptedForReview {
             SKStoreReviewController.requestReview()
         }
     }

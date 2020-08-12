@@ -9,7 +9,7 @@ import SwiftUI
 
 struct InstructionsView: View {
         
-    @AppStorage(APP_STORAGE_KEYS.HAS_LAUNCHED_APP.rawValue) var hasLaunchedApp = false
+    @State var hasLaunchedApp = false
     @StateObject var viewModel: TutorialViewModel
     @Environment(\.presentationMode) var presentationMode
     

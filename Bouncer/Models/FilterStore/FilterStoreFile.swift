@@ -9,7 +9,7 @@
 import Foundation
 import Combine
 
-final class FilterStoreFile: FilterStoreProtocol {
+final class FilterStoreFile: FilterStore {
     
     var filters: [Filter] = []
     static let filterListFile = "filters.json"
@@ -17,16 +17,16 @@ final class FilterStoreFile: FilterStoreProtocol {
     
     init() {
         let testFilter = Filter(id: UUID(), phrase: "test", type: .any, action: .promotion)
-        self.add(filter: testFilter)
+        let _ = self.add(filter: testFilter)
     }
 
-    private var fileURL: URL? {
+    fileprivate var fileURL: URL? {
         return FileManager.default
             .containerURL(forSecurityApplicationGroupIdentifier: Self.groupContainer)?
             .appendingPathComponent(Self.filterListFile)
     }
     
-    private func saveToDisk() {
+    fileprivate func saveToDisk() {
         guard let url = fileURL else {
             filters = []
             return
@@ -45,7 +45,7 @@ extension FilterStoreFile {
     
     func get() -> AnyPublisher<[Filter], FilterStoreError> {
         var filters: [Filter] = []
-        guard let url = fileURL else {  // File does not exist yet
+        guard let url = fileURL else {
             return Fail(error: .loadError).eraseToAnyPublisher()
         }
         do {
@@ -54,43 +54,50 @@ extension FilterStoreFile {
         } catch {
             return Fail(error: .decodingError).eraseToAnyPublisher()
         }
-        return Just(filters).setFailureType(to: FilterStoreError.self).eraseToAnyPublisher()
-        
+
+        return Just(filters)
+            .setFailureType(to: FilterStoreError.self)
+            .eraseToAnyPublisher()
     }
     
-    func add(filter: Filter) {
+    func add(filter: Filter) -> AnyPublisher<Void, FilterStoreError> {
         filters.append(filter)
         filters = filters.sorted(by: { $1.phrase > $0.phrase })
         saveToDisk()
+        return Empty().eraseToAnyPublisher()
     }
     
-    func remove(id: UUID) -> AnyPublisher<Void, FilterStoreError> {
-        filters = filters.filter{$0.id != id}
+    func remove(uuid: UUID) -> AnyPublisher<Void, FilterStoreError> {
+        filters = filters.filter{$0.id != uuid}
         saveToDisk()
-        return Just(()).setFailureType(to: FilterStoreError.self).eraseToAnyPublisher()
+        return Empty().eraseToAnyPublisher()
     }
     
-    func reset() {
+    func reset() -> AnyPublisher<Void, FilterStoreError> {
         filters = []
         saveToDisk()
+        return Empty().eraseToAnyPublisher()
     }
     
-    func migrateFromV1() {
+    func migrateFromV1() -> AnyPublisher<Void, FilterStoreError> {
         let wordListFile = "wordlist.filter"
         let storePath = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Self.groupContainer)
         let oldStore = storePath!.appendingPathComponent(wordListFile)
         if (FileManager.default.fileExists(atPath: oldStore.path)) {
-            guard let wordData = NSMutableData(contentsOf: oldStore) else { return }
+            guard let wordData = NSMutableData(contentsOf: oldStore) else {
+                return Fail(error: .loadError).eraseToAnyPublisher()
+            }
             do {
                 if let loadedStrings = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(wordData as Data) as? [String] {
                     for s in loadedStrings {
-                        self.add(filter: Filter(id: UUID(), phrase: s))
+                        let _ = self.add(filter: Filter(id: UUID(), phrase: s))
                     }
                     try? FileManager.default.removeItem(atPath: oldStore.path)
                 }
             } catch {
-                return
+                return Fail(error: .migrationError).eraseToAnyPublisher()
             }
         }
+        return Empty().eraseToAnyPublisher()
     }
 }
