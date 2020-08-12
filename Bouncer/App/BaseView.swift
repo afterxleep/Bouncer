@@ -6,8 +6,6 @@
 import SwiftUI
 
 struct BaseView: View {
-        
-    @State var hasLaunchedApp = false    
     @EnvironmentObject var store: AppStore
     
     init() {
@@ -15,16 +13,17 @@ struct BaseView: View {
     }
     
     var body: some View {
-        Group {
-            if(!hasLaunchedApp) {
-                TutorialView()
-            } else {                
-                /*
-                FilterListContainerView()
-                    .environmentObject(store)
-                    .background(Color("MainBackgroundColor"))
-                */
+        Group {            
+            if(!store.state.settings.hasLaunchedApp) {
+                TutorialContainerView().environmentObject(store)
             }
+            /*
+            else {
+                FilterListContainerView()
+                    .environment(store)
+                    .background(Color("MainBackgroundColor"))
+            }
+            */
         }
     }
     

@@ -62,7 +62,7 @@ struct FilterListView: View {
                             Image(systemName: SYSTEM_IMAGES.HELP.image).imageScale(.large)
                             }
                             .sheet(isPresented: $showingSettings) {
-                                TutorialView(firstLaunch: false)                                    
+                                //TutorialView(firstLaunch: false)                                    
                         },
                     trailing:
                         Group {

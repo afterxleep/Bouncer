@@ -6,7 +6,7 @@
 import Foundation
 import Combine
 
-func filterReducer(state: inout FilterState, action: FilterAction) -> AnyPublisher<AppAction, Never>? {
+func filterReducer(state: inout FilterState, action: FilterAction) -> Void {
     switch action {
 
     case let .setFilters(filters):
@@ -16,8 +16,8 @@ func filterReducer(state: inout FilterState, action: FilterAction) -> AnyPublish
         break
 
     case .remove(let uuid):
-        return nil
+        break
     }
 
-    return Empty().eraseToAnyPublisher()
+
 }

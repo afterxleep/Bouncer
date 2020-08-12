@@ -36,7 +36,6 @@
 		D6529F9024A41372009AE3FF /* BouncerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529F8F24A41372009AE3FF /* BouncerUITests.swift */; };
 		D6529F9F24A413A6009AE3FF /* TutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529F9E24A413A6009AE3FF /* TutorialView.swift */; };
 		D6529FA424A413EB009AE3FF /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FA324A413EB009AE3FF /* BackgroundView.swift */; };
-		D6529FB724A50B1F009AE3FF /* InstructionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FB624A50B1F009AE3FF /* InstructionsView.swift */; };
 		D6529FC324A54AAD009AE3FF /* FilterListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FC224A54AAD009AE3FF /* FilterListView.swift */; };
 		D6529FC524A54ABA009AE3FF /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FC424A54ABA009AE3FF /* FilterViewModel.swift */; };
 		D6529FCB24A54ADE009AE3FF /* FilterStoreFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FC824A54ADE009AE3FF /* FilterStoreFile.swift */; };
@@ -56,6 +55,10 @@
 		D6C90BF224CAAF7B00426B31 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C90BF124CAAF7B00426B31 /* AppState.swift */; };
 		D6C90BF424CAB26700426B31 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C90BF324CAB26700426B31 /* AppStore.swift */; };
 		D6C90BF624CB36AE00426B31 /* FilterRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C90BF524CB36AD00426B31 /* FilterRowView.swift */; };
+		D6CC124B24E452E100388160 /* TutorialContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6CC124A24E452E100388160 /* TutorialContainerView.swift */; };
+		D6CC124D24E4563F00388160 /* SettingsAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6CC124C24E4563F00388160 /* SettingsAction.swift */; };
+		D6CC124F24E47C3900388160 /* SettingsMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6CC124E24E47C3900388160 /* SettingsMiddleware.swift */; };
+		D6CC125124E4837800388160 /* SettingsReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6CC125024E4837800388160 /* SettingsReducer.swift */; };
 		D6EA9A8224AD2201000135E7 /* SMSFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EA9A8124AD2201000135E7 /* SMSFilter.swift */; };
 		D6EA9A8424AD2244000135E7 /* FilterStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EA9A8324AD2244000135E7 /* FilterStore.swift */; };
 		D6EA9A8524AD2319000135E7 /* FilterStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EA9A8324AD2244000135E7 /* FilterStore.swift */; };
@@ -136,7 +139,6 @@
 		D6529F9124A41372009AE3FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6529F9E24A413A6009AE3FF /* TutorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialView.swift; sourceTree = "<group>"; };
 		D6529FA324A413EB009AE3FF /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
-		D6529FB624A50B1F009AE3FF /* InstructionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstructionsView.swift; sourceTree = "<group>"; };
 		D6529FC224A54AAD009AE3FF /* FilterListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListView.swift; sourceTree = "<group>"; };
 		D6529FC424A54ABA009AE3FF /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		D6529FC824A54ADE009AE3FF /* FilterStoreFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterStoreFile.swift; sourceTree = "<group>"; };
@@ -156,6 +158,10 @@
 		D6C90BF124CAAF7B00426B31 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		D6C90BF324CAB26700426B31 /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
 		D6C90BF524CB36AD00426B31 /* FilterRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterRowView.swift; sourceTree = "<group>"; };
+		D6CC124A24E452E100388160 /* TutorialContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialContainerView.swift; sourceTree = "<group>"; };
+		D6CC124C24E4563F00388160 /* SettingsAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAction.swift; sourceTree = "<group>"; };
+		D6CC124E24E47C3900388160 /* SettingsMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMiddleware.swift; sourceTree = "<group>"; };
+		D6CC125024E4837800388160 /* SettingsReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsReducer.swift; sourceTree = "<group>"; };
 		D6EA9A8124AD2201000135E7 /* SMSFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSFilter.swift; sourceTree = "<group>"; };
 		D6EA9A8324AD2244000135E7 /* FilterStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterStore.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -196,8 +202,9 @@
 		D61497E724E442F100AF997E /* Actions */ = {
 			isa = PBXGroup;
 			children = (
-				D61497E824E4430E00AF997E /* FilterAction.swift */,
 				D61497EF24E4438000AF997E /* AppAction.swift */,
+				D6CC124C24E4563F00388160 /* SettingsAction.swift */,
+				D61497E824E4430E00AF997E /* FilterAction.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -206,6 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				D61497ED24E4435100AF997E /* AppReducer.swift */,
+				D6CC125024E4837800388160 /* SettingsReducer.swift */,
 				D61497EB24E4433800AF997E /* FilterReducer.swift */,
 			);
 			path = Reducers;
@@ -214,6 +222,7 @@
 		D61497F124E443C300AF997E /* Middlewares */ = {
 			isa = PBXGroup;
 			children = (
+				D6CC124E24E47C3900388160 /* SettingsMiddleware.swift */,
 			);
 			path = Middlewares;
 			sourceTree = "<group>";
@@ -346,7 +355,7 @@
 		D6529F9D24A4139A009AE3FF /* Tutorial */ = {
 			isa = PBXGroup;
 			children = (
-				D6529FB624A50B1F009AE3FF /* InstructionsView.swift */,
+				D6CC124A24E452E100388160 /* TutorialContainerView.swift */,
 				D6529F9E24A413A6009AE3FF /* TutorialView.swift */,
 				D630D13A24BC1EF100FB8ED7 /* TutorialViewModel.swift */,
 			);
@@ -687,8 +696,11 @@
 				D60A19C724A69F1F0002E8BD /* SMSMessage.swift in Sources */,
 				D61497E924E4430E00AF997E /* FilterAction.swift in Sources */,
 				D67D590324C93DD100626995 /* StoreManager.swift in Sources */,
+				D6CC124D24E4563F00388160 /* SettingsAction.swift in Sources */,
 				D664B24824AA998700EB826D /* UIImage+Gradient.swift in Sources */,
 				D673E75224C68404008B1072 /* FilterTypes.swift in Sources */,
+				D6CC125124E4837800388160 /* SettingsReducer.swift in Sources */,
+				D6CC124B24E452E100388160 /* TutorialContainerView.swift in Sources */,
 				D6529FCB24A54ADE009AE3FF /* FilterStoreFile.swift in Sources */,
 				D630D13B24BC1EF100FB8ED7 /* TutorialViewModel.swift in Sources */,
 				D6379EB324AA852500FFD400 /* EmptyListView.swift in Sources */,
@@ -696,6 +708,7 @@
 				D67D590424C93DD100626995 /* StoreObserver.swift in Sources */,
 				D61D9BF124C7EBEC0058935B /* StoreServiceDefault.swift in Sources */,
 				D67F582E24E4496300165365 /* AppSettingsDefaults.swift in Sources */,
+				D6CC124F24E47C3900388160 /* SettingsMiddleware.swift in Sources */,
 				D6233A6624A59F2800B37A6A /* AddFilterView.swift in Sources */,
 				D6C90BF224CAAF7B00426B31 /* AppState.swift in Sources */,
 				D61497F024E4438000AF997E /* AppAction.swift in Sources */,
@@ -705,7 +718,6 @@
 				D63B546C24C77972005D4DAA /* UnlockAppViewModel.swift in Sources */,
 				D673E75424C686CF008B1072 /* UnlockAppView.swift in Sources */,
 				D62B331B24BAB16C002DFB81 /* ReviewService.swift in Sources */,
-				D6529FB724A50B1F009AE3FF /* InstructionsView.swift in Sources */,
 				D679D67424AA758C00579223 /* Constants.swift in Sources */,
 				D67D590724C93E0B00626995 /* DataTypes.swift in Sources */,
 				D61497EC24E4433800AF997E /* FilterReducer.swift in Sources */,

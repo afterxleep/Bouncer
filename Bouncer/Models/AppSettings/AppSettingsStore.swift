@@ -1,9 +1,6 @@
 //
-//  AppSettingsInterface.swift
-//  FreshlyPressed
-//
-//  Created by Daniel Bernal on 8/8/20.
-//  Copyright © 2020 Automattic. All rights reserved.
+//  AppSettingsStore.swift
+//  Bouncers
 //
 
 import Foundation

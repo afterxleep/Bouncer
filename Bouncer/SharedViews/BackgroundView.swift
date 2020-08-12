@@ -2,8 +2,6 @@
 //  BackgroundView.swift
 //  Bouncer
 //
-//  Created by Daniel Bernal on 6/19/20.
-//
 
 import SwiftUI
 

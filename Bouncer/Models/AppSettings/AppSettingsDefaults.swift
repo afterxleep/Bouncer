@@ -5,7 +5,7 @@
 
 import Foundation
 
-final class AppSettingsDefaults: AppSettingsStore {
+class AppSettingsDefaults: AppSettingsStore {
     var userDefaults: UserDefaults
 
     init(userDefaults: UserDefaults) {

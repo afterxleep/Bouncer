@@ -12,11 +12,14 @@ struct BouncerApp: App {
     // Store Payments Observer
     let storeObserver = StoreObserver.shared
     
-    let store = AppStore(initialState: .init(
-                            filters: FilterState()
+    let store = AppStore(initialState: .init(                            
+                        settings: SettingsState(),
+                        filters: FilterState()
                         ),
                       reducer: appReducer,
-                      middlewares: []
+                      middlewares: [
+                        settingsMiddleware(appSettings: AppSettingsDefaults(userDefaults: UserDefaults.standard))
+                      ]
     )
 
     init() {
@@ -24,8 +27,8 @@ struct BouncerApp: App {
         // Add the storeObserver to the queue
         //SKPaymentQueue.default().add(storeObserver)
         
-        // Initial State
-        store.dispatch(.filter(action: .load))
+        // Fetch existing settings
+        store.dispatch(.settings(action: .fetchSettings))
         
     }
     
