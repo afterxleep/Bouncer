@@ -7,7 +7,6 @@ import SwiftUI
 
 struct TutorialContainerView: View {
     @EnvironmentObject var store: AppStore
-
     var body: some View {
         TutorialView(hasLaunchedApp: store.state.settings.hasLaunchedApp,
                      onSettingsTap: openSettings)

@@ -6,7 +6,7 @@
 import SwiftUI
 
 struct TutorialView: View {
-
+    @Environment(\.presentationMode) var presentationMode
     var hasLaunchedApp: Bool
     let onSettingsTap: () -> Void
 
@@ -94,7 +94,12 @@ struct TutorialView: View {
                     .padding(.bottom, 35)
 
                     Button(action: {
-                        //onSettingsTap()
+                        if(!hasLaunchedApp) {
+                            onSettingsTap()
+                        } else {
+                            presentationMode.wrappedValue.dismiss()
+                        }
+
                     }) {
                         Text((!hasLaunchedApp) ? "BUTTON_TUTORIAL_FIRST_LAUNCH_TEXT" : "BUTTON_TUTORIAL_HELP_TEXT")
                             .foregroundColor(Color("TextDefaultColor"))
