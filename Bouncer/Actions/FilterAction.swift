@@ -6,7 +6,8 @@
 import Foundation
 
 enum FilterAction {
-    case setFilters(filters: [Filter])
-    case load
+    case fetch
+    case fetchComplete(filters: [Filter])
+    case fetchError(error: FilterMiddlewareError)
     case remove(uuid: UUID)
 }

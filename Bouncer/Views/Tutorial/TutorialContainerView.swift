@@ -24,7 +24,7 @@ struct TutorialContainerView_Previews: PreviewProvider {
 extension TutorialContainerView {
 
     func setAppHasLaunched() {
-
+        store.dispatch(AppAction.settings(action: .setHasLaunchedApp(status: true)))
     }
 
     func openSettings() {

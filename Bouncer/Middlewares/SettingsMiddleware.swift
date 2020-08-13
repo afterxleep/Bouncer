@@ -15,6 +15,8 @@ func settingsMiddleware(appSettings: AppSettingsStore) -> Middleware<AppState, A
         switch action {
 
             case .settings(action: .fetchSettings):
+                // TODO: The problem with dispatching these actions is that the middleware will then
+                // re-run them.  Let's figure out a more elegant way to do this
                 let hasLaunched = Just(AppAction.settings(action:
                                             .setHasLaunchedApp(status: appSettings.hasLaunchedApp)))
                 let numberOfLaunches = Just(AppAction.settings(action:

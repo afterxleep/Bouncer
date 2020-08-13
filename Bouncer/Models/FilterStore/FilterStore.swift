@@ -43,7 +43,7 @@ enum FilterStoreError: Error {
 
 
 protocol FilterStore {
-    func get() -> AnyPublisher<[Filter], FilterStoreError>
+    func fetch() -> AnyPublisher<[Filter], FilterStoreError>
     func add(filter: Filter) -> AnyPublisher<Void, FilterStoreError>
     func remove(uuid: UUID) -> AnyPublisher<Void, FilterStoreError>
     func reset() -> AnyPublisher<Void, FilterStoreError>

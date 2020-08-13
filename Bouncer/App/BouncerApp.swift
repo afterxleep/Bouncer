@@ -18,7 +18,8 @@ struct BouncerApp: App {
                         ),
                       reducer: appReducer,
                       middlewares: [
-                        settingsMiddleware(appSettings: AppSettingsDefaults(userDefaults: UserDefaults.standard))
+                        settingsMiddleware(appSettings: AppSettingsDefaults(userDefaults: UserDefaults.standard)),
+                        filterMiddleware(filterStore: FilterStoreFile())
                       ]
     )
 
@@ -29,6 +30,7 @@ struct BouncerApp: App {
         
         // Fetch existing settings
         store.dispatch(.settings(action: .fetchSettings))
+        store.dispatch(.filter(action: .fetch))
         
     }
     

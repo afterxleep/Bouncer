@@ -5,34 +5,12 @@
 
 import SwiftUI
 
-struct FilterListContainerView: View {
-    @EnvironmentObject var store: AppStore
-    
-    var body: some View {        
-        FilterListView(
-            filters: store.state.filters.filters,
-            purchasedApp: false,
-            onDelete: delete
-        )
-    }
-    
-    func delete(at indexes: IndexSet) {
-        
-        for o in indexes {
-            let id = store.state.filters.filters[o].id
-            //store.send(.filter(action: .remove(uuid: id)))
-        }
-    }
-    
-}
-
 struct FilterListView: View {
-    @State var filters: [Filter]
-    @State var purchasedApp: Bool
-    @State private var showingSettings = false
-    @State private var showingAddForm = false
-    @State private var showingInApp = false
-    
+    var filters: [Filter]
+    var purchasedApp: Bool
+    var showingSettings = false
+    var showingAddForm = false
+    var showingInApp = false
     let onDelete: ((IndexSet) -> Void)?
     
     var body: some View {
@@ -52,6 +30,7 @@ struct FilterListView: View {
                     }
                 }
                 .navigationBarTitle("LIST_VIEW_TITLE")
+                /*
                 .navigationBarItems(
                     leading:
                         Button(
@@ -61,7 +40,7 @@ struct FilterListView: View {
                             }) {
                             Image(systemName: SYSTEM_IMAGES.HELP.image).imageScale(.large)
                             }
-                            .sheet(isPresented: $showingSettings) {
+                            .sheet(isPresented: showingSettings) {
                                 //TutorialView(firstLaunch: false)                                    
                         },
                     trailing:
@@ -71,7 +50,7 @@ struct FilterListView: View {
                                     action: { self.showingInApp = true }) {
                                         Image(systemName: SYSTEM_IMAGES.ADD.image).imageScale(.large)
                                     }
-                                    .sheet(isPresented: $showingInApp) {
+                                    .sheet(isPresented: showingInApp) {
                                         UnlockAppView()
                                     }
                             } else {
@@ -79,13 +58,13 @@ struct FilterListView: View {
                                     action: { self.showingAddForm = true }) {
                                         Image(systemName: SYSTEM_IMAGES.ADD.image).imageScale(.large)
                                     }
-                                    .sheet(isPresented: $showingAddForm) {
+                                    .sheet(isPresented: showingAddForm) {
                                        
                                     }
                             }
                         }                        
                 )
-            }            
+                 */ }
             
         }
     }

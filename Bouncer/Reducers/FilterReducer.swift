@@ -9,15 +9,19 @@ import Combine
 func filterReducer(state: inout FilterState, action: FilterAction) -> Void {
     switch action {
 
-    case let .setFilters(filters):
+    case .fetch:
+        break
+
+    case let .fetchComplete(filters):
         state.filters = filters
 
-    case .load:
+    case .fetchError(let error):
         break
 
     case .remove(let uuid):
         break
-    }
 
+
+    }
 
 }

@@ -43,7 +43,7 @@ final class FilterStoreFile: FilterStore {
 
 extension FilterStoreFile {
     
-    func get() -> AnyPublisher<[Filter], FilterStoreError> {
+    func fetch() -> AnyPublisher<[Filter], FilterStoreError> {
         var filters: [Filter] = []
         guard let url = fileURL else {
             return Fail(error: .loadError).eraseToAnyPublisher()

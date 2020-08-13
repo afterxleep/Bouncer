@@ -17,16 +17,16 @@ struct BaseView: View {
             if(!store.state.settings.hasLaunchedApp) {
                 TutorialContainerView().environmentObject(store)
             }
-            /*
             else {
-                FilterListContainerView()
-                    .environment(store)
-                    .background(Color("MainBackgroundColor"))
+                FilterListContainerView().environmentObject(store)
             }
-            */
         }
     }
-    
+
+}
+
+extension BaseView {
+
     func customizeNavbar() {
         let image = UIImage.gradientImageWithBounds(
             bounds: CGRect(x: 0, y: 0, width: 1, height: 11),
