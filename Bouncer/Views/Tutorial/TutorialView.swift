@@ -94,7 +94,7 @@ struct TutorialView: View {
                     .padding(.bottom, 35)
 
                     Button(action: {
-                        onSettingsTap()
+                        //onSettingsTap()
                     }) {
                         Text((!hasLaunchedApp) ? "BUTTON_TUTORIAL_FIRST_LAUNCH_TEXT" : "BUTTON_TUTORIAL_HELP_TEXT")
                             .foregroundColor(Color("TextDefaultColor"))

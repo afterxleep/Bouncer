@@ -7,12 +7,10 @@ import SwiftUI
 
 struct FilterListView: View {
     var filters: [Filter]
-    var purchasedApp: Bool
-    var showingSettings = false
-    var showingAddForm = false
-    var showingInApp = false
+    var requiresPurchase: (() -> Bool)
     let onDelete: ((IndexSet) -> Void)?
-    
+    let openSettings: () -> Void
+
     var body: some View {
         ZStack {
             BackgroundView()
@@ -30,27 +28,8 @@ struct FilterListView: View {
                     }
                 }
                 .navigationBarTitle("LIST_VIEW_TITLE")
-                .navigationBarItems(leading:
-                                        Button(action: {  }) {
-                                            Image(systemName: SYSTEM_IMAGES.HELP.image).imageScale(.large)
-                                        },
-                                    trailing:
-                                        Group {
-                                            if (purchasedApp) {
-                                                Button(
-                                                    action: { }) {
-                                                        Image(systemName: SYSTEM_IMAGES.ADD.image).imageScale(.large)
-                                                    }
-                                            } else {
-                                                Button(
-                                                    action: { }) {
-                                                        Image(systemName: SYSTEM_IMAGES.ADD.image).imageScale(.large)
-                                                    }
-                                            }
-                                        }
-                )
+                .navigationBarItems(leading: HelpButton(openSettings: openSettings), trailing: AddButton(requiresPurchase: requiresPurchase))
             }
-
         }
     }
 }
@@ -60,8 +39,9 @@ struct FilterListView: View {
 struct FilterListView_Previews: PreviewProvider {
     static var previews: some View {
         FilterListView(filters: [],
-                       purchasedApp: false,
-                       onDelete: nil
+                       requiresPurchase: { return false },
+                       onDelete: nil,
+                       openSettings: {}
         )
     }
 }

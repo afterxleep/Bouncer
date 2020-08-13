@@ -29,6 +29,8 @@
 		D6379EB324AA852500FFD400 /* EmptyListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6379EB224AA852500FFD400 /* EmptyListView.swift */; };
 		D63B545F24C75231005D4DAA /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D63B545E24C75231005D4DAA /* StoreKit.framework */; };
 		D63B546C24C77972005D4DAA /* UnlockAppViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D63B546B24C77972005D4DAA /* UnlockAppViewModel.swift */; };
+		D644F1E824E4C4D0006C5EE2 /* HelpButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D644F1E724E4C4D0006C5EE2 /* HelpButtonView.swift */; };
+		D644F1EA24E4C4F3006C5EE2 /* AddButtonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D644F1E924E4C4F3006C5EE2 /* AddButtonView.swift */; };
 		D6529F7324A41371009AE3FF /* BouncerApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529F7224A41371009AE3FF /* BouncerApp.swift */; };
 		D6529F7A24A41372009AE3FF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D6529F7924A41372009AE3FF /* Preview Assets.xcassets */; };
 		D6529F8524A41372009AE3FF /* BouncerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529F8424A41372009AE3FF /* BouncerTests.swift */; };
@@ -36,7 +38,6 @@
 		D6529F9F24A413A6009AE3FF /* TutorialView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529F9E24A413A6009AE3FF /* TutorialView.swift */; };
 		D6529FA424A413EB009AE3FF /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FA324A413EB009AE3FF /* BackgroundView.swift */; };
 		D6529FC324A54AAD009AE3FF /* FilterListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FC224A54AAD009AE3FF /* FilterListView.swift */; };
-		D6529FC524A54ABA009AE3FF /* FilterViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FC424A54ABA009AE3FF /* FilterViewModel.swift */; };
 		D6529FCB24A54ADE009AE3FF /* FilterStoreFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FC824A54ADE009AE3FF /* FilterStoreFile.swift */; };
 		D664B24424AA92AA00EB826D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D664B24324AA92AA00EB826D /* Colors.xcassets */; };
 		D664B24624AA92D200EB826D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D664B24524AA92D200EB826D /* Assets.xcassets */; };
@@ -127,6 +128,8 @@
 		D6379EB224AA852500FFD400 /* EmptyListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyListView.swift; sourceTree = "<group>"; };
 		D63B545E24C75231005D4DAA /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		D63B546B24C77972005D4DAA /* UnlockAppViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockAppViewModel.swift; sourceTree = "<group>"; };
+		D644F1E724E4C4D0006C5EE2 /* HelpButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpButtonView.swift; sourceTree = "<group>"; };
+		D644F1E924E4C4F3006C5EE2 /* AddButtonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddButtonView.swift; sourceTree = "<group>"; };
 		D6529F6F24A41371009AE3FF /* Bouncer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bouncer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6529F7224A41371009AE3FF /* BouncerApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BouncerApp.swift; sourceTree = "<group>"; };
 		D6529F7924A41372009AE3FF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -140,7 +143,6 @@
 		D6529F9E24A413A6009AE3FF /* TutorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialView.swift; sourceTree = "<group>"; };
 		D6529FA324A413EB009AE3FF /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		D6529FC224A54AAD009AE3FF /* FilterListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListView.swift; sourceTree = "<group>"; };
-		D6529FC424A54ABA009AE3FF /* FilterViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterViewModel.swift; sourceTree = "<group>"; };
 		D6529FC824A54ADE009AE3FF /* FilterStoreFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterStoreFile.swift; sourceTree = "<group>"; };
 		D664B24324AA92AA00EB826D /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		D664B24524AA92D200EB826D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -276,6 +278,17 @@
 			path = StoreService;
 			sourceTree = "<group>";
 		};
+		D644F1E624E4C47D006C5EE2 /* ChildViews */ = {
+			isa = PBXGroup;
+			children = (
+				D6379EB224AA852500FFD400 /* EmptyListView.swift */,
+				D6C90BF524CB36AD00426B31 /* FilterRowView.swift */,
+				D644F1E724E4C4D0006C5EE2 /* HelpButtonView.swift */,
+				D644F1E924E4C4F3006C5EE2 /* AddButtonView.swift */,
+			);
+			path = ChildViews;
+			sourceTree = "<group>";
+		};
 		D64EB7D524CB393700FC6037 /* FilterAdd */ = {
 			isa = PBXGroup;
 			children = (
@@ -375,12 +388,10 @@
 		D6529FC124A54A92009AE3FF /* FilterList */ = {
 			isa = PBXGroup;
 			children = (
+				D673E75124C68404008B1072 /* FilterTypes.swift */,
 				D6FC672824E49B2B0083C9FA /* FilterListContainerView.swift */,
 				D6529FC224A54AAD009AE3FF /* FilterListView.swift */,
-				D673E75124C68404008B1072 /* FilterTypes.swift */,
-				D6C90BF524CB36AD00426B31 /* FilterRowView.swift */,
-				D6529FC424A54ABA009AE3FF /* FilterViewModel.swift */,
-				D6379EB224AA852500FFD400 /* EmptyListView.swift */,
+				D644F1E624E4C47D006C5EE2 /* ChildViews */,
 			);
 			path = FilterList;
 			sourceTree = "<group>";
@@ -723,15 +734,16 @@
 				D6FC672E24E4ACCF0083C9FA /* FilterMiddleware.swift in Sources */,
 				D62B331B24BAB16C002DFB81 /* ReviewService.swift in Sources */,
 				D679D67424AA758C00579223 /* Constants.swift in Sources */,
+				D644F1EA24E4C4F3006C5EE2 /* AddButtonView.swift in Sources */,
 				D67D590724C93E0B00626995 /* DataTypes.swift in Sources */,
 				D61497EC24E4433800AF997E /* FilterReducer.swift in Sources */,
 				D6529F7324A41371009AE3FF /* BouncerApp.swift in Sources */,
 				D6C90BF424CAB26700426B31 /* AppStore.swift in Sources */,
 				D6EA9A8224AD2201000135E7 /* SMSFilter.swift in Sources */,
 				D67D590924C93F6E00626995 /* Extensions.swift in Sources */,
+				D644F1E824E4C4D0006C5EE2 /* HelpButtonView.swift in Sources */,
 				D61497EE24E4435100AF997E /* AppReducer.swift in Sources */,
 				D67F582F24E4496300165365 /* AppSettingsStore.swift in Sources */,
-				D6529FC524A54ABA009AE3FF /* FilterViewModel.swift in Sources */,
 				D615898A24A55FF800FE710A /* BaseView.swift in Sources */,
 				D62B331D24BAB18E002DFB81 /* RatingServiceDefault.swift in Sources */,
 				D61D9BEF24C7EBAA0058935B /* StoreServiceProtocol.swift in Sources */,

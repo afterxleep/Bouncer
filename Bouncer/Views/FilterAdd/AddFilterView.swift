@@ -13,7 +13,7 @@ struct AddFilterView: View {
     @State var filterDestination: FilterDestination = .junk
     @State var filterTerm: String = ""
     @State var exactMatch: Bool = false
-    var viewModel: FilterViewModel
+
     
     var body: some View {
         NavigationView {
@@ -65,7 +65,7 @@ struct AddFilterView: View {
     
     func saveFilter() {
         if(filterTerm.count > 0) {
-            self.viewModel.add(type: filterType, phrase: filterTerm, action: filterDestination)
+            //self.viewModel.add(type: filterType, phrase: filterTerm, action: filterDestination)
             self.showingAddForm = false
         }
     }
