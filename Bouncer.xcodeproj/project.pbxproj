@@ -18,7 +18,6 @@
 		D61D9BEF24C7EBAA0058935B /* StoreServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61D9BEE24C7EBAA0058935B /* StoreServiceProtocol.swift */; };
 		D61D9BF124C7EBEC0058935B /* StoreServiceDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61D9BF024C7EBEC0058935B /* StoreServiceDefault.swift */; };
 		D621CB4324ABABF6008883AA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D621CB4524ABABF6008883AA /* Localizable.strings */; };
-		D6233A6624A59F2800B37A6A /* AddFilterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6233A6524A59F2800B37A6A /* AddFilterView.swift */; };
 		D6233A7224A650B700B37A6A /* MessageFilterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6233A7124A650B700B37A6A /* MessageFilterExtension.swift */; };
 		D6233A7624A650B700B37A6A /* SMSFilter.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = D6233A6F24A650B700B37A6A /* SMSFilter.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D6233A7F24A651A200B37A6A /* SMSFilterLocal.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6233A7D24A651A200B37A6A /* SMSFilterLocal.swift */; };
@@ -115,7 +114,6 @@
 		D61D9BF024C7EBEC0058935B /* StoreServiceDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreServiceDefault.swift; sourceTree = "<group>"; };
 		D621CB4424ABABF6008883AA /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D621CB4724ABC56E008883AA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		D6233A6524A59F2800B37A6A /* AddFilterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddFilterView.swift; sourceTree = "<group>"; };
 		D6233A6F24A650B700B37A6A /* SMSFilter.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SMSFilter.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6233A7124A650B700B37A6A /* MessageFilterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFilterExtension.swift; sourceTree = "<group>"; };
 		D6233A7324A650B700B37A6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -281,7 +279,6 @@
 			children = (
 				D644F1EB24E59FBE006C5EE2 /* FilterAddContainerView.swift */,
 				D644F1ED24E59FC9006C5EE2 /* FilterAddView.swift */,
-				D6233A6524A59F2800B37A6A /* AddFilterView.swift */,
 			);
 			path = FilterAdd;
 			sourceTree = "<group>";
@@ -712,7 +709,6 @@
 				D61D9BF124C7EBEC0058935B /* StoreServiceDefault.swift in Sources */,
 				D67F582E24E4496300165365 /* AppSettingsDefaults.swift in Sources */,
 				D6CC124F24E47C3900388160 /* SettingsMiddleware.swift in Sources */,
-				D6233A6624A59F2800B37A6A /* AddFilterView.swift in Sources */,
 				D6C90BF224CAAF7B00426B31 /* AppState.swift in Sources */,
 				D61497F024E4438000AF997E /* AppAction.swift in Sources */,
 				D6529FC324A54AAD009AE3FF /* FilterListView.swift in Sources */,

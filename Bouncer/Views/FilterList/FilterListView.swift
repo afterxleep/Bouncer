@@ -8,7 +8,7 @@ import SwiftUI
 struct FilterListView: View {
     var filters: [Filter]
     var requiresPurchase: (() -> Bool)
-    let onDelete: ((IndexSet) -> Void)?
+    let onDelete: (IndexSet) -> Void
     let openSettings: () -> Void
 
     @State var showingSettings = false
@@ -37,7 +37,7 @@ struct FilterListView: View {
         List {
             ForEach(filters) { filter in
                FilterRowView(filter: filter)
-            }.onDelete(perform: onDelete)
+            }.onDelete(perform: onDelete )
         }
         .listStyle(PlainListStyle())
     }
@@ -96,7 +96,7 @@ struct FilterListView_Previews: PreviewProvider {
     static var previews: some View {
         FilterListView(filters: [],
                        requiresPurchase: { return false },
-                       onDelete: nil,
+                       onDelete: {_ in },
                        openSettings: {}
         )
     }

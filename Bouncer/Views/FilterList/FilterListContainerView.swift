@@ -11,7 +11,7 @@ struct FilterListContainerView: View {
     var body: some View {
         FilterListView(filters: store.state.filters.filters,
                        requiresPurchase: { return requiresPurchase() },
-                       onDelete: nil,
+                       onDelete: deleteFilter,
                        openSettings: {})
             .environmentObject(store)
     }
@@ -30,6 +30,12 @@ extension FilterListContainerView {
             return true
         }
         return false
+    }
+
+    func deleteFilter(at offsets: IndexSet) {
+        for o in offsets {
+            store.dispatch(.filter(action: .delete(uuid: store.state.filters.filters[o].id)))
+        }
     }
 
 }

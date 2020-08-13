@@ -9,6 +9,9 @@ enum FilterAction {
     case fetch
     case fetchComplete(filters: [Filter])
     case fetchError(error: FilterMiddlewareError)
-    case remove(uuid: UUID)
     case add(filter: Filter)
+    case addError(error: FilterMiddlewareError)
+    case delete(uuid: UUID)
+    case deleteError(error: FilterMiddlewareError)
+
 }

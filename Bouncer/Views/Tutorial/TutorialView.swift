@@ -8,7 +8,7 @@ import SwiftUI
 struct TutorialView: View {
     @Environment(\.presentationMode) var presentationMode
     var hasLaunchedApp: Bool
-    let onSettingsTap: () -> Void
+    let onSettingsTap: (() -> Void)?
 
     var body: some View {
         ZStack {
@@ -95,7 +95,7 @@ struct TutorialView: View {
 
                     Button(action: {
                         if(!hasLaunchedApp) {
-                            onSettingsTap()
+                            (onSettingsTap ?? {})()
                         } else {
                             presentationMode.wrappedValue.dismiss()
                         }
