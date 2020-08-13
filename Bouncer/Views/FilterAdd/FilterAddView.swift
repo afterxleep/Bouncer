@@ -57,8 +57,9 @@ struct FilterAddView: View {
                 },
                 trailing:
                     Button(
-                        action: {                            
+                        action: {
                             onAdd(Filter(id: UUID() , phrase: filterTerm, type: filterType, action: filterDestination))
+                            self.presentationMode.wrappedValue.dismiss()
                         }
                     ) {
                         Text("SAVE")
