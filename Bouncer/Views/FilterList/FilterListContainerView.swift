@@ -12,7 +12,7 @@ struct FilterListContainerView: View {
         FilterListView(filters: store.state.filters.filters,
                        requiresPurchase: { return requiresPurchase() },
                        onDelete: nil,
-                       openSettings: openSettings)
+                       openSettings: {})
             .environmentObject(store)
     }
 }
@@ -30,13 +30,6 @@ extension FilterListContainerView {
             return true
         }
         return false
-    }
-
-    func openSettings() {
-        if let settingsURL = URL(string: UIApplication.openSettingsURLString),
-            UIApplication.shared.canOpenURL(settingsURL) {
-            UIApplication.shared.open(settingsURL, options: [:])
-        }
     }
 
 }

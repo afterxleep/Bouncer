@@ -2,14 +2,13 @@
 //  FilterMiddleware.swift
 //  Bouncer
 //
-//  Created by Daniel Bernal on 8/12/20.
-//
 
 import Foundation
 import Combine
 
 enum FilterMiddlewareError {
     case loadError
+    case addError
     case unknown
 }
 
@@ -32,7 +31,21 @@ func filterMiddleware(filterStore: FilterStore) -> Middleware<AppState, AppActio
                         default:
                             return Just(AppAction.filter(action: .fetchError(error: FilterMiddlewareError.unknown)))
                         }
+                    }
+                    .eraseToAnyPublisher()
 
+            case .filter(action: .add(let filter)):
+                return filterStore.add(filter: filter)
+                    .subscribe(on: DispatchQueue.main)
+                    .map { AppAction.filter(action: .fetch) }
+                    .catch { (error: FilterStoreError) -> Just<AppAction> in
+                        switch(error) {
+                        case .addError:
+                            return Just(AppAction.filter(action: .fetchError(error: FilterMiddlewareError.addError)))
+
+                        default:
+                            return Just(AppAction.filter(action: .fetchError(error: FilterMiddlewareError.unknown)))
+                        }
                     }
                     .eraseToAnyPublisher()
 

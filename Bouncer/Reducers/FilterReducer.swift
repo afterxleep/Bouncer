@@ -12,15 +12,17 @@ func filterReducer(state: inout FilterState, action: FilterAction) -> Void {
     case .fetch:
         break
 
-    case let .fetchComplete(filters):
+    case .fetchComplete(let filters):
         state.filters = filters
+
+    case .add:
+        break
 
     case .fetchError(let error):
         break
 
-    case .remove(let uuid):
+    case .remove:
         break
-
 
     }
 

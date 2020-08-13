@@ -2,8 +2,6 @@
 //  FilterRow.swift
 //  Bouncer
 //
-//  Created by Daniel Bernal on 7/24/20.
-//
 
 import Foundation
 import SwiftUI
@@ -37,9 +35,12 @@ struct FilterRowView: View {
         .font(.headline)
     }
     
-    
+}
+
+extension FilterRowView {
+
     // MARK: - Helpers
-    func getFilterTypeDecoration(filter: Filter) -> SystemImage {
+    fileprivate func getFilterTypeDecoration(filter: Filter) -> SystemImage {
         var data: SystemImage
         switch(filter.type) {
             case .sender:
@@ -52,7 +53,7 @@ struct FilterRowView: View {
         return data
     }
     
-    func getFilterDestinationDecoration(filter: Filter) -> FilterDestinationDecoration {
+    fileprivate func getFilterDestinationDecoration(filter: Filter) -> FilterDestinationDecoration {
         var data: FilterDestinationDecoration
         switch (filter.action) {
             case .junk:
