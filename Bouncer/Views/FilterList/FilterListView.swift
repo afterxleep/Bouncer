@@ -30,45 +30,29 @@ struct FilterListView: View {
                     }
                 }
                 .navigationBarTitle("LIST_VIEW_TITLE")
-                /*
-                .navigationBarItems(
-                    leading:
-                        Button(
-                            action: {
-                                self.showingSettings = true
-                                
-                            }) {
-                            Image(systemName: SYSTEM_IMAGES.HELP.image).imageScale(.large)
-                            }
-                            .sheet(isPresented: showingSettings) {
-                                //TutorialView(firstLaunch: false)                                    
-                        },
-                    trailing:
-                        Group {
-                            if (purchasedApp) {
-                                Button(
-                                    action: { self.showingInApp = true }) {
-                                        Image(systemName: SYSTEM_IMAGES.ADD.image).imageScale(.large)
-                                    }
-                                    .sheet(isPresented: showingInApp) {
-                                        UnlockAppView()
-                                    }
-                            } else {
-                                Button(
-                                    action: { self.showingAddForm = true }) {
-                                        Image(systemName: SYSTEM_IMAGES.ADD.image).imageScale(.large)
-                                    }
-                                    .sheet(isPresented: showingAddForm) {
-                                       
-                                    }
-                            }
-                        }                        
+                .navigationBarItems(leading:
+                                        Button(action: {  }) {
+                                            Image(systemName: SYSTEM_IMAGES.HELP.image).imageScale(.large)
+                                        },
+                                    trailing:
+                                        Group {
+                                            if (purchasedApp) {
+                                                Button(
+                                                    action: { }) {
+                                                        Image(systemName: SYSTEM_IMAGES.ADD.image).imageScale(.large)
+                                                    }
+                                            } else {
+                                                Button(
+                                                    action: { }) {
+                                                        Image(systemName: SYSTEM_IMAGES.ADD.image).imageScale(.large)
+                                                    }
+                                            }
+                                        }
                 )
-                 */ }
-            
+            }
+
         }
     }
-
 }
 
 
