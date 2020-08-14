@@ -15,6 +15,32 @@ struct FilterListView: View {
     @State var showingAddForm = false
     @State var showingInApp = false
 
+    var body: some View {
+        ZStack {
+            BackgroundView()
+            NavigationView {
+                filterList
+                .navigationBarTitle("LIST_VIEW_TITLE")
+                .navigationBarItems(leading: helpButton, trailing: addButton)
+            }
+        }
+    }
+}
+
+
+
+struct FilterListView_Previews: PreviewProvider {
+    static var previews: some View {
+        FilterListView(filters: [],
+                       requiresPurchase: { return false },
+                       onDelete: {_ in },
+                       openSettings: {}
+        )
+    }
+}
+
+extension FilterListView {
+
     var filterList: some View {
         Group {
             if(filters.count > 0) {
@@ -73,28 +99,5 @@ struct FilterListView: View {
                     }
             }
         }
-    }
-
-    var body: some View {
-        ZStack {
-            BackgroundView()
-            NavigationView {
-                filterList
-                .navigationBarTitle("LIST_VIEW_TITLE")
-                .navigationBarItems(leading: helpButton, trailing: addButton)
-            }
-        }
-    }
-}
-
-
-
-struct FilterListView_Previews: PreviewProvider {
-    static var previews: some View {
-        FilterListView(filters: [],
-                       requiresPurchase: { return false },
-                       onDelete: {_ in },
-                       openSettings: {}
-        )
     }
 }

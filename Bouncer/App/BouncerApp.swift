@@ -30,6 +30,8 @@ struct BouncerApp: App {
         
         // Fetch existing settings
         store.dispatch(.settings(action: .fetchSettings))
+
+        // FetchExisting Filters
         store.dispatch(.filter(action: .fetch))
         
     }

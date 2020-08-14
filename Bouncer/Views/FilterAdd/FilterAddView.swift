@@ -45,24 +45,7 @@ struct FilterAddView: View {
                 }
             }
             .navigationBarTitle("FILTER_ADD_VIEW_TITLE")
-            .navigationBarItems(
-                leading:
-                    Button(
-                        action: {
-                            presentationMode.wrappedValue.dismiss()
-                        }) {
-                        Text("CANCEL")
-                },
-                trailing:
-                    Button(
-                        action: {
-                            onAdd(Filter(id: UUID() , phrase: filterTerm, type: filterType, action: filterDestination))
-                            self.presentationMode.wrappedValue.dismiss()
-                        }
-                    ) {
-                        Text("SAVE")
-                    }
-            )
+            .navigationBarItems(leading: cancelButton, trailing: saveButton)
         }
     }
 }
@@ -70,5 +53,28 @@ struct FilterAddView: View {
 struct FilterAddView_Previews: PreviewProvider {
     static var previews: some View {
         FilterAddView(onAdd: {_ in })
+    }
+}
+
+extension FilterAddView {
+
+    var cancelButton: some View {
+        Button(
+            action: {
+                presentationMode.wrappedValue.dismiss()
+            }) {
+            Text("CANCEL")
+        }
+    }
+
+    var saveButton: some View {
+        Button(
+            action: {
+                onAdd(Filter(id: UUID() , phrase: filterTerm, type: filterType, action: filterDestination))
+                self.presentationMode.wrappedValue.dismiss()
+            }
+        ) {
+            Text("SAVE")
+        }
     }
 }

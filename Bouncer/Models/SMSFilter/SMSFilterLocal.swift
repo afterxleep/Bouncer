@@ -1,26 +1,20 @@
 //
-//  FilterServiceWordList.swift
-//  Bouncer
-//
 
 import Foundation
 import IdentityLookup
+import Combine
 
-final class SMSFilterLocal {
+final class SMSOfflineFilter {
         
-    let filterListStore: FilterStore
-    
+    let filterStore: FilterStore
     var filters: [Filter] = []
     
     //MARK: - Initializer
-    init(filterListStore: FilterStore = FilterStoreFile()) {
-        self.filterListStore = filterListStore
-        let _ = filterListStore.migrateFromV1()
-        //self.filters = filterListStore.filters
-        self.filters = []
+    init(filterStore: FilterStore = FilterStoreFile()) {
+        self.filterStore = filterStore
     }
     
-    func applyFilter(filter: Filter, message: SMSMessage) -> Bool {
+    fileprivate func applyFilter(filter: Filter, message: SMSMessage) -> Bool {
         var txt = ""
         switch (filter.type) {
             case .sender:
@@ -33,17 +27,30 @@ final class SMSFilterLocal {
         return txt.contains(filter.phrase)
     }
     
-    func filterMessage(message: SMSMessage) -> ILMessageFilterAction {
-        for filter in filters {
-            if(applyFilter(filter: filter, message: message)) {
-                switch (filter.action) {
-                    case .junk: return .junk
-                    case .promotion: return .promotion
-                    case .transaction: return .transaction
-                }
-            }
-        }
-        return .none
-    }
+    func filterMessage(message: SMSMessage) -> AnyPublisher<ILMessageFilterAction, Never> {
 
+        return filterStore.fetch()
+            .map { filters in
+                for filter in filters {
+                    if(self.applyFilter(filter: filter, message: message)) {
+                        switch (filter.action) {
+                            case .junk: return ILMessageFilterAction.junk
+                            case .promotion: return ILMessageFilterAction.promotion
+                            case .transaction: return ILMessageFilterAction.transaction
+                        }
+                    }
+                }
+                return ILMessageFilterAction.junk
+            }
+            .catch { (error: FilterStoreError) -> Just<ILMessageFilterAction> in
+                return Just(ILMessageFilterAction.none)
+            }   
+            .eraseToAnyPublisher()
+
+    }
 }
+
+
+
+
+
