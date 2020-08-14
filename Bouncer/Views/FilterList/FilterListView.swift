@@ -15,31 +15,34 @@ struct FilterListView: View {
     @State var showingAddForm = false
     @State var showingInApp = false
 
-    var emptyList: some View {
-        VStack(alignment: .center) {
-            Group() {
-                Text("EMPTY_LIST_TITLE").font(.title2).bold().padding()
-                Group {
-                    Text("EMPTY_LIST_MESSAGE")
-                    HStack(spacing: 0) {
-                        Text("TAP_SPACE")
-                        Image(systemName: "plus.circle")
-                        Text("TO_ADD_A_FILTER_SPACE")
-                    }
-                }.frame(width: 260)
-            }
-            .foregroundColor(Color("TextHighLightColor"))
-            .multilineTextAlignment(.center)
-        }.padding(.bottom, 200)
-    }
-
     var filterList: some View {
-        List {
-            ForEach(filters) { filter in
-               FilterRowView(filter: filter)
-            }.onDelete(perform: onDelete )
+        Group {
+            if(filters.count > 0) {
+                List {
+                    ForEach(filters) { filter in
+                       FilterRowView(filter: filter)
+                    }.onDelete(perform: onDelete )
+                }
+                .listStyle(PlainListStyle())
+            } else {
+                VStack(alignment: .center) {
+                    Group() {
+                        Text("EMPTY_LIST_TITLE").font(.title2).bold().padding()
+                        Group {
+                            Text("EMPTY_LIST_MESSAGE")
+                            HStack(spacing: 0) {
+                                Text("TAP_SPACE")
+                                Image(systemName: "plus.circle")
+                                Text("TO_ADD_A_FILTER_SPACE")
+                            }
+                        }.frame(width: 260)
+                    }
+                    .foregroundColor(Color("TextDefaultColor"))
+                    .multilineTextAlignment(.center)
+                    .padding(.bottom, 10)
+                }.padding(.bottom, 200)
+            }
         }
-        .listStyle(PlainListStyle())
     }
 
     var helpButton: some View {
@@ -76,13 +79,7 @@ struct FilterListView: View {
         ZStack {
             BackgroundView()
             NavigationView {
-                Group {
-                    if(filters.count > 0) {
-                       filterList
-                    } else {
-                        emptyList
-                    }
-                }
+                filterList
                 .navigationBarTitle("LIST_VIEW_TITLE")
                 .navigationBarItems(leading: helpButton, trailing: addButton)
             }
