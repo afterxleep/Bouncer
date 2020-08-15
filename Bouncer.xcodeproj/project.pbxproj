@@ -15,7 +15,7 @@
 		D61497F024E4438000AF997E /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61497EF24E4438000AF997E /* AppAction.swift */; };
 		D615898A24A55FF800FE710A /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D615898924A55FF800FE710A /* BaseView.swift */; };
 		D61B7A0624CB7C64009C65BD /* DispatchQueue.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61B7A0524CB7C64009C65BD /* DispatchQueue.swift */; };
-		D61D9BEF24C7EBAA0058935B /* StoreServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61D9BEE24C7EBAA0058935B /* StoreServiceProtocol.swift */; };
+		D61D9BEF24C7EBAA0058935B /* StoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61D9BEE24C7EBAA0058935B /* StoreService.swift */; };
 		D61D9BF124C7EBEC0058935B /* StoreServiceDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61D9BF024C7EBEC0058935B /* StoreServiceDefault.swift */; };
 		D621CB4324ABABF6008883AA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D621CB4524ABABF6008883AA /* Localizable.strings */; };
 		D6233A7224A650B700B37A6A /* MessageFilterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6233A7124A650B700B37A6A /* MessageFilterExtension.swift */; };
@@ -43,7 +43,6 @@
 		D673E75224C68404008B1072 /* FilterTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D673E75124C68404008B1072 /* FilterTypes.swift */; };
 		D673E75424C686CF008B1072 /* UnlockAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D673E75324C686CF008B1072 /* UnlockAppView.swift */; };
 		D679D67424AA758C00579223 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D679D67324AA758C00579223 /* Constants.swift */; };
-		D67D58FF24C9371500626995 /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67D58FE24C9371500626995 /* Protocols.swift */; };
 		D67D590324C93DD100626995 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67D590124C93DD100626995 /* StoreManager.swift */; };
 		D67D590424C93DD100626995 /* StoreObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67D590224C93DD100626995 /* StoreObserver.swift */; };
 		D67D590724C93E0B00626995 /* DataTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67D590624C93E0B00626995 /* DataTypes.swift */; };
@@ -111,7 +110,7 @@
 		D61497EF24E4438000AF997E /* AppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
 		D615898924A55FF800FE710A /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		D61B7A0524CB7C64009C65BD /* DispatchQueue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispatchQueue.swift; sourceTree = "<group>"; };
-		D61D9BEE24C7EBAA0058935B /* StoreServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreServiceProtocol.swift; sourceTree = "<group>"; };
+		D61D9BEE24C7EBAA0058935B /* StoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreService.swift; sourceTree = "<group>"; };
 		D61D9BF024C7EBEC0058935B /* StoreServiceDefault.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StoreServiceDefault.swift; sourceTree = "<group>"; };
 		D621CB4424ABABF6008883AA /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D621CB4724ABC56E008883AA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -147,7 +146,6 @@
 		D673E75124C68404008B1072 /* FilterTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTypes.swift; sourceTree = "<group>"; };
 		D673E75324C686CF008B1072 /* UnlockAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockAppView.swift; sourceTree = "<group>"; };
 		D679D67324AA758C00579223 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
-		D67D58FE24C9371500626995 /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		D67D590124C93DD100626995 /* StoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
 		D67D590224C93DD100626995 /* StoreObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreObserver.swift; sourceTree = "<group>"; };
 		D67D590624C93E0B00626995 /* DataTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTypes.swift; sourceTree = "<group>"; };
@@ -271,7 +269,7 @@
 			isa = PBXGroup;
 			children = (
 				D67D590024C9377400626995 /* StoreManager */,
-				D61D9BEE24C7EBAA0058935B /* StoreServiceProtocol.swift */,
+				D61D9BEE24C7EBAA0058935B /* StoreService.swift */,
 				D61D9BF024C7EBEC0058935B /* StoreServiceDefault.swift */,
 			);
 			path = StoreService;
@@ -440,7 +438,6 @@
 			children = (
 				D67D590124C93DD100626995 /* StoreManager.swift */,
 				D67D590224C93DD100626995 /* StoreObserver.swift */,
-				D67D58FE24C9371500626995 /* Protocols.swift */,
 				D67D590624C93E0B00626995 /* DataTypes.swift */,
 				D67D590824C93F6E00626995 /* Extensions.swift */,
 			);
@@ -718,7 +715,6 @@
 				D6529FC324A54AAD009AE3FF /* FilterListView.swift in Sources */,
 				D644F1EC24E59FBE006C5EE2 /* FilterAddContainerView.swift in Sources */,
 				D6529FA424A413EB009AE3FF /* BackgroundView.swift in Sources */,
-				D67D58FF24C9371500626995 /* Protocols.swift in Sources */,
 				D63B546C24C77972005D4DAA /* UnlockAppViewModel.swift in Sources */,
 				D673E75424C686CF008B1072 /* UnlockAppView.swift in Sources */,
 				D6FC672E24E4ACCF0083C9FA /* FilterMiddleware.swift in Sources */,
@@ -734,7 +730,7 @@
 				D67F582F24E4496300165365 /* AppSettingsStore.swift in Sources */,
 				D615898A24A55FF800FE710A /* BaseView.swift in Sources */,
 				D62B331D24BAB18E002DFB81 /* RatingServiceDefault.swift in Sources */,
-				D61D9BEF24C7EBAA0058935B /* StoreServiceProtocol.swift in Sources */,
+				D61D9BEF24C7EBAA0058935B /* StoreService.swift in Sources */,
 				D61B7A0624CB7C64009C65BD /* DispatchQueue.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

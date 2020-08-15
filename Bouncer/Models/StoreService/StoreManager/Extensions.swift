@@ -2,8 +2,6 @@
 //  Extensions.swift
 //  Bouncer
 //
-//  Created by Daniel Bernal on 7/22/20.
-//
 
 import Foundation
 import StoreKit

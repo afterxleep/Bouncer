@@ -2,8 +2,6 @@
 //  StoreServiceDefault.swift
 //  Bouncer
 //
-//  Created by Daniel Bernal on 7/21/20.
-//
 
 import Foundation
 import StoreKit
@@ -64,7 +62,7 @@ class StoreServiceDefault: ObservableObject {
     }
 }
 
-extension StoreServiceDefault: StoreServiceProtocol {
+extension StoreServiceDefault: StoreService {
     
     func fetchProducts() {
         storeManager.startProductRequest(with: productIdentifiers)

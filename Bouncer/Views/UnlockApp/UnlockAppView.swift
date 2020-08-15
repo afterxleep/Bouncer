@@ -2,8 +2,6 @@
 //  UnlockAppView.swift
 //  Bouncer
 //
-//  Created by Daniel Bernal on 7/20/20.
-//
 
 import SwiftUI
 

@@ -2,15 +2,13 @@
 //  UnlockAppViewModel.swift
 //  Bouncer
 //
-//  Created by Daniel Bernal on 7/21/20.
-//
 
 import Foundation
 import Combine
 
 class UnlockAppViewModel: ObservableObject {
     
-    let storeService: StoreServiceProtocol
+    let storeService: StoreService
     var productsCancellable: AnyCancellable?
     var transactionStateCancellable: AnyCancellable?
     
@@ -18,7 +16,7 @@ class UnlockAppViewModel: ObservableObject {
     @Published private(set) var shouldDisplayBuyButton: Bool = true
     @Published private(set) var transactionCompletedSuccessdfully: Bool = false
     
-    init(storeService: StoreServiceProtocol = StoreServiceDefault()) {
+    init(storeService: StoreService = StoreServiceDefault()) {
         self.storeService = storeService        
         
         productsCancellable =
