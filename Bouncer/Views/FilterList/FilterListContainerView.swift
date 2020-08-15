@@ -26,7 +26,7 @@ struct FilterListContainerView_Previews: PreviewProvider {
 extension FilterListContainerView {
 
     func requiresPurchase() -> Bool {
-        if(store.state.filters.filters.count > 8) {
+        if(store.state.filters.filters.count > store.state.settings.maximumFreeFilters) {
             return true
         }
         return false

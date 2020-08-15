@@ -11,7 +11,7 @@ struct BouncerApp: App {
     
     // Store Payments Observer
     let storeObserver = StoreObserver.shared
-    
+
     let store = AppStore(initialState: .init(                            
                         settings: SettingsState(),
                         filters: FilterState()
@@ -19,7 +19,8 @@ struct BouncerApp: App {
                       reducer: appReducer,
                       middlewares: [
                         settingsMiddleware(appSettings: AppSettingsDefaults(userDefaults: UserDefaults.standard)),
-                        filterMiddleware(filterStore: FilterStoreFile())
+                        filterMiddleware(filterStore: FilterStoreFile()),
+                        reviewMiddleware(reviewService: ReviewServiceStoreKit(appSettings: AppSettingsDefaults(userDefaults: UserDefaults.standard)))                        
                       ]
     )
 
@@ -33,6 +34,9 @@ struct BouncerApp: App {
 
         // FetchExisting Filters
         store.dispatch(.filter(action: .fetch))
+
+        // Increase launch number
+        store.dispatch(.settings(action: .setNumberOfLaunches(number: store.state.settings.numberOfLaunches + 1)))
         
     }
     

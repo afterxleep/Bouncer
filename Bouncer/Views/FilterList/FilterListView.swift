@@ -9,7 +9,7 @@ struct FilterListView: View {
     var filters: [Filter]
     var requiresPurchase: (() -> Bool)
     let onDelete: (IndexSet) -> Void
-    let openSettings: () -> Void
+    let openSettings: () -> Void    
 
     @State var showingSettings = false
     @State var showingAddForm = false

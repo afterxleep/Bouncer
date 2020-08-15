@@ -11,7 +11,7 @@ func filterReducer(state: inout FilterState, action: FilterAction) -> Void {
 
     case .fetchComplete(let filters):
         state.filters = filters
-
+        
     default:
         break
     }

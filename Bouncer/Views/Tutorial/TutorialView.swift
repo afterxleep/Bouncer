@@ -49,7 +49,7 @@ struct TutorialView: View {
                     .multilineTextAlignment(.center)
 
                     Rectangle()
-                        .frame(width: 300, height: 1)
+                        .frame(width: 280, height: 1)
                         .foregroundColor(Color("separatorLineColor"))
                         .padding(.top, 10)
                         .padding(.bottom,  15)
@@ -103,13 +103,14 @@ struct TutorialView: View {
                     }) {
                         Text((!hasLaunchedApp) ? "BUTTON_TUTORIAL_FIRST_LAUNCH_TEXT" : "BUTTON_TUTORIAL_HELP_TEXT")
                             .foregroundColor(Color("TextDefaultColor"))
-                            .frame(minWidth: 300, maxWidth: 300, minHeight: 0, maxHeight: 50)
+                            .frame(minWidth: 280, maxWidth: 280, minHeight: 0, maxHeight: 50)
                             .background(Color("ButtonBackgroundColor"))
                             .cornerRadius(DESIGN.BUTTON.CORNER_RADIUS)
                             .padding(.bottom, 40)
                     }
                 }
-                .padding(.horizontal)
+                .padding(.horizontal, 10)
+                .frame(minWidth: 320, maxWidth: 340)
                 .background(Color("messageBoxBackgroundColor"))
                 .cornerRadius(40)
             }

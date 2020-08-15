@@ -18,6 +18,7 @@ struct FilterState {
 }
 
 struct SettingsState {
+    var maximumFreeFilters: Int = 10
     var hasLaunchedApp: Bool = false
     var numberOfLaunches: Int = 0
     var lastVersionPromptedForReview: String = ""
