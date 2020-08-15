@@ -41,7 +41,8 @@ struct FilterAddView: View {
                                 Text(value.formDescription.text)
                             }
                         }
-                    }.pickerStyle(DefaultPickerStyle())
+                    }
+                    .pickerStyle(DefaultPickerStyle())
                 }
             }
             .navigationBarTitle("FILTER_ADD_VIEW_TITLE")

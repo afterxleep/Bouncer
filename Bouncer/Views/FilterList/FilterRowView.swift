@@ -12,6 +12,7 @@ struct FilterRowView: View {
     var body: some View {
         let typeDecoration = getFilterTypeDecoration(filter: filter)
         let actionDecoration = getFilterDestinationDecoration(filter: filter)
+        let typeColor = getFilterTypeColor(filter: filter)
         HStack(spacing: 10) {
             Image(systemName: typeDecoration.image)
                 .foregroundColor(.gray)
@@ -26,11 +27,9 @@ struct FilterRowView: View {
             .font(.caption2)
             .padding(.horizontal, 6)
             .padding(.vertical, 4)
-            .foregroundColor(Color.red)
-            .overlay(
-                RoundedRectangle(cornerRadius: 5)
-                    .stroke(Color.red, lineWidth: 1)
-                )
+            .foregroundColor(COLORS.DEFAULT_COLOR)
+            .background(typeColor)
+            .cornerRadius(5)
         }.padding(.vertical, 8)
         .font(.headline)
     }
@@ -64,5 +63,16 @@ extension FilterRowView {
                 data = FilterDestination.transaction.listDescription
             }
         return data
+    }
+
+    fileprivate func getFilterTypeColor(filter: Filter) -> Color {
+        switch (filter.action) {
+            case .junk:
+                return COLORS.ALERT_COLOR
+            case .promotion:
+                return COLORS.WARNING_COLOR
+            case .transaction:
+                return COLORS.OK_COLOR
+            }        
     }
 }

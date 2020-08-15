@@ -50,7 +50,7 @@ extension MessageFilterExtension: ILMessageFilterQueryHandling {
             completion(response)
             return
         }
-        let filter = SMSFilterLocal(filterList: self.filters)
+        let filter = SMSFilterLocal(filterList: filters)
         response.action = filter.filterMessage(message: SMSMessage(sender: sender, text: messageBody))
         print("FILTEREXTENSION - Filtering done")
         completion(response)

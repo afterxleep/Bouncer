@@ -26,7 +26,7 @@ struct BouncerApp: App {
     init() {
         
         // Add the storeObserver to the queue
-        //SKPaymentQueue.default().add(storeObserver)
+        SKPaymentQueue.default().add(storeObserver)
         
         // Fetch existing settings
         store.dispatch(.settings(action: .fetchSettings))

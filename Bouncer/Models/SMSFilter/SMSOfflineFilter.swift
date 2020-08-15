@@ -32,7 +32,7 @@ final class SMSFilterLocal {
     
     func filterMessage(message: SMSMessage) -> ILMessageFilterAction {
         for filter in filters {
-            if(self.applyFilter(filter: filter, message: message)) {
+            if(applyFilter(filter: filter, message: message)) {
                 switch (filter.action) {
                     case .junk: return ILMessageFilterAction.junk
                     case .promotion: return ILMessageFilterAction.promotion

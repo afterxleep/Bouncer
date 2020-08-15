@@ -40,7 +40,7 @@ extension BaseView {
         appearance.backgroundColor = UIColor(named: "NavigationBarBackgroundColor")
         appearance.backgroundImage = image
         let attrs: [NSAttributedString.Key: Any] = [
-            .foregroundColor: UIColor(named: "TextDefaultColor") ?? .white
+            .foregroundColor: UIColor(named: "TextHighLightColor") ?? .white
         ]
         appearance.largeTitleTextAttributes = attrs
         UINavigationBar.appearance().scrollEdgeAppearance = appearance                
