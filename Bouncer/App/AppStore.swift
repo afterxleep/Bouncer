@@ -37,7 +37,7 @@ final class Store<State, Action>: ObservableObject {
                 break
             }
             middleware
-                .receive(on: DispatchQueue.main)
+                .receive(on: RunLoop.main)
                 .sink(receiveValue: dispatch)
                 .store(in: &middlewareCancellables)
         }

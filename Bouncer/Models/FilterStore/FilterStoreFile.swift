@@ -1,9 +1,6 @@
 //
-//  WordListFileStorageService.swift
+//  FilterStoreFile.swift
 //  Bouncer
-//
-//  Created by Daniel Bernal on 3/10/19.
-//  Copyright © 2019 Daniel Bernal. All rights reserved.
 //
 
 import Foundation
@@ -58,11 +55,11 @@ extension FilterStoreFile {
     func add(filter: Filter) -> AnyPublisher<Void, FilterStoreError> {
         return Future<Void, FilterStoreError> { promise in
             _ =  self.fetch()
-                .sink(receiveCompletion: { _ in }, receiveValue: { result in
+                .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] result in
                     var filters: [Filter] = result
                     filters.append(filter)
                     filters = filters.sorted(by: { $1.phrase > $0.phrase })
-                    self.saveToDisk(filters: filters)
+                    self?.saveToDisk(filters: filters)
                     promise(.success(()))
                 })
         }.eraseToAnyPublisher()
@@ -71,10 +68,10 @@ extension FilterStoreFile {
     func remove(uuid: UUID) -> AnyPublisher<Void, FilterStoreError> {
         return Future<Void, FilterStoreError> { promise in
             _ =  self.fetch()
-                .sink(receiveCompletion: { _ in }, receiveValue: { result in
+                .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] result in
                     var filters: [Filter] = result
                     filters = filters.filter{$0.id != uuid}
-                    self.saveToDisk(filters: filters)
+                    self?.saveToDisk(filters: filters)
                     promise(.success(()))
                 })
         }.eraseToAnyPublisher()

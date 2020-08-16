@@ -25,10 +25,11 @@ final class MessageFilterExtension: ILMessageFilterExtension {
 
     func fetchFilters() {
         _ = filterStore.fetch()
+            .receive(on: RunLoop.main)
             .sink(receiveCompletion: {_ in
-            }, receiveValue: { result in
+            }, receiveValue: { [weak self] result in
                 print("FILTEREXTENSION - Filter list loaded")
-                self.filters = result
+                self?.filters = result
             })
     }
 

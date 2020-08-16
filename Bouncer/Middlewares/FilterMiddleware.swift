@@ -47,7 +47,7 @@ func filterMiddleware(filterStore: FilterStore) -> Middleware<AppState, AppActio
                     .eraseToAnyPublisher()
                 
             case .filter(action: .delete(let uuid)):
-                return filterStore.remove(uuid: uuid)
+                return filterStore.remove(uuid: uuid)                    
                     .map { AppAction.filter(action: .fetch) }
                     .catch { (error: FilterStoreError) -> Just<AppAction> in
                         switch(error) {
