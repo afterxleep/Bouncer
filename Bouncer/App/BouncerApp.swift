@@ -14,13 +14,15 @@ struct BouncerApp: App {
 
     let store = AppStore(initialState: .init(                            
                         settings: SettingsState(),
-                        filters: FilterState()
+                        filters: FilterState(),
+                        inApp: InAppState()
                         ),
                       reducer: appReducer,
                       middlewares: [
                         settingsMiddleware(appSettings: AppSettingsDefaults(userDefaults: UserDefaults.standard)),
                         filterMiddleware(filterStore: FilterStoreFile()),
-                        reviewMiddleware(reviewService: ReviewServiceStoreKit(appSettings: AppSettingsDefaults(userDefaults: UserDefaults.standard)))                        
+                        reviewMiddleware(reviewService: ReviewServiceStoreKit(appSettings: AppSettingsDefaults(userDefaults: UserDefaults.standard))),
+                        inAppMiddleware(storeService: StoreServiceDefault())
                       ]
     )
 

@@ -9,6 +9,7 @@ import Combine
 final class FilterStoreFile: FilterStore {
     
     var filters: [Filter] = []
+    var cancellables = [AnyCancellable]()
     static let filterListFile = "filters.json"
     static let groupContainer = "group.com.banshai.bouncer"
 
@@ -54,7 +55,7 @@ extension FilterStoreFile {
     
     func add(filter: Filter) -> AnyPublisher<Void, FilterStoreError> {
         return Future<Void, FilterStoreError> { promise in
-            _ =  self.fetch()
+            self.fetch()
                 .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] result in
                     var filters: [Filter] = result
                     filters.append(filter)
@@ -62,18 +63,20 @@ extension FilterStoreFile {
                     self?.saveToDisk(filters: filters)
                     promise(.success(()))
                 })
+                .store(in: &self.cancellables)
         }.eraseToAnyPublisher()
     }
     
     func remove(uuid: UUID) -> AnyPublisher<Void, FilterStoreError> {
         return Future<Void, FilterStoreError> { promise in
-            _ =  self.fetch()
+            self.fetch()
                 .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] result in
                     var filters: [Filter] = result
                     filters = filters.filter{$0.id != uuid}
                     self?.saveToDisk(filters: filters)
                     promise(.success(()))
                 })
+                .store(in: &self.cancellables)
         }.eraseToAnyPublisher()
     }
     

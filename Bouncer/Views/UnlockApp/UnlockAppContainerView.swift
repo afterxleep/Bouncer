@@ -8,8 +8,14 @@
 import SwiftUI
 
 struct UnlockAppContainerView: View {
+    @EnvironmentObject var store: AppStore
+
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        UnlockAppView(closeButtonTapped: closeSheet,
+                      restoreButtonTapped: restorePurchases,
+                      purchaseTapped: purchaseProduct,
+                      products: store.state.inApp.availableProducts,
+                      transactionInprogress: store.state.inApp.transactionInProgress)
     }
 }
 
@@ -17,4 +23,20 @@ struct UnlockAppContainerView_Previews: PreviewProvider {
     static var previews: some View {
         UnlockAppContainerView()
     }
+}
+
+extension UnlockAppContainerView {
+
+    func closeSheet() {
+
+    }
+
+    func restorePurchases() {
+
+    }
+
+    func purchaseProduct(product: Product) {
+
+    }
+
 }

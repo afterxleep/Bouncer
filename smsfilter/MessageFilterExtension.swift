@@ -11,6 +11,7 @@ final class MessageFilterExtension: ILMessageFilterExtension {
 
     var filters = [Filter]()
     var filterStore = FilterStoreFile()
+    var cancellables = [AnyCancellable]()
 
     override init() {
         print("FILTEREXTENSION - Message filtering Started.")
@@ -24,13 +25,14 @@ final class MessageFilterExtension: ILMessageFilterExtension {
     }
 
     func fetchFilters() {
-        _ = filterStore.fetch()
+        filterStore.fetch()
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: {_ in
             }, receiveValue: { [weak self] result in
                 print("FILTEREXTENSION - Filter list loaded")
                 self?.filters = result
             })
+            .store(in: &self.cancellables)
     }
 
     func migrateFromV1() {

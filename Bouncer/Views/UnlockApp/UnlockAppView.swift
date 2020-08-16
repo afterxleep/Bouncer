@@ -12,7 +12,6 @@ struct UnlockAppView: View {
     var purchaseTapped: (_ product: Product) -> Void
 
     var products: [Product]
-    var shouldDisplayBuyButton: Bool
     var transactionInprogress: Bool
 
     var body: some View {
@@ -55,7 +54,7 @@ struct UnlockAppView: View {
                                 .padding(.bottom, 30)
                                 .lineLimit(nil)
                                 .minimumScaleFactor(0.5)
-                        if(products.count > 0 && shouldDisplayBuyButton) {
+                        if(products.count > 0) {
                             ForEach(products, id: \.self.identifier) { product in
                                 Button(action: {
                                     purchaseTapped(product)
@@ -99,8 +98,7 @@ struct UnlockAppView_Previews: PreviewProvider {
         UnlockAppView(closeButtonTapped: {},
                       restoreButtonTapped: {},
                       purchaseTapped: {_ in },
-                      products: [],
-                      shouldDisplayBuyButton: true,
+                      products: [],                      
                       transactionInprogress: false
         )
     }
