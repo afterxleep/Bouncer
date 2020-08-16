@@ -6,14 +6,15 @@
 import SwiftUI
 
 struct UnlockAppView: View {
-    
-    @StateObject var viewModel = UnlockAppViewModel()
-    @Environment(\.presentationMode) var presentationMode
-    
-    func dismissView() {
-        self.presentationMode.wrappedValue.dismiss()
-    }
-    
+
+    var closeButtonTapped: () -> Void
+    var restoreButtonTapped: () -> Void
+    var purchaseTapped: (_ product: Product) -> Void
+
+    var products: [Product]
+    var shouldDisplayBuyButton: Bool
+    var transactionInprogress: Bool
+
     var body: some View {
         ZStack {
             BackgroundView()
@@ -21,7 +22,7 @@ struct UnlockAppView: View {
                 HStack() {
                     Spacer()
                     Button(action: {
-                        self.dismissView()
+                        closeButtonTapped()
                     }) {
                         Image(systemName: SYSTEM_IMAGES.CLOSE.image)
                             .foregroundColor(SYSTEM_IMAGES.CLOSE.color)
@@ -54,10 +55,10 @@ struct UnlockAppView: View {
                                 .padding(.bottom, 30)
                                 .lineLimit(nil)
                                 .minimumScaleFactor(0.5)
-                        if(viewModel.products.count > 0 && viewModel.shouldDisplayBuyButton) {
-                            ForEach(viewModel.products, id: \.self.identifier) { product in
+                        if(products.count > 0 && shouldDisplayBuyButton) {
+                            ForEach(products, id: \.self.identifier) { product in
                                 Button(action: {
-                                    viewModel.purchase(product: product)
+                                    purchaseTapped(product)
                                 }) {
                                 Group() { 
                                         Text("UPGRADE_BUTTON_TEXT") +
@@ -71,7 +72,7 @@ struct UnlockAppView: View {
                                 }
                             }
                             Button(action: {
-                                viewModel.restorePurchases()
+                                restoreButtonTapped()
                             }) {
                                 Text("RESTORE_PURCHASE")
                                     .font(.caption)
@@ -95,6 +96,12 @@ struct UnlockAppView: View {
 
 struct UnlockAppView_Previews: PreviewProvider {
     static var previews: some View {
-        UnlockAppView()
+        UnlockAppView(closeButtonTapped: {},
+                      restoreButtonTapped: {},
+                      purchaseTapped: {_ in },
+                      products: [],
+                      shouldDisplayBuyButton: true,
+                      transactionInprogress: false
+        )
     }
 }

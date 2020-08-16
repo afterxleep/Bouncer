@@ -4,7 +4,6 @@
 //
 
 import Foundation
-import Combine
 
 func filterReducer(state: inout FilterState, action: FilterAction) -> Void {
     switch action {

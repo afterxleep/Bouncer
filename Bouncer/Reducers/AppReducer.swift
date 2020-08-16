@@ -13,7 +13,11 @@ func appReducer(state: inout AppState, action: AppAction) -> Void {
     case .filter(let action):
         filterReducer(state: &state.filters, action: action)
 
-    case .settings(action: let action):
+    case .settings(let action):
         settingsReducer(state: &state.settings, action: action)
+
+    case .inApp(let action):
+        inAppReducer(state: &state.inApp, action: action)
+
     }
 }
