@@ -8,14 +8,17 @@
 import SwiftUI
 
 struct UnlockAppContainerView: View {
+    @Environment(\.presentationMode) var presentationMode
     @EnvironmentObject var store: AppStore
 
     var body: some View {
         UnlockAppView(closeButtonTapped: closeSheet,
                       restoreButtonTapped: restorePurchases,
                       purchaseTapped: purchaseProduct,
-                      products: store.state.inApp.availableProducts,
-                      transactionInprogress: store.state.inApp.transactionInProgress)
+                      products: store.state.inApp.availableProducts,                      
+                      transactionInprogress: store.state.inApp.transactionInProgress,
+                      maximumFreeFilters: store.state.settings.maximumFreeFilters
+        ).onAppear(perform: fetchProducts)
     }
 }
 
@@ -27,8 +30,12 @@ struct UnlockAppContainerView_Previews: PreviewProvider {
 
 extension UnlockAppContainerView {
 
-    func closeSheet() {
+    func fetchProducts() {
+        store.dispatch(.inApp(action: .fetchProducts))
+    }
 
+    func closeSheet() {
+        presentationMode.wrappedValue.dismiss()
     }
 
     func restorePurchases() {

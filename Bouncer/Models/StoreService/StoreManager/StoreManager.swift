@@ -86,7 +86,7 @@ extension StoreManager: SKProductsRequestDelegate {
 extension StoreManager: SKRequestDelegate {
     
     func request(_ request: SKRequest, didFailWithError error: Error) {
-        print("Request Failed")
+        print("Request Failed with Error: \(error)")
     }
     
     func requestDidFinish(_ request: SKRequest) {

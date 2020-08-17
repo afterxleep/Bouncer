@@ -24,11 +24,9 @@ enum TransactionState {
 }
 
 protocol StoreService {
-    
     var productIdentifiers: [String] { get set }
     var storeManager: StoreManager { get set }
     func fetchProducts() -> AnyPublisher<[Product], Never>
     func startPurchase(product: Product) -> AnyPublisher<TransactionState, Never>
     func restorePurchases() -> AnyPublisher<TransactionState, Never>
-    
 }

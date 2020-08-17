@@ -19,15 +19,10 @@ func inAppMiddleware(storeService: StoreService) -> Middleware<AppState, AppActi
         switch action {
 
         case .inApp(action: .fetchProducts):
-            break;
-            /*
-            // The service should be changed to actually return a promise!!
-            _ = storeService
-                .productsPublisher
-                .map { AppAction.inApp(action: .fetchProductsComplete(products: $0 ))}
-                .eraseToAnyPublisher()
-            storeService.fetchProducts()
-            */
+            return storeService.fetchProducts()
+                .map({ products in
+                    AppAction.inApp(action: .fetchProductsComplete(products: products))
+                }).eraseToAnyPublisher()            
 
         default:
             break

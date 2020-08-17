@@ -14,6 +14,8 @@ func inAppReducer(state: inout InAppState, action: InAppAction) -> Void {
 
         case .fetchProductsComplete(let products):
             state.transactionInProgress = false
+            state.availableProducts = products
+            break
 
         case .fetchProductsError(let error):
             break

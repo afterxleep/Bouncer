@@ -13,6 +13,7 @@ struct UnlockAppView: View {
 
     var products: [Product]
     var transactionInprogress: Bool
+    var maximumFreeFilters: Int
 
     var body: some View {
         ZStack {
@@ -37,7 +38,7 @@ struct UnlockAppView: View {
                         .fontWeight(.bold)
                         .foregroundColor(Color("TextHighLightColor"))
                         .padding(.bottom, 10.0)
-                    Text("PAYMENT_PAGE_MESSAGE")
+                    Text("PAYMENT_PAGE_MESSAGE \(maximumFreeFilters)")
                         .font(.headline)
                         .foregroundColor(Color("TextDefaultColor"))
                         .padding(.horizontal, 20.0)
@@ -54,7 +55,7 @@ struct UnlockAppView: View {
                                 .padding(.bottom, 30)
                                 .lineLimit(nil)
                                 .minimumScaleFactor(0.5)
-                        if(products.count > 0) {
+                        if(!transactionInprogress) {
                             ForEach(products, id: \.self.identifier) { product in
                                 Button(action: {
                                     purchaseTapped(product)
@@ -78,7 +79,7 @@ struct UnlockAppView: View {
                                     .foregroundColor(Color("TextDefaultColor"))
                             }
                         } else {
-                            ProgressView().foregroundColor(Color("TextHighLightColor"))
+                            ProgressView().progressViewStyle(CircularProgressViewStyle(tint: Color("TextHighLightColor")))
                         }
                     }
                     .padding(.horizontal, 20)
@@ -99,7 +100,8 @@ struct UnlockAppView_Previews: PreviewProvider {
                       restoreButtonTapped: {},
                       purchaseTapped: {_ in },
                       products: [],                      
-                      transactionInprogress: false
+                      transactionInprogress: false,
+                      maximumFreeFilters: 10
         )
     }
 }
