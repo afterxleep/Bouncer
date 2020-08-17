@@ -43,7 +43,9 @@ extension BaseView {
             .foregroundColor: UIColor(named: "TextHighLightColor") ?? .white
         ]
         appearance.largeTitleTextAttributes = attrs
+        appearance.titleTextAttributes = attrs
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
+        UINavigationBar.appearance().standardAppearance = appearance
 
         
     }
