@@ -18,7 +18,6 @@ struct FilterState {
 }
 
 struct SettingsState {
-    var hasPurchasedUpgrade: Bool = false
     var hasLaunchedApp: Bool = false
     var numberOfLaunches: Int = 0
     var lastVersionPromptedForReview: String = ""

@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-struct FilterAddView: View {
+struct FilterAddView: View {    
     var onAdd: (Filter) -> Void
 
     @Environment(\.presentationMode) var presentationMode
