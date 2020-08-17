@@ -71,11 +71,16 @@ extension FilterAddView {
     var saveButton: some View {
         Button(
             action: {
-                onAdd(Filter(id: UUID() , phrase: filterTerm, type: filterType, action: filterDestination))
-                self.presentationMode.wrappedValue.dismiss()
+                if(filterTerm.count > 0) {
+                    onAdd(Filter(id: UUID(),
+                                 phrase: filterTerm,
+                                 type: filterType,
+                                 action: filterDestination))
+                    self.presentationMode.wrappedValue.dismiss()
+                }
             }
         ) {
-            Text("SAVE")
+            Text("SAVE").disabled(filterTerm.count == 0)
         }
     }
 }
