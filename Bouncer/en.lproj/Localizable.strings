@@ -52,7 +52,7 @@
 "BUTTON_TUTORIAL_FIRST_LAUNCH_TEXT" = "Take me to Settings!";
 "BUTTON_TUTORIAL_HELP_TEXT" = "Got it!";
 "PAYMENT_PAGE_TITLE" = "Ready to Upgrade?";
-"PAYMENT_PAGE_MESSAGE %lld" = "The free version of Bouncer is limited to %lld filters, which is ussually enough for most people.";
-"UPGRADE_BUTTON_TEXT" = "Upgrade for ";
+"PAYMENT_PAGE_MESSAGE %lld" = "The free version of Bouncer is limited to %lld filters, which is usually enough for most people.";
+"UPGRADE_BUTTON_TEXT %@" = "Subscribe for %@ per year";
 "RESTORE_PURCHASE" = "Restore purchase";
 "UPGRADE_EXPLANATION" = "Upgrade to get unlimited filters and help me keep improving the app.";

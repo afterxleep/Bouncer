@@ -22,7 +22,13 @@ func inAppMiddleware(storeService: StoreService) -> Middleware<AppState, AppActi
             return storeService.fetchProducts()
                 .map({ products in
                     AppAction.inApp(action: .fetchProductsComplete(products: products))
-                }).eraseToAnyPublisher()            
+                }).eraseToAnyPublisher()
+
+        case .inApp(action: .purchaseProduct(let product)):
+            return storeService.startPurchase(product: product)
+                .map({ response in
+                    AppAction.inApp(action: .purchaseProductComplete(product: product))
+                }).eraseToAnyPublisher()
 
         default:
             break

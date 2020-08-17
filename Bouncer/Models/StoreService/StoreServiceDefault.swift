@@ -11,7 +11,7 @@ struct StoreServiceDefault {
 
     internal var storeManager = StoreManager.shared
     internal var storeObserver = StoreObserver.shared
-    var productIdentifiers = ["com.banshai.bouncer.unlimited_filters"]
+    var productIdentifiers = ["com.banshai.bouncer.unlimited_subscription"]  
 
     fileprivate func transactionObserver() -> AnyPublisher<TransactionState, Never> {
         return storeObserver

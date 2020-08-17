@@ -60,10 +60,7 @@ struct UnlockAppView: View {
                                 Button(action: {
                                     purchaseTapped(product)
                                 }) {
-                                Group() { 
-                                        Text("UPGRADE_BUTTON_TEXT") +
-                                        Text("\(product.price)")
-                                    }
+                                    Text("UPGRADE_BUTTON_TEXT \(product.price)")
                                     .foregroundColor(Color("TextDefaultColor"))
                                     .frame(minWidth: 300, maxWidth: 300, minHeight: 0, maxHeight: 50)
                                     .background(Color("ButtonBackgroundColor"))
