@@ -9,8 +9,7 @@ struct FilterListContainerView: View {
     @EnvironmentObject var store: AppStore
 
     var body: some View {
-        FilterListView(filters: store.state.filters.filters,
-                       requiresPurchase: { return requiresPurchase() },
+        FilterListView(filters: store.state.filters.filters,                       
                        onDelete: deleteFilter,
                        openSettings: {})
             .environmentObject(store)
@@ -24,13 +23,6 @@ struct FilterListContainerView_Previews: PreviewProvider {
 }
 
 extension FilterListContainerView {
-
-    func requiresPurchase() -> Bool {
-        if(store.state.filters.filters.count > store.state.settings.maximumFreeFilters) {
-            return true
-        }
-        return false
-    }
 
     func deleteFilter(at offsets: IndexSet) {
         for o in offsets {

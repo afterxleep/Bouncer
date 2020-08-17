@@ -40,7 +40,6 @@
 		D664B24624AA92D200EB826D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D664B24524AA92D200EB826D /* Assets.xcassets */; };
 		D664B24824AA998700EB826D /* UIImage+Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D664B24724AA998700EB826D /* UIImage+Gradient.swift */; };
 		D673E75224C68404008B1072 /* FilterTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D673E75124C68404008B1072 /* FilterTypes.swift */; };
-		D673E75424C686CF008B1072 /* UnlockAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D673E75324C686CF008B1072 /* UnlockAppView.swift */; };
 		D679D67424AA758C00579223 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D679D67324AA758C00579223 /* Constants.swift */; };
 		D67D590324C93DD100626995 /* StoreManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67D590124C93DD100626995 /* StoreManager.swift */; };
 		D67D590424C93DD100626995 /* StoreObserver.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67D590224C93DD100626995 /* StoreObserver.swift */; };
@@ -59,10 +58,6 @@
 		D6EA9A8424AD2244000135E7 /* FilterStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EA9A8324AD2244000135E7 /* FilterStore.swift */; };
 		D6EA9A8524AD2319000135E7 /* FilterStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EA9A8324AD2244000135E7 /* FilterStore.swift */; };
 		D6F14E8824E8A1780029A0DF /* ReviewMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F14E8724E8A1780029A0DF /* ReviewMiddleware.swift */; };
-		D6F14E8A24E8BDA90029A0DF /* UnlockAppContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F14E8924E8BDA90029A0DF /* UnlockAppContainerView.swift */; };
-		D6F14E8C24E8BF560029A0DF /* InAppMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F14E8B24E8BF560029A0DF /* InAppMiddleware.swift */; };
-		D6F14E8E24E8C0520029A0DF /* InAppaction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F14E8D24E8C0520029A0DF /* InAppaction.swift */; };
-		D6F14E9024E8C3A10029A0DF /* InAppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F14E8F24E8C3A00029A0DF /* InAppReducer.swift */; };
 		D6FC672924E49B2B0083C9FA /* FilterListContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FC672824E49B2B0083C9FA /* FilterListContainerView.swift */; };
 		D6FC672E24E4ACCF0083C9FA /* FilterMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6FC672D24E4ACCF0083C9FA /* FilterMiddleware.swift */; };
 /* End PBXBuildFile section */
@@ -146,7 +141,6 @@
 		D664B24524AA92D200EB826D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D664B24724AA998700EB826D /* UIImage+Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Gradient.swift"; sourceTree = "<group>"; };
 		D673E75124C68404008B1072 /* FilterTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTypes.swift; sourceTree = "<group>"; };
-		D673E75324C686CF008B1072 /* UnlockAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockAppView.swift; sourceTree = "<group>"; };
 		D679D67324AA758C00579223 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D67D590124C93DD100626995 /* StoreManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreManager.swift; sourceTree = "<group>"; };
 		D67D590224C93DD100626995 /* StoreObserver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StoreObserver.swift; sourceTree = "<group>"; };
@@ -164,10 +158,6 @@
 		D6EA9A8124AD2201000135E7 /* SMSFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSFilter.swift; sourceTree = "<group>"; };
 		D6EA9A8324AD2244000135E7 /* FilterStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterStore.swift; sourceTree = "<group>"; };
 		D6F14E8724E8A1780029A0DF /* ReviewMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewMiddleware.swift; sourceTree = "<group>"; };
-		D6F14E8924E8BDA90029A0DF /* UnlockAppContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnlockAppContainerView.swift; sourceTree = "<group>"; };
-		D6F14E8B24E8BF560029A0DF /* InAppMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppMiddleware.swift; sourceTree = "<group>"; };
-		D6F14E8D24E8C0520029A0DF /* InAppaction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppaction.swift; sourceTree = "<group>"; };
-		D6F14E8F24E8C3A00029A0DF /* InAppReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InAppReducer.swift; sourceTree = "<group>"; };
 		D6FC672824E49B2B0083C9FA /* FilterListContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListContainerView.swift; sourceTree = "<group>"; };
 		D6FC672D24E4ACCF0083C9FA /* FilterMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterMiddleware.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -211,7 +201,6 @@
 				D61497EF24E4438000AF997E /* AppAction.swift */,
 				D6CC124C24E4563F00388160 /* SettingsAction.swift */,
 				D61497E824E4430E00AF997E /* FilterAction.swift */,
-				D6F14E8D24E8C0520029A0DF /* InAppaction.swift */,
 			);
 			path = Actions;
 			sourceTree = "<group>";
@@ -222,7 +211,6 @@
 				D61497ED24E4435100AF997E /* AppReducer.swift */,
 				D6CC125024E4837800388160 /* SettingsReducer.swift */,
 				D61497EB24E4433800AF997E /* FilterReducer.swift */,
-				D6F14E8F24E8C3A00029A0DF /* InAppReducer.swift */,
 			);
 			path = Reducers;
 			sourceTree = "<group>";
@@ -233,7 +221,6 @@
 				D6CC124E24E47C3900388160 /* SettingsMiddleware.swift */,
 				D6FC672D24E4ACCF0083C9FA /* FilterMiddleware.swift */,
 				D6F14E8724E8A1780029A0DF /* ReviewMiddleware.swift */,
-				D6F14E8B24E8BF560029A0DF /* InAppMiddleware.swift */,
 			);
 			path = Middlewares;
 			sourceTree = "<group>";
@@ -465,21 +452,11 @@
 		D67F583024E44B0E00165365 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D6B471B124C669350047D9D8 /* UnlockApp */,
 				D6529F9D24A4139A009AE3FF /* Tutorial */,
 				D64EB7D524CB393700FC6037 /* FilterAdd */,
 				D6529FC124A54A92009AE3FF /* FilterList */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		D6B471B124C669350047D9D8 /* UnlockApp */ = {
-			isa = PBXGroup;
-			children = (
-				D6F14E8924E8BDA90029A0DF /* UnlockAppContainerView.swift */,
-				D673E75324C686CF008B1072 /* UnlockAppView.swift */,
-			);
-			path = UnlockApp;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -701,7 +678,6 @@
 			files = (
 				D6C90BF624CB36AE00426B31 /* FilterRowView.swift in Sources */,
 				D6233A7F24A651A200B37A6A /* SMSOfflineFilter.swift in Sources */,
-				D6F14E8C24E8BF560029A0DF /* InAppMiddleware.swift in Sources */,
 				D6529F9F24A413A6009AE3FF /* TutorialView.swift in Sources */,
 				D60A19C724A69F1F0002E8BD /* SMSMessage.swift in Sources */,
 				D61497E924E4430E00AF997E /* FilterAction.swift in Sources */,
@@ -714,7 +690,6 @@
 				D6CC124B24E452E100388160 /* TutorialContainerView.swift in Sources */,
 				D6529FCB24A54ADE009AE3FF /* FilterStoreFile.swift in Sources */,
 				D644F1EE24E59FC9006C5EE2 /* FilterAddView.swift in Sources */,
-				D6F14E9024E8C3A10029A0DF /* InAppReducer.swift in Sources */,
 				D6EA9A8424AD2244000135E7 /* FilterStore.swift in Sources */,
 				D67D590424C93DD100626995 /* StoreObserver.swift in Sources */,
 				D6F14E8824E8A1780029A0DF /* ReviewMiddleware.swift in Sources */,
@@ -726,7 +701,6 @@
 				D6529FC324A54AAD009AE3FF /* FilterListView.swift in Sources */,
 				D644F1EC24E59FBE006C5EE2 /* FilterAddContainerView.swift in Sources */,
 				D6529FA424A413EB009AE3FF /* BackgroundView.swift in Sources */,
-				D673E75424C686CF008B1072 /* UnlockAppView.swift in Sources */,
 				D6FC672E24E4ACCF0083C9FA /* FilterMiddleware.swift in Sources */,
 				D62B331B24BAB16C002DFB81 /* ReviewService.swift in Sources */,
 				D679D67424AA758C00579223 /* Constants.swift in Sources */,
@@ -739,8 +713,6 @@
 				D61497EE24E4435100AF997E /* AppReducer.swift in Sources */,
 				D67F582F24E4496300165365 /* AppSettingsStore.swift in Sources */,
 				D615898A24A55FF800FE710A /* BaseView.swift in Sources */,
-				D6F14E8A24E8BDA90029A0DF /* UnlockAppContainerView.swift in Sources */,
-				D6F14E8E24E8C0520029A0DF /* InAppaction.swift in Sources */,
 				D62B331D24BAB18E002DFB81 /* RatingServiceDefault.swift in Sources */,
 				D61D9BEF24C7EBAA0058935B /* StoreService.swift in Sources */,
 				D61B7A0624CB7C64009C65BD /* DispatchQueue.swift in Sources */,

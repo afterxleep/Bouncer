@@ -7,7 +7,6 @@ import SwiftUI
 
 struct FilterListView: View {
     var filters: [Filter]
-    var requiresPurchase: (() -> Bool)
     let onDelete: (IndexSet) -> Void
     let openSettings: () -> Void
 
@@ -31,8 +30,7 @@ struct FilterListView: View {
 
 struct FilterListView_Previews: PreviewProvider {
     static var previews: some View {
-        FilterListView(filters: [],
-                       requiresPurchase: { return false },
+        FilterListView(filters: [],                       
                        onDelete: {_ in },
                        openSettings: {}
         )
@@ -83,21 +81,12 @@ extension FilterListView {
 
     var addButton: some View {
         Group {
-            if (requiresPurchase()) {
-                Button(
-                    action: { showingInApp = true }) {
-                        Image(systemName: SYSTEM_IMAGES.ADD.image).imageScale(.large)
-                    }.sheet(isPresented: $showingInApp) {
-                        UnlockAppContainerView()
-                    }
-            } else {
-                Button(
-                    action: { showingAddForm = true }) {
-                        Image(systemName: SYSTEM_IMAGES.ADD.image).imageScale(.large)
-                    }.sheet(isPresented: $showingAddForm) {
-                        FilterAddContainerView()
-                    }
+            Button(
+                action: { showingAddForm = true }) {
+                    Image(systemName: SYSTEM_IMAGES.ADD.image).imageScale(.large)
+                }.sheet(isPresented: $showingAddForm) {
+                    FilterAddContainerView()
+                }
             }
         }
-    }
 }

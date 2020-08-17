@@ -15,9 +15,6 @@ func appReducer(state: inout AppState, action: AppAction) -> Void {
 
     case .settings(let action):
         settingsReducer(state: &state.settings, action: action)
-
-    case .inApp(let action):
-        inAppReducer(state: &state.inApp, action: action)
-
+        
     }
 }

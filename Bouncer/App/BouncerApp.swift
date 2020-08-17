@@ -14,23 +14,18 @@ struct BouncerApp: App {
 
     let store = AppStore(initialState: .init(                            
                         settings: SettingsState(),
-                        filters: FilterState(),
-                        inApp: InAppState()
+                        filters: FilterState() 
                         ),
                       reducer: appReducer,
                       middlewares: [
                         settingsMiddleware(appSettings: AppSettingsDefaults(userDefaults: UserDefaults.standard)),
                         filterMiddleware(filterStore: FilterStoreFile()),
-                        reviewMiddleware(reviewService: ReviewServiceStoreKit(appSettings: AppSettingsDefaults(userDefaults: UserDefaults.standard))),
-                        inAppMiddleware(storeService: StoreServiceDefault())
+                        reviewMiddleware(reviewService: ReviewServiceStoreKit(appSettings: AppSettingsDefaults(userDefaults: UserDefaults.standard)))                        
                       ]
     )
 
     init() {
-        
-        // Add the storeObserver to the queue
-        SKPaymentQueue.default().add(storeObserver)
-        
+
         // Fetch existing settings
         store.dispatch(.settings(action: .fetchSettings))
 
