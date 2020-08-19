@@ -3,12 +3,11 @@
 //  Bouncer
 //
 
-
 import Foundation
 import IdentityLookup
 
 
-final class SMSFilterLocal {
+struct SMSOfflineFilter {
 
     var filters: [Filter]
     
@@ -17,7 +16,7 @@ final class SMSFilterLocal {
         self.filters = filterList
     }
     
-    func applyFilter(filter: Filter, message: SMSMessage) -> Bool {
+    fileprivate func applyFilter(filter: Filter, message: SMSMessage) -> Bool {
         var txt = ""
         switch (filter.type) {
             case .sender:
@@ -44,4 +43,3 @@ final class SMSFilterLocal {
     }
 
 }
-

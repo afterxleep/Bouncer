@@ -7,11 +7,13 @@ import Foundation
 import Combine
 
 final class FilterStoreFile: FilterStore {
+
+    static let filterListFile = "filters.json"
+    static let groupContainer = "group.com.banshai.bouncer"
+    static let filterListFileV1 = "wordlist.filter"
     
     var filters: [Filter] = []
     var cancellables = [AnyCancellable]()
-    static let filterListFile = "filters.json"
-    static let groupContainer = "group.com.banshai.bouncer"
 
     fileprivate var fileURL: URL? {
         return FileManager.default
@@ -88,7 +90,7 @@ extension FilterStoreFile {
     }
     
     func migrateFromV1() -> Void {
-        let wordListFile = "wordlist.filter"
+        let wordListFile = Self.filterListFileV1
         let storePath = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Self.groupContainer)
         let oldStore = storePath!.appendingPathComponent(wordListFile)
         if (FileManager.default.fileExists(atPath: oldStore.path)) {

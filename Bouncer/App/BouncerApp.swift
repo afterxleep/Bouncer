@@ -9,9 +9,6 @@ import StoreKit
 @main
 struct BouncerApp: App {
     
-    // Store Payments Observer
-    let storeObserver = StoreObserver.shared
-
     let store = AppStore(initialState: .init(                            
                         settings: SettingsState(),
                         filters: FilterState() 
