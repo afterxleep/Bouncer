@@ -39,7 +39,7 @@ struct FilterRowView: View {
 extension FilterRowView {
 
     // MARK: - Helpers
-    fileprivate func getFilterTypeDecoration(filter: Filter) -> SystemImage {
+    private func getFilterTypeDecoration(filter: Filter) -> SystemImage {
         var data: SystemImage
         switch(filter.type) {
             case .sender:
@@ -52,7 +52,7 @@ extension FilterRowView {
         return data
     }
     
-    fileprivate func getFilterDestinationDecoration(filter: Filter) -> FilterDestinationDecoration {
+    private func getFilterDestinationDecoration(filter: Filter) -> FilterDestinationDecoration {
         var data: FilterDestinationDecoration
         switch (filter.action) {
             case .junk:
@@ -65,7 +65,7 @@ extension FilterRowView {
         return data
     }
 
-    fileprivate func getFilterTypeColor(filter: Filter) -> Color {
+    private func getFilterTypeColor(filter: Filter) -> Color {
         switch (filter.action) {
             case .junk:
                 return COLORS.ALERT_COLOR

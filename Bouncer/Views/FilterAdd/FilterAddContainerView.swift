@@ -22,7 +22,7 @@ struct FilterAddContainerView_Previews: PreviewProvider {
 
 extension FilterAddContainerView {
 
-    fileprivate func saveFilter(filter: Filter) {
+    private func saveFilter(filter: Filter) {
         store.dispatch(.filter(action: .add(filter: filter)))
     }
 }

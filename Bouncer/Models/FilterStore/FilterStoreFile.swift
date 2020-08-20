@@ -15,13 +15,13 @@ final class FilterStoreFile: FilterStore {
     var filters: [Filter] = []
     var cancellables = [AnyCancellable]()
 
-    fileprivate var fileURL: URL? {
+    private var fileURL: URL? {
         return FileManager.default
             .containerURL(forSecurityApplicationGroupIdentifier: Self.groupContainer)?
             .appendingPathComponent(Self.filterListFile)
     }
     
-    fileprivate func saveToDisk(filters: [Filter]) {
+    private func saveToDisk(filters: [Filter]) {
         guard let url = fileURL else {
             return
         }
@@ -94,8 +94,7 @@ extension FilterStoreFile {
         let storePath = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Self.groupContainer)
         let oldStore = storePath!.appendingPathComponent(wordListFile)
         if (FileManager.default.fileExists(atPath: oldStore.path)) {
-            guard let wordData = NSMutableData(contentsOf: oldStore) else {
-                print("Migration Failed")
+            guard let wordData = NSMutableData(contentsOf: oldStore) else {                
                 return
             }
             do {
@@ -104,10 +103,8 @@ extension FilterStoreFile {
                         let _ = self.add(filter: Filter(id: UUID(), phrase: s))
                     }
                     try? FileManager.default.removeItem(atPath: oldStore.path)
-                    print("Migration Complete or not required")
                 }
             } catch {
-                print("Migration Failed")
             }
         }
     }

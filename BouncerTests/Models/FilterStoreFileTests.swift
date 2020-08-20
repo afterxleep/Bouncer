@@ -10,24 +10,13 @@ import Combine
 class FilterStoreFileTests: XCTestCase {
 
     var filterStore = FilterStoreFile()
-    var fileManager = FileManager.default
+
     var filters: [Filter] = [
         Filter(id: UUID(), phrase: "rappi", type: .any, action: .junk),
         Filter(id: UUID(), phrase: "etb", type: .sender, action: .promotion),
         Filter(id: UUID(), phrase: "your code", type: .message, action: .transaction)
     ]
-
-    fileprivate var filterURL: URL {
-        return FileManager.default
-            .containerURL(forSecurityApplicationGroupIdentifier: FilterStoreFile.groupContainer)!
-            .appendingPathComponent(FilterStoreFile.filterListFile)
-    }
-
-    fileprivate var V1Url: URL {
-        return FileManager.default
-            .containerURL(forSecurityApplicationGroupIdentifier: FilterStoreFile.groupContainer)!
-            .appendingPathComponent(FilterStoreFile.filterListFileV1)
-    }
+    var totalOldStoreFilters = 5
 
     override func setUp() {
         super.setUp()
@@ -48,8 +37,35 @@ class FilterStoreFileTests: XCTestCase {
         }
     }
 
+    func test00_migrateFromV1() {
+        let sourceURL = Bundle.main.bundleURL.appendingPathComponent(FilterStoreFile.filterListFileV1)
+        let storePath = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: FilterStoreFile.groupContainer)
+        let destURL = storePath!.appendingPathComponent(FilterStoreFile.filterListFileV1)
+        try? FileManager.default.copyItem(at: sourceURL, to: destURL)
+        filterStore.migrateFromV1()
+        sleep(2)  // Migrate is async and has no callbacks
 
-    func test01_AddFilters() {
+        let expectation = self.expectation(description: "Fetch Filters")
+        var filters: [Filter] = []
+        _ = filterStore.fetch()
+            .sink(receiveCompletion: {_ in }, receiveValue: { value in
+                filters = value
+                expectation.fulfill()
+            })
+        waitForExpectations(timeout: 1, handler: nil)
+        XCTAssertEqual(self.filters.count + totalOldStoreFilters, filters.count)
+        XCTAssertFalse(FileManager.default.fileExists(atPath: destURL.path))
+
+    }
+
+    func test01_migrateFromV1NoOldData() {
+        filterStore.migrateFromV1()
+        let storePath = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: FilterStoreFile.groupContainer)
+        let destURL = storePath!.appendingPathComponent(FilterStoreFile.filterListFileV1)
+        XCTAssertFalse(FileManager.default.fileExists(atPath: destURL.path))
+    }
+
+    func test10_AddFilters() {
 
         let expectation = self.expectation(description: "Fetch Filters")
         var filters: [Filter] = []
@@ -61,10 +77,9 @@ class FilterStoreFileTests: XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
         XCTAssertEqual(self.filters.count, filters.count)
 
-
     }
 
-    func test02_DeleteFilter() {
+    func test20_DeleteFilter() {
         var expectation = self.expectation(description: "Fetch Filters")
 
         var filters: [Filter] = []
@@ -92,7 +107,6 @@ class FilterStoreFileTests: XCTestCase {
             })
         waitForExpectations(timeout: 1, handler: nil)
         XCTAssertEqual(self.filters.count-1, filters.count)
-
 
     }
 }

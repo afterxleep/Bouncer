@@ -41,6 +41,7 @@
 		D679D67424AA758C00579223 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D679D67324AA758C00579223 /* Constants.swift */; };
 		D67F582E24E4496300165365 /* AppSettingsDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67F582C24E4496300165365 /* AppSettingsDefaults.swift */; };
 		D67F582F24E4496300165365 /* AppSettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67F582D24E4496300165365 /* AppSettingsStore.swift */; };
+		D6B2CC8D24EF16C6004F72C4 /* wordlist.filter in Resources */ = {isa = PBXBuildFile; fileRef = D6B2CC8C24EF16C6004F72C4 /* wordlist.filter */; };
 		D6C90BF224CAAF7B00426B31 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C90BF124CAAF7B00426B31 /* AppState.swift */; };
 		D6C90BF424CAB26700426B31 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C90BF324CAB26700426B31 /* AppStore.swift */; };
 		D6C90BF624CB36AE00426B31 /* FilterRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C90BF524CB36AD00426B31 /* FilterRowView.swift */; };
@@ -137,6 +138,7 @@
 		D679D67324AA758C00579223 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D67F582C24E4496300165365 /* AppSettingsDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSettingsDefaults.swift; sourceTree = "<group>"; };
 		D67F582D24E4496300165365 /* AppSettingsStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSettingsStore.swift; sourceTree = "<group>"; };
+		D6B2CC8C24EF16C6004F72C4 /* wordlist.filter */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = wordlist.filter; sourceTree = "<group>"; };
 		D6C90BF124CAAF7B00426B31 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		D6C90BF324CAB26700426B31 /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
 		D6C90BF524CB36AD00426B31 /* FilterRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterRowView.swift; sourceTree = "<group>"; };
@@ -381,6 +383,7 @@
 		D6529FD324A550A9009AE3FF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D6B2CC8524EED357004F72C4 /* Mocks */,
 				D67F582B24E4495700165365 /* AppSettings */,
 				D62B331924BAB15C002DFB81 /* ReviewService */,
 				D6233A7B24A6519200B37A6A /* SMSFilter */,
@@ -434,6 +437,14 @@
 				D6529FC124A54A92009AE3FF /* FilterList */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
+		D6B2CC8524EED357004F72C4 /* Mocks */ = {
+			isa = PBXGroup;
+			children = (
+				D6B2CC8C24EF16C6004F72C4 /* wordlist.filter */,
+			);
+			path = Mocks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -576,6 +587,7 @@
 				D664B24424AA92AA00EB826D /* Colors.xcassets in Resources */,
 				D621CB4324ABABF6008883AA /* Localizable.strings in Resources */,
 				D664B24624AA92D200EB826D /* Assets.xcassets in Resources */,
+				D6B2CC8D24EF16C6004F72C4 /* wordlist.filter in Resources */,
 				D6529F7A24A41372009AE3FF /* Preview Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

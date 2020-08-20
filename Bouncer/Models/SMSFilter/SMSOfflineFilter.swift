@@ -16,7 +16,7 @@ struct SMSOfflineFilter {
         self.filters = filterList
     }
     
-    fileprivate func applyFilter(filter: Filter, message: SMSMessage) -> Bool {
+    private func applyFilter(filter: Filter, message: SMSMessage) -> Bool {
         var txt = ""
         switch (filter.type) {
             case .sender:
