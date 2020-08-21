@@ -39,7 +39,7 @@ Fire up XCode 12 (Currently beta), open Bouncer.xcodeproj and hit Build.  There 
 Latest Release
 ----------------------
 
-The old 1.x version (UIkit based) is available from the [App Store](https://apps.apple.com/us/app/bouncer-sms-block-list/id1457476313) for free, and you can grab the code from [the 'uikit' branch](https://github.com/afterxleep/Bouncer/tree/uikit).
+The old 1.x version (UIkit based) is available from the [App Store](https://apps.apple.com/us/app/bouncer-sms-block-list/id1457476313) for free, and you can grab the code from [the 1.20 release](https://github.com/afterxleep/Bouncer/releases/tag/v1.2.0).
 
 Version 2.x (This new SwiftUI version) will be released when iOS 14 becomes available to the public, but feel free to install it on your own.  (Requires iOS 14 beta)
 
