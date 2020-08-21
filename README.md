@@ -36,8 +36,9 @@ Note: This version is a complete Rewrite Using SwiftUI 2.0, so you will need Xco
 Latest Release
 ----------------------
 
-The old version (UIkit based) is available from the [App Store](https://apps.apple.com/us/app/bouncer-sms-block-list/id1457476313) for free.  
-This version will be released when iOS 14 becomes available to the public.
+The old 1.x version (UIkit based) is available from the [App Store](https://apps.apple.com/us/app/bouncer-sms-block-list/id1457476313) for free, and you can grab the code from the 'uikit' branch on this repo.
+
+Version 2.x (SwiftUI) will be released when iOS 14 becomes available to the public.
 
 
 Contribute
