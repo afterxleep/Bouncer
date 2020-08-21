@@ -1,7 +1,7 @@
 Bouncer SMS Filter
 =====================
 
-This is a simple SMS filtering app for iOS that uses the ILMessageFilterExtension to move unwanted messages to the "Junk" Section.
+This is a simple SMS filtering app for iOS that uses the ILMessageFilterExtension to move unwanted and specific messages to the "Junk", "Promotion" and "Transaction" sections of the Messages app. 
 
 Different to other apps, Bouncer does not share, upload or send any of your personal information or SMS messages to a remote server.   All the filtering happens locally on your phone.
 
