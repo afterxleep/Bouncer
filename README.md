@@ -24,6 +24,7 @@ Bouncer is written 100% in Swift, for iOS 14 and features things like:
 * Redux-like architecture
 * Combine
 * SwiftUI 2.x features and improvements
+* No 3rd party dependencies 💪
 
 
 Building
