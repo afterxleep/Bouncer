@@ -16,15 +16,18 @@ Features
 * Localized in English and Spanish
 
 
-Tech Stack
+Tech Stack/Specs
 ----------------------
 Bouncer is written 100% in Swift, for iOS 14 and features things like:
 
-* All new SwiftUI lifecycle (No storyboards, Appdelegate or UIKit)
+* All new SwiftUI lifecycle (No storyboards or Appdelegate)
 * Redux-like architecture
 * Combine
 * SwiftUI 2.x features and improvements
+* Zero UIKit
 * No 3rd party dependencies 💪
+
+If you are curious about the architecture approach, check out my Redux-like architecture with SwiftUI series [here](https://danielbernal.co/redux-like-architecture-with-swiftui-basics/)
 
 
 Building
