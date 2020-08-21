@@ -16,6 +16,16 @@ Features
 * Localized in English and Spanish
 
 
+Tech Stack
+----------------------
+Bouncer is written 100% in Swift, for iOS 14 and features things like:
+
+* All new SwiftUI lifecycle (No storyboards, Appdelegate or UIKit)
+* Redux-like architecture
+* Combine
+* SwiftUI 2.x features and improvements
+
+
 Building
 ----------------------
 
@@ -26,7 +36,8 @@ Note: This version is a complete Rewrite Using SwiftUI 2.0, so you will need Xco
 Latest Release
 ----------------------
 
-Too lazy to build it yourself?  Download the latest stable from the [App Store](https://apps.apple.com/us/app/bouncer-sms-block-list/id1457476313) for free.
+The old version (UIkit based) is available from the [App Store](https://apps.apple.com/us/app/bouncer-sms-block-list/id1457476313) for free.  
+This version will be released when iOS 14 becomes available to the public.
 
 
 Contribute
