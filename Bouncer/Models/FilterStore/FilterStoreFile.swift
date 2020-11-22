@@ -21,6 +21,13 @@ final class FilterStoreFile: FilterStore {
             .appendingPathComponent(Self.filterListFile)
     }
     
+    private func fileExists(url: URL) -> Bool {
+        guard let url = self.fileURL else {
+            return false
+        }
+        return FileManager.default.fileExists(atPath: url.path)
+    }
+    
     private func saveToDisk(filters: [Filter]) {
         guard let url = fileURL else {
             return
@@ -44,11 +51,18 @@ extension FilterStoreFile {
                 promise(.failure(.loadError))
                 return
             }
+            // Create the filter store if it does not exist
+            if(!self.fileExists(url: url)) {
+                let filters = [Filter]()
+                self.saveToDisk(filters: filters)
+                promise(.success(filters))
+            }
             do {
                 let data = try Data(contentsOf: url)
                 filters = try JSONDecoder().decode([Filter].self, from: data)
                 promise(.success(filters))
             } catch {
+                 
                 promise(.failure(.decodingError))
             }
         }
