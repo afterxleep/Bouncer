@@ -34,7 +34,7 @@ If you are curious about the architecture approach, check out my [Redux-like arc
 Building
 ----------------------
 
-Fire up XCode 12 (Currently beta), open Bouncer.xcodeproj and hit Build.  There are no dependencies or additional requirements.
+Fire up XCode 12, open Bouncer.xcodeproj and hit Build.  There are no dependencies or additional requirements.
 
 Latest Release
 ----------------------
