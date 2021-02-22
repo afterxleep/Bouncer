@@ -25,8 +25,14 @@ struct ReviewServiceStoreKit: ReviewService {
         // Has the process been completed several times and the user has not already been prompted for this version?
         if ((appSettings.numberOfLaunches % launchesMultipleRqeuired) == 0) && currentVersion != lastVersionPromptedForReview {
             appSettings.lastVersionPromptedForReview = currentVersion
-            SKStoreReviewController.requestReview()
 
+            if #available(iOS 14.0, *) {
+                if let scene = UIApplication.shared.connectedScenes.first(where: { $0.activationState == .foregroundActive }) as? UIWindowScene {
+                        SKStoreReviewController.requestReview(in: scene)
+                }
+            } else {
+                SKStoreReviewController.requestReview()
+            }
         }
     }
     
