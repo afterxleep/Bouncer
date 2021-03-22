@@ -7,14 +7,14 @@ import Foundation
 import Combine
 
 final class FilterStoreFile: FilterStore {
-
+    
     static let filterListFile = "filters.json"
     static let groupContainer = "group.com.banshai.bouncer"
     static let filterListFileV1 = "wordlist.filter"
     
     var filters: [Filter] = []
     var cancellables = [AnyCancellable]()
-
+    
     private var fileURL: URL? {
         return FileManager.default
             .containerURL(forSecurityApplicationGroupIdentifier: Self.groupContainer)?
@@ -62,7 +62,7 @@ extension FilterStoreFile {
                 filters = try JSONDecoder().decode([Filter].self, from: data)
                 promise(.success(filters))
             } catch {
-                 
+                
                 promise(.failure(.decodingError))
             }
         }
@@ -81,6 +81,23 @@ extension FilterStoreFile {
                 })
                 .store(in: &self.cancellables)
         }.eraseToAnyPublisher()
+    }
+    
+    func update(filter: Filter) -> AnyPublisher<Void, Never> {
+        return Future<Void, Never> { promise in
+            self.fetch()
+                .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] result in
+                    var filters = result
+                    
+                    if let filterIndex = result.firstIndex(where: { $0.id == filter.id }) {
+                        filters[filterIndex] = filter
+                        self?.saveToDisk(filters: filters)
+                        promise(.success(()))
+                    }
+                })
+                .store(in: &self.cancellables)
+        }
+        .eraseToAnyPublisher()
     }
     
     func remove(uuid: UUID) -> AnyPublisher<Void, FilterStoreError> {
