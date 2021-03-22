@@ -14,55 +14,60 @@ enum FilterMiddlewareError {
 }
 
 func filterMiddleware(filterStore: FilterStore) -> Middleware<AppState, AppAction> {
-
+    
     return { state, action in
         switch action {
-
-            case .filter(action: .fetch):
-
-                return filterStore.fetch()
-                    .map { AppAction.filter(action: .fetchComplete(filters: $0 )) }
-                    .catch { (error: FilterStoreError) -> Just<AppAction> in
-                        switch(error) {
-                        case .loadError:
-                            return Just(AppAction.filter(action: .fetchError(error: FilterMiddlewareError.loadError)))
-
-                        default:
-                            return Just(AppAction.filter(action: .fetchError(error: FilterMiddlewareError.unknown)))
-                        }
+        
+        case .filter(action: .fetch):
+            return filterStore.fetch()
+                .map { AppAction.filter(action: .fetchComplete(filters: $0 )) }
+                .catch { (error: FilterStoreError) -> Just<AppAction> in
+                    switch(error) {
+                    case .loadError:
+                        return Just(AppAction.filter(action: .fetchError(error: FilterMiddlewareError.loadError)))
+                        
+                    default:
+                        return Just(AppAction.filter(action: .fetchError(error: FilterMiddlewareError.unknown)))
                     }
-                    .eraseToAnyPublisher()
-
-            case .filter(action: .add(let filter)):
-                return filterStore.add(filter: filter)
-                    .map { AppAction.filter(action: .fetch) }
-                    .catch { (error: FilterStoreError) -> Just<AppAction> in
-                        switch(error) {
-                        case .addError:
-                            return Just(AppAction.filter(action: .addError(error: FilterMiddlewareError.addError)))
-                        default:
-                            return Just(AppAction.filter(action: .addError(error: FilterMiddlewareError.unknown)))
-                        }
+                }
+                .eraseToAnyPublisher()
+            
+        case .filter(action: .add(let filter)):
+            return filterStore.add(filter: filter)
+                .map { AppAction.filter(action: .fetch) }
+                .catch { (error: FilterStoreError) -> Just<AppAction> in
+                    switch(error) {
+                    case .addError:
+                        return Just(AppAction.filter(action: .addError(error: FilterMiddlewareError.addError)))
+                    default:
+                        return Just(AppAction.filter(action: .addError(error: FilterMiddlewareError.unknown)))
                     }
-                    .eraseToAnyPublisher()
-                
-            case .filter(action: .delete(let uuid)):
-                return filterStore.remove(uuid: uuid)                    
-                    .map { AppAction.filter(action: .fetch) }
-                    .catch { (error: FilterStoreError) -> Just<AppAction> in
-                        switch(error) {
-                        case .addError:
-                            return Just(AppAction.filter(action: .deleteError(error: FilterMiddlewareError.deleteError)))
-
-                        default:
-                            return Just(AppAction.filter(action: .deleteError(error: FilterMiddlewareError.unknown)))
-                        }
+                }
+                .eraseToAnyPublisher()
+            
+        case .filter(action: .update(filter: let filter)):
+            return filterStore.update(filter: filter)
+                .map { AppAction.filter(action: .fetch) }
+                .eraseToAnyPublisher()
+            
+        case .filter(action: .delete(let uuid)):
+            return filterStore.remove(uuid: uuid)                    
+                .map { AppAction.filter(action: .fetch) }
+                .catch { (error: FilterStoreError) -> Just<AppAction> in
+                    switch(error) {
+                    case .addError:
+                        return Just(AppAction.filter(action: .deleteError(error: FilterMiddlewareError.deleteError)))
+                        
+                    default:
+                        return Just(AppAction.filter(action: .deleteError(error: FilterMiddlewareError.unknown)))
                     }
-                    .eraseToAnyPublisher()
-
-            default:
-                break
+                }
+                .eraseToAnyPublisher()
+            
+        default:
+            break
         }
         return Empty().eraseToAnyPublisher()
     }
+    
 }
