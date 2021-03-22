@@ -9,6 +9,7 @@
 "FILTER_TYPE_SELECTION_LABEL" = "Filtar usando:";
 "FILTER_ADD_TEXT_PLACEHOLDER" = "Ingresa una palabra o frase";
 "FILTER_ADD_VIEW_TITLE" = "Agregar Filtro";
+"FILTER_ADD_EDIT_VIEW_TITLE" = "Actualizar Filtro";
 "SAVE" = "Guardar";
 "CANCEL" = "Cancelar";
 "ADVANCED" = "Avanzado";
