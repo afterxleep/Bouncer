@@ -5,61 +5,59 @@
 
 import SwiftUI
 
-struct FilterAddView: View {    
+enum InteractionType: Equatable {
+    case add
+    case update
+}
+
+struct FilterAddView: View {
+    
     var onAdd: (Filter) -> Void
-
+    var interactionType: InteractionType
+    var filter: Filter?
+    
     @Environment(\.presentationMode) var presentationMode
-    @State var filterType: FilterType = .any
-    @State var filterDestination: FilterDestination = .junk
-    @State var filterTerm: String = ""
-    @State var exactMatch: Bool = false
-
+    @State var filterType: FilterType
+    @State var filterDestination: FilterDestination
+    @State var filterTerm: String
+    @State var exactMatch: Bool
+    
     var body: some View {
-        NavigationView {
-            Form {
-                Section(header: Text("FILTER_INFORMATION")) {
-                    Picker("FILTER_TYPE_SELECTION_LABEL", selection: $filterType) {
-                        ForEach(FilterType.allCases, id: \.self) { value in
-                            HStack {
-                                Image(systemName: value.formDescription.decoration.image).foregroundColor(value.formDescription.decoration.color)
-                                Text(value.formDescription.text)
-                            }
-                        }
-                    }.pickerStyle(DefaultPickerStyle())
-                    HStack {
-                        Text("CONTAINS_LABEL")
-                        Spacer()
-                        TextField("FILTER_ADD_TEXT_PLACEHOLDER", text: $filterTerm)
-                            .autocapitalization(.none)
-                            .disableAutocorrection(true)
-                            .multilineTextAlignment(.trailing)
-                    }
-                    Picker("FILTER_ACTION_LABEL", selection: $filterDestination) {
-                        ForEach(FilterDestination.allCases, id: \.self) { value in
-                            HStack {
-                                Image(systemName: value.formDescription.decoration.image).foregroundColor(value.formDescription.decoration.color)
-                                Text(value.formDescription.text)
-                            }
-                        }
-                    }
-                    .pickerStyle(DefaultPickerStyle())
-                }
+        switch interactionType {
+        case .add:
+            NavigationView {
+                form
+                    .navigationBarTitle("FILTER_ADD_VIEW_TITLE")
+                    .navigationBarItems(leading: cancelButton, trailing: saveButton)
             }
-            .navigationBarTitle("FILTER_ADD_VIEW_TITLE")
-            .navigationBarItems(leading: cancelButton, trailing: saveButton)
+        case .update:
+            form
+                .navigationBarTitle("FILTER_ADD_EDIT_VIEW_TITLE")
+                .navigationBarItems(trailing: saveButton)
         }
     }
+    
 }
 
 struct FilterAddView_Previews: PreviewProvider {
     static var previews: some View {
-        FilterAddView(onAdd: {_ in })
+        FilterAddView(interactionType: .add, onAdd: {_ in })
     }
 }
 
 extension FilterAddView {
-
-    var cancelButton: some View {
+    
+    init(interactionType: InteractionType, filter: Filter? = nil, onAdd: @escaping (Filter) -> Void) {
+        self.filter = filter
+        self._filterType = .init(initialValue: filter?.type ?? .any)
+        self._filterTerm = .init(initialValue: filter?.phrase ?? "")
+        self._filterDestination = .init(initialValue: filter?.action ?? .junk)
+        self._exactMatch = .init(initialValue: false)
+        self.interactionType = interactionType
+        self.onAdd = onAdd
+    }
+    
+    private var cancelButton: some View {
         Button(
             action: {
                 presentationMode.wrappedValue.dismiss()
@@ -67,15 +65,12 @@ extension FilterAddView {
             Text("CANCEL")
         }
     }
-
-    var saveButton: some View {
+    
+    private var saveButton: some View {
         Button(
             action: {
                 if(filterTerm.count > 0) {
-                    onAdd(Filter(id: UUID(),
-                                 phrase: filterTerm,
-                                 type: filterType,
-                                 action: filterDestination))
+                    onAdd(filterToSave)
                     self.presentationMode.wrappedValue.dismiss()
                 }
             }
@@ -83,4 +78,44 @@ extension FilterAddView {
             Text("SAVE").disabled(filterTerm.count == 0)
         }
     }
+    
+    private var filterToSave: Filter {
+        Filter(id: filter?.id ?? UUID(),
+               phrase: filterTerm,
+               type: filterType,
+               action: filterDestination)
+    }
+    
+    private var form: some View {
+        Form {
+            Section(header: Text("FILTER_INFORMATION")) {
+                Picker("FILTER_TYPE_SELECTION_LABEL", selection: $filterType) {
+                    ForEach(FilterType.allCases, id: \.self) { value in
+                        HStack {
+                            Image(systemName: value.formDescription.decoration.image).foregroundColor(value.formDescription.decoration.color)
+                            Text(value.formDescription.text)
+                        }
+                    }
+                }.pickerStyle(DefaultPickerStyle())
+                HStack {
+                    Text("CONTAINS_LABEL")
+                    Spacer()
+                    TextField("FILTER_ADD_TEXT_PLACEHOLDER", text: $filterTerm)
+                        .autocapitalization(.none)
+                        .disableAutocorrection(true)
+                        .multilineTextAlignment(.trailing)
+                }
+                Picker("FILTER_ACTION_LABEL", selection: $filterDestination) {
+                    ForEach(FilterDestination.allCases, id: \.self) { value in
+                        HStack {
+                            Image(systemName: value.formDescription.decoration.image).foregroundColor(value.formDescription.decoration.color)
+                            Text(value.formDescription.text)
+                        }
+                    }
+                }
+                .pickerStyle(DefaultPickerStyle())
+            }
+        }
+    }
+    
 }
