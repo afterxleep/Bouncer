@@ -8,10 +8,10 @@
 
 /* Add Filter View */
 "FILTER_TYPE_SELECTION_LABEL" = "When";
-"FILTER_ADD_TEXT_PLACEHOLDER" = "Enter a word or phrase";
-"FILTER_ADD_TEXT_LABEL" = "Contains";
+"FILTER_TEXT_PLACEHOLDER" = "Enter a word or phrase";
+"FILTER_CONTAINS_TEXT_LABEL" = "Contains";
 "FILTER_ADD_VIEW_TITLE" = "Add Filter";
-"FILTER_ADD_EDIT_VIEW_TITLE" = "Update Filter";
+"FILTER_EDIT_VIEW_TITLE" = "Update Filter";
 "SAVE" = "Save";
 "CANCEL" = "Cancel";
 "ADVANCED" = "Advanced";
@@ -19,7 +19,6 @@
 "EXACT_MATCH" = "Exact match";
 "EXACT_MATCH_CAPTION" = "Filter messages only when the sender/message are an exact match to the provided word or phrase.";
 "FILTER_ACTION_LABEL" = "Mark as";
-"CONTAINS_LABEL" = "Contains";
 "JUNK_ACTION" = "Junk";
 "TRANSACTION_ACTION" = "Transaction";
 "PROMOTION_ACTION" = "Promotion";

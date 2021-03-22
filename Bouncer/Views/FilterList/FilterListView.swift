@@ -11,7 +11,7 @@ struct FilterListView: View {
     let openSettings: () -> Void
     
     @State var showingSettings = false
-    @State var showingAddForm = false
+    @State var showingFilterDetail = false
     @State var showingInApp = false
     
     var body: some View {
@@ -44,7 +44,7 @@ extension FilterListView {
             if(filters.count > 0) {
                 List {
                     ForEach(filters) { filter in
-                        NavigationLink(destination: FilterAddContainerView(interactionType: .update,
+                        NavigationLink(destination: FilterDetailContainerView(interactionType: .update,
                                                                            filter: filter)) {
                             FilterRowView(filter: filter)
                         }
@@ -87,10 +87,10 @@ extension FilterListView {
     var addButton: some View {
         Group {
             Button(
-                action: { showingAddForm = true }) {
+                action: { showingFilterDetail = true }) {
                 Image(systemName: SYSTEM_IMAGES.ADD.image).imageScale(.large)
-            }.sheet(isPresented: $showingAddForm) {
-                FilterAddContainerView()
+            }.sheet(isPresented: $showingFilterDetail) {
+                FilterDetailContainerView()
             }
         }
     }

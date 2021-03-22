@@ -1,5 +1,5 @@
 //
-//  FilterAddView.swift
+//  FilterDetailView.swift
 //  Bouncer
 //
 
@@ -10,9 +10,9 @@ enum InteractionType: Equatable {
     case update
 }
 
-struct FilterAddView: View {
+struct FilterDetailView: View {
     
-    var onAdd: (Filter) -> Void
+    var onSave: (Filter) -> Void
     var interactionType: InteractionType
     var filter: Filter?
     
@@ -32,29 +32,29 @@ struct FilterAddView: View {
             }
         case .update:
             form
-                .navigationBarTitle("FILTER_ADD_EDIT_VIEW_TITLE")
+                .navigationBarTitle("FILTER_EDIT_VIEW_TITLE")
                 .navigationBarItems(trailing: saveButton)
         }
     }
     
 }
 
-struct FilterAddView_Previews: PreviewProvider {
+struct FilterDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        FilterAddView(interactionType: .add, onAdd: {_ in })
+        FilterDetailView(interactionType: .add, onSave: {_ in })
     }
 }
 
-extension FilterAddView {
+extension FilterDetailView {
     
-    init(interactionType: InteractionType, filter: Filter? = nil, onAdd: @escaping (Filter) -> Void) {
+    init(interactionType: InteractionType, filter: Filter? = nil, onSave: @escaping (Filter) -> Void) {
         self.filter = filter
         self._filterType = .init(initialValue: filter?.type ?? .any)
         self._filterTerm = .init(initialValue: filter?.phrase ?? "")
         self._filterDestination = .init(initialValue: filter?.action ?? .junk)
         self._exactMatch = .init(initialValue: false)
         self.interactionType = interactionType
-        self.onAdd = onAdd
+        self.onSave = onSave
     }
     
     private var cancelButton: some View {
@@ -70,7 +70,7 @@ extension FilterAddView {
         Button(
             action: {
                 if(filterTerm.count > 0) {
-                    onAdd(filterToSave)
+                    onSave(filterToSave)
                     self.presentationMode.wrappedValue.dismiss()
                 }
             }
@@ -98,9 +98,9 @@ extension FilterAddView {
                     }
                 }.pickerStyle(DefaultPickerStyle())
                 HStack {
-                    Text("CONTAINS_LABEL")
+                    Text("FILTER_CONTAINS_TEXT_LABEL")
                     Spacer()
-                    TextField("FILTER_ADD_TEXT_PLACEHOLDER", text: $filterTerm)
+                    TextField("FILTER_TEXT_PLACEHOLDER", text: $filterTerm)
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
                         .multilineTextAlignment(.trailing)
