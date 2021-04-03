@@ -6,6 +6,8 @@
 import Foundation
 import Combine
 
+private typealias DiskWriteError = String
+
 final class FilterStoreFile: FilterStore {
     
     static let filterListFile = "filters.json"
@@ -28,41 +30,56 @@ final class FilterStoreFile: FilterStore {
         return FileManager.default.fileExists(atPath: url.path)
     }
     
-    private func saveToDisk(filters: [Filter]) {
+    private func saveToDisk(filters: [Filter]) -> DiskWriteError? {
         guard let url = fileURL else {
-            return
+            return nil
         }
+        
         do {
             try JSONEncoder().encode(filters)
                 .write(to: url)
+            return nil
         } catch {
-            print(error)
+            let errorMessage = error.localizedDescription
+            #if DEBUG
+            print(errorMessage)
+            #endif
+            
+            return errorMessage
         }
     }
+    
 }
 
 
 extension FilterStoreFile {
     
     func fetch() -> AnyPublisher<[Filter], FilterStoreError> {
-        return Future<[Filter], FilterStoreError> { promise in
+        return Future<[Filter], FilterStoreError> { [weak self] promise in
             var filters: [Filter] = []
-            guard let url = self.fileURL else {
+            guard
+                let self = self,
+                let url = self.fileURL else {
                 promise(.failure(.loadError))
                 return
             }
+            
             // Create the filter store if it does not exist
             if(!self.fileExists(url: url)) {
                 let filters = [Filter]()
-                self.saveToDisk(filters: filters)
-                promise(.success(filters))
+                
+                if let errorMessage = self.saveToDisk(filters: filters) {
+                    promise(.failure(.diskError(errorMessage)))
+                } else {
+                    promise(.success(filters))
+                }
             }
+            
             do {
                 let data = try Data(contentsOf: url)
                 filters = try JSONDecoder().decode([Filter].self, from: data)
                 promise(.success(filters))
             } catch {
-                
                 promise(.failure(.decodingError))
             }
         }
@@ -73,11 +90,17 @@ extension FilterStoreFile {
         return Future<Void, FilterStoreError> { promise in
             self.fetch()
                 .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] result in
+                    guard let self = self else { return }
+                    
                     var filters: [Filter] = result
                     filters.append(filter)
                     filters = filters.sorted(by: { $1.phrase > $0.phrase })
-                    self?.saveToDisk(filters: filters)
-                    promise(.success(()))
+                    
+                    if let errorMessage = self.saveToDisk(filters: filters) {
+                        promise(.failure(.diskError(errorMessage)))
+                    } else {
+                        promise(.success(()))
+                    }
                 })
                 .store(in: &self.cancellables)
         }.eraseToAnyPublisher()
@@ -91,8 +114,12 @@ extension FilterStoreFile {
                     
                     if let filterIndex = result.firstIndex(where: { $0.id == filter.id }) {
                         filters[filterIndex] = filter
-                        self?.saveToDisk(filters: filters)
-                        promise(.success(()))
+                        
+                        if let errorMessage = self?.saveToDisk(filters: filters) {
+                            promise(.failure(.diskError(errorMessage)))
+                        } else {
+                            promise(.success(()))
+                        }
                     }
                 })
                 .store(in: &self.cancellables)
@@ -106,17 +133,24 @@ extension FilterStoreFile {
                 .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] result in
                     var filters: [Filter] = result
                     filters = filters.filter{$0.id != uuid}
-                    self?.saveToDisk(filters: filters)
-                    promise(.success(()))
+                    
+                    if let errorMessage = self?.saveToDisk(filters: filters) {
+                        promise(.failure(.diskError(errorMessage)))
+                    } else {
+                        promise(.success(()))
+                    }
                 })
                 .store(in: &self.cancellables)
         }.eraseToAnyPublisher()
     }
     
     func reset() -> AnyPublisher<Void, FilterStoreError> {
-        return Future<Void, FilterStoreError> { promise in
-            self.saveToDisk(filters: [])
-            promise(.success(()))
+        return Future<Void, FilterStoreError> { [weak self] promise in
+            if let errorMessage = self?.saveToDisk(filters: []) {
+                promise(.failure(.diskError(errorMessage)))
+            } else {
+                promise(.success(()))
+            }
         }.eraseToAnyPublisher()
     }
     

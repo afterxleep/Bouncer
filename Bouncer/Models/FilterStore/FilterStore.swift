@@ -39,6 +39,7 @@ enum FilterStoreError: Error {
     case updateError
     case deleteError
     case migrationError
+    case diskError(String)
     case other
 }
 
