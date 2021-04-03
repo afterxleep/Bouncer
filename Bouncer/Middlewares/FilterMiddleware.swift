@@ -9,6 +9,7 @@ import Combine
 enum FilterMiddlewareError {
     case loadError
     case addError
+    case updateError
     case deleteError
     case unknown
 }
@@ -48,6 +49,14 @@ func filterMiddleware(filterStore: FilterStore) -> Middleware<AppState, AppActio
         case .filter(action: .update(filter: let filter)):
             return filterStore.update(filter: filter)
                 .map { AppAction.filter(action: .fetch) }
+                .catch { (error: FilterStoreError) -> Just<AppAction> in
+                    switch error {
+                    case .updateError:
+                        return Just(AppAction.filter(action: .updateError(error: .updateError)))
+                    default:
+                        return Just(AppAction.filter(action: .updateError(error: .unknown)))
+                    }
+                }
                 .eraseToAnyPublisher()
             
         case .filter(action: .delete(let uuid)):

@@ -83,8 +83,8 @@ extension FilterStoreFile {
         }.eraseToAnyPublisher()
     }
     
-    func update(filter: Filter) -> AnyPublisher<Void, Never> {
-        return Future<Void, Never> { promise in
+    func update(filter: Filter) -> AnyPublisher<Void, FilterStoreError> {
+        return Future<Void, FilterStoreError> { promise in
             self.fetch()
                 .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] result in
                     var filters = result
