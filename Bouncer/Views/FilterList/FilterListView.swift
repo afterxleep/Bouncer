@@ -45,10 +45,10 @@ extension FilterListView {
                 List {
                     ForEach(filters) { filter in
                         NavigationLink(destination: FilterDetailContainerView(interactionType: .update,
-                                                                           filter: filter)) {
+                                                                              filter: filter)) {
                             FilterRowView(filter: filter)
                         }
-                    }.onDelete(perform: onDelete )
+                    }.onDelete(perform: onDelete)
                 }
                 
                 .listStyle(PlainListStyle())

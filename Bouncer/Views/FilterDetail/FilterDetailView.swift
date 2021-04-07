@@ -5,85 +5,38 @@
 
 import SwiftUI
 
-enum InteractionType: Equatable {
-    case add
-    case update
-}
-
-struct FilterDetailView: View {
+struct FilterDetailView<L: View, R: View>: View {
     
-    var onSave: (Filter) -> Void
-    var interactionType: InteractionType
-    var filter: Filter?
+    var isEmbedded = true
+    var title: String
+    var leadingBarItem: L
+    var trailingBarItem: R
     
-    @Environment(\.presentationMode) var presentationMode
-    @State var filterType: FilterType
-    @State var filterDestination: FilterDestination
-    @State var filterTerm: String
-    @State var exactMatch: Bool
+    @Binding var filterType: FilterType
+    @Binding var filterDestination: FilterDestination
+    @Binding var filterTerm: String
+    @Binding var exactMatch: Bool
     
     var body: some View {
-        switch interactionType {
-        case .add:
-            NavigationView {
-                form
-                    .navigationBarTitle("FILTER_ADD_VIEW_TITLE")
-                    .navigationBarItems(leading: cancelButton, trailing: saveButton)
-            }
-        case .update:
-            form
-                .navigationBarTitle("FILTER_EDIT_VIEW_TITLE")
-                .navigationBarItems(trailing: saveButton)
-        }
+        rootView
     }
     
-}
-
-struct FilterDetailView_Previews: PreviewProvider {
-    static var previews: some View {
-        FilterDetailView(interactionType: .add, onSave: {_ in })
-    }
 }
 
 extension FilterDetailView {
     
-    init(interactionType: InteractionType, filter: Filter? = nil, onSave: @escaping (Filter) -> Void) {
-        self.filter = filter
-        self._filterType = .init(initialValue: filter?.type ?? .any)
-        self._filterTerm = .init(initialValue: filter?.phrase ?? "")
-        self._filterDestination = .init(initialValue: filter?.action ?? .junk)
-        self._exactMatch = .init(initialValue: false)
-        self.interactionType = interactionType
-        self.onSave = onSave
-    }
-    
-    private var cancelButton: some View {
-        Button(
-            action: {
-                presentationMode.wrappedValue.dismiss()
-            }) {
-            Text("CANCEL")
-        }
-    }
-    
-    private var saveButton: some View {
-        Button(
-            action: {
-                if(filterTerm.count > 0) {
-                    onSave(filterToSave)
-                    self.presentationMode.wrappedValue.dismiss()
-                }
+    @ViewBuilder private var rootView: some View {
+        if isEmbedded {
+            NavigationView {
+                form
+                    .navigationBarTitle(title.localized)
+                    .navigationBarItems(leading: leadingBarItem, trailing: trailingBarItem)
             }
-        ) {
-            Text("SAVE").disabled(filterTerm.count == 0)
+        } else {
+            form
+                .navigationBarTitle(title.localized)
+                .navigationBarItems(trailing: trailingBarItem)
         }
-    }
-    
-    private var filterToSave: Filter {
-        Filter(id: filter?.id ?? UUID(),
-               phrase: filterTerm,
-               type: filterType,
-               action: filterDestination)
     }
     
     private var form: some View {
@@ -118,4 +71,16 @@ extension FilterDetailView {
         }
     }
     
+}
+
+struct FilterDetailView_Previews: PreviewProvider {
+    static var previews: some View {
+        FilterDetailView(title: "Filter Detail View",
+                         leadingBarItem: Text("LBI"),
+                         trailingBarItem: Text("RBI"),
+                         filterType: .constant(.any),
+                         filterDestination: .constant(.junk),
+                         filterTerm: .constant("Query Term"),
+                         exactMatch: .constant(false))
+    }
 }
