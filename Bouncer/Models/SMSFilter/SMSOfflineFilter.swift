@@ -20,13 +20,14 @@ struct SMSOfflineFilter {
         var txt = ""
         switch (filter.type) {
             case .sender:
-                txt = message.sender.lowercased()
+                txt = message.sender
             case .message:
-                txt = message.text.lowercased()
+                txt = message.text
             default:
-                txt = "\(message.sender.lowercased()) \(message.text.lowercased())"
+                txt = "\(message.sender) \(message.text)"
         }
-        return txt.contains(filter.phrase)
+
+        return txt.lowercased().contains(filter.phrase) || (txt.range(of: filter.phrase, options:[.regularExpression, .caseInsensitive]) != nil)
     }
     
     func filterMessage(message: SMSMessage) -> ILMessageFilterAction {
