@@ -29,12 +29,12 @@ extension FilterDetailView {
         if isEmbedded {
             NavigationView {
                 form
-                    .navigationBarTitle(title.localized)
+                    .navigationBarTitle(NSLocalizedString(title, comment: "New Filter"))
                     .navigationBarItems(leading: leadingBarItem, trailing: trailingBarItem)
             }
         } else {
             form
-                .navigationBarTitle(title.localized)
+                .navigationBarTitle(NSLocalizedString(title, comment: "Update Filter"))
                 .navigationBarItems(trailing: trailingBarItem)
         }
     }

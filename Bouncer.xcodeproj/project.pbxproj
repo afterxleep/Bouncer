@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		09491AEF261D30A400CF8073 /* String+Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09491AEE261D30A400CF8073 /* String+Empty.swift */; };
-		09491AF5261D316E00CF8073 /* String+Localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09491AF4261D316E00CF8073 /* String+Localized.swift */; };
 		D60A19C724A69F1F0002E8BD /* SMSMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60A19C624A69F1F0002E8BD /* SMSMessage.swift */; };
 		D60A19C824A6A2C80002E8BD /* SMSMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60A19C624A69F1F0002E8BD /* SMSMessage.swift */; };
 		D61497E924E4430E00AF997E /* FilterAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61497E824E4430E00AF997E /* FilterAction.swift */; };
@@ -100,7 +99,6 @@
 
 /* Begin PBXFileReference section */
 		09491AEE261D30A400CF8073 /* String+Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Empty.swift"; sourceTree = "<group>"; };
-		09491AF4261D316E00CF8073 /* String+Localized.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Localized.swift"; sourceTree = "<group>"; };
 		D60A19C624A69F1F0002E8BD /* SMSMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSMessage.swift; sourceTree = "<group>"; };
 		D61497E824E4430E00AF997E /* FilterAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterAction.swift; sourceTree = "<group>"; };
 		D61497EB24E4433800AF997E /* FilterReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterReducer.swift; sourceTree = "<group>"; };
@@ -402,7 +400,6 @@
 			children = (
 				D664B24724AA998700EB826D /* UIImage+Gradient.swift */,
 				09491AEE261D30A400CF8073 /* String+Empty.swift */,
-				09491AF4261D316E00CF8073 /* String+Localized.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -676,7 +673,6 @@
 				D6233A7F24A651A200B37A6A /* SMSOfflineFilter.swift in Sources */,
 				D6529F9F24A413A6009AE3FF /* TutorialView.swift in Sources */,
 				D60A19C724A69F1F0002E8BD /* SMSMessage.swift in Sources */,
-				09491AF5261D316E00CF8073 /* String+Localized.swift in Sources */,
 				D61497E924E4430E00AF997E /* FilterAction.swift in Sources */,
 				D6CC124D24E4563F00388160 /* SettingsAction.swift in Sources */,
 				D664B24824AA998700EB826D /* UIImage+Gradient.swift in Sources */,
