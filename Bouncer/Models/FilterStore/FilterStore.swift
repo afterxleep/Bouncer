@@ -36,8 +36,10 @@ enum FilterStoreError: Error {
     case loadError
     case decodingError
     case addError
+    case updateError
     case deleteError
     case migrationError
+    case diskError(String)
     case other
 }
 
@@ -45,6 +47,7 @@ enum FilterStoreError: Error {
 protocol FilterStore {
     func fetch() -> AnyPublisher<[Filter], FilterStoreError>
     func add(filter: Filter) -> AnyPublisher<Void, FilterStoreError>
+    func update(filter: Filter) -> AnyPublisher<Void, FilterStoreError>
     func remove(uuid: UUID) -> AnyPublisher<Void, FilterStoreError>
     func reset() -> AnyPublisher<Void, FilterStoreError>
     func migrateFromV1() -> Void

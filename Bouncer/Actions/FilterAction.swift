@@ -11,7 +11,8 @@ enum FilterAction {
     case fetchError(error: FilterMiddlewareError)
     case add(filter: Filter)
     case addError(error: FilterMiddlewareError)
+    case update(filter: Filter)
+    case updateError(error: FilterMiddlewareError)
     case delete(uuid: UUID)
     case deleteError(error: FilterMiddlewareError)
-
 }

@@ -9,18 +9,18 @@ struct FilterListView: View {
     var filters: [Filter]
     let onDelete: (IndexSet) -> Void
     let openSettings: () -> Void
-
+    
     @State var showingSettings = false
-    @State var showingAddForm = false
+    @State var showingFilterDetail = false
     @State var showingInApp = false
-
+    
     var body: some View {
         ZStack {
             BackgroundView()
             NavigationView {
                 filterList
-                .navigationBarTitle("LIST_VIEW_TITLE")
-                .navigationBarItems(leading: helpButton, trailing: addButton)
+                    .navigationBarTitle("LIST_VIEW_TITLE")
+                    .navigationBarItems(leading: helpButton, trailing: addButton)
             }
         }
     }
@@ -38,17 +38,22 @@ struct FilterListView_Previews: PreviewProvider {
 }
 
 extension FilterListView {
-
+    
     var filterList: some View {
         Group {
             if(filters.count > 0) {
                 List {
                     ForEach(filters) { filter in
-                       FilterRowView(filter: filter)
-                    }.onDelete(perform: onDelete )
+                        NavigationLink(destination: FilterDetailContainerView(interactionType: .update,
+                                                                              filter: filter)) {
+                            FilterRowView(filter: filter)
+                        }
+                    }.onDelete(perform: onDelete)
                 }
+                
                 .listStyle(PlainListStyle())
-            } else {
+            }
+            else {
                 VStack(alignment: .center) {
                     Group() {
                         Text("EMPTY_LIST_TITLE").font(.title2).bold().padding()
@@ -68,7 +73,7 @@ extension FilterListView {
             }
         }
     }
-
+    
     var helpButton: some View {
         Group {
             Button(action: { showingSettings = true }) {
@@ -78,15 +83,15 @@ extension FilterListView {
             }
         }
     }
-
+    
     var addButton: some View {
         Group {
             Button(
-                action: { showingAddForm = true }) {
-                    Image(systemName: SYSTEM_IMAGES.ADD.image).imageScale(.large)
-                }.sheet(isPresented: $showingAddForm) {
-                    FilterAddContainerView()
-                }
+                action: { showingFilterDetail = true }) {
+                Image(systemName: SYSTEM_IMAGES.ADD.image).imageScale(.large)
+            }.sheet(isPresented: $showingFilterDetail) {
+                FilterDetailContainerView()
             }
         }
+    }
 }
