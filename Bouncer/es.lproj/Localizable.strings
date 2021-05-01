@@ -7,8 +7,10 @@
 */
 
 "FILTER_TYPE_SELECTION_LABEL" = "Filtar usando:";
-"FILTER_ADD_TEXT_PLACEHOLDER" = "Ingresa una palabra o frase";
+"FILTER_TEXT_PLACEHOLDER" = "Ingresa una palabra o frase";
+"FILTER_CONTAINS_TEXT_LABEL" = "Contiene";
 "FILTER_ADD_VIEW_TITLE" = "Agregar Filtro";
+"FILTER_EDIT_VIEW_TITLE" = "Actualizar Filtro";
 "SAVE" = "Guardar";
 "CANCEL" = "Cancelar";
 "ADVANCED" = "Avanzado";
@@ -16,7 +18,6 @@
 "EXACT_MATCH" = "Ocurrencia Exacta";
 "EXACT_MATCH_CAPTION" = "Filtra los mensajes solo cuando el remitente/mensaje es exactamente igual a la palabra o frase especificada arriba.";
 "FILTER_ACTION_LABEL" = "Marcar Como";
-"CONTAINS_LABEL" = "Contiene";
 "JUNK_ACTION" = "Spam";
 "TRANSACTION_ACTION" = "Transacción";
 "PROMOTION_ACTION" = "Promoción";
