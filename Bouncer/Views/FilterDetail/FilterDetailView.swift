@@ -42,14 +42,14 @@ extension FilterDetailView {
     private var form: some View {
         Form {
             Section(header: Text("FILTER_INFORMATION")) {
-                Picker("FILTER_TYPE_SELECTION_LABEL", selection: $filterType) {
+                Picker(selection: $filterType, label: Text("FILTER_TYPE_SELECTION_LABEL")) {
                     ForEach(FilterType.allCases, id: \.self) { value in
                         HStack {
                             Image(systemName: value.formDescription.decoration.image).foregroundColor(value.formDescription.decoration.color)
                             Text(value.formDescription.text)
                         }
                     }
-                }.pickerStyle(DefaultPickerStyle())
+                }
                 HStack {
                     Text("FILTER_CONTAINS_TEXT_LABEL")
                     Spacer()
@@ -58,7 +58,7 @@ extension FilterDetailView {
                         .disableAutocorrection(true)
                         .multilineTextAlignment(.trailing)
                 }
-                Picker("FILTER_ACTION_LABEL", selection: $filterDestination) {
+                Picker(selection: $filterDestination, label: Text("FILTER_ACTION_LABEL")) {
                     ForEach(FilterDestination.allCases, id: \.self) { value in
                         HStack {
                             Image(systemName: value.formDescription.decoration.image).foregroundColor(value.formDescription.decoration.color)
@@ -66,8 +66,7 @@ extension FilterDetailView {
                         }
                     }
                 }
-                .pickerStyle(DefaultPickerStyle())
-            }
+            }            
         }
     }
     
