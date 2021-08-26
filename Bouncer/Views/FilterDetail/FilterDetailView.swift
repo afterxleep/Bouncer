@@ -66,7 +66,7 @@ extension FilterDetailView {
                         }
                     }
                 }
-            }            
+            }
         }
     }
     
