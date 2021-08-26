@@ -29,12 +29,12 @@ extension FilterDetailView {
         if isEmbedded {
             NavigationView {
                 form
-                    .navigationBarTitle(NSLocalizedString(title, comment: "New Filter"))
+                    .navigationBarTitle("NEW_FILTER")
                     .navigationBarItems(leading: leadingBarItem, trailing: trailingBarItem)
             }
         } else {
             form
-                .navigationBarTitle(NSLocalizedString(title, comment: "Update Filter"))
+                .navigationBarTitle("UPDATE_FILTER")
                 .navigationBarItems(trailing: trailingBarItem)
         }
     }
@@ -75,11 +75,11 @@ extension FilterDetailView {
 
 struct FilterDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        FilterDetailView(title: "Filter Detail View",
+        FilterDetailView(title: "Add Filter",
                          leadingBarItem: Text("LBI"),
                          trailingBarItem: Text("RBI"),
                          filterType: .constant(.any),
-                         filterDestination: .constant(.junk),
+                         filterDestination: .constant(.transaction),
                          filterTerm: .constant("Query Term"),
                          exactMatch: .constant(false))
     }

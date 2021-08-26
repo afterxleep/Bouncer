@@ -55,4 +55,6 @@
  "PAYMENT_PAGE_MESSAGE %lld" = "وتقتصر النسخة المجانية من Bouncer على %lld مرشحات، وهو ما يكفي عادة لمعظم الناس.";
  "UPGRADE_BUTTON_TEXT %@" = "الاشتراك بمبلغ %@ في السنة";
  "RESTORE_PURCHASE" = "استعادة المشتريات";
- "UPGRADE_EXPLANATION" = "قم بالترقية للحصول على مرشحات غير محدودة ومساعدتي في تحسين التطبيق."; 
+ "UPGRADE_EXPLANATION" = "قم بالترقية للحصول على مرشحات غير محدودة ومساعدتي في تحسين التطبيق.";
+ "NEW_FILTER" = "New Filter";
+ "UPDATE_FILTER" = "Update Filter";

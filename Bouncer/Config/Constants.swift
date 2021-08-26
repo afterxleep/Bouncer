@@ -27,7 +27,7 @@ struct SYSTEM_IMAGES {
     static let SENDER = SystemImage(image: "person", color: COLORS.DEFAULT_ICON_COLOR)
     static let MESSAGE_TEXT = SystemImage(image: "text.quote", color: COLORS.DEFAULT_ICON_COLOR)
     static let SPAM = SystemImage(image: "bin.xmark", color: COLORS.ALERT_COLOR)
-    static let TRANSACTION = SystemImage(image: "arrow.right.arrow.left", color: COLORS.OK_COLOR)
+    static let TRANSACTION = SystemImage(image: "arrow.left.arrow.right", color: COLORS.OK_COLOR)
     static let PROMOTION = SystemImage(image: "tag", color: COLORS.WARNING_COLOR)
     static let HELP = SystemImage(image: "questionmark.circle", color: COLORS.DEFAULT_COLOR)
     static let ADD = SystemImage(image: "plus.circle", color: COLORS.DEFAULT_COLOR)

@@ -53,3 +53,5 @@
 "PAYMENT_PAGE_TITLE" = "Obtén más filtros!";
 "PAYMENT_PAGE_MESSAGE %lld" = "La versión gratuita de Bouncer está limitada a %lld filtros";
 "UPGRADE_EXPLANATION" = "Actualiza para conseguir filtros ilimitados y ayudarme a seguir mejorando el app.";
+"NEW_FILTER" = "Nuevo Filtro";
+"UPDATE_FILTER" = "Editar Filtro";
