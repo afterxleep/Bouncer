@@ -1,60 +1,64 @@
 /*
-   Localizable.strings
-   Bouncer
+Localizable.strings
+Bouncer
 
-   Created by asaah18 on 7/13/21.
+Created by asaah18 on 7/13/21.
 
- */
+*/
 
- /* Add Filter View */
- "FILTER_TYPE_SELECTION_LABEL" =" عندما";
- "FILTER_TEXT_PLACEHOLDER" = "أدخل كلمة أو عبارة";
- "FILTER_CONTAINS_TEXT_LABEL" = "تحتوي";
- "FILTER_ADD_VIEW_TITLE" = "أضف فلتر";
- "FILTER_EDIT_VIEW_TITLE" = "حدّث الفلتر";
- "SAVE" = "حفظ";
- "CANCEL" = "إلغاء";
- "ADVANCED" = "متقدم";
- "FILTER_INFORMATION" = "إعدادات الفلتر";
- "EXACT_MATCH" = "مطابق تماماً";
- "EXACT_MATCH_CAPTION" = "لا تتم تصفية الرسائل إلا عندما يكون المرسل/الرسالة مطابقةً تماماً للكلمة أو العبارة المقدمة.";
- "FILTER_ACTION_LABEL" = "تمييز كـ";
- "JUNK_ACTION" = "الرسائل المزعجة";
- "TRANSACTION_ACTION" = "المعاملات";
- "PROMOTION_ACTION" = "إعلانات";
- "SENDER_AND_TEXT" = "مرسل أو رسالة";
- "SENDER" = "اسم المرسل";
- "TEXT" = "نص الرسالة";
- "LIST_VIEW_TITLE" = "قائمة الحظر";
- "SENDER_CONTAINS_PREFFIX " = "المرسل يحتوي على: ";
- "MESSAGE_CONTAINS_PREFFIX " = "الرسالة تحتوي على: ";
- "SENDER_IS_PREFFIX " = "المرسل هو: ";
- "MESSAGE_IS_PREFFIX" = "الرسالة هي:";
- "SENDER_OR_TEXT_CONTAINS_PREFFIX" = "";
- "EMPTY_LIST_TITLE" = "قائمة الحظر فارغة";
- "EMPTY_LIST_MESSAGE" = "سوف يقوم Bouncer بتصفية الرسائل النصية القصيرة من المرسلين المجهولين باستخدام الفلاتر التي تضيفها هنا.";
- "TAP_SPACE" = "اضغط";
- "TO_ADD_A_FILTER_SPACE" = "' لإضافة فلتر.";
- "WELCOME_TITLE" = "مرحباً!";
- "WELCOME_SUBTITLE" = "مرحباً بك في Bouncer";
- "HELP" = "مساعدة";
- "LETS" = ""; /* used to be "let's", now it's merged with (ENABLE_SMS_FILTERING) for language specific reason*/
- "HERE_IS_HOW" = "";  /* used to be "to", now it's merged with (ENABLE_SMS_FILTERING) for language specific reason*/
- "ENABLE_SMS_FILTERING" = "لتمكين تصفية الرسائل النصية ";
- "ON_YOUR_IPHONE" = "على جهاز iPhone الخاص بك:";
- "OPEN_SPACE" = "فتح ";
- "THE_APP" = ""; /*this string is empty because "the" is part of the word in Arabic*/
- "SETTINGS_APP" = "تطبيق 'الإعدادات'";
- "TAP" = "اضغط";
- "MESSAGES_APP" = " 'الرسائل'";
- "UNKNOWN_SOURCES" = " 'غير معروف ومزعج'";
- "TOGGLE" = "بدّل";
- "BUTTON_TUTORIAL_FIRST_LAUNCH_TEXT" = "خذني إلى الإعدادات!";
- "BUTTON_TUTORIAL_HELP_TEXT" = "فهمت!";
- "PAYMENT_PAGE_TITLE" = "مستعد للترقية؟";
- "PAYMENT_PAGE_MESSAGE %lld" = "وتقتصر النسخة المجانية من Bouncer على %lld فلاتر، وهو ما يكفي عادة لمعظم الناس.";
- "UPGRADE_BUTTON_TEXT %@" = "الاشتراك بمبلغ %@ في السنة";
- "RESTORE_PURCHASE" = "استعادة المشتريات";
- "UPGRADE_EXPLANATION" = "قم بالترقية للحصول على فلاتر غير محدودة ولمساعدتي في تحسين التطبيق.";
- "NEW_FILTER" = "فلتر جديد";
- "UPDATE_FILTER" = "تحديث الفلتر";
+/* Add Filter View */
+"FILTER_TYPE_SELECTION_LABEL" =" عندما";
+"FILTER_TEXT_PLACEHOLDER" = "أدخل كلمة أو عبارة";
+"FILTER_CONTAINS_TEXT_LABEL" = "تحتوي";
+"FILTER_ADD_VIEW_TITLE" = "أضف فلتر";
+"FILTER_EDIT_VIEW_TITLE" = "حدّث الفلتر";
+"SAVE" = "حفظ";
+"CANCEL" = "إلغاء";
+"ADVANCED" = "متقدم";
+"FILTER_INFORMATION" = "إعدادات الفلتر";
+"EXACT_MATCH" = "مطابق تماماً";
+"EXACT_MATCH_CAPTION" = "لا تتم تصفية الرسائل إلا عندما يكون المرسل/الرسالة مطابقةً تماماً للكلمة أو العبارة المقدمة.";
+"FILTER_ACTION_LABEL" = "تمييز كـ";
+"JUNK_ACTION" = "الرسائل المزعجة";
+"TRANSACTION_ACTION" = "المعاملات";
+"PROMOTION_ACTION" = "إعلانات";
+"SENDER_AND_TEXT" = "مرسل أو رسالة";
+"SENDER" = "اسم المرسل";
+"TEXT" = "نص الرسالة";
+"LIST_VIEW_TITLE" = "قائمة الحظر";
+"SENDER_CONTAINS_PREFFIX " = "المرسل يحتوي على: ";
+"MESSAGE_CONTAINS_PREFFIX " = "الرسالة تحتوي على: ";
+"SENDER_IS_PREFFIX " = "المرسل هو: ";
+"MESSAGE_IS_PREFFIX" = "الرسالة هي:";
+"SENDER_OR_TEXT_CONTAINS_PREFFIX" = "";
+"EMPTY_LIST_TITLE" = "قائمة الحظر فارغة";
+"EMPTY_LIST_MESSAGE" = "سوف يقوم Bouncer بتصفية الرسائل النصية القصيرة من المرسلين المجهولين باستخدام الفلاتر التي تضيفها هنا.";
+"TAP_SPACE" = "اضغط";
+"TO_ADD_A_FILTER_SPACE" = "' لإضافة فلتر.";
+"WELCOME_TITLE" = "مرحباً!";
+"WELCOME_SUBTITLE" = "مرحباً بك في Bouncer";
+"HELP" = "مساعدة";
+"LETS" = ""; /* used to be "let's", now it's merged with (ENABLE_SMS_FILTERING) for language specific reason*/
+"HERE_IS_HOW" = "";  /* used to be "to", now it's merged with (ENABLE_SMS_FILTERING) for language specific reason*/
+"ENABLE_SMS_FILTERING" = "لتمكين تصفية الرسائل النصية ";
+"ON_YOUR_IPHONE" = "على جهاز iPhone الخاص بك:";
+"OPEN_SPACE" = "فتح ";
+"THE_APP" = ""; /*this string is empty because "the" is part of the word in Arabic*/
+"SETTINGS_APP" = "تطبيق 'الإعدادات'";
+"TAP" = "اضغط";
+"MESSAGES_APP" = " 'الرسائل'";
+"UNKNOWN_SOURCES" = " 'غير معروف ومزعج'";
+"TOGGLE" = "بدّل";
+"BUTTON_TUTORIAL_FIRST_LAUNCH_TEXT" = "خذني إلى الإعدادات!";
+"BUTTON_TUTORIAL_HELP_TEXT" = "فهمت!";
+"PAYMENT_PAGE_TITLE" = "مستعد للترقية؟";
+"PAYMENT_PAGE_MESSAGE %lld" = "وتقتصر النسخة المجانية من Bouncer على %lld فلاتر، وهو ما يكفي عادة لمعظم الناس.";
+"UPGRADE_BUTTON_TEXT %@" = "الاشتراك بمبلغ %@ في السنة";
+"RESTORE_PURCHASE" = "استعادة المشتريات";
+"UPGRADE_EXPLANATION" = "قم بالترقية للحصول على فلاتر غير محدودة ولمساعدتي في تحسين التطبيق.";
+"NEW_FILTER" = "فلتر جديد";
+"UPDATE_FILTER" = "تحديث الفلتر";
+"1." = ".١";
+"2." = ".٢";
+"3." = ".٣";
+"4." = ".٤";
