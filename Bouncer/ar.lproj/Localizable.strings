@@ -33,7 +33,7 @@ Created by asaah18 on 7/13/21.
 "SENDER_OR_TEXT_CONTAINS_PREFFIX" = "";
 "EMPTY_LIST_TITLE" = "قائمة الحظر فارغة";
 "EMPTY_LIST_MESSAGE" = "سوف يقوم Bouncer بتصفية الرسائل النصية القصيرة من المرسلين المجهولين باستخدام الفلاتر التي تضيفها هنا.";
-"TAP_SPACE" = "اضغط";
+"TAP_SPACE" = "اضغط '";
 "TO_ADD_A_FILTER_SPACE" = "' لإضافة فلتر.";
 "WELCOME_TITLE" = "مرحباً!";
 "WELCOME_SUBTITLE" = "مرحباً بك في Bouncer";
