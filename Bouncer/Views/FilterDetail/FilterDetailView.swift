@@ -53,7 +53,7 @@ extension FilterDetailView {
                 HStack {
                     Text("FILTER_CONTAINS_TEXT_LABEL")
                     Spacer()
-                    TextField("FILTER_TEXT_PLACEHOLDER", text: $filterTerm)
+                    TextField(NSLocalizedString("FILTER_TEXT_PLACEHOLDER", comment: ""), text: $filterTerm)
                         .autocapitalization(.none)
                         .disableAutocorrection(true)
                         .multilineTextAlignment(.trailing)
