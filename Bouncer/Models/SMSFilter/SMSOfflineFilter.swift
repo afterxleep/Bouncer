@@ -27,7 +27,7 @@ struct SMSOfflineFilter {
                 txt = "\(message.sender) \(message.text)"
         }
 
-        return txt.lowercased().contains(filter.phrase.lowercased()) || (txt.range(of: filter.phrase, options:[.regularExpression, .caseInsensitive]) != nil)
+        return txt.localizedCaseInsensitiveContains(filter.phrase) || (txt.range(of: filter.phrase, options:[.regularExpression, .caseInsensitive]) != nil)
     }
     
     func filterMessage(message: SMSMessage) -> ILMessageFilterAction {
