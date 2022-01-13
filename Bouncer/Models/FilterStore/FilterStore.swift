@@ -27,7 +27,7 @@ struct Filter: Identifiable, Equatable, Codable {
     init(id: UUID, phrase: String, type: FilterType = .any, action: FilterDestination = .junk) {
         self.id = id
         self.type = type
-        self.phrase = phrase.lowercased()
+        self.phrase = phrase
         self.action = action
     }
 }
