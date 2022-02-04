@@ -21,15 +21,10 @@
 "JUNK_ACTION" = "Spam";
 "TRANSACTION_ACTION" = "Transacción";
 "PROMOTION_ACTION" = "Promoción";
-"SENDER_AND_TEXT" = "Remitente o Mensaje";
-"SENDER" = "Remitente";
+"SENDER_NUMBER_AND_TEXT" = "Remitente, número o mensaje";
+"SENDER_NUMBER" = "Remitente o número";
 "TEXT" = "Mensaje";
 "LIST_VIEW_TITLE" = "Lista de Bloqueo";
-"SENDER_CONTAINS_PREFFIX " = "El Remitente contiene: ";
-"MESSAGE_CONTAINS_PREFFIX " = "El Mensaje contiene: ";
-"SENDER_IS_PREFFIX " = "El Remitente es: ";
-"MESSAGE_IS_PREFFIX" = "El mensaje es:";
-"SENDER_OR_TEXT_CONTAINS_PREFFIX" = "";
 "EMPTY_LIST_TITLE" = "Tu lista de bloqueo está vacía";
 "EMPTY_LIST_MESSAGE" = "Bouncer bloqueará los mensajes de remitentes desconocidos usando los filtros que agregues aquí.";
 "TAP_SPACE" = "Toca '";

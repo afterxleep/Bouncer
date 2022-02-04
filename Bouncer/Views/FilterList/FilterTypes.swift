@@ -33,9 +33,9 @@ extension FilterType {
     var formDescription: FilterDestinationDecoration {
         switch self {
         case .any:
-            return FilterDestinationDecoration(decoration: SYSTEM_IMAGES.ENTIRE_MESSAGE, text: "SENDER_AND_TEXT")
+            return FilterDestinationDecoration(decoration: SYSTEM_IMAGES.ENTIRE_MESSAGE, text: "SENDER_NUMBER_AND_TEXT")
         case .sender:
-            return FilterDestinationDecoration(decoration: SYSTEM_IMAGES.SENDER, text: "SENDER")
+            return FilterDestinationDecoration(decoration: SYSTEM_IMAGES.SENDER, text: "SENDER_NUMBER")
         case .message:
             return FilterDestinationDecoration(decoration: SYSTEM_IMAGES.MESSAGE_TEXT, text: "TEXT")
         }

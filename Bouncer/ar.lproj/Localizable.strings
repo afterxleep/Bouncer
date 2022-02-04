@@ -6,7 +6,6 @@ Created by asaah18 on 7/13/21.
 
 */
 
-/* Add Filter View */
 "FILTER_TYPE_SELECTION_LABEL" =" عندما";
 "FILTER_TEXT_PLACEHOLDER" = "أدخل كلمة أو عبارة";
 "FILTER_CONTAINS_TEXT_LABEL" = "تحتوي";
@@ -22,15 +21,10 @@ Created by asaah18 on 7/13/21.
 "JUNK_ACTION" = "الرسائل المزعجة";
 "TRANSACTION_ACTION" = "المعاملات";
 "PROMOTION_ACTION" = "إعلانات";
-"SENDER_AND_TEXT" = "مرسل أو رسالة";
-"SENDER" = "اسم المرسل";
+"SENDER_NUMBER_AND_TEXT" = "Sender Name, Number or Message";
+"SENDER_NUMBER" = "Sender Name or Number";
 "TEXT" = "نص الرسالة";
 "LIST_VIEW_TITLE" = "قائمة الحظر";
-"SENDER_CONTAINS_PREFFIX " = "المرسل يحتوي على: ";
-"MESSAGE_CONTAINS_PREFFIX " = "الرسالة تحتوي على: ";
-"SENDER_IS_PREFFIX " = "المرسل هو: ";
-"MESSAGE_IS_PREFFIX" = "الرسالة هي:";
-"SENDER_OR_TEXT_CONTAINS_PREFFIX" = "";
 "EMPTY_LIST_TITLE" = "قائمة الحظر فارغة";
 "EMPTY_LIST_MESSAGE" = "سوف يقوم Bouncer بتصفية الرسائل النصية القصيرة من المرسلين المجهولين باستخدام الفلاتر التي تضيفها هنا.";
 "TAP_SPACE" = "اضغط '";

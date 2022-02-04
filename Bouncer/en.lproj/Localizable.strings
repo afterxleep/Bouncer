@@ -6,7 +6,6 @@
 
 */
 
-/* Add Filter View */
 "FILTER_TYPE_SELECTION_LABEL" = "When";
 "FILTER_TEXT_PLACEHOLDER" = "Enter a word or phrase";
 "FILTER_CONTAINS_TEXT_LABEL" = "Contains";
@@ -22,15 +21,10 @@
 "JUNK_ACTION" = "Junk";
 "TRANSACTION_ACTION" = "Transaction";
 "PROMOTION_ACTION" = "Promotion";
-"SENDER_AND_TEXT" = "Sender or Text";
-"SENDER" = "Sender Name";
+"SENDER_NUMBER_AND_TEXT" = "Sender Name, Number or Message";
+"SENDER_NUMBER" = "Sender Name or Number";
 "TEXT" = "Message Text";
 "LIST_VIEW_TITLE" = "Block List";
-"SENDER_CONTAINS_PREFFIX " = "Sender contains: ";
-"MESSAGE_CONTAINS_PREFFIX " = "Message contains: ";
-"SENDER_IS_PREFFIX " = "Sender is: ";
-"MESSAGE_IS_PREFFIX" = "Message is:";
-"SENDER_OR_TEXT_CONTAINS_PREFFIX" = "";
 "EMPTY_LIST_TITLE" = "Your Block List is empty";
 "EMPTY_LIST_MESSAGE" = "Bouncer will filter SMS from unknown senders using the filters you add here.";
 "TAP_SPACE" = "Tap '";
