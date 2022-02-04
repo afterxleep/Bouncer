@@ -62,3 +62,5 @@
 "2." = "2.";
 "3." = "3.";
 "4." = "4.";
+"USE_REGULAR_EXPRESSIONS" = "Usar Expresiones Regulares";
+"USE_REGULAR_EXPRESSIONS_DETAIL" = "Activa esta opción para usar el filtrado avanzado usando expresiones regulares en formato PCRE.";

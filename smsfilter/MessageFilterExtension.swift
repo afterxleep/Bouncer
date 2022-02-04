@@ -15,8 +15,7 @@ final class MessageFilterExtension: ILMessageFilterExtension {
 
     override init() {
         print("FILTEREXTENSION - Message filtering Started.")
-        super.init()
-        migrateFromV1()
+        super.init()        
         fetchFilters()
     }
 
@@ -33,10 +32,6 @@ final class MessageFilterExtension: ILMessageFilterExtension {
                 self?.filters = result
             })
             .store(in: &self.cancellables)
-    }
-
-    func migrateFromV1() {
-        filterStore.migrateFromV1()
     }
 
 }

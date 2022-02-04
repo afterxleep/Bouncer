@@ -16,6 +16,7 @@ struct FilterDetailView<L: View, R: View>: View {
     @Binding var filterDestination: FilterDestination
     @Binding var filterTerm: String
     @Binding var exactMatch: Bool
+    @Binding var useRegex: Bool
     
     var body: some View {
         rootView
@@ -67,6 +68,12 @@ extension FilterDetailView {
                     }
                 }
             }
+            Section(header: Text("ADVANCED"),
+                    footer: Text("USE_REGULAR_EXPRESSIONS_DETAIL")) {
+                Toggle(isOn: $useRegex) {
+                Text("USE_REGULAR_EXPRESSIONS")
+                }
+            }
         }
     }
     
@@ -80,6 +87,7 @@ struct FilterDetailView_Previews: PreviewProvider {
                          filterType: .constant(.any),
                          filterDestination: .constant(.transaction),
                          filterTerm: .constant("Query Term"),
-                         exactMatch: .constant(false))
+                         exactMatch: .constant(false),
+                         useRegex: .constant(false))
     }
 }

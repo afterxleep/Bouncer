@@ -154,23 +154,5 @@ extension FilterStoreFile {
         }.eraseToAnyPublisher()
     }
     
-    func migrateFromV1() -> Void {
-        let wordListFile = Self.filterListFileV1
-        let storePath = FileManager.default.containerURL(forSecurityApplicationGroupIdentifier: Self.groupContainer)
-        let oldStore = storePath!.appendingPathComponent(wordListFile)
-        if (FileManager.default.fileExists(atPath: oldStore.path)) {
-            guard let wordData = NSMutableData(contentsOf: oldStore) else {                
-                return
-            }
-            do {
-                if let loadedStrings = try NSKeyedUnarchiver.unarchiveTopLevelObjectWithData(wordData as Data) as? [String] {
-                    for s in loadedStrings {
-                        let _ = self.add(filter: Filter(id: UUID(), phrase: s))
-                    }
-                    try? FileManager.default.removeItem(atPath: oldStore.path)
-                }
-            } catch {
-            }
-        }
-    }
+    
 }
