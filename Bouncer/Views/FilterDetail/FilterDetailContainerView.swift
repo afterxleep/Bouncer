@@ -22,6 +22,7 @@ struct FilterDetailContainerView: View {
     @State private var filterDestination: FilterDestination
     @State private var filterTerm: String
     @State private var exactMatch: Bool
+    @State private var useRegex: Bool
     
     var body: some View {
         switch interactionType {
@@ -32,7 +33,8 @@ struct FilterDetailContainerView: View {
                              filterType: $filterType,
                              filterDestination: $filterDestination,
                              filterTerm: $filterTerm,
-                             exactMatch: $exactMatch)
+                             exactMatch: $exactMatch,
+                             useRegex: $useRegex)
         case .update:
             FilterDetailView(isEmbedded: false,
                              title: "FILTER_EDIT_VIEW_TITLE",
@@ -41,7 +43,8 @@ struct FilterDetailContainerView: View {
                              filterType: $filterType,
                              filterDestination: $filterDestination,
                              filterTerm: $filterTerm,
-                             exactMatch: $exactMatch)
+                             exactMatch: $exactMatch,
+                             useRegex: $useRegex)
         }
     }
     
@@ -56,6 +59,7 @@ extension FilterDetailContainerView {
         self._filterTerm = .init(initialValue: filter?.phrase ?? "")
         self._filterDestination = .init(initialValue: filter?.action ?? .junk)
         self._exactMatch = .init(initialValue: false)
+        self._useRegex = .init(initialValue: filter?.useRegex ?? false)        
     }
     
     private var cancelButton: some View {
@@ -88,7 +92,8 @@ extension FilterDetailContainerView {
         Filter(id: filterId ?? UUID(),
                phrase: filterTerm.trimmed,
                type: filterType,
-               action: filterDestination)
+               action: filterDestination,
+               useRegex: useRegex)
     }
     
 }

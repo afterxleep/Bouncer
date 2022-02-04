@@ -23,12 +23,19 @@ struct Filter: Identifiable, Equatable, Codable {
     var type: FilterType
     var phrase: String
     var action: FilterDestination
+    var useRegex: Bool?
     
-    init(id: UUID, phrase: String, type: FilterType = .any, action: FilterDestination = .junk) {
+    init(id: UUID,
+         phrase: String,
+         type: FilterType = .any,
+         action: FilterDestination = .junk,
+         useRegex: Bool? = nil
+    ) {
         self.id = id
         self.type = type
         self.phrase = phrase.lowercased()
         self.action = action
+        self.useRegex = useRegex
     }
 }
 
@@ -49,6 +56,5 @@ protocol FilterStore {
     func add(filter: Filter) -> AnyPublisher<Void, FilterStoreError>
     func update(filter: Filter) -> AnyPublisher<Void, FilterStoreError>
     func remove(uuid: UUID) -> AnyPublisher<Void, FilterStoreError>
-    func reset() -> AnyPublisher<Void, FilterStoreError>
-    func migrateFromV1() -> Void
+    func reset() -> AnyPublisher<Void, FilterStoreError>    
 }
