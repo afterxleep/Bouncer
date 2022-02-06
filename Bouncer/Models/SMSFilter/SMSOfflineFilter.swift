@@ -42,7 +42,7 @@ struct SMSOfflineFilter {
     }
     
     private func matchText(text: String, filter: Filter) -> Bool {
-        return text.lowercased().contains(filter.phrase)
+        return text.contains(filter.phrase)
     }
     
     private func matchRegex(text: String, filter: Filter) -> Bool {

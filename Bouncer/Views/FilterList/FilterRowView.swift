@@ -17,8 +17,7 @@ struct FilterRowView: View {
             Image(systemName: typeDecoration.image)
                 .foregroundColor(.gray)
                 .aspectRatio(contentMode: .fit)
-            Text("'\(filter.phrase)'")
-                    .bold()
+            getFilterText(filter: filter)
             Spacer()
             HStack(spacing: 4) {
                 Image(systemName: actionDecoration.decoration.image)
@@ -74,5 +73,14 @@ extension FilterRowView {
             case .transaction:
                 return COLORS.OK_COLOR
             }        
+    }
+    
+    private func getFilterText(filter: Filter) -> Text {
+        if (filter.useRegex ?? false) {
+            return Text("/\(filter.phrase)/")
+                .bold()
+        }
+        return Text("'\(filter.phrase)'")
+                .bold()
     }
 }

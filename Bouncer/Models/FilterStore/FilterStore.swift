@@ -33,7 +33,7 @@ struct Filter: Identifiable, Equatable, Codable {
     ) {
         self.id = id
         self.type = type
-        self.phrase = phrase.lowercased()
+        self.phrase = phrase
         self.action = action
         self.useRegex = useRegex
     }

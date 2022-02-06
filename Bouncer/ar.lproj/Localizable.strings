@@ -6,7 +6,7 @@ Created by asaah18 on 7/13/21.
 
 */
 
-"FILTER_TYPE_SELECTION_LABEL" =" عندما";
+"FILTER_TYPE_SELECTION_LABEL" ="When";
 "FILTER_TEXT_PLACEHOLDER" = "أدخل كلمة أو عبارة";
 "FILTER_CONTAINS_TEXT_LABEL" = "تحتوي";
 "FILTER_ADD_VIEW_TITLE" = "أضف فلتر";
@@ -21,7 +21,7 @@ Created by asaah18 on 7/13/21.
 "JUNK_ACTION" = "الرسائل المزعجة";
 "TRANSACTION_ACTION" = "المعاملات";
 "PROMOTION_ACTION" = "إعلانات";
-"SENDER_NUMBER_AND_TEXT" = "Sender Name, Number or Message";
+"ANYTHING_IN_MESSAGE" = "Any part of the message";
 "SENDER_NUMBER" = "Sender Name or Number";
 "TEXT" = "نص الرسالة";
 "LIST_VIEW_TITLE" = "قائمة الحظر";
@@ -56,5 +56,5 @@ Created by asaah18 on 7/13/21.
 "2." = ".٢";
 "3." = ".٣";
 "4." = ".٤";
-"USE_REGULAR_EXPRESSIONS" = "Usar Expresiones Regulares";
-"USE_REGULAR_EXPRESSIONS_DETAIL" = "Activa esta opción para usar el filtrado avanzado usando expresiones regulares en formato PCRE.";
+"USE_REGULAR_EXPRESSIONS" = "Match as Regular Expression";
+"USE_REGULAR_EXPRESSIONS_DETAIL" = "Enable this option if your filter contains a regular expression.  (Regex should be provided in PCRE format).";

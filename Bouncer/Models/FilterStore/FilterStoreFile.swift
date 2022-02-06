@@ -93,7 +93,14 @@ extension FilterStoreFile {
                     guard let self = self else { return }
                     
                     var filters: [Filter] = result
-                    filters.append(filter)
+
+                    var newFilter = filter
+                    
+                    // If the filter is not a regular expression
+                    if !(newFilter.useRegex ?? false) {
+                        newFilter.phrase = newFilter.phrase.lowercased()
+                    }
+                    filters.append(newFilter)
                     filters = filters.sorted(by: { $1.phrase > $0.phrase })
                     
                     if let errorMessage = self.saveToDisk(filters: filters) {

@@ -33,7 +33,7 @@ extension FilterType {
     var formDescription: FilterDestinationDecoration {
         switch self {
         case .any:
-            return FilterDestinationDecoration(decoration: SYSTEM_IMAGES.ENTIRE_MESSAGE, text: "SENDER_NUMBER_AND_TEXT")
+            return FilterDestinationDecoration(decoration: SYSTEM_IMAGES.ENTIRE_MESSAGE, text: "ANYTHING_IN_MESSAGE")
         case .sender:
             return FilterDestinationDecoration(decoration: SYSTEM_IMAGES.SENDER, text: "SENDER_NUMBER")
         case .message:

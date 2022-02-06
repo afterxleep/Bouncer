@@ -6,9 +6,9 @@
    
 */
 
-"FILTER_TYPE_SELECTION_LABEL" = "Filtar usando:";
+"FILTER_TYPE_SELECTION_LABEL" = "Cuando";
 "FILTER_TEXT_PLACEHOLDER" = "Ingresa una palabra o frase";
-"FILTER_CONTAINS_TEXT_LABEL" = "Contiene";
+"FILTER_CONTAINS_TEXT_LABEL" = "Contenga";
 "FILTER_ADD_VIEW_TITLE" = "Agregar Filtro";
 "FILTER_EDIT_VIEW_TITLE" = "Actualizar Filtro";
 "SAVE" = "Guardar";
@@ -17,11 +17,11 @@
 "FILTER_INFORMATION" = "Información del filtro";
 "EXACT_MATCH" = "Ocurrencia Exacta";
 "EXACT_MATCH_CAPTION" = "Filtra los mensajes solo cuando el remitente/mensaje es exactamente igual a la palabra o frase especificada arriba.";
-"FILTER_ACTION_LABEL" = "Marcar Como";
+"FILTER_ACTION_LABEL" = "Marcar como";
 "JUNK_ACTION" = "Spam";
 "TRANSACTION_ACTION" = "Transacción";
 "PROMOTION_ACTION" = "Promoción";
-"SENDER_NUMBER_AND_TEXT" = "Remitente, número o mensaje";
+"ANYTHING_IN_MESSAGE" = "Todo el mensaje";
 "SENDER_NUMBER" = "Remitente o número";
 "TEXT" = "Mensaje";
 "LIST_VIEW_TITLE" = "Lista de Bloqueo";
@@ -54,5 +54,5 @@
 "2." = "2.";
 "3." = "3.";
 "4." = "4.";
-"USE_REGULAR_EXPRESSIONS" = "Usar Expresiones Regulares";
-"USE_REGULAR_EXPRESSIONS_DETAIL" = "Activa esta opción para usar el filtrado avanzado usando expresiones regulares en formato PCRE.";
+"USE_REGULAR_EXPRESSIONS" = "Filtrar como Expresión Regular";
+"USE_REGULAR_EXPRESSIONS_DETAIL" = "Activa esta opción si tu filtro contiene una Expresión Regular (Regex). (Las expresiones regulares deben usar el formato PCRE).";

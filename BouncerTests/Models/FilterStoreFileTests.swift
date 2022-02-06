@@ -14,7 +14,9 @@ class FilterStoreFileTests: XCTestCase {
     var filters: [Filter] = [
         Filter(id: UUID(), phrase: "rappi", type: .any, action: .junk),
         Filter(id: UUID(), phrase: "etb", type: .sender, action: .promotion),
-        Filter(id: UUID(), phrase: "your code", type: .message, action: .transaction)
+        Filter(id: UUID(), phrase: "your code", type: .message, action: .transaction),
+        Filter(id: UUID(), phrase: "[b-chm-pP]at|ot", type: .message, action: .junk, useRegex: true),
+        Filter(id: UUID(), phrase: "YoUR COdE", type: .message, action: .junk, useRegex: false)
     ]
     var totalOldStoreFilters = 5
 
@@ -48,6 +50,12 @@ class FilterStoreFileTests: XCTestCase {
             })
         waitForExpectations(timeout: 1, handler: nil)
         XCTAssertEqual(self.filters.count, filters.count)
+        
+        let regexFilter = filters[0]
+        XCTAssertEqual(regexFilter.phrase, "[b-chm-pP]at|ot")
+        
+        let wordFilter = filters[4]
+        XCTAssertEqual(wordFilter.phrase, "your code")
 
     }
 
