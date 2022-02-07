@@ -38,6 +38,10 @@ class FilterStoreFileTests: XCTestCase {
             waitForExpectations(timeout: 1, handler: nil)
         }
     }
+    
+    override func tearDown() {
+        _ = filterStore.reset()
+    }
 
     func test10_AddFilters() {
 
