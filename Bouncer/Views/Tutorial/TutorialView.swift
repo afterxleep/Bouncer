@@ -12,7 +12,7 @@ struct TutorialView: View {
 
     var body: some View {
         ZStack {
-            BackgroundView()
+            BackgroundView()            
             VStack {
                 VStack {
                     Image("welcome_icon").padding()
@@ -24,14 +24,13 @@ struct TutorialView: View {
                         Text("WELCOME_SUBTITLE")
                             .font(.largeTitle)
                             .foregroundColor(Color("TextDefaultColor"))
-                            .padding(.bottom, 60.0)
+                            .padding(.bottom, 20.0)
                     }
                     else {
                         Text("HELP")
                             .font(.largeTitle)
                             .fontWeight(.bold)
                             .foregroundColor(Color("TextHighLightColor"))
-                            .padding(.bottom, 20.0)
                     }
                 }
                 VStack(alignment: .center) {
@@ -43,8 +42,8 @@ struct TutorialView: View {
                             .fontWeight(.bold) +
                         Text("ON_YOUR_IPHONE").foregroundColor(Color("TextDefaultColor"))
                     }
-                    .padding(.horizontal, 40.0)
-                    .padding(.top, 40)
+                    .padding(.horizontal, 20.0)
+                    .padding(.top, 20)
                     .fixedSize(horizontal: false, vertical: true)
                     .multilineTextAlignment(.center)
 
@@ -91,7 +90,7 @@ struct TutorialView: View {
                             Text( "'Bouncer'").foregroundColor(Color("TextDefaultColor"))
                         }
                     }
-                    .padding(.bottom, 35)
+                    .padding(.bottom, 20)
 
                     Button(action: {
                         if(!hasLaunchedApp) {
@@ -102,11 +101,12 @@ struct TutorialView: View {
 
                     }) {
                         Text((!hasLaunchedApp) ? "BUTTON_TUTORIAL_FIRST_LAUNCH_TEXT" : "BUTTON_TUTORIAL_HELP_TEXT")
-                            .foregroundColor(Color("TextDefaultColor"))
+                            .foregroundColor(Color("TextHighLightColor"))
                             .frame(minWidth: 280, maxWidth: 280, minHeight: 0, maxHeight: 50)
                             .background(Color("ButtonBackgroundColor"))
                             .cornerRadius(DESIGN.BUTTON.CORNER_RADIUS)
                             .padding(.bottom, 40)
+                            .font(Font.headline)
                     }
                 }
                 .padding(.horizontal, 10)

@@ -1,9 +1,7 @@
-[![Build Status](https://app.bitrise.io/app/4fdfbbb4b3ef9059/status.svg?token=1J9phju6Z9f0ni-jIK6ykQ&branch=master)](https://app.bitrise.io/app/4fdfbbb4b3ef9059)
-
 Bouncer SMS Filter
 =====================
 
-This is a simple SMS filtering app for iOS that uses the ILMessageFilterExtension to move unwanted and specific messages to the "Junk", "Promotion" and "Transaction" sections of the Messages app. 
+This is a simple SMS filtering app for iOS that uses the ILMessageFilterExtension to move unwanted and specific messages to the "Junk", "Promotion" and "Transaction" sections of the Messages app.
 
 Different to other apps, Bouncer does not share, upload or send any of your personal information or SMS messages to a remote server.   All the filtering happens locally on your phone.
 
@@ -14,8 +12,8 @@ Features
 * Filter SMS messages using a simple list of words
 * Catalog filtered messages in iOS 14+ categories (Junk, Transaction, Promotion)
 * Unlimmited number of filter rules
-* Automatic migration of filters from Version 1.x
-* Localized in English and Spanish
+* Localized in English, Spanish and Arabic
+* Supports both word lists and regular expressions
 
 
 Tech Stack/Specs
@@ -36,7 +34,7 @@ If you are curious about the architecture approach, check out my [Redux-like arc
 Building
 ----------------------
 
-Fire up XCode 12, open Bouncer.xcodeproj and hit Build.  There are no dependencies or additional requirements.
+Fire up XCode 13.2.1, open Bouncer.xcodeproj and hit Build.  There are no dependencies or additional requirements.
 
 Latest Release
 ----------------------
@@ -55,4 +53,3 @@ License
 ----------------------
 
 Bouncer is distributed under [MIT license](https://github.com/afterxleep/Bouncer/blob/master/LICENSE)
-

@@ -6,7 +6,7 @@ Created by asaah18 on 7/13/21.
 
 */
 
-"FILTER_TYPE_SELECTION_LABEL" ="When";
+"FILTER_TYPE_SELECTION_LABEL" ="عندما";
 "FILTER_TEXT_PLACEHOLDER" = "أدخل كلمة أو عبارة";
 "FILTER_CONTAINS_TEXT_LABEL" = "تحتوي";
 "FILTER_ADD_VIEW_TITLE" = "أضف فلتر";
@@ -21,8 +21,8 @@ Created by asaah18 on 7/13/21.
 "JUNK_ACTION" = "الرسائل المزعجة";
 "TRANSACTION_ACTION" = "المعاملات";
 "PROMOTION_ACTION" = "إعلانات";
-"ANYTHING_IN_MESSAGE" = "Any part of the message";
-"SENDER_NUMBER" = "Sender Name or Number";
+"ANYTHING_IN_MESSAGE" = "أي جزء من الرسالة";
+"SENDER_NUMBER" = "اسم أو رقم المرسل";
 "TEXT" = "نص الرسالة";
 "LIST_VIEW_TITLE" = "قائمة الحظر";
 "EMPTY_LIST_TITLE" = "قائمة الحظر فارغة";
@@ -32,8 +32,8 @@ Created by asaah18 on 7/13/21.
 "WELCOME_TITLE" = "مرحباً!";
 "WELCOME_SUBTITLE" = "مرحباً بك في Bouncer";
 "HELP" = "مساعدة";
-"LETS" = ""; /* used to be "let's", now it's merged with (ENABLE_SMS_FILTERING) for language specific reason*/
-"HERE_IS_HOW" = "";  /* used to be "to", now it's merged with (ENABLE_SMS_FILTERING) for language specific reason*/
+"LETS" = ""; /*used to be "let's", now it's merged with (ENABLE_SMS_FILTERING) for language specific reason*/
+"HERE_IS_HOW" = "";  /*used to be "to", now it's merged with (ENABLE_SMS_FILTERING) for language specific reason*/
 "ENABLE_SMS_FILTERING" = "لتمكين تصفية الرسائل النصية ";
 "ON_YOUR_IPHONE" = "على جهاز iPhone الخاص بك:";
 "OPEN_SPACE" = "فتح ";
@@ -56,5 +56,5 @@ Created by asaah18 on 7/13/21.
 "2." = ".٢";
 "3." = ".٣";
 "4." = ".٤";
-"USE_REGULAR_EXPRESSIONS" = "Match as Regular Expression";
-"USE_REGULAR_EXPRESSIONS_DETAIL" = "Enable this option if your filter contains a regular expression.  (Regex should be provided in PCRE format).";
+"USE_REGULAR_EXPRESSIONS" = "مطابقة كتعبير نمطي";
+"USE_REGULAR_EXPRESSIONS_DETAIL" = "فعل هذا الخيار عندما يكون الفلنر الخاص بك يتحتوي على تعبير نمطي.  (يجب توفير التعبير النمطي بتنسيق 'PCRE').";
