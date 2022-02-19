@@ -68,10 +68,16 @@ extension FilterDetailView {
                     }
                 }
             }
-            Section(header: Text("ADVANCED"),
-                    footer: Text("USE_REGULAR_EXPRESSIONS_DETAIL")) {
+            Section(header: Text("ADVANCED")) {
                 Toggle(isOn: $useRegex) {
-                Text("USE_REGULAR_EXPRESSIONS")
+                    VStack(alignment: .leading) {
+                        Text("USE_REGULAR_EXPRESSIONS")
+                            .padding(0)
+                        Spacer()
+                        Text("USE_REGULAR_EXPRESSIONS_DETAIL")
+                            .font(.caption)
+                            .foregroundColor(Color("TextDefaultColor"))
+                    }.padding(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
                 }
             }
         }
