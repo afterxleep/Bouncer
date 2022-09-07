@@ -11,7 +11,7 @@ Features
 ----------------------
 * Filter SMS messages using a simple list of words
 * Catalog filtered messages in iOS 14+ categories (Junk, Transaction, Promotion)
-* Unlimmited number of filter rules
+* Unlimited number of filter rules
 * Localized in English, Spanish and Arabic
 * Supports both word lists and regular expressions
 
