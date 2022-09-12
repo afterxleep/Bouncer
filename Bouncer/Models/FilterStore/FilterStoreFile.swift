@@ -5,6 +5,7 @@
 
 import Foundation
 import Combine
+import os.log
 
 private typealias DiskWriteError = String
 
@@ -41,10 +42,7 @@ final class FilterStoreFile: FilterStore {
             return nil
         } catch {
             let errorMessage = error.localizedDescription
-            #if DEBUG
-            print(errorMessage)
-            #endif
-            
+            os_log("Error: %s.", type: .error, errorMessage)            
             return errorMessage
         }
     }

@@ -14,13 +14,13 @@ final class MessageFilterExtension: ILMessageFilterExtension {
     var cancellables = [AnyCancellable]()
 
     override init() {
-        print("FILTEREXTENSION - Message filtering Started.")
-        super.init()        
+        os_log("FILTEREXTENSION - Message filtering Started.", log: OSLog.messageFilterLog, type: .info)
+        super.init()
         fetchFilters()
     }
 
     deinit {
-        print("FILTEREXTENSION - Message filtering complete")
+        os_log("FILTEREXTENSION - Message filtering complete.", log: OSLog.messageFilterLog, type: .info)
     }
 
     func fetchFilters() {
@@ -28,7 +28,7 @@ final class MessageFilterExtension: ILMessageFilterExtension {
             .receive(on: RunLoop.main)
             .sink(receiveCompletion: {_ in
             }, receiveValue: { [weak self] result in
-                print("FILTEREXTENSION - Filter list loaded")
+                os_log("FILTEREXTENSION - Filter list loaded", log: OSLog.messageFilterLog, type: .info)
                 self?.filters = result
             })
             .store(in: &self.cancellables)
@@ -50,7 +50,7 @@ extension MessageFilterExtension: ILMessageFilterQueryHandling {
         }
         let filter = SMSOfflineFilter(filterList: filters)
         response.action = filter.filterMessage(message: SMSMessage(sender: sender, text: messageBody))
-        print("FILTEREXTENSION - Filtering done")
+        os_log("FILTEREXTENSION - Filtering done", log: OSLog.messageFilterLog, type: .info)        
         completion(response)
     }
 }

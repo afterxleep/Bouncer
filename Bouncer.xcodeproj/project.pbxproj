@@ -43,6 +43,8 @@
 		D67F582E24E4496300165365 /* AppSettingsDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67F582C24E4496300165365 /* AppSettingsDefaults.swift */; };
 		D67F582F24E4496300165365 /* AppSettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67F582D24E4496300165365 /* AppSettingsStore.swift */; };
 		D6B2CC8D24EF16C6004F72C4 /* wordlist.filter in Resources */ = {isa = PBXBuildFile; fileRef = D6B2CC8C24EF16C6004F72C4 /* wordlist.filter */; };
+		D6BE8B8728CFE0C3004E7274 /* OSLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BE8B8628CFE0C3004E7274 /* OSLog.swift */; };
+		D6BE8B8828CFE230004E7274 /* OSLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BE8B8628CFE0C3004E7274 /* OSLog.swift */; };
 		D6C90BF224CAAF7B00426B31 /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C90BF124CAAF7B00426B31 /* AppState.swift */; };
 		D6C90BF424CAB26700426B31 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C90BF324CAB26700426B31 /* AppStore.swift */; };
 		D6C90BF624CB36AE00426B31 /* FilterRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6C90BF524CB36AD00426B31 /* FilterRowView.swift */; };
@@ -142,6 +144,7 @@
 		D67F582D24E4496300165365 /* AppSettingsStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSettingsStore.swift; sourceTree = "<group>"; };
 		D6B2CC8C24EF16C6004F72C4 /* wordlist.filter */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = wordlist.filter; sourceTree = "<group>"; };
 		D6BAC9EE26D7A156007ACCBE /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D6BE8B8628CFE0C3004E7274 /* OSLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSLog.swift; sourceTree = "<group>"; };
 		D6C90BF124CAAF7B00426B31 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		D6C90BF324CAB26700426B31 /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
 		D6C90BF524CB36AD00426B31 /* FilterRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterRowView.swift; sourceTree = "<group>"; };
@@ -401,6 +404,7 @@
 			children = (
 				D664B24724AA998700EB826D /* UIImage+Gradient.swift */,
 				09491AEE261D30A400CF8073 /* String+Empty.swift */,
+				D6BE8B8628CFE0C3004E7274 /* OSLog.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -661,6 +665,7 @@
 			files = (
 				D6233A8324A653F200B37A6A /* FilterStoreFile.swift in Sources */,
 				D6EA9A8524AD2319000135E7 /* FilterStore.swift in Sources */,
+				D6BE8B8828CFE230004E7274 /* OSLog.swift in Sources */,
 				D60A19C824A6A2C80002E8BD /* SMSMessage.swift in Sources */,
 				D6233A8124A6538D00B37A6A /* SMSOfflineFilter.swift in Sources */,
 				D6233A7224A650B700B37A6A /* MessageFilterExtension.swift in Sources */,
@@ -675,6 +680,7 @@
 				D6233A7F24A651A200B37A6A /* SMSOfflineFilter.swift in Sources */,
 				D6529F9F24A413A6009AE3FF /* TutorialView.swift in Sources */,
 				D60A19C724A69F1F0002E8BD /* SMSMessage.swift in Sources */,
+				D6BE8B8728CFE0C3004E7274 /* OSLog.swift in Sources */,
 				D61497E924E4430E00AF997E /* FilterAction.swift in Sources */,
 				D6CC124D24E4563F00388160 /* SettingsAction.swift in Sources */,
 				D664B24824AA998700EB826D /* UIImage+Gradient.swift in Sources */,
