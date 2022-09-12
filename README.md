@@ -19,7 +19,7 @@ Features
 Tech Stack/Specs
 ----------------------
 
-Bouncer is written 100% in Swift, for iOS 14 and features things like:
+Bouncer is written 100% in Swift and features things like:
 
 * All new SwiftUI lifecycle (No storyboards or Appdelegate)
 * Redux-like architecture
@@ -34,7 +34,7 @@ If you are curious about the architecture approach, check out my [Redux-like arc
 Building
 ----------------------
 
-Fire up XCode 13.2.1, open Bouncer.xcodeproj and hit Build.  There are no dependencies or additional requirements.
+Fire up XCode open Bouncer.xcodeproj and hit Build.  There are no dependencies or additional requirements.
 
 Latest Release
 ----------------------
