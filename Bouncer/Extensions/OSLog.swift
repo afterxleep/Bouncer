@@ -14,6 +14,6 @@ extension OSLog {
     /// Logs message filter related messages
     static let messageFilterLog = OSLog(subsystem: subsystem, category: "messageFilter")
     
-    /// Logs Erross
+    /// Logs Errors
     static let errorLog = OSLog(subsystem: subsystem, category: "errorLog")
 }
