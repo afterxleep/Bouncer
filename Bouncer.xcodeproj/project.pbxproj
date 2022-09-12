@@ -728,7 +728,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = SMSFilter/SMSFilter.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 183;
+				CURRENT_PROJECT_VERSION = 207;
 				DEVELOPMENT_TEAM = JM9222EF99;
 				INFOPLIST_FILE = SMSFilter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -751,7 +751,7 @@
 				CODE_SIGN_ENTITLEMENTS = SMSFilter/SMSFilter.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 183;
+				CURRENT_PROJECT_VERSION = 207;
 				DEVELOPMENT_TEAM = JM9222EF99;
 				INFOPLIST_FILE = SMSFilter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -896,7 +896,7 @@
 				CODE_SIGN_ENTITLEMENTS = Bouncer/Bouncer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 183;
+				CURRENT_PROJECT_VERSION = 207;
 				DEVELOPMENT_ASSET_PATHS = "\"Bouncer/Preview Content\"";
 				DEVELOPMENT_TEAM = JM9222EF99;
 				ENABLE_PREVIEWS = YES;
@@ -926,7 +926,7 @@
 				CODE_SIGN_ENTITLEMENTS = Bouncer/Bouncer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 183;
+				CURRENT_PROJECT_VERSION = 207;
 				DEVELOPMENT_ASSET_PATHS = "\"Bouncer/Preview Content\"";
 				DEVELOPMENT_TEAM = JM9222EF99;
 				ENABLE_PREVIEWS = YES;

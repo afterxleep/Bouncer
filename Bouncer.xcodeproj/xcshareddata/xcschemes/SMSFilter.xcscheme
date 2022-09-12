@@ -15,9 +15,9 @@
                <EnvironmentBuildable>
                   <BuildableReference
                      BuildableIdentifier = "primary"
-                     BlueprintIdentifier = "D6529F6E24A41371009AE3FF"
-                     BuildableName = "Bouncer.app"
-                     BlueprintName = "Bouncer"
+                     BlueprintIdentifier = "D6233A6E24A650B700B37A6A"
+                     BuildableName = "SMSFilter.appex"
+                     BlueprintName = "SMSFilter"
                      ReferencedContainer = "container:Bouncer.xcodeproj">
                   </BuildableReference>
                </EnvironmentBuildable>
