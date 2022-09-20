@@ -47,7 +47,7 @@ Version 2.x (This new SwiftUI version) is [available in the App Store](https://a
 Contribute
 ----------------------
 
-Please report any found issues or feed free to fork the repo and open pull requests with fixes, features or updates.
+Please report any found issues or feel free to fork the repo and open pull requests with fixes, features or updates.
 
 License
 ----------------------
