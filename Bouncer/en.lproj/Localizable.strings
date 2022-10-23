@@ -19,8 +19,13 @@
 "EXACT_MATCH_CAPTION" = "Filter messages only when the sender/message are an exact match to the provided word or phrase.";
 "FILTER_ACTION_LABEL" = "Mark as";
 "JUNK_ACTION" = "Junk";
-"TRANSACTION_ACTION" = "Transaction";
-"PROMOTION_ACTION" = "Promotion";
+"TRANSACTION_ACTION" = "Other Transactions";
+"TRANSACTION_ACTION_ORDERS" = "Orders";
+"TRANSACTION_ACTION_FINANCE" = "Finance";
+"TRANSACTION_ACTION_REMINDERS" = "Reminders";
+"PROMOTION_ACTION" = "Other Promotions";
+"PROMOTION_ACTION_OFFERS" = "Offers";
+"PROMOTION_ACTION_COUPONS" = "Coupons";
 "ANYTHING_IN_MESSAGE" = "Any part of the message";
 "SENDER_NUMBER" = "Sender Name or Number";
 "TEXT" = "Message Text";

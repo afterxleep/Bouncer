@@ -13,9 +13,19 @@ enum FilterType: String, Codable, Equatable, CaseIterable {
 }
 
 enum FilterDestination: String, Codable, Equatable, CaseIterable {
+    // Base Actions
+    case none
     case junk
     case transaction
     case promotion
+    
+    // SubActions (Apple allows 5 max.)
+    case transactionOrder
+    case transactionFinance
+    case transactionReminders
+    case promotionOffers
+    case promotionCoupons
+
 }
 
 struct Filter: Identifiable, Equatable, Codable {
@@ -23,18 +33,21 @@ struct Filter: Identifiable, Equatable, Codable {
     var type: FilterType
     var phrase: String
     var action: FilterDestination
+    var subAction: FilterDestination
     var useRegex: Bool?
     
     init(id: UUID,
          phrase: String,
          type: FilterType = .any,
          action: FilterDestination = .junk,
+         subAction: FilterDestination = .none,
          useRegex: Bool? = nil
     ) {
         self.id = id
         self.type = type
         self.phrase = phrase
         self.action = action
+        self.subAction = subAction
         self.useRegex = useRegex
     }
 }

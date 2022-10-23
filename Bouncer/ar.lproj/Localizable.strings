@@ -19,8 +19,13 @@ Created by asaah18 on 7/13/21.
 "EXACT_MATCH_CAPTION" = "لا تتم تصفية الرسائل إلا عندما يكون المرسل/الرسالة مطابقةً تماماً للكلمة أو العبارة المقدمة.";
 "FILTER_ACTION_LABEL" = "تمييز كـ";
 "JUNK_ACTION" = "الرسائل المزعجة";
-"TRANSACTION_ACTION" = "المعاملات";
-"PROMOTION_ACTION" = "إعلانات";
+"TRANSACTION_ACTION" = "معاملات أخرى";
+"TRANSACTION_ACTION_ORDERS" = "اوامر";
+"TRANSACTION_ACTION_FINANCE" = "الماليه";
+"TRANSACTION_ACTION_REMINDERS" = "رسائل التذكير";
+"PROMOTION_ACTION" = "عروض ترويجية أخرى";
+"PROMOTION_ACTION_OFFERS" = "العروض";
+"PROMOTION_ACTION_COUPONS" = "الكوبونات";
 "ANYTHING_IN_MESSAGE" = "أي جزء من الرسالة";
 "SENDER_NUMBER" = "اسم أو رقم المرسل";
 "TEXT" = "نص الرسالة";

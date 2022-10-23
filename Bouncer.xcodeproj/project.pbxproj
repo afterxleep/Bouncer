@@ -36,7 +36,6 @@
 		D664B24424AA92AA00EB826D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D664B24324AA92AA00EB826D /* Colors.xcassets */; };
 		D664B24624AA92D200EB826D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D664B24524AA92D200EB826D /* Assets.xcassets */; };
 		D664B24824AA998700EB826D /* UIImage+Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D664B24724AA998700EB826D /* UIImage+Gradient.swift */; };
-		D66A7C2724EB3E0800349C3F /* BouncerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66A7C2624EB3E0800349C3F /* BouncerUITests.swift */; };
 		D66A7C2924EB3F8C00349C3F /* SMSOfflineFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66A7C2824EB3F8C00349C3F /* SMSOfflineFilter.swift */; };
 		D673E75224C68404008B1072 /* FilterTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D673E75124C68404008B1072 /* FilterTypes.swift */; };
 		D679D67424AA758C00579223 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D679D67324AA758C00579223 /* Constants.swift */; };
@@ -71,13 +70,6 @@
 			remoteInfo = SMSFilter;
 		};
 		D6529F8124A41372009AE3FF /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = D6529F6724A41371009AE3FF /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = D6529F6E24A41371009AE3FF;
-			remoteInfo = Bouncer;
-		};
-		D6529F8C24A41372009AE3FF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D6529F6724A41371009AE3FF /* Project object */;
 			proxyType = 1;
@@ -128,8 +120,6 @@
 		D6529F7B24A41372009AE3FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6529F8024A41372009AE3FF /* BouncerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BouncerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6529F8624A41372009AE3FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		D6529F8B24A41372009AE3FF /* BouncerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BouncerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		D6529F9124A41372009AE3FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6529F9E24A413A6009AE3FF /* TutorialView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialView.swift; sourceTree = "<group>"; };
 		D6529FA324A413EB009AE3FF /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		D6529FC224A54AAD009AE3FF /* FilterListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListView.swift; sourceTree = "<group>"; };
@@ -137,7 +127,6 @@
 		D664B24324AA92AA00EB826D /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		D664B24524AA92D200EB826D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D664B24724AA998700EB826D /* UIImage+Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Gradient.swift"; sourceTree = "<group>"; };
-		D66A7C2624EB3E0800349C3F /* BouncerUITests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BouncerUITests.swift; sourceTree = "<group>"; };
 		D66A7C2824EB3F8C00349C3F /* SMSOfflineFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSOfflineFilter.swift; sourceTree = "<group>"; };
 		D673E75124C68404008B1072 /* FilterTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterTypes.swift; sourceTree = "<group>"; };
 		D679D67324AA758C00579223 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -179,13 +168,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D6529F7D24A41372009AE3FF /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D6529F8824A41372009AE3FF /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -285,7 +267,6 @@
 			children = (
 				D6529F7124A41371009AE3FF /* Bouncer */,
 				D6529F8324A41372009AE3FF /* BouncerTests */,
-				D6529F8E24A41372009AE3FF /* BouncerUITests */,
 				D6233A7024A650B700B37A6A /* SMSFilter */,
 				D6529F7024A41371009AE3FF /* Products */,
 				D63B545D24C75231005D4DAA /* Frameworks */,
@@ -297,7 +278,6 @@
 			children = (
 				D6529F6F24A41371009AE3FF /* Bouncer.app */,
 				D6529F8024A41372009AE3FF /* BouncerTests.xctest */,
-				D6529F8B24A41372009AE3FF /* BouncerUITests.xctest */,
 				D6233A6F24A650B700B37A6A /* SMSFilter.appex */,
 			);
 			name = Products;
@@ -341,15 +321,6 @@
 				D6529F8624A41372009AE3FF /* Info.plist */,
 			);
 			path = BouncerTests;
-			sourceTree = "<group>";
-		};
-		D6529F8E24A41372009AE3FF /* BouncerUITests */ = {
-			isa = PBXGroup;
-			children = (
-				D66A7C2624EB3E0800349C3F /* BouncerUITests.swift */,
-				D6529F9124A41372009AE3FF /* Info.plist */,
-			);
-			path = BouncerUITests;
 			sourceTree = "<group>";
 		};
 		D6529F9D24A4139A009AE3FF /* Tutorial */ = {
@@ -515,24 +486,6 @@
 			productReference = D6529F8024A41372009AE3FF /* BouncerTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		D6529F8A24A41372009AE3FF /* BouncerUITests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = D6529F9A24A41372009AE3FF /* Build configuration list for PBXNativeTarget "BouncerUITests" */;
-			buildPhases = (
-				D6529F8724A41372009AE3FF /* Sources */,
-				D6529F8824A41372009AE3FF /* Frameworks */,
-				D6529F8924A41372009AE3FF /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				D6529F8D24A41372009AE3FF /* PBXTargetDependency */,
-			);
-			name = BouncerUITests;
-			productName = BouncerUITests;
-			productReference = D6529F8B24A41372009AE3FF /* BouncerUITests.xctest */;
-			productType = "com.apple.product-type.bundle.ui-testing";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -550,11 +503,6 @@
 					};
 					D6529F7F24A41372009AE3FF = {
 						CreatedOnToolsVersion = 12.0;
-						TestTargetID = D6529F6E24A41371009AE3FF;
-					};
-					D6529F8A24A41372009AE3FF = {
-						CreatedOnToolsVersion = 12.0;
-						LastSwiftMigration = 1200;
 						TestTargetID = D6529F6E24A41371009AE3FF;
 					};
 				};
@@ -576,7 +524,6 @@
 			targets = (
 				D6529F6E24A41371009AE3FF /* Bouncer */,
 				D6529F7F24A41372009AE3FF /* BouncerTests */,
-				D6529F8A24A41372009AE3FF /* BouncerUITests */,
 				D6233A6E24A650B700B37A6A /* SMSFilter */,
 			);
 		};
@@ -604,13 +551,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		D6529F7E24A41372009AE3FF /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		D6529F8924A41372009AE3FF /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -685,14 +625,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		D6529F8724A41372009AE3FF /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				D66A7C2724EB3E0800349C3F /* BouncerUITests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -705,11 +637,6 @@
 			isa = PBXTargetDependency;
 			target = D6529F6E24A41371009AE3FF /* Bouncer */;
 			targetProxy = D6529F8124A41372009AE3FF /* PBXContainerItemProxy */;
-		};
-		D6529F8D24A41372009AE3FF /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = D6529F6E24A41371009AE3FF /* Bouncer */;
-			targetProxy = D6529F8C24A41372009AE3FF /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -732,7 +659,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = SMSFilter/SMSFilter.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 215;
+				CURRENT_PROJECT_VERSION = 308;
 				DEVELOPMENT_TEAM = JM9222EF99;
 				INFOPLIST_FILE = SMSFilter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -755,7 +682,7 @@
 				CODE_SIGN_ENTITLEMENTS = SMSFilter/SMSFilter.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 215;
+				CURRENT_PROJECT_VERSION = 308;
 				DEVELOPMENT_TEAM = JM9222EF99;
 				INFOPLIST_FILE = SMSFilter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -825,7 +752,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -881,7 +808,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -901,14 +828,14 @@
 				CODE_SIGN_ENTITLEMENTS = Bouncer/Bouncer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 215;
+				CURRENT_PROJECT_VERSION = 308;
 				DEVELOPMENT_ASSET_PATHS = "\"Bouncer/Preview Content\"";
 				DEVELOPMENT_TEAM = JM9222EF99;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Bouncer/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Bouncer;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -932,14 +859,14 @@
 				CODE_SIGN_ENTITLEMENTS = Bouncer/Bouncer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 215;
+				CURRENT_PROJECT_VERSION = 308;
 				DEVELOPMENT_ASSET_PATHS = "\"Bouncer/Preview Content\"";
 				DEVELOPMENT_TEAM = JM9222EF99;
 				ENABLE_PREVIEWS = YES;
 				INFOPLIST_FILE = Bouncer/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Bouncer;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.productivity";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -961,7 +888,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JM9222EF99;
 				INFOPLIST_FILE = BouncerTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -983,7 +910,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = JM9222EF99;
 				INFOPLIST_FILE = BouncerTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -994,49 +921,6 @@
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bouncer.app/Bouncer";
-			};
-			name = Release;
-		};
-		D6529F9B24A41372009AE3FF /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JM9222EF99;
-				INFOPLIST_FILE = BouncerUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.banshai.BouncerUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Bouncer;
-			};
-			name = Debug;
-		};
-		D6529F9C24A41372009AE3FF /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = JM9222EF99;
-				INFOPLIST_FILE = BouncerUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.banshai.BouncerUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_TARGET_NAME = Bouncer;
 			};
 			name = Release;
 		};
@@ -1075,15 +959,6 @@
 			buildConfigurations = (
 				D6529F9824A41372009AE3FF /* Debug */,
 				D6529F9924A41372009AE3FF /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		D6529F9A24A41372009AE3FF /* Build configuration list for PBXNativeTarget "BouncerUITests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				D6529F9B24A41372009AE3FF /* Debug */,
-				D6529F9C24A41372009AE3FF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

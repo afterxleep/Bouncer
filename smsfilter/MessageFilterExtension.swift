@@ -43,14 +43,29 @@ extension MessageFilterExtension: ILMessageFilterQueryHandling {
                 completion: @escaping (ILMessageFilterQueryResponse) -> Void) {
 
         let response = ILMessageFilterQueryResponse()
-        guard let sender = queryRequest.sender, let messageBody = queryRequest.messageBody  else {
-            response.action = .none
-            completion(response)
+        guard let sender = queryRequest.sender, let messageBody = queryRequest.messageBody else {
             return
         }
         let filter = SMSOfflineFilter(filterList: filters)
-        response.action = filter.filterMessage(message: SMSMessage(sender: sender, text: messageBody))
+        let filterOutput: SMSOfflineFilterResponse = filter.filterMessage(message: SMSMessage(sender: sender,
+                                                                                              text: messageBody))
+        response.action = filterOutput.action
+        response.subAction = filterOutput.subaction
         os_log("FILTEREXTENSION - Filtering done", log: OSLog.messageFilterLog, type: .info)        
         completion(response)
     }
 }
+
+extension MessageFilterExtension: ILMessageFilterCapabilitiesQueryHandling {
+    
+    func handle(_ capabilitiesQueryRequest: ILMessageFilterCapabilitiesQueryRequest, context: ILMessageFilterExtensionContext, completion: @escaping (ILMessageFilterCapabilitiesQueryResponse) -> Void) {
+        let response = ILMessageFilterCapabilitiesQueryResponse()
+        response.transactionalSubActions = [.transactionalOrders,
+                                            .transactionalFinance,
+                                            .transactionalReminders]
+        response.promotionalSubActions = [.promotionalOffers,
+                                          .promotionalCoupons]
+        completion(response)
+    }
+}
+

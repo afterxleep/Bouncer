@@ -44,7 +44,7 @@ class FilterStoreFileTests: XCTestCase {
     }
 
     func test10_AddFilters() {
-
+        
         let expectation = self.expectation(description: "Fetch Filters")
         var filters: [Filter] = []
         _ = filterStore.fetch()

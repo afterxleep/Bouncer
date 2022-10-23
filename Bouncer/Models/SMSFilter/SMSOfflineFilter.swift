@@ -6,9 +6,11 @@
 import Foundation
 import IdentityLookup
 
+typealias SMSOfflineFilterResponse = (action: ILMessageFilterAction,
+                                      subaction: ILMessageFilterSubAction)
 
 struct SMSOfflineFilter {
-
+    
     var filters: [Filter]
     
     //MARK: - Initializer
@@ -49,17 +51,43 @@ struct SMSOfflineFilter {
         return (text.range(of: filter.phrase, options:[.regularExpression, .caseInsensitive]) != nil)
     }
     
-    func filterMessage(message: SMSMessage) -> ILMessageFilterAction {
+    private func getAction(_ filter: Filter) -> ILMessageFilterAction {
+        switch filter.action {
+        case .junk:
+            return .junk
+        case .transaction:
+            return .transaction
+        case .promotion:
+            return .promotion
+        default:
+            return .none
+        }
+    }
+    
+    private func getSubAction(_ filter: Filter) -> ILMessageFilterSubAction {
+        switch filter.subAction {
+        case .transactionOrder:
+            return .transactionalOrders
+        case .transactionFinance:
+            return .transactionalFinance
+        case .transactionReminders:
+            return .transactionalReminders
+        case .promotionOffers:
+            return .promotionalOffers
+        case .promotionCoupons:
+            return .promotionalCoupons
+        default:
+            return .none
+        }
+    }
+    
+    func filterMessage(message: SMSMessage) -> SMSOfflineFilterResponse  {
         for filter in filters {
             if(applyFilter(filter: filter, message: message)) {
-                switch (filter.action) {
-                    case .junk: return ILMessageFilterAction.junk
-                    case .promotion: return ILMessageFilterAction.promotion
-                    case .transaction: return ILMessageFilterAction.transaction
-                }
+                return (getAction(filter), getSubAction(filter))
             }
         }
-        return ILMessageFilterAction.none
+        return (.none, .none)
     }
 
 }
