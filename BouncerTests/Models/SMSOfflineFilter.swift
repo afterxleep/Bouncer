@@ -25,11 +25,11 @@ class SMSOfflineFilterTest: XCTestCase {
         filterResult = smsFilter.filterMessage(message: message)
         XCTAssertEqual(filterResult.action, .junk)
 
-        smsFilter = SMSOfflineFilter(filterList: [Filter(id: UUID(), phrase: "comunica", type: .sender, action: .promotion)])
+        smsFilter = SMSOfflineFilter(filterList: [Filter(id: UUID(), phrase: "comunica", type: .sender, action: .transaction)])
         filterResult = smsFilter.filterMessage(message: message)
         XCTAssertEqual(filterResult.action, .transaction)
 
-        smsFilter = SMSOfflineFilter(filterList: [Filter(id: UUID(), phrase: "mega", type: .message, action: .transaction)])
+        smsFilter = SMSOfflineFilter(filterList: [Filter(id: UUID(), phrase: "mega", type: .message, action: .promotion)])
         filterResult = smsFilter.filterMessage(message: message)
         XCTAssertEqual(filterResult.action, .promotion)
         
