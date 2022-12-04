@@ -102,6 +102,7 @@
 
 /* Begin PBXFileReference section */
 		09491AEE261D30A400CF8073 /* String+Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Empty.swift"; sourceTree = "<group>"; };
+		30B61399293D2B9B00A8A2A1 /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D60A19C624A69F1F0002E8BD /* SMSMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSMessage.swift; sourceTree = "<group>"; };
 		D61497E824E4430E00AF997E /* FilterAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterAction.swift; sourceTree = "<group>"; };
 		D61497EB24E4433800AF997E /* FilterReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterReducer.swift; sourceTree = "<group>"; };
@@ -568,6 +569,7 @@
 				es,
 				Base,
 				ar,
+				fa,
 			);
 			mainGroup = D6529F6624A41371009AE3FF;
 			productRefGroup = D6529F7024A41371009AE3FF /* Products */;
@@ -720,6 +722,7 @@
 				D621CB4424ABABF6008883AA /* es */,
 				D621CB4724ABC56E008883AA /* en */,
 				D6BAC9EE26D7A156007ACCBE /* ar */,
+				30B61399293D2B9B00A8A2A1 /* fa */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -732,7 +735,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = SMSFilter/SMSFilter.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 215;
+				CURRENT_PROJECT_VERSION = 224;
 				DEVELOPMENT_TEAM = JM9222EF99;
 				INFOPLIST_FILE = SMSFilter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -755,7 +758,7 @@
 				CODE_SIGN_ENTITLEMENTS = SMSFilter/SMSFilter.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 215;
+				CURRENT_PROJECT_VERSION = 224;
 				DEVELOPMENT_TEAM = JM9222EF99;
 				INFOPLIST_FILE = SMSFilter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -901,7 +904,7 @@
 				CODE_SIGN_ENTITLEMENTS = Bouncer/Bouncer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 215;
+				CURRENT_PROJECT_VERSION = 224;
 				DEVELOPMENT_ASSET_PATHS = "\"Bouncer/Preview Content\"";
 				DEVELOPMENT_TEAM = JM9222EF99;
 				ENABLE_PREVIEWS = YES;
@@ -932,7 +935,7 @@
 				CODE_SIGN_ENTITLEMENTS = Bouncer/Bouncer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 215;
+				CURRENT_PROJECT_VERSION = 224;
 				DEVELOPMENT_ASSET_PATHS = "\"Bouncer/Preview Content\"";
 				DEVELOPMENT_TEAM = JM9222EF99;
 				ENABLE_PREVIEWS = YES;
