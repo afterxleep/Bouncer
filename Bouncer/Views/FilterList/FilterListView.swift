@@ -5,6 +5,7 @@
 
 import SwiftUI
 import UniformTypeIdentifiers
+import os.log
 
 struct FilterListView: View {
     var filters: [Filter]
@@ -83,22 +84,28 @@ extension FilterListView {
                     .padding(.bottom, 10)
                 }.padding(.bottom, 200)
             }
-        }.fileImporter(isPresented: $showingFileImporter, allowedContentTypes: [.json]) { result in
+        }
+        .fileImporter(isPresented: $showingFileImporter, allowedContentTypes: [.json]) { result in
             switch result {
             case .success(let url):
                 do {
                     let filters = try JSONDecoder().decode([Filter].self, from: Data(contentsOf: url))
                     self.onImport(filters)
                 } catch {
-                    // TODO: Handle failure
+                    os_log(.error, log: .errorLog,
+                           "Failed to load JSON from file: %{public}@",
+                           error.localizedDescription)
                 }
                 
             case .failure(let failure):
-                OSLog.errorLog.error("Failed to load import file: \(failure.localizedDescription)")
+                os_log(.error, log: .errorLog,
+                       "Failed to load import file: %{public}@",
+                       failure.localizedDescription)
             }
             
             showingImportFilterList = true
-        }.sheet(isPresented: $showingImportFilterList) {
+        }
+        .sheet(isPresented: $showingImportFilterList) {
             ImportFilterListContainerView()
         }.sheet(isPresented: $showingSettings) {
             TutorialView(hasLaunchedApp: true, onSettingsTap: openSettings)
