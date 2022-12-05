@@ -14,7 +14,7 @@ enum DESIGN {
 struct COLORS {
     static let ALERT_COLOR = Color("AlertColor")
     static let WARNING_COLOR = Color("WarningColor")
-    static let OK_COLOR = Color("OKColor")
+    static let OK_COLOR = Color("OkColor")
     static let DEFAULT_COLOR = Color("DefaultColor")
     static let DEFAULT_ICON_COLOR = Color("DefaultIconColor")
     static let ACCENT_COLOR = Color("AccentColor")
