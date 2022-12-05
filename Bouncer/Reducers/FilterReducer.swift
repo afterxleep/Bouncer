@@ -11,6 +11,9 @@ func filterReducer(state: inout FilterState, action: FilterAction) -> Void {
     case .fetchComplete(let filters):
         state.filters = filters
         
+    case .fetchFromImportComplete(let filters):
+        state.filtersFromImport = filters
+        
     default:
         break
     }

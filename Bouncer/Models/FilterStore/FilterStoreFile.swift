@@ -18,10 +18,14 @@ final class FilterStoreFile: FilterStore {
     var filters: [Filter] = []
     var cancellables = [AnyCancellable]()
     
-    private var fileURL: URL? {
+    static var fileURL: URL? {
         return FileManager.default
             .containerURL(forSecurityApplicationGroupIdentifier: Self.groupContainer)?
             .appendingPathComponent(Self.filterListFile)
+    }
+    
+    private var fileURL: URL? {
+        return Self.fileURL
     }
     
     private func fileExists(url: URL) -> Bool {

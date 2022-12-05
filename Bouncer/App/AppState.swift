@@ -15,6 +15,7 @@ struct AppState {
 // MARK: Filter State
 struct FilterState {
     var filters: [Filter] = []
+    var filtersFromImport: [Filter] = []
 }
 
 struct SettingsState {

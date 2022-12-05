@@ -28,7 +28,7 @@ enum FilterDestination: String, Codable, Equatable, CaseIterable {
 
 }
 
-struct Filter: Identifiable, Equatable, Codable {
+struct Filter: Hashable, Identifiable, Equatable, Codable {
     var id: UUID
     var type: FilterType
     var phrase: String

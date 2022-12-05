@@ -61,3 +61,10 @@
 "4." = "4.";
 "USE_REGULAR_EXPRESSIONS" = "Filtrar como Expresión Regular";
 "USE_REGULAR_EXPRESSIONS_DETAIL" = "Activa esta opción si tu filtro contiene una Expresión Regular (Regex). (Las expresiones regulares deben usar el formato PCRE).";
+"EXPORT_BLOCK_LIST" = "Exportar Lista de Bloqueo";
+"IMPORT_BLOCK_LIST" = "Importar Lista de Bloqueo";
+"NEW_FILTERS" = "Filtros Nuevos";
+"DUPLICATE_FILTERS" = "Filtros Duplicados";
+"SELECT_ALL" = "Seleccionar Todos";
+"SELECT_NEW" = "Seleccionar Nuevos";
+"SELECT_NONE" = "Seleccionar Ninguno";

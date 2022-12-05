@@ -4,15 +4,19 @@
 //
 
 import SwiftUI
+import UniformTypeIdentifiers
 
 struct FilterListView: View {
     var filters: [Filter]
     let onDelete: (IndexSet) -> Void
+    let onImport: ([Filter]) -> Void
     let openSettings: () -> Void
     
     @State var showingSettings = false
     @State var showingFilterDetail = false
     @State var showingInApp = false
+    @State var showingFileImporter = false
+    @State var showingImportFilterList = false
     
     var body: some View {
         ZStack {
@@ -20,7 +24,14 @@ struct FilterListView: View {
             NavigationView {
                 filterList
                     .navigationBarTitle("LIST_VIEW_TITLE")
-                    .navigationBarItems(leading: helpButton, trailing: addButton)
+                    .toolbar {
+                        ToolbarItemGroup(placement: .navigationBarLeading) {
+                            menu
+                        }
+                        ToolbarItemGroup(placement: .navigationBarTrailing) {
+                            addButton
+                        }
+                    }
             }
         }
     }
@@ -32,6 +43,7 @@ struct FilterListView_Previews: PreviewProvider {
     static var previews: some View {
         FilterListView(filters: [],                       
                        onDelete: {_ in },
+                       onImport: {_ in },
                        openSettings: {}
         )
     }
@@ -71,15 +83,33 @@ extension FilterListView {
                     .padding(.bottom, 10)
                 }.padding(.bottom, 200)
             }
+        }.fileImporter(isPresented: $showingFileImporter, allowedContentTypes: [.json]) { result in
+            switch result {
+            case .success(let url):
+                do {
+                    let filters = try JSONDecoder().decode([Filter].self, from: Data(contentsOf: url))
+                    self.onImport(filters)
+                } catch {
+                    // TODO: Handle failure
+                }
+                
+            case .failure(let failure):
+                // TODO: Handle failure
+                break
+            }
+            
+            showingImportFilterList = true
+        }.sheet(isPresented: $showingImportFilterList) {
+            ImportFilterListContainerView()
+        }.sheet(isPresented: $showingSettings) {
+            TutorialView(hasLaunchedApp: true, onSettingsTap: openSettings)
         }
     }
     
     var helpButton: some View {
         Group {
             Button(action: { showingSettings = true }) {
-                Image(systemName: SYSTEM_IMAGES.HELP.image).imageScale(.large)
-            }.sheet(isPresented: $showingSettings) {
-                TutorialView(hasLaunchedApp: true, onSettingsTap: openSettings)
+                Label("HELP", systemImage: SYSTEM_IMAGES.HELP.image).imageScale(.large)
             }
         }
     }
@@ -92,6 +122,23 @@ extension FilterListView {
             }.sheet(isPresented: $showingFilterDetail) {
                 FilterDetailContainerView()
             }
+        }
+    }
+    
+    var menu: some View {
+        Menu {
+            if let filterStoreFileURL = FilterStoreFile.fileURL {
+                ShareLink(item: filterStoreFileURL) {
+                    Label("EXPORT_BLOCK_LIST", systemImage: SYSTEM_IMAGES.EXPORT.image).imageScale(.large)
+                }
+            }
+            Button(action: { showingFileImporter = true }) {
+                Label("IMPORT_BLOCK_LIST", systemImage: SYSTEM_IMAGES.IMPORT.image).imageScale(.large)
+            }
+            Divider()
+            helpButton
+        } label: {
+            Image(systemName: SYSTEM_IMAGES.IMPORT_EXPORT_MENU.image).imageScale(.large)
         }
     }
 }
