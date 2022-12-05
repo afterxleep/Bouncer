@@ -94,8 +94,7 @@ extension FilterListView {
                 }
                 
             case .failure(let failure):
-                // TODO: Handle failure
-                break
+                OSLog.errorLog.error("Failed to load import file: \(failure.localizedDescription)")
             }
             
             showingImportFilterList = true
