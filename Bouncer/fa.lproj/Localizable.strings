@@ -1,0 +1,60 @@
+/*
+  Localizable.strings
+  Bouncer
+
+  Created by Saeed Taheri on 12/4/22.
+ 
+*/
+
+"FILTER_TYPE_SELECTION_LABEL" = "اگر";
+"FILTER_TEXT_PLACEHOLDER" = "یک کلمه یا عبارت وارد کنید";
+"FILTER_CONTAINS_TEXT_LABEL" = "شامل";
+"FILTER_ADD_VIEW_TITLE" = "افزودن فیلتر";
+"FILTER_EDIT_VIEW_TITLE" = "به روز رسانی فیلتر";
+"SAVE" = "ذخیره";
+"CANCEL" = "انصراف";
+"ADVANCED" = "پیشرفته";
+"FILTER_INFORMATION" = "تنظیمات فیلتر";
+"EXACT_MATCH" = "تطابق کامل";
+"EXACT_MATCH_CAPTION" = "فیلتر کردن پیام‌ها فقط در صورتی که فرستنده یا پیام با کلمه یا عبارت تعیین شده تطابق کامل داشته باشد.";
+"FILTER_ACTION_LABEL" = "علامت‌گذاری به عنوان";
+"JUNK_ACTION" = "اسپم (Junk)";
+"TRANSACTION_ACTION" = "تراکنش (Transaction)";
+"PROMOTION_ACTION" = "تبلیغ (Promotion)";
+"ANYTHING_IN_MESSAGE" = "هر بخشی از پیام";
+"SENDER_NUMBER" = "شماره یا نام فرستنده";
+"TEXT" = "متن پیام";
+"LIST_VIEW_TITLE" = "فهرست مسدود شده ها";
+"EMPTY_LIST_TITLE" = "فهرست مسدود شده ها خالی است";
+"EMPTY_LIST_MESSAGE" = "اپ Bouncer پیامک‌ها را بر اساس فیلترهایی که اینجا اضافه می‌کنید فیلتر می‌کند.";
+"TAP_SPACE" = "با لمس ";
+"TO_ADD_A_FILTER_SPACE" = " می‌توانید فیلتر اضافه کنید.";
+"WELCOME_TITLE" = "سلام!";
+"WELCOME_SUBTITLE" = "به Bouncer خوش آمدید";
+"HELP" = "راهنما";
+"LETS" = "بریم برای ";
+"HERE_IS_HOW" = "برای ";
+"ENABLE_SMS_FILTERING" = "فعال‌سازی فیلتر کردن پیامک";
+"ON_YOUR_IPHONE" = " در آیفون شما:";
+"OPEN_SPACE" = "باز کردن ";
+"THE_APP" = "‌";
+"SETTINGS_APP" = "Settings";
+"TAP" = "انتخاب ";
+"MESSAGES_APP" = "Messages";
+"UNKNOWN_SOURCES" = "Unknown & Spam ";
+"TOGGLE" = "تغییر وضعیت";
+"BUTTON_TUTORIAL_FIRST_LAUNCH_TEXT" = "رفتن به تنظیمات";
+"BUTTON_TUTORIAL_HELP_TEXT" = "متوجه شدم!";
+"PAYMENT_PAGE_TITLE" = "آماده ارتقا هستید؟";
+"PAYMENT_PAGE_MESSAGE %lld" = "نسخه رایگان Bouncer محدود به %lld فیلتر است؛ معمولاً این تعداد برای اکثر افراد کافی است.";
+"UPGRADE_BUTTON_TEXT %@" = "با قیمت %@ در سال مشترک شوید";
+"RESTORE_PURCHASE" = "بازگردانی خرید";
+"UPGRADE_EXPLANATION" = "برای تنظیم فیلترهای نامحدود و همچنین کمک به من در بهبود اپ، ارتقا دهید.";
+"NEW_FILTER" = "فیلتر جدید";
+"UPDATE_FILTER" = "به روز رسانی فیلتر";
+"1." = ".۱";
+"2." = ".۲";
+"3." = ".۳";
+"4." = ".۴";
+"USE_REGULAR_EXPRESSIONS" = "تطابق به عنوان Regex";
+"USE_REGULAR_EXPRESSIONS_DETAIL" = "اگر فیلتر شما حاوی Regex است، این گزینه را فعال کنید. (Regex باید در قالب PCRE نوشته شود).";
