@@ -32,7 +32,7 @@ extension FilterListContainerView {
     }
     
     func importFilters(filters: [Filter]) {
-        let action: FilterAction = .fetchFromImportComplete(filters: filters)
+        let action: FilterAction = .import(filters: filters)
         store.dispatch(.filter(action: action))
     }
 

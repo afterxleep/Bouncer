@@ -44,15 +44,7 @@ class FilterStoreFileTests: XCTestCase {
     }
 
     func test10_AddFilters() {
-        
-        let expectation = self.expectation(description: "Fetch Filters")
-        var filters: [Filter] = []
-        _ = filterStore.fetch()
-            .sink(receiveCompletion: {_ in }, receiveValue: { value in
-                filters = value
-                expectation.fulfill()
-            })
-        waitForExpectations(timeout: 1, handler: nil)
+        let filters: [Filter] = self.fetchFilters()
         XCTAssertEqual(self.filters.count, filters.count)
         
         let regexFilter = filters[0]
@@ -62,7 +54,36 @@ class FilterStoreFileTests: XCTestCase {
         XCTAssertEqual(wordFilter.phrase, "your code")
 
     }
-
+    
+    func test15_AddManyFilters() {
+        var filters: [Filter] = self.fetchFilters()
+        XCTAssertEqual(self.filters.count, filters.count)
+        
+        let newFilter = Filter(id: UUID(), phrase: "some new filter")
+        let newFilters = [
+            filters.first(where: { $0.phrase == "rappi" })!,
+            newFilter,
+        ]
+        
+        let expectation = self.expectation(description: "Add Many Filters")
+        _ = filterStore.addMany(filters: newFilters)
+            .sink(receiveCompletion: {_ in }, receiveValue: { value in
+                expectation.fulfill()
+            })
+        waitForExpectations(timeout: 1, handler: nil)
+        
+        filters = self.fetchFilters()
+        XCTAssertEqual(self.filters.count + newFilters.count, filters.count)
+        
+        let rappis = filters.filter { $0.phrase == "rappi" }
+        XCTAssertEqual(2, rappis.count)
+        XCTAssertEqual(2, Set(rappis.map(\.id)).count, "Expected duplicate filters to have different IDs")
+        
+        let addedNewFilters = filters.filter { $0.phrase == newFilter.phrase }
+        XCTAssertEqual(1, addedNewFilters.count)
+        XCTAssertEqual(newFilter.id, addedNewFilters.first!.id)
+    }
+    
     func test20_DeleteFilter() {
         var expectation = self.expectation(description: "Fetch Filters")
 
@@ -92,5 +113,17 @@ class FilterStoreFileTests: XCTestCase {
         waitForExpectations(timeout: 1, handler: nil)
         XCTAssertEqual(self.filters.count-1, filters.count)
 
+    }
+    
+    private func fetchFilters() -> [Filter] {
+        let expectation = self.expectation(description: "Fetch Filters")
+        var filters: [Filter] = []
+        _ = filterStore.fetch()
+            .sink(receiveCompletion: {_ in }, receiveValue: { value in
+                filters = value
+                expectation.fulfill()
+            })
+        waitForExpectations(timeout: 1, handler: nil)
+        return filters
     }
 }

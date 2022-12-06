@@ -12,7 +12,7 @@ struct ImportFilterListContainerView: View {
     var body: some View {
         ImportFilterListView(
             existingFilters: store.state.filters.filters,
-            filters: store.state.filters.filtersFromImport,
+            filters: store.state.filters.importedFilters,
             onAdd: { filters in
                 addFilters(filters: filters)
                 doneImporting()
@@ -32,27 +32,11 @@ struct ImportFilterListContainerView_Previews: PreviewProvider {
 extension ImportFilterListContainerView {
     
     func addFilters(filters: [Filter]) {
-        let existingFilters = store.state.filters.filters
-        
-        for f in filters {
-            var filter = f
-            // Prevent duplicate IDs
-            if (existingFilters.contains(filter)) {
-                filter = Filter(
-                    id: UUID(),
-                    phrase: filter.phrase,
-                    type: filter.type,
-                    action: filter.action,
-                    subAction: filter.subAction,
-                    useRegex: filter.useRegex
-                )
-            }
-            store.dispatch(.filter(action: .add(filter: filter)))
-        }
+        store.dispatch(.filter(action: .addMany(filters: filters)))
     }
     
     func doneImporting() {
-        store.dispatch(.filter(action: .fetchFromImportComplete(filters: [])))
+        store.dispatch(.filter(action: .import(filters: [])))
         self.dismiss()
     }
 }
