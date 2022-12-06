@@ -35,13 +35,10 @@ struct ImportFilterListView: View {
                 filterList
                     .toolbar {
                         ToolbarItemGroup(placement: .navigationBarLeading) {
-                            Button {
+                            Button("CANCEL") {
                                 self.onCancel()
-                            } label: {
-                                Image(systemName: SYSTEM_IMAGES.CLOSE.image)
                             }
-                        }
-                        ToolbarItemGroup(placement: .navigationBarTrailing) {
+                            
                             Menu {
                                 Button {
                                     self.selectedFilters = Set(filters)
@@ -61,12 +58,11 @@ struct ImportFilterListView: View {
                             } label: {
                                 Image(systemName: SYSTEM_IMAGES.CHECKLIST_OPTIONS.image)
                             }
-
-                            Button {
+                        }
+                        ToolbarItemGroup(placement: .navigationBarTrailing) {
+                            Button("SAVE") {
                                 self.onAdd(Array(self.selectedFilters))
-                            } label: {
-                                Image(systemName: SYSTEM_IMAGES.ADD.image)
-                            }
+                            }.disabled(selectedFilters.count == 0)
                         }
                     }
             }
@@ -122,5 +118,4 @@ extension ImportFilterListView {
             }
         }.listRowBackground(selected ? systemImage.color.opacity(0.15) : nil)
     }
-    
 }
