@@ -84,43 +84,23 @@ extension ImportFilterListView {
 
     var filterList: some View {
         VStack {
-            if (filters.count > 0) {
-                List {
-                    Section("NEW_FILTERS") {
-                        ForEach(newFilters) { filter in
-                            filterRowView(filter,
-                                          selected: self.selectedFilters.contains(filter),
-                                          duplicate: false)
-                        }
+            List {
+                Section("NEW_FILTERS") {
+                    ForEach(newFilters) { filter in
+                        filterRowView(filter,
+                                      selected: self.selectedFilters.contains(filter),
+                                      duplicate: false)
                     }
-                    
-                    Section("DUPLICATE_FILTERS") {
-                        ForEach(duplicateFilters) { filter in
-                            filterRowView(filter,
-                                          selected: self.selectedFilters.contains(filter),
-                                          duplicate: true)
-                        }
+                }
+                
+                Section("DUPLICATE_FILTERS") {
+                    ForEach(duplicateFilters) { filter in
+                        filterRowView(filter,
+                                      selected: self.selectedFilters.contains(filter),
+                                      duplicate: true)
                     }
-                }.listStyle(.plain)
-//            } else {
-//                VStack(alignment: .center) {
-//                    Group() {
-//                        Text("EMPTY_LIST_TITLE").font(.title2).bold().padding()
-//                        Group {
-//                            Text("EMPTY_LIST_MESSAGE")
-//                            HStack(spacing: 0) {
-//                                Text("TAP_SPACE")
-//                                Image(systemName: "plus.circle")
-//                                Text("TO_ADD_A_FILTER_SPACE")
-//                            }
-//                        }.frame(width: 260)
-//                    }
-//                    .foregroundColor(Color("TextDefaultColor"))
-//                    .multilineTextAlignment(.center)
-//                    .padding(.bottom, 10)
-//                }.padding(.bottom, 200)
-            }
-            Text("\(self.selectedFilters.count) Selected")
+                }
+            }.listStyle(.plain)
         }
     }
     

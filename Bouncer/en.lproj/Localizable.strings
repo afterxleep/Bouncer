@@ -70,3 +70,6 @@
 "SELECT_ALL" = "Select All";
 "SELECT_NEW" = "Select New";
 "SELECT_NONE" = "Select None";
+"ERROR" = "Error";
+"EMPTY_IMPORT_FILE" = "The file you selected contained no filters.";
+"IMPORT_ERROR %@" = "There was an error importing the selected file.\n\n%@";

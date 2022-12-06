@@ -67,4 +67,7 @@
 "DUPLICATE_FILTERS" = "Filtros Duplicados";
 "SELECT_ALL" = "Seleccionar Todos";
 "SELECT_NEW" = "Seleccionar Nuevos";
-"SELECT_NONE" = "Seleccionar Ninguno";
+"SELECT_NONE" = "Limpiar Selección";
+"ERROR" = "Error";
+"EMPTY_IMPORT_FILE" = "El archivo seleccionado no contiene filtros.";
+"IMPORT_ERROR %@" = "Hubo un error al importar el archivo seleccionado.\n\n%@";

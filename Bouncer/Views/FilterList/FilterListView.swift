@@ -19,6 +19,30 @@ struct FilterListView: View {
     @State var showingFileImporter = false
     @State var showingImportFilterList = false
     
+    enum ImportError: Identifiable {
+        case emptyImportFileError
+        case decodingError(String)
+        case unknownError(String)
+        
+        var id: String {
+            switch self {
+                case .emptyImportFileError: return "EMPTY_IMPORT_FILE"
+                case .decodingError(let str): return str
+                case .unknownError(let str): return str
+            }
+        }
+        
+        var textView: Text {
+            switch self {
+                case .emptyImportFileError: return Text("EMPTY_IMPORT_FILE")
+                case .decodingError(let str): return Text("IMPORT_ERROR \(str)")
+                case .unknownError(let str): return Text("IMPORT_ERROR \(str)")
+            }
+        }
+    }
+    
+    @State var importError: ImportError? = nil
+    
     var body: some View {
         ZStack {
             BackgroundView()
@@ -90,17 +114,24 @@ extension FilterListView {
             case .success(let url):
                 do {
                     let filters = try JSONDecoder().decode([Filter].self, from: Data(contentsOf: url))
-                    self.onImport(filters)
+                    
+                    if (filters.count > 0) {
+                        self.onImport(filters)
+                    } else {
+                        self.importError = .emptyImportFileError
+                    }
                 } catch {
                     os_log(.error, log: .errorLog,
                            "Failed to load JSON from file: %{public}@",
                            error.localizedDescription)
+                    self.importError = .decodingError(error.localizedDescription)
                 }
                 
-            case .failure(let failure):
+            case .failure(let error):
                 os_log(.error, log: .errorLog,
                        "Failed to load import file: %{public}@",
-                       failure.localizedDescription)
+                       error.localizedDescription)
+                self.importError = .unknownError(error.localizedDescription)
             }
             
             showingImportFilterList = true
@@ -109,6 +140,9 @@ extension FilterListView {
             ImportFilterListContainerView()
         }.sheet(isPresented: $showingSettings) {
             TutorialView(hasLaunchedApp: true, onSettingsTap: openSettings)
+        }
+        .alert(item: $importError) { error in
+            Alert(title: Text("ERROR"), message: error.textView)
         }
     }
     
