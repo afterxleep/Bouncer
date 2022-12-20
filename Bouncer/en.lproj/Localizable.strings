@@ -63,3 +63,13 @@
 "4." = "4.";
 "USE_REGULAR_EXPRESSIONS" = "Match as Regular Expression";
 "USE_REGULAR_EXPRESSIONS_DETAIL" = "Enable this option if your filter contains a regular expression.  (Regex should be provided in PCRE format).";
+"EXPORT_BLOCK_LIST" = "Export Block List";
+"IMPORT_BLOCK_LIST" = "Import Block List";
+"NEW_FILTERS" = "New Filters";
+"DUPLICATE_FILTERS" = "Duplicate Filters";
+"SELECT_ALL" = "Select All";
+"SELECT_NEW" = "Select New";
+"SELECT_NONE" = "Select None";
+"ERROR" = "Error";
+"EMPTY_IMPORT_FILE" = "The file you selected contained no filters.";
+"IMPORT_ERROR %@" = "There was an error importing the selected file.\n\n%@";

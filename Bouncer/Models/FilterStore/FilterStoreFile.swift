@@ -18,10 +18,14 @@ final class FilterStoreFile: FilterStore {
     var filters: [Filter] = []
     var cancellables = [AnyCancellable]()
     
-    private var fileURL: URL? {
+    static var fileURL: URL? {
         return FileManager.default
             .containerURL(forSecurityApplicationGroupIdentifier: Self.groupContainer)?
             .appendingPathComponent(Self.filterListFile)
+    }
+    
+    private var fileURL: URL? {
+        return Self.fileURL
     }
     
     private func fileExists(url: URL) -> Bool {
@@ -102,6 +106,43 @@ extension FilterStoreFile {
                     filters = filters.sorted(by: { $1.phrase > $0.phrase })
                     
                     if let errorMessage = self.saveToDisk(filters: filters) {
+                        promise(.failure(.diskError(errorMessage)))
+                    } else {
+                        promise(.success(()))
+                    }
+                })
+                .store(in: &self.cancellables)
+        }.eraseToAnyPublisher()
+    }
+    
+    func addMany(filters: [Filter]) -> AnyPublisher<Void, FilterStoreError> {
+        return Future<Void, FilterStoreError> { promise in
+            self.fetch()
+                .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] result in
+                    guard let self = self else { return }
+                    
+                    var existingFilters: [Filter] = result
+
+                    let newFilters = filters.map { f in
+                        if (existingFilters.contains(f)) {
+                            return Filter(
+                                id: UUID(),
+                                phrase: f.phrase,
+                                type: f.type,
+                                action: f.action,
+                                subAction: f.subAction,
+                                useRegex: f.useRegex
+                            )
+                        } else {
+                            return f
+                        }
+                    }
+                    
+                    
+                    existingFilters.append(contentsOf: newFilters)
+                    existingFilters = existingFilters.sorted(by: { $1.phrase > $0.phrase })
+                    
+                    if let errorMessage = self.saveToDisk(filters: existingFilters) {
                         promise(.failure(.diskError(errorMessage)))
                     } else {
                         promise(.success(()))

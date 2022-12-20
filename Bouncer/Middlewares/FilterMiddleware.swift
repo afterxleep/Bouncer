@@ -45,6 +45,19 @@ func filterMiddleware(filterStore: FilterStore) -> Middleware<AppState, AppActio
                     }
                 }
                 .eraseToAnyPublisher()
+
+        case .filter(action: .addMany(let filters)):
+            return filterStore.addMany(filters: filters)
+                .map { AppAction.filter(action: .fetch) }
+                .catch { (error: FilterStoreError) -> Just<AppAction> in
+                    switch(error) {
+                    case .addError:
+                        return Just(AppAction.filter(action: .addError(error: FilterMiddlewareError.addError)))
+                    default:
+                        return Just(AppAction.filter(action: .addError(error: FilterMiddlewareError.unknown)))
+                    }
+                }
+                .eraseToAnyPublisher()
             
         case .filter(action: .update(filter: let filter)):
             return filterStore.update(filter: filter)

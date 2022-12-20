@@ -28,7 +28,7 @@ enum FilterDestination: String, Codable, Equatable, CaseIterable {
 
 }
 
-struct Filter: Identifiable, Equatable, Codable {
+struct Filter: Hashable, Identifiable, Equatable, Codable {
     var id: UUID
     var type: FilterType
     var phrase: String
@@ -67,6 +67,7 @@ enum FilterStoreError: Error {
 protocol FilterStore {
     func fetch() -> AnyPublisher<[Filter], FilterStoreError>
     func add(filter: Filter) -> AnyPublisher<Void, FilterStoreError>
+    func addMany(filters: [Filter]) -> AnyPublisher<Void, FilterStoreError>
     func update(filter: Filter) -> AnyPublisher<Void, FilterStoreError>
     func remove(uuid: UUID) -> AnyPublisher<Void, FilterStoreError>
     func reset() -> AnyPublisher<Void, FilterStoreError>    
