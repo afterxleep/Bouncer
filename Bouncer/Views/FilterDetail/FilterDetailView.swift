@@ -68,16 +68,20 @@ extension FilterDetailView {
                         .multilineTextAlignment(.trailing)
                 }
                 Picker(selection: $filterDestination, label: Text("FILTER_ACTION_LABEL")) {
-                    filterPickerSectionFor(.junk).tag(FilterDestination.junk)
-                    Divider()
-                    filterPickerSectionFor(.transactionOrder).tag(FilterDestination.transactionOrder)
-                    filterPickerSectionFor(.transactionFinance).tag(FilterDestination.transactionFinance)
-                    filterPickerSectionFor(.transactionReminders).tag(FilterDestination.transactionReminders)
-                    filterPickerSectionFor(.transaction).tag(FilterDestination.transaction)
-                    Divider()
-                    filterPickerSectionFor(.promotionOffers).tag(FilterDestination.promotionOffers)
-                    filterPickerSectionFor(.promotionCoupons).tag(FilterDestination.promotionCoupons)
-                    filterPickerSectionFor(.promotion).tag(FilterDestination.promotion)
+                    Section {
+                        filterPickerSectionFor(.junk).tag(FilterDestination.junk)
+                    }
+                    Section(header: Text("TRANSACTIONS")) {
+                        filterPickerSectionFor(.transactionOrder).tag(FilterDestination.transactionOrder)
+                        filterPickerSectionFor(.transactionFinance).tag(FilterDestination.transactionFinance)
+                        filterPickerSectionFor(.transactionReminders).tag(FilterDestination.transactionReminders)
+                        filterPickerSectionFor(.transaction).tag(FilterDestination.transaction)
+                    }
+                    Section(header: Text("PROMOTIONS")) {
+                        filterPickerSectionFor(.promotionOffers).tag(FilterDestination.promotionOffers)
+                        filterPickerSectionFor(.promotionCoupons).tag(FilterDestination.promotionCoupons)
+                        filterPickerSectionFor(.promotion).tag(FilterDestination.promotion)
+                    }
                 }
             }
             Section(header: Text("ADVANCED")) {

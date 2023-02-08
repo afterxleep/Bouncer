@@ -19,10 +19,12 @@
 "EXACT_MATCH_CAPTION" = "Filtra los mensajes solo cuando el remitente/mensaje es exactamente igual a la palabra o frase especificada arriba.";
 "FILTER_ACTION_LABEL" = "Marcar como";
 "JUNK_ACTION" = "Spam";
+"TRANSACTIONS" = "Transacciones";
 "TRANSACTION_ACTION" = "Otras Transacciones";
 "TRANSACTION_ACTION_ORDERS" = "Pedidos";
 "TRANSACTION_ACTION_FINANCE" = "Finanzas";
 "TRANSACTION_ACTION_REMINDERS" = "Recordatorios";
+"PROMOTIONS" = "Promociones";
 "PROMOTION_ACTION" = "Otras Promociones";
 "PROMOTION_ACTION_OFFERS" = "Ofertas";
 "PROMOTION_ACTION_COUPONS" = "Cupones";
