@@ -1,0 +1,25 @@
+name: CorePR
+
+on:
+  pull_request:
+    types:
+      - opened
+      - synchronize
+      - reopened
+    branches:
+      - develop
+
+jobs:
+  assign_pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Assign PR to Core
+        uses: actions/github-script@v5
+        with:
+          script: |
+            await github.rest.issues.addAssignees({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              assignees: ['@afterxleep']
+            });
