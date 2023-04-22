@@ -57,7 +57,7 @@ final class FilterStoreFile: FilterStore {
             // Decode with current version
             guard let filters = try? JSONDecoder().decode([Filter].self, from: data) else {
 
-                // Try migrating the database if unreadable
+                // Try migrating the database if decoding fails
                 _ = self.migrateDatabase()
                     .sink(receiveCompletion: { _ in }, receiveValue: { result in
                         if result != [] {
