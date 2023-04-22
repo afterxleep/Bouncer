@@ -21,6 +21,8 @@ func settingsReducer(state: inout SettingsState, action: SettingsAction) -> Void
         case .setLastVersionPromptedForReview(let version):
             state.lastVersionPromptedForReview = version
 
+        case .setDatabaseVersion(let version):
+            state.databaseVersion = version
 
     }
 }

@@ -22,4 +22,5 @@ struct SettingsState {
     var hasLaunchedApp: Bool = false
     var numberOfLaunches: Int = 0
     var lastVersionPromptedForReview: String = ""
+    var databaseVersion: Int = 0
 }

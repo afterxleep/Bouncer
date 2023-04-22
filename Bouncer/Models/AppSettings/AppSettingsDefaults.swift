@@ -26,6 +26,11 @@ struct AppSettingsDefaults: AppSettingsStore {
         get { return value(for: AppSettingsKeys.lastVersionPromptedForReview.rawValue) ?? "" }
         set { updateDefaults(for: AppSettingsKeys.lastVersionPromptedForReview.rawValue, value: newValue) }
     }
+
+    var databaseVersion: Int {
+        get { return value(for: AppSettingsKeys.databaseVersion.rawValue) ?? 0 }
+        set { updateDefaults(for: AppSettingsKeys.databaseVersion.rawValue, value: newValue) }
+    }
     
 }
 

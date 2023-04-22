@@ -136,7 +136,7 @@ class FilterStoreFileTests: XCTestCase {
         do {
             try data.write(to: url)
         } catch {
-            XCTFail("Could not write sampel data")
+            XCTFail("Could not write sample data")
             return
         }
 
@@ -152,10 +152,13 @@ class FilterStoreFileTests: XCTestCase {
 
         let regexFilter = filters[0]
         XCTAssertEqual(regexFilter.phrase, "[b-chm-pP]at|ot")
+        XCTAssertEqual(regexFilter.subAction, .none)
+        XCTAssertEqual(regexFilter.useRegex, true)
 
         let wordFilter = filters[3]
         XCTAssertEqual(wordFilter.phrase, "your code")
-
+        XCTAssertEqual(regexFilter.subAction, .none)
+        XCTAssertEqual(regexFilter.useRegex, true)
     }
     
     private func fetchFilters() -> [Filter] {

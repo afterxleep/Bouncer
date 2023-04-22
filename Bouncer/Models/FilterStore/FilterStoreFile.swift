@@ -50,7 +50,29 @@ final class FilterStoreFile: FilterStore {
             return errorMessage
         }
     }
-    
+
+    private func decodeData(data: Data) -> AnyPublisher<[Filter], FilterStoreError> {
+        return Future<[Filter], FilterStoreError> { promise in
+
+            // Decode with current version
+            guard let filters = try? JSONDecoder().decode([Filter].self, from: data) else {
+                promise(.failure(.decodingError))
+                return
+            }
+            promise(.success(filters))
+
+        }.eraseToAnyPublisher()
+    }
+
+    private func migrateDatabase() -> Future<[Filter], FilterStoreMigrationError> {
+        let migrator = FilterStoreFileMigrator(store: self)
+        return Future<[Filter], FilterStoreMigrationError> { promise in
+            _ = migrator.migrateV1()
+                .sink(receiveCompletion: { _ in }, receiveValue: { filters in
+                    return promise(.success(filters))
+            })
+        }
+    }
 }
 
 
@@ -58,7 +80,6 @@ extension FilterStoreFile {
     
     func fetch() -> AnyPublisher<[Filter], FilterStoreError> {
         return Future<[Filter], FilterStoreError> { [weak self] promise in
-            var filters: [Filter] = []
             guard
                 let self = self,
                 let url = self.fileURL else {
@@ -79,8 +100,10 @@ extension FilterStoreFile {
             
             do {
                 let data = try Data(contentsOf: url)
-                filters = try JSONDecoder().decode([Filter].self, from: data)
-                promise(.success(filters))
+               _ = decodeData(data: data)
+                    .sink(receiveCompletion: { _ in }, receiveValue: { result in
+                        promise(.success(result))
+                    })
             } catch {
                 promise(.failure(.decodingError))
             }

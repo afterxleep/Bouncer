@@ -20,15 +20,16 @@ struct FilterStoreFileMigrator {
         self.store = store
     }
 
-    func migrateV1() -> Future<Void, FilterStoreMigrationError> {
-        return Future<Void, FilterStoreMigrationError> { promise in
+    func migrateV1() -> AnyPublisher<[Filter], FilterStoreMigrationError> {
+        return Future<[Filter], FilterStoreMigrationError> { promise in
             guard let url = FilterStoreFile.fileURL,
               let data = try? Data(contentsOf: url),
               let filters = try? JSONDecoder().decode([FilterV1].self, from: data) else {
                 return promise(.failure(.loadError))
             }
             _ = store.reset()
-            
+
+            // Update filters
             for filter in filters {
                 let updatedFilter = Filter(id: filter.id,
                                            phrase: filter.phrase,
@@ -37,9 +38,12 @@ struct FilterStoreFileMigrator {
                                            useRegex: filter.useRegex)
                 _ = store.add(filter: updatedFilter)
             }
-            return promise(.success(()))
-        }
-
+            // Re-fetch data
+            _ = store.fetch()
+                .sink(receiveCompletion: { _ in }, receiveValue: { filters in
+                    return promise(.success(filters))
+                })
+        }.eraseToAnyPublisher()
     }
 
 }
