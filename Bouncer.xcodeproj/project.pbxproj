@@ -514,8 +514,9 @@
 		D6529F6724A41371009AE3FF /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				BuildIndependentTargetsInParallel = YES;
 				LastSwiftUpdateCheck = 1200;
-				LastUpgradeCheck = 1400;
+				LastUpgradeCheck = 1430;
 				TargetAttributes = {
 					D6233A6E24A650B700B37A6A = {
 						CreatedOnToolsVersion = 12.0;
@@ -687,7 +688,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = SMSFilter/SMSFilter.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 397;
+				CURRENT_PROJECT_VERSION = 399;
 				DEVELOPMENT_TEAM = JM9222EF99;
 				INFOPLIST_FILE = SMSFilter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -710,7 +711,7 @@
 				CODE_SIGN_ENTITLEMENTS = SMSFilter/SMSFilter.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 397;
+				CURRENT_PROJECT_VERSION = 399;
 				DEVELOPMENT_TEAM = JM9222EF99;
 				INFOPLIST_FILE = SMSFilter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -856,7 +857,7 @@
 				CODE_SIGN_ENTITLEMENTS = Bouncer/Bouncer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 397;
+				CURRENT_PROJECT_VERSION = 399;
 				DEVELOPMENT_ASSET_PATHS = "\"Bouncer/Preview Content\"";
 				DEVELOPMENT_TEAM = JM9222EF99;
 				ENABLE_PREVIEWS = YES;
@@ -887,7 +888,7 @@
 				CODE_SIGN_ENTITLEMENTS = Bouncer/Bouncer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 397;
+				CURRENT_PROJECT_VERSION = 399;
 				DEVELOPMENT_ASSET_PATHS = "\"Bouncer/Preview Content\"";
 				DEVELOPMENT_TEAM = JM9222EF99;
 				ENABLE_PREVIEWS = YES;
