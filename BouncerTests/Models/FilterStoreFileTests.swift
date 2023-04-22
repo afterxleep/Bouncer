@@ -13,10 +13,15 @@ class FilterStoreFileTests: XCTestCase {
 
     var filters: [Filter] = [
         Filter(id: UUID(), phrase: "rappi", type: .any, action: .junk),
-        Filter(id: UUID(), phrase: "etb", type: .sender, action: .promotion),
-        Filter(id: UUID(), phrase: "your code", type: .message, action: .transaction),
-        Filter(id: UUID(), phrase: "[b-chm-pP]at|ot", type: .message, action: .junk, useRegex: true),
-        Filter(id: UUID(), phrase: "YoUR COdE", type: .message, action: .junk, useRegex: false)
+        Filter(id: UUID(), phrase: "etb", type: .sender, action: .promotion, subAction: .none, useRegex: false),
+        Filter(id: UUID(), phrase: "etb2", type: .sender, action: .promotion, subAction: .promotionCoupons, useRegex: false),
+        Filter(id: UUID(), phrase: "etb3", type: .sender, action: .promotion, subAction: .promotionOffers, useRegex: false),
+        Filter(id: UUID(), phrase: "your code", type: .message, action: .transaction, subAction: .none, useRegex: false),
+        Filter(id: UUID(), phrase: "your code2", type: .message, action: .transaction, subAction: .transactionOrder, useRegex: false),
+        Filter(id: UUID(), phrase: "your code3", type: .message, action: .transaction, subAction: .transactionFinance, useRegex: false),
+        Filter(id: UUID(), phrase: "your code4", type: .message, action: .transaction, subAction: .transactionReminders, useRegex: false),
+        Filter(id: UUID(), phrase: "[b-chm-pP]at|ot", type: .message, action: .junk, subAction: .none, useRegex: true),
+        Filter(id: UUID(), phrase: "YoUR COdE", type: .message, action: .junk, subAction: .none, useRegex: true)
     ]
     var totalOldStoreFilters = 5
 
@@ -24,7 +29,7 @@ class FilterStoreFileTests: XCTestCase {
         super.setUp()
         let expectation = self.expectation(description: "Reset Filters")
         _ = filterStore.reset()
-            .sink(receiveCompletion: { _ in}, receiveValue: { value in
+            .sink(receiveCompletion: { _ in }, receiveValue: { value in
                 expectation.fulfill()
             })
         waitForExpectations(timeout: 1, handler: nil)
@@ -32,7 +37,7 @@ class FilterStoreFileTests: XCTestCase {
         for filter in filters {
             let expectation = self.expectation(description: "Adding Test Filters")
             _ = filterStore.add(filter: filter)
-                .sink(receiveCompletion: { _ in}, receiveValue: { value in
+                .sink(receiveCompletion: { _ in }, receiveValue: { value in
                     expectation.fulfill()
                 })
             waitForExpectations(timeout: 1, handler: nil)
@@ -46,11 +51,11 @@ class FilterStoreFileTests: XCTestCase {
     func test10_AddFilters() {
         let filters: [Filter] = self.fetchFilters()
         XCTAssertEqual(self.filters.count, filters.count)
-        
-        let regexFilter = filters[0]
+
+        let regexFilter = filters[1]
         XCTAssertEqual(regexFilter.phrase, "[b-chm-pP]at|ot")
         
-        let wordFilter = filters[4]
+        let wordFilter = filters[6]
         XCTAssertEqual(wordFilter.phrase, "your code")
 
     }
@@ -112,6 +117,44 @@ class FilterStoreFileTests: XCTestCase {
             })
         waitForExpectations(timeout: 1, handler: nil)
         XCTAssertEqual(self.filters.count-1, filters.count)
+
+    }
+
+    func test99_MigrateV1() {
+        let oldStoreData = [
+            FilterV1(id: UUID(), phrase: "rappi", type: .any, action: .junk),
+            FilterV1(id: UUID(), phrase: "etb", type: .sender, action: .promotion),
+            FilterV1(id: UUID(), phrase: "your code", type: .message, action: .transaction),
+            FilterV1(id: UUID(), phrase: "[b-chm-pP]at|ot", type: .message, action: .junk, useRegex: true),
+            FilterV1(id: UUID(), phrase: "YoUR COdE", type: .message, action: .junk, useRegex: false)
+        ]
+        guard let data = try? JSONEncoder().encode(oldStoreData),
+              let url = FilterStoreFile.fileURL else {
+            XCTFail("Could not encode legacy data")
+            return
+        }
+        do {
+            try data.write(to: url)
+        } catch {
+            XCTFail("Could not write sampel data")
+            return
+        }
+
+        let migrator = FilterStoreFileMigrator(store: self.filterStore)
+        let expectation = self.expectation(description: "Fetch Filters")
+        _ = migrator.migrateV1()
+            .sink(receiveCompletion: {_ in }, receiveValue: { value in
+                expectation.fulfill()
+        })
+        waitForExpectations(timeout: 1, handler: nil)
+        let filters: [Filter] = self.fetchFilters()
+        XCTAssertEqual(filters.count, 5)
+
+        let regexFilter = filters[0]
+        XCTAssertEqual(regexFilter.phrase, "[b-chm-pP]at|ot")
+
+        let wordFilter = filters[3]
+        XCTAssertEqual(wordFilter.phrase, "your code")
 
     }
     

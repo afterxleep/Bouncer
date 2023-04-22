@@ -17,6 +17,8 @@
 		D61497EE24E4435100AF997E /* AppReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61497ED24E4435100AF997E /* AppReducer.swift */; };
 		D61497F024E4438000AF997E /* AppAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61497EF24E4438000AF997E /* AppAction.swift */; };
 		D615898A24A55FF800FE710A /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D615898924A55FF800FE710A /* BaseView.swift */; };
+		D616A7F129F42E2900D5523F /* FilterV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = D616A7F029F42E2900D5523F /* FilterV1.swift */; };
+		D616A7F329F42EEC00D5523F /* FilterStoreFileMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D616A7F229F42EEC00D5523F /* FilterStoreFileMigrator.swift */; };
 		D617B44A24EB19C8009E0D40 /* AppSettingsDefaultsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D617B44924EB19C8009E0D40 /* AppSettingsDefaultsTests.swift */; };
 		D621CB4324ABABF6008883AA /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D621CB4524ABABF6008883AA /* Localizable.strings */; };
 		D6233A7224A650B700B37A6A /* MessageFilterExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6233A7124A650B700B37A6A /* MessageFilterExtension.swift */; };
@@ -104,6 +106,8 @@
 		D61497ED24E4435100AF997E /* AppReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppReducer.swift; sourceTree = "<group>"; };
 		D61497EF24E4438000AF997E /* AppAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAction.swift; sourceTree = "<group>"; };
 		D615898924A55FF800FE710A /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		D616A7F029F42E2900D5523F /* FilterV1.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterV1.swift; sourceTree = "<group>"; };
+		D616A7F229F42EEC00D5523F /* FilterStoreFileMigrator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterStoreFileMigrator.swift; sourceTree = "<group>"; };
 		D617B44924EB19C8009E0D40 /* AppSettingsDefaultsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsDefaultsTests.swift; sourceTree = "<group>"; };
 		D621CB4424ABABF6008883AA /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D621CB4724ABC56E008883AA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
@@ -211,6 +215,14 @@
 			path = Middlewares;
 			sourceTree = "<group>";
 		};
+		D616A7F429F42FBB00D5523F /* LegacyModels */ = {
+			isa = PBXGroup;
+			children = (
+				D616A7F029F42E2900D5523F /* FilterV1.swift */,
+			);
+			path = LegacyModels;
+			sourceTree = "<group>";
+		};
 		D617B44824EB199B009E0D40 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -234,6 +246,7 @@
 		D6233A7B24A6519200B37A6A /* SMSFilter */ = {
 			isa = PBXGroup;
 			children = (
+				D60A19C624A69F1F0002E8BD /* SMSMessage.swift */,
 				D6EA9A8124AD2201000135E7 /* SMSFilter.swift */,
 				D6233A7D24A651A200B37A6A /* SMSOfflineFilter.swift */,
 			);
@@ -360,8 +373,10 @@
 		D6529FC624A54AC7009AE3FF /* FilterStore */ = {
 			isa = PBXGroup;
 			children = (
+				D616A7F429F42FBB00D5523F /* LegacyModels */,
 				D6EA9A8324AD2244000135E7 /* FilterStore.swift */,
 				D6529FC824A54ADE009AE3FF /* FilterStoreFile.swift */,
+				D616A7F229F42EEC00D5523F /* FilterStoreFileMigrator.swift */,
 			);
 			path = FilterStore;
 			sourceTree = "<group>";
@@ -374,7 +389,6 @@
 				D62B331924BAB15C002DFB81 /* ReviewService */,
 				D6233A7B24A6519200B37A6A /* SMSFilter */,
 				D6529FC624A54AC7009AE3FF /* FilterStore */,
-				D60A19C624A69F1F0002E8BD /* SMSMessage.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -596,6 +610,7 @@
 				D6FC672924E49B2B0083C9FA /* FilterListContainerView.swift in Sources */,
 				D6CC124B24E452E100388160 /* TutorialContainerView.swift in Sources */,
 				D6529FCB24A54ADE009AE3FF /* FilterStoreFile.swift in Sources */,
+				D616A7F129F42E2900D5523F /* FilterV1.swift in Sources */,
 				D644F1EE24E59FC9006C5EE2 /* FilterDetailView.swift in Sources */,
 				5B7EED99293D9061002A44D0 /* ImportFilterListView.swift in Sources */,
 				D6EA9A8424AD2244000135E7 /* FilterStore.swift in Sources */,
@@ -613,6 +628,7 @@
 				D679D67424AA758C00579223 /* Constants.swift in Sources */,
 				D61497EC24E4433800AF997E /* FilterReducer.swift in Sources */,
 				D6529F7324A41371009AE3FF /* BouncerApp.swift in Sources */,
+				D616A7F329F42EEC00D5523F /* FilterStoreFileMigrator.swift in Sources */,
 				D6C90BF424CAB26700426B31 /* AppStore.swift in Sources */,
 				D6EA9A8224AD2201000135E7 /* SMSFilter.swift in Sources */,
 				D61497EE24E4435100AF997E /* AppReducer.swift in Sources */,
@@ -667,7 +683,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = SMSFilter/SMSFilter.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 347;
+				CURRENT_PROJECT_VERSION = 388;
 				DEVELOPMENT_TEAM = JM9222EF99;
 				INFOPLIST_FILE = SMSFilter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -690,7 +706,7 @@
 				CODE_SIGN_ENTITLEMENTS = SMSFilter/SMSFilter.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 347;
+				CURRENT_PROJECT_VERSION = 388;
 				DEVELOPMENT_TEAM = JM9222EF99;
 				INFOPLIST_FILE = SMSFilter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -836,7 +852,7 @@
 				CODE_SIGN_ENTITLEMENTS = Bouncer/Bouncer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 347;
+				CURRENT_PROJECT_VERSION = 388;
 				DEVELOPMENT_ASSET_PATHS = "\"Bouncer/Preview Content\"";
 				DEVELOPMENT_TEAM = JM9222EF99;
 				ENABLE_PREVIEWS = YES;
@@ -867,7 +883,7 @@
 				CODE_SIGN_ENTITLEMENTS = Bouncer/Bouncer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 347;
+				CURRENT_PROJECT_VERSION = 388;
 				DEVELOPMENT_ASSET_PATHS = "\"Bouncer/Preview Content\"";
 				DEVELOPMENT_TEAM = JM9222EF99;
 				ENABLE_PREVIEWS = YES;

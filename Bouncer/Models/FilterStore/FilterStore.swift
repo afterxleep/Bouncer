@@ -18,7 +18,7 @@ enum FilterDestination: String, Codable, Equatable, CaseIterable {
     case junk
     case transaction
     case promotion
-    
+
     // SubActions (Apple allows 5 max.)
     case transactionOrder
     case transactionFinance
@@ -35,7 +35,7 @@ struct Filter: Hashable, Identifiable, Equatable, Codable {
     var action: FilterDestination
     var subAction: FilterDestination
     var useRegex: Bool?
-    
+
     init(id: UUID,
          phrase: String,
          type: FilterType = .any,
@@ -52,6 +52,7 @@ struct Filter: Hashable, Identifiable, Equatable, Codable {
     }
 }
 
+
 enum FilterStoreError: Error {
     case loadError
     case decodingError
@@ -63,12 +64,11 @@ enum FilterStoreError: Error {
     case other
 }
 
-
 protocol FilterStore {
     func fetch() -> AnyPublisher<[Filter], FilterStoreError>
     func add(filter: Filter) -> AnyPublisher<Void, FilterStoreError>
     func addMany(filters: [Filter]) -> AnyPublisher<Void, FilterStoreError>
     func update(filter: Filter) -> AnyPublisher<Void, FilterStoreError>
     func remove(uuid: UUID) -> AnyPublisher<Void, FilterStoreError>
-    func reset() -> AnyPublisher<Void, FilterStoreError>    
+    func reset() -> AnyPublisher<Void, FilterStoreError>
 }
