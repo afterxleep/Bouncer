@@ -39,9 +39,15 @@ Fire up XCode open Bouncer.xcodeproj and hit Build.  There are no dependencies o
 Latest Release
 ----------------------
 
+Version 2.x is [available in the App Store](https://apps.apple.com/us/app/bouncer-private-sms-blocker/id1457476313), and free to dowload
+
+### Feeling adventurous?
+Join the public [beta test group in Testflight](https://testflight.apple.com/join/Lls6XUfx) for the bleeding edge changes!
+
+
+Older verions?
 The old 1.x version (UIkit based) is not avaiable from the App Store anymore, but you can grab the source and build it from [the 1.20 release](https://github.com/afterxleep/Bouncer/releases/tag/v1.2.0).
 
-Version 2.x (This new SwiftUI version) is [available in the App Store](https://apps.apple.com/us/app/bouncer-private-sms-blocker/id1457476313), and free to dowload
 
 
 Contribute
