@@ -17,7 +17,7 @@ struct FilterListView: View {
     @State var showingFilterDetail = false
     @State var showingInApp = false
     @State var showingFileImporter = false
-    @State var showingImportFilterList = false
+    @State var showingImportFilterList = false    
     
     enum ImportError: Identifiable {
         case emptyImportFileError
@@ -139,7 +139,7 @@ extension FilterListView {
         .sheet(isPresented: $showingImportFilterList) {
             ImportFilterListContainerView()
         }.sheet(isPresented: $showingSettings) {
-            TutorialView(hasLaunchedApp: true, onSettingsTap: openSettings)
+            TutorialContainerView()
         }
         .alert(item: $importError) { error in
             Alert(title: Text("ERROR"), message: error.textView)
@@ -167,16 +167,16 @@ extension FilterListView {
     
     var menu: some View {
         Menu {
+            Button(action: { showingFileImporter = true }) {
+                Label("IMPORT_BLOCK_LIST", systemImage: SYSTEM_IMAGES.IMPORT.image).imageScale(.large)
+            }
             if let filterStoreFileURL = FilterStoreFile.fileURL {
                 ShareLink(item: filterStoreFileURL) {
                     Label("EXPORT_BLOCK_LIST", systemImage: SYSTEM_IMAGES.EXPORT.image).imageScale(.large)
                 }
             }
-            Button(action: { showingFileImporter = true }) {
-                Label("IMPORT_BLOCK_LIST", systemImage: SYSTEM_IMAGES.IMPORT.image).imageScale(.large)
-            }
             Divider()
-            helpButton
+            helpButton            
         } label: {
             Image(systemName: SYSTEM_IMAGES.IMPORT_EXPORT_MENU.image).imageScale(.large)
         }

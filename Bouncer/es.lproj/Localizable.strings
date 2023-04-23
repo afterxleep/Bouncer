@@ -38,7 +38,7 @@
 "TO_ADD_A_FILTER_SPACE" = "' para agregar un filtro.";
 "WELCOME_TITLE" = "Hola!";
 "WELCOME_SUBTITLE" = "Bienvenid@ a Bouncer!";
-"HELP" = "Ayuda";
+"HELP" = "Help";
 "LETS" = "Vamos a";
 "HERE_IS_HOW" = "Para ";
 "ENABLE_SMS_FILTERING" = "configurar el filtrado SMS";
@@ -52,9 +52,6 @@
 "TOGGLE" = "Activa";
 "BUTTON_TUTORIAL_FIRST_LAUNCH_TEXT" = "Llévame a Ajustes!";
 "BUTTON_TUTORIAL_HELP_TEXT" = "Hecho!";
-"PAYMENT_PAGE_TITLE" = "Obtén más filtros!";
-"PAYMENT_PAGE_MESSAGE %lld" = "La versión gratuita de Bouncer está limitada a %lld filtros";
-"UPGRADE_EXPLANATION" = "Actualiza para conseguir filtros ilimitados y ayudarme a seguir mejorando el app.";
 "NEW_FILTER" = "Nuevo Filtro";
 "UPDATE_FILTER" = "Editar Filtro";
 "1." = "1.";
@@ -72,4 +69,8 @@
 "SELECT_NONE" = "Limpiar Selección";
 "ERROR" = "Error";
 "EMPTY_IMPORT_FILE" = "El archivo seleccionado no contiene filtros.";
-"IMPORT_ERROR %@" = "Hubo un error al importar el archivo seleccionado.\n\n%@";
+"IMPORT_ERROR %@" = "Ocurrió un error al importar el archivo seleccionado.\n\n%@";
+"NEED_HELP" = "Necesitas ayuda? Escríbeme!"
+"ASK_ANYTHING" "Preguntame!";
+"NO_EMAIL_CONFIGURED" = "Parece que no tienes una cuenta de correo configurada en tu iPhone.  Puedes escribirme a daniebernal@hey.com";
+"SETUP_INFO" = "Enable SMS filtering";

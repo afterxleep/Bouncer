@@ -18,11 +18,13 @@ Created by asaah18 on 7/13/21.
 "EXACT_MATCH" = "مطابق تماماً";
 "EXACT_MATCH_CAPTION" = "لا تتم تصفية الرسائل إلا عندما يكون المرسل/الرسالة مطابقةً تماماً للكلمة أو العبارة المقدمة.";
 "FILTER_ACTION_LABEL" = "تمييز كـ";
+"TRANSACTIONS" = "Transactions";
 "JUNK_ACTION" = "الرسائل المزعجة";
 "TRANSACTION_ACTION" = "معاملات أخرى";
 "TRANSACTION_ACTION_ORDERS" = "اوامر";
 "TRANSACTION_ACTION_FINANCE" = "الماليه";
 "TRANSACTION_ACTION_REMINDERS" = "رسائل التذكير";
+"PROMOTIONS" = "Promotions";
 "PROMOTION_ACTION" = "عروض ترويجية أخرى";
 "PROMOTION_ACTION_OFFERS" = "العروض";
 "PROMOTION_ACTION_COUPONS" = "الكوبونات";
@@ -50,11 +52,6 @@ Created by asaah18 on 7/13/21.
 "TOGGLE" = "بدّل";
 "BUTTON_TUTORIAL_FIRST_LAUNCH_TEXT" = "خذني إلى الإعدادات!";
 "BUTTON_TUTORIAL_HELP_TEXT" = "فهمت!";
-"PAYMENT_PAGE_TITLE" = "مستعد للترقية؟";
-"PAYMENT_PAGE_MESSAGE %lld" = "وتقتصر النسخة المجانية من Bouncer على %lld فلاتر، وهو ما يكفي عادة لمعظم الناس.";
-"UPGRADE_BUTTON_TEXT %@" = "الاشتراك بمبلغ %@ في السنة";
-"RESTORE_PURCHASE" = "استعادة المشتريات";
-"UPGRADE_EXPLANATION" = "قم بالترقية للحصول على فلاتر غير محدودة ولمساعدتي في تحسين التطبيق.";
 "NEW_FILTER" = "فلتر جديد";
 "UPDATE_FILTER" = "تحديث الفلتر";
 "1." = ".١";
@@ -63,3 +60,17 @@ Created by asaah18 on 7/13/21.
 "4." = ".٤";
 "USE_REGULAR_EXPRESSIONS" = "مطابقة كتعبير نمطي";
 "USE_REGULAR_EXPRESSIONS_DETAIL" = "فعل هذا الخيار عندما يكون الفلنر الخاص بك يتحتوي على تعبير نمطي.  (يجب توفير التعبير النمطي بتنسيق 'PCRE').";
+"EXPORT_BLOCK_LIST" = "Export Block List";
+"IMPORT_BLOCK_LIST" = "Import Block List";
+"NEW_FILTERS" = "New Filters";
+"DUPLICATE_FILTERS" = "Duplicate Filters";
+"SELECT_ALL" = "Select All";
+"SELECT_NEW" = "Select New";
+"SELECT_NONE" = "Select None";
+"ERROR" = "Error";
+"EMPTY_IMPORT_FILE" = "The file you selected contained no filters.";
+"IMPORT_ERROR %@" = "There was an error importing the selected file.\n\n%@";
+"NEED_HELP" = "Need help? Send me an email!"
+"ASK_ANYTHING" "Ask anything!";
+"NO_EMAIL_CONFIGURED" = "It seems you don't have an email account set up. You can write me directly at danielbernal@hey.com";
+"SETUP_INFO" = "Enable SMS filtering";

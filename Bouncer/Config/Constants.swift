@@ -47,6 +47,7 @@ struct SYSTEM_IMAGES {
     static let SELECT_ALL = SystemImage(image: "checklist.checked", color: COLORS.DEFAULT_COLOR)
     static let SELECT_NEW = SystemImage(image: "checklist", color: COLORS.DEFAULT_COLOR)
     static let SELECT_NONE = SystemImage(image: "checklist.unchecked", color: COLORS.DEFAULT_COLOR)
+    static let SUPPORT = SystemImage(image: "support", color: COLORS.DEFAULT_COLOR)
 }
 
 

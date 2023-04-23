@@ -4,20 +4,23 @@
 //
 
 import SwiftUI
+import MessageUI
 
 struct TutorialContainerView: View {
     @EnvironmentObject var store: AppStore
 
     var body: some View {
         TutorialView(hasLaunchedApp: store.state.settings.hasLaunchedApp,
-                     onSettingsTap: openSettings)
+                     onSettingsTap: openSettings,
+                     onContactTap: triggerContact,
+                     canSendMail: MFMailComposeViewController.canSendMail())
     }
 }
 
 struct TutorialContainerView_Previews: PreviewProvider {
     static var previews: some View {
         TutorialView(hasLaunchedApp: false,
-                     onSettingsTap: {})
+                     onSettingsTap: {}, onContactTap: {}, canSendMail: false)
     }
 }
 
@@ -33,5 +36,9 @@ extension TutorialContainerView {
             UIApplication.shared.open(settingsURL, options: [:])
         }
         setAppHasLaunched()
+    }
+
+    func triggerContact() {
+
     }
 }
