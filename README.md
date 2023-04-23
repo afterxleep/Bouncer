@@ -20,7 +20,7 @@ Messages text is checked against a simple user defined blacklist.
 Version 2.x is [available in the App Store](https://apps.apple.com/us/app/bouncer-private-sms-blocker/id1457476313)
 
 ### Feeling adventurous?. Try the beta!
-Join the [beta test group in Testflight](https://testflight.apple.com/join/Lls6XUfx) from your iPhone.
+Join the [beta test group in Testflight](https://testflight.apple.com/join/Lls6XUfx)
 
 ### Looking for the older version?
 The old 1.x version (UIkit based) is not avaiable from the App Store anymore, but you can grab the source and build it from [the 1.20 release](https://github.com/afterxleep/Bouncer/releases/tag/v1.2.0).
