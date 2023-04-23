@@ -1,0 +1,76 @@
+/*
+Localizable.strings
+Bouncer
+
+Créé par Daniel Bernal le 6/30/20.
+
+*/
+
+"FILTER_TYPE_SELECTION_LABEL" = "Quand";
+"FILTER_TEXT_PLACEHOLDER" = "Entrer un mot ou une expression";
+"FILTER_CONTAINS_TEXT_LABEL" = "Contient";
+"FILTER_ADD_VIEW_TITLE" = "Ajouter un filtre";
+"FILTER_EDIT_VIEW_TITLE" = "Mettre à jour le filtre";
+"SAVE" = "Enregistrer";
+"CANCEL" = "Annuler";
+"ADVANCED" = "Avancé";
+"FILTER_INFORMATION" = "Paramètres de filtre";
+"EXACT_MATCH" = "Correspondance exacte";
+"EXACT_MATCH_CAPTION" = "Filtrer les messages uniquement lorsque l'expéditeur/le message correspond exactement au mot ou à l'expression fourni(e).";
+"FILTER_ACTION_LABEL" = "Marquer comme";
+"TRANSACTIONS" = "Transactions";
+"JUNK_ACTION" = "Indésirable";
+"TRANSACTION_ACTION" = "Autres transactions";
+"TRANSACTION_ACTION_ORDERS" = "Commandes";
+"TRANSACTION_ACTION_FINANCE" = "Finances";
+"TRANSACTION_ACTION_REMINDERS" = "Rappels";
+"PROMOTIONS" = "Promotions";
+"PROMOTION_ACTION" = "Autres promotions";
+"PROMOTION_ACTION_OFFERS" = "Offres";
+"PROMOTION_ACTION_COUPONS" = "Coupons";
+"ANYTHING_IN_MESSAGE" = "N'importe quelle partie du message";
+"SENDER_NUMBER" = "Nom ou numéro de l'expéditeur";
+"TEXT" = "Texte du message";
+"LIST_VIEW_TITLE" = "Liste de blocage";
+"EMPTY_LIST_TITLE" = "Votre liste de blocage est vide";
+"EMPTY_LIST_MESSAGE" = "Bouncer filtrera les SMS provenant d'expéditeurs inconnus en utilisant les filtres que vous ajoutez ici.";
+"TAP_SPACE" = "Appuyez sur '";
+"TO_ADD_A_FILTER_SPACE" = "' pour ajouter un filtre.";
+"WELCOME_TITLE" = "Bonjour !";
+"WELCOME_SUBTITLE" = "Bienvenue sur Bouncer";
+"HELP" = "Aide";
+"LETS" = "Allons ";
+"HERE_IS_HOW" = "Pour ";
+"ENABLE_SMS_FILTERING" = "activer le filtrage des SMS";
+"ON_YOUR_IPHONE" = " sur votre iPhone :";
+"OPEN_SPACE" = "Ouvrir ";
+"THE_APP" = "l'";
+"SETTINGS_APP" = "application 'Réglages'";
+"TAP" = "Appuyez sur";
+"MESSAGES_APP" = "l'application 'Messages'";
+"UNKNOWN_SOURCES" = " 'Inconnus et spam'";
+"TOGGLE" = "Basculez";
+"BUTTON_TUTORIAL_FIRST_LAUNCH_TEXT" = "Emmenez-moi aux paramètres !";
+"BUTTON_TUTORIAL_HELP_TEXT" = "Compris !";
+"NEW_FILTER" = "Nouveau filtre";
+"UPDATE_FILTER" = "Mettre à jour le filtre";
+"1." = "1.";
+"2." = "2.";
+"3." = "3.";
+"4." = "4.";
+"USE_REGULAR_EXPRESSIONS" = "Correspondance comme expression régulière";
+"USE_REGULAR_EXPRESSIONS_DETAIL" = "Activez cette option si votre filtre contient une expression régulière. (L'expression régulière doit être fournie au format PCRE).";
+"EXPORT_BLOCK_LIST" = "Exporter la liste de blocage";
+"IMPORT_BLOCK_LIST" = "Importer la liste de blocage";
+"NEW_FILTERS" = "Nouveaux filtres";
+"DUPLICATE_FILTERS" = "Dupliquer les filtres";
+"SELECT_ALL" = "Sélectionner tout";
+"SELECT_NEW" = "Sélectionner les nouveaux";
+"SELECT_NONE" = "Ne rien sélectionner";
+"ERROR" = "Erreur";
+"EMPTY_IMPORT_FILE" = "Le fichier que vous avez sélectionné ne contenait aucun filtre.";
+"IMPORT_ERROR %@" = "Une erreur est survenue lors de l'importation du fichier sélectionné.\n\n%@";
+"NEED_HELP" = "Besoin d'aide ? Envoyez-moi un email !";
+"ASK_ANYTHING" = "Posez-moi n'importe quelle question !";
+"NO_EMAIL_CONFIGURED" = "Il semble que vous n'ayez pas configuré de compte e-mail. Vous pouvez m'écrire directement à danielbernal@hey.com.";
+"SETUP_INFO" = "Activer la filtration SMS";

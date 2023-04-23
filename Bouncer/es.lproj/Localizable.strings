@@ -70,7 +70,7 @@
 "ERROR" = "Error";
 "EMPTY_IMPORT_FILE" = "El archivo seleccionado no contiene filtros.";
 "IMPORT_ERROR %@" = "Ocurrió un error al importar el archivo seleccionado.\n\n%@";
-"NEED_HELP" = "Necesitas ayuda? Escríbeme!"
-"ASK_ANYTHING" "Preguntame!";
+"NEED_HELP" = "Necesitas ayuda? Escríbeme!";
+"ASK_ANYTHING" = "Preguntame!";
 "NO_EMAIL_CONFIGURED" = "Parece que no tienes una cuenta de correo configurada en tu iPhone.  Puedes escribirme a daniebernal@hey.com";
 "SETUP_INFO" = "Enable SMS filtering";
