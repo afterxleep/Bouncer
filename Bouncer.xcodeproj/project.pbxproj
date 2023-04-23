@@ -157,6 +157,7 @@
 		D6CC124C24E4563F00388160 /* SettingsAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsAction.swift; sourceTree = "<group>"; };
 		D6CC124E24E47C3900388160 /* SettingsMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsMiddleware.swift; sourceTree = "<group>"; };
 		D6CC125024E4837800388160 /* SettingsReducer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsReducer.swift; sourceTree = "<group>"; };
+		D6DA734729F539B300C3A831 /* fa */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fa; path = fa.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D6EA9A8124AD2201000135E7 /* SMSFilter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSFilter.swift; sourceTree = "<group>"; };
 		D6EA9A8324AD2244000135E7 /* FilterStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterStore.swift; sourceTree = "<group>"; };
 		D6F0621024EC69F800F47BA2 /* FilterStoreFileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterStoreFileTests.swift; sourceTree = "<group>"; };
@@ -546,6 +547,7 @@
 				ar,
 				fr,
 				de,
+				fa,
 			);
 			mainGroup = D6529F6624A41371009AE3FF;
 			productRefGroup = D6529F7024A41371009AE3FF /* Products */;
@@ -686,6 +688,7 @@
 				D6BAC9EE26D7A156007ACCBE /* ar */,
 				D6B790C729F536F500613F98 /* fr */,
 				D6B790C829F536FB00613F98 /* de */,
+				D6DA734729F539B300C3A831 /* fa */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
