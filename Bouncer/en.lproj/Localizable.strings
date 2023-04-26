@@ -70,7 +70,7 @@
 "ERROR" = "Error";
 "EMPTY_IMPORT_FILE" = "The file you selected contained no filters.";
 "IMPORT_ERROR %@" = "There was an error importing the selected file.\n\n%@";
-"NEED_HELP" = "Need help? Send me an email!";
+"NEED_HELP" = "Need help?";
 "ASK_ANYTHING" = "Ask anything!";
 "NO_EMAIL_CONFIGURED" = "It seems you don't have an email account set up. You can write me directly at danielbernal@hey.com";
 "SETUP_INFO" = "Enable SMS filtering";

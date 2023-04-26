@@ -70,7 +70,7 @@ Created by Daniel Bernal on 6/30/20.
 "ERROR" = "Fehler";
 "EMPTY_IMPORT_FILE" = "Die von Ihnen ausgewählte Datei enthält keine Filter.";
 "IMPORT_ERROR %@" = "Beim Importieren der ausgewählten Datei ist ein Fehler aufgetreten. \n\n%@";
-"NEED_HELP" = "Brauchen Sie Hilfe? Schicken Sie mir eine E-Mail!";
+"NEED_HELP" = "Brauchen Sie Hilfe?";
 "ASK_ANYTHING" = "Frag alles!";
 "NO_EMAIL_CONFIGURED" = "Es scheint, dass Sie kein E-Mail-Konto eingerichtet haben. Sie können mir direkt unter danielbernal@hey.com schreiben";
 "SETUP_INFO" = "SMS-Filterung aktivieren";
