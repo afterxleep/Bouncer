@@ -31,8 +31,8 @@
 "ANYTHING_IN_MESSAGE" = "Any part of the message";
 "SENDER_NUMBER" = "Sender Name or Number";
 "TEXT" = "Message Text";
-"LIST_VIEW_TITLE" = "Block List";
-"EMPTY_LIST_TITLE" = "Your Block List is empty";
+"LIST_VIEW_TITLE" = "Filters";
+"EMPTY_LIST_TITLE" = "Your Filter List is empty";
 "EMPTY_LIST_MESSAGE" = "Bouncer will filter SMS from unknown senders using the filters you add here.";
 "TAP_SPACE" = "Tap '";
 "TO_ADD_A_FILTER_SPACE" = "' to add a filter.";
@@ -70,7 +70,7 @@
 "ERROR" = "Error";
 "EMPTY_IMPORT_FILE" = "The file you selected contained no filters.";
 "IMPORT_ERROR %@" = "There was an error importing the selected file.\n\n%@";
-"NEED_HELP" = "Need help? Send me an email!";
+"NEED_HELP" = "Need help?";
 "ASK_ANYTHING" = "Ask anything!";
 "NO_EMAIL_CONFIGURED" = "It seems you don't have an email account set up. You can write me directly at danielbernal@hey.com";
 "SETUP_INFO" = "Enable SMS filtering";

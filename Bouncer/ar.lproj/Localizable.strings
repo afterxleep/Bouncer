@@ -31,8 +31,8 @@ Created by asaah18 on 7/13/21.
 "ANYTHING_IN_MESSAGE" = "أي جزء من الرسالة";
 "SENDER_NUMBER" = "اسم أو رقم المرسل";
 "TEXT" = "نص الرسالة";
-"LIST_VIEW_TITLE" = "قائمة الحظر";
-"EMPTY_LIST_TITLE" = "قائمة الحظر فارغة";
+"LIST_VIEW_TITLE" = "المرشحات";
+"EMPTY_LIST_TITLE" = "قائمة المرشحات الخاصة بك فارغة";
 "EMPTY_LIST_MESSAGE" = "سوف يقوم Bouncer بتصفية الرسائل النصية القصيرة من المرسلين المجهولين باستخدام الفلاتر التي تضيفها هنا.";
 "TAP_SPACE" = "اضغط '";
 "TO_ADD_A_FILTER_SPACE" = "' لإضافة فلتر.";
@@ -70,7 +70,7 @@ Created by asaah18 on 7/13/21.
 "ERROR" = "خطأ";
 "EMPTY_IMPORT_FILE" = "الملف الذي تم اختياره لا يحتوي على أي فلاتر.";
 "IMPORT_ERROR %@" = "حدث خطأ أثناء استيراد الملف المحدد.\n\n%@";
-"NEED_HELP" = "هل تحتاج إلى مساعدة؟ أرسل لي بريدًا إلكترونيًا!";
+"NEED_HELP" = "هل تحتاج إلى مساعدة؟";
 "ASK_ANYTHING" = "اسأل أي شيء!";
 "NO_EMAIL_CONFIGURED" = "يبدو أنه لم يتم تعيين حساب بريد إلكتروني على جهازك. يمكنك الكتابة لي مباشرة على danielbernal@hey.com";
 "SETUP_INFO" = "تمكين تصفية الرسائل النصية";

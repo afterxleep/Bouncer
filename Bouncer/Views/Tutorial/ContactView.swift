@@ -20,7 +20,7 @@ struct ContactView: UIViewControllerRepresentable {
         let controller = MFMailComposeViewController()
         controller.mailComposeDelegate = context.coordinator
         controller.setToRecipients(["danielbernal@hey.com"])
-        controller.setSubject("Bouncer Support")
+        controller.setSubject("Bouncer Support (v\(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "")")
         return controller
     }
 

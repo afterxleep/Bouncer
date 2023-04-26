@@ -31,8 +31,8 @@ Créé par Daniel Bernal le 6/30/20.
 "ANYTHING_IN_MESSAGE" = "N'importe quelle partie du message";
 "SENDER_NUMBER" = "Nom ou numéro de l'expéditeur";
 "TEXT" = "Texte du message";
-"LIST_VIEW_TITLE" = "Liste de blocage";
-"EMPTY_LIST_TITLE" = "Votre liste de blocage est vide";
+"LIST_VIEW_TITLE" = "Filtres";
+"EMPTY_LIST_TITLE" = "Votre liste de filtres est vide";
 "EMPTY_LIST_MESSAGE" = "Bouncer filtrera les SMS provenant d'expéditeurs inconnus en utilisant les filtres que vous ajoutez ici.";
 "TAP_SPACE" = "Appuyez sur '";
 "TO_ADD_A_FILTER_SPACE" = "' pour ajouter un filtre.";
@@ -70,7 +70,7 @@ Créé par Daniel Bernal le 6/30/20.
 "ERROR" = "Erreur";
 "EMPTY_IMPORT_FILE" = "Le fichier que vous avez sélectionné ne contenait aucun filtre.";
 "IMPORT_ERROR %@" = "Une erreur est survenue lors de l'importation du fichier sélectionné.\n\n%@";
-"NEED_HELP" = "Besoin d'aide ? Envoyez-moi un email !";
+"NEED_HELP" = "Besoin d'aide ?";
 "ASK_ANYTHING" = "Posez-moi n'importe quelle question !";
 "NO_EMAIL_CONFIGURED" = "Il semble que vous n'ayez pas configuré de compte e-mail. Vous pouvez m'écrire directement à danielbernal@hey.com.";
 "SETUP_INFO" = "Activer la filtration SMS";
