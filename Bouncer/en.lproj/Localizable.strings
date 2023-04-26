@@ -31,8 +31,8 @@
 "ANYTHING_IN_MESSAGE" = "Any part of the message";
 "SENDER_NUMBER" = "Sender Name or Number";
 "TEXT" = "Message Text";
-"LIST_VIEW_TITLE" = "Block List";
-"EMPTY_LIST_TITLE" = "Your Block List is empty";
+"LIST_VIEW_TITLE" = "Filters";
+"EMPTY_LIST_TITLE" = "Your Filter List is empty";
 "EMPTY_LIST_MESSAGE" = "Bouncer will filter SMS from unknown senders using the filters you add here.";
 "TAP_SPACE" = "Tap '";
 "TO_ADD_A_FILTER_SPACE" = "' to add a filter.";
