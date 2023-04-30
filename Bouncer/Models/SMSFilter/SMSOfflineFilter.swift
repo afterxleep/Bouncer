@@ -63,9 +63,9 @@ struct SMSOfflineFilter {
         switch filter.action {
         case .junk:
             return .junk
-        case .transaction, .transactionOrder, .transactionReminders:
+        case .transaction:
             return .transaction
-        case .promotion,.promotionOffers, .promotionCoupons:
+        case .promotion:
             return .promotion
         default:
             return .none
@@ -85,7 +85,15 @@ struct SMSOfflineFilter {
         case .promotionCoupons:
             return .promotionalCoupons
         default:
-            return .none
+            // If no subaction pressent just return the base groups
+            switch filter.action {
+            case .promotion:
+                return .promotionalOthers
+            case .transaction:
+                return .transactionalOthers
+            default:
+                return .none
+            }
         }
     }
     

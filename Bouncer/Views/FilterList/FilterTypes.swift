@@ -53,14 +53,15 @@ extension FilterDestination {
             return FilterDestinationDecoration(decoration: SYSTEM_IMAGES.TRANSACTION_FINANCE, text: "TRANSACTION_ACTION_FINANCE")
         case .transactionReminders:
             return FilterDestinationDecoration(decoration: SYSTEM_IMAGES.TRANSACTION_REMINDERS, text: "TRANSACTION_ACTION_REMINDERS")
-        case .transaction:
-            return FilterDestinationDecoration(decoration: SYSTEM_IMAGES.TRANSACTION, text: "TRANSACTION_ACTION")
         case .promotionOffers:
             return FilterDestinationDecoration(decoration: SYSTEM_IMAGES.PROMOTION_OFFERS, text: "PROMOTION_ACTION_OFFERS")
         case .promotionCoupons:
             return FilterDestinationDecoration(decoration: SYSTEM_IMAGES.PROMOTION_COUPONS, text: "PROMOTION_ACTION_COUPONS")
+        case .transaction:
+            return FilterDestinationDecoration(decoration: SYSTEM_IMAGES.TRANSACTION, text: "TRANSACTION_ACTION")
         case .promotion:
             return FilterDestinationDecoration(decoration: SYSTEM_IMAGES.PROMOTION, text: "PROMOTION_ACTION")
         }
+        
     }
 }

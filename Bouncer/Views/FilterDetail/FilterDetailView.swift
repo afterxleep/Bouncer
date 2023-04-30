@@ -52,9 +52,8 @@ extension FilterDetailView {
             Section(header: Text("FILTER_INFORMATION")) {
                 Picker(selection: $filterType, label: Text("FILTER_TYPE_SELECTION_LABEL")) {
                     ForEach(FilterType.allCases, id: \.self) { value in
-                        HStack {
+                        VStack {
                             Text(value.formDescription.text)
-                            Spacer()
                             Image(systemName: value.formDescription.decoration.image)
                         }
                     }

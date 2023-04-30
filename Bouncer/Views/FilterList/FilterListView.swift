@@ -87,7 +87,6 @@ extension FilterListView {
                         }
                     }.onDelete(perform: onDelete)
                 }
-                
                 .listStyle(PlainListStyle())
             }
             else {

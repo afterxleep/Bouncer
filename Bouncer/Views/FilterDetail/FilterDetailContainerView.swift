@@ -57,7 +57,8 @@ extension FilterDetailContainerView {
         self.filterId = filter?.id
         self._filterType = .init(initialValue: filter?.type ?? .any)
         self._filterTerm = .init(initialValue: filter?.phrase ?? "")
-        self._filterDestination = .init(initialValue: filter?.action ?? .junk)
+        let action = filter?.subAction != FilterDestination.none ? filter?.subAction : filter?.action
+        self._filterDestination = .init(initialValue: action ?? .junk)
         self._exactMatch = .init(initialValue: false)
         self._useRegex = .init(initialValue: filter?.useRegex ?? false)        
     }
@@ -89,11 +90,30 @@ extension FilterDetailContainerView {
     
     
     private var filterToSave: Filter {
-        Filter(id: filterId ?? UUID(),
-               phrase: filterTerm.trimmed,
-               type: filterType,
-               action: filterDestination,
-               useRegex: useRegex)
+        var action: FilterDestination
+        var subAction: FilterDestination
+        switch filterDestination {
+            case .promotion, .promotionOffers, .promotionCoupons:
+                action = .promotion
+                subAction = filterDestination != .promotion ? filterDestination : .none
+            case .transaction, .transactionOrder, .transactionFinance, .transactionReminders:
+                action = .transaction
+                subAction = filterDestination != .transaction ? filterDestination : .none
+            case .junk:
+                action = .junk
+                subAction = .none
+            default:
+                action = .none
+                subAction = .none
+            }
+        let filter = Filter(id: filterId ?? UUID(),
+                            phrase: filterTerm.trimmed,
+                            type: filterType,
+                            action: action,
+                            subAction: subAction,
+                            useRegex: useRegex)
+        print(filter)
+        return filter
     }
     
 }

@@ -52,26 +52,32 @@ extension FilterRowView {
     }
     
     private func getFilterDestinationDecoration(filter: Filter) -> FilterDestinationDecoration {
-        var data: FilterDestinationDecoration
         switch (filter.action) {
-            case .junk, .none:
-                data = FilterDestination.junk.listDescription
-            case .promotionOffers:
-                data = FilterDestination.promotionOffers.listDescription
-            case .promotionCoupons:
-                data = FilterDestination.promotionCoupons.listDescription
             case .promotion:
-                data = FilterDestination.promotion.listDescription
-            case .transactionReminders:
-                data = FilterDestination.transactionReminders.listDescription
-            case .transactionFinance:
-                data = FilterDestination.transactionFinance.listDescription
-            case .transactionOrder:
-                data = FilterDestination.transactionOrder.listDescription
+                switch filter.subAction {
+                    case .promotionOffers:
+                        return FilterDestination.promotionOffers.listDescription
+                    case .promotionCoupons:
+                        return FilterDestination.promotionCoupons.listDescription
+                    default:
+                        return FilterDestination.promotion.listDescription
+                }
             case .transaction:
-                data = FilterDestination.transaction.listDescription
+                switch filter.subAction {
+                    case .transactionReminders:
+                        return FilterDestination.transactionReminders.listDescription
+                    case .transactionFinance:
+                        return FilterDestination.transactionFinance.listDescription
+                    case .transactionOrder:
+                        return FilterDestination.transactionOrder.listDescription
+                    default:
+                        return FilterDestination.transaction.listDescription
+                }
+            case .junk:
+                return FilterDestination.junk.listDescription
+            default:
+                return FilterDestination.junk.listDescription
             }
-        return data
     }
 
     private func getFilterTypeColor(filter: Filter) -> Color {
