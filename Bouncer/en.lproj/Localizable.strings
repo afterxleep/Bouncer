@@ -74,3 +74,5 @@
 "ASK_ANYTHING" = "Ask anything!";
 "NO_EMAIL_CONFIGURED" = "It seems you don't have an email account set up. You can write me directly at danielbernal@hey.com";
 "SETUP_INFO" = "Enable SMS filtering";
+"IS_CASE_SENSITIVE" = "Case sensitive";
+"IS_CASE_SENSITIVE_DETAIL" = "Enable this option to treat uppercase and lowercase characters differently.";

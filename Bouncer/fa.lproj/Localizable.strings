@@ -53,3 +53,5 @@
 "4." = ".۴";
 "USE_REGULAR_EXPRESSIONS" = "تطابق به عنوان Regex";
 "USE_REGULAR_EXPRESSIONS_DETAIL" = "اگر فیلتر شما حاوی Regex است، این گزینه را فعال کنید. (Regex باید در قالب PCRE نوشته شود).";
+"IS_CASE_SENSITIVE" = "حساسیت به بزرگی و کوچکی حروف";
+"IS_CASE_SENSITIVE_DETAIL" = "فعال‌سازی این گزینه برای برخورد با حروف بزرگ و کوچک به صورت متفاوت";

@@ -74,3 +74,5 @@ Created by asaah18 on 7/13/21.
 "ASK_ANYTHING" = "اسأل أي شيء!";
 "NO_EMAIL_CONFIGURED" = "يبدو أنه لم يتم تعيين حساب بريد إلكتروني على جهازك. يمكنك الكتابة لي مباشرة على danielbernal@hey.com";
 "SETUP_INFO" = "تمكين تصفية الرسائل النصية";
+"IS_CASE_SENSITIVE" = "هل حساس لحالة الأحرف";
+"IS_CASE_SENSITIVE_DETAIL" = "تمكين هذا الخيار لمعاملة الأحرف الكبيرة والصغيرة بشكل مختلف";
