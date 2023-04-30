@@ -30,14 +30,9 @@ struct SMSOfflineFilter {
             default:
                 txt = "\(message.sender) \(message.text)"
         }
-        
-        // Filters initially used both matchText and regex, so if the value is not assigned, use both
-        guard let useRegex = filter.useRegex else {
-            return match(text: txt, filter: filter) || matchRegex(text: txt, filter: filter)
-        }
-        
+
         // Use different filter strategies based on user selection
-        if useRegex {
+        if filter.useRegex {
             return matchRegex(text: txt, filter: filter)
         }
         else {
@@ -46,14 +41,22 @@ struct SMSOfflineFilter {
     }
 
     private func match(text: String, filter: Filter) -> Bool {
-        let result = text.range(of: filter.phrase, options: .caseInsensitive) != nil
+        var matchOptions: String.CompareOptions = []
+        if !filter.caseSensitive {
+            matchOptions.insert(.caseInsensitive)
+        }
+        let result = text.range(of: filter.phrase, options: matchOptions) != nil
         os_log("FILTEREXTENSION - -- Match: %@", log: OSLog.messageFilterLog, type: .info, "\(result)")
         os_log("FILTEREXTENSION - -- Method: Text", log: OSLog.messageFilterLog, type: .info)
         return text.range(of: filter.phrase, options: .caseInsensitive) != nil
     }
 
     private func matchRegex(text: String, filter: Filter) -> Bool {
-        let result = (text.range(of: filter.phrase, options:[.regularExpression, .caseInsensitive]) != nil)
+        var matchOptions: String.CompareOptions = [.regularExpression]
+        if !filter.caseSensitive {
+            matchOptions.insert(.caseInsensitive)
+        }
+        let result = (text.range(of: filter.phrase, options: matchOptions) != nil)
         os_log("FILTEREXTENSION - -- Match: %@", log: OSLog.messageFilterLog, type: .info, "\(result)")
         os_log("FILTEREXTENSION - -- Method: Regex", log: OSLog.messageFilterLog, type: .info)
         return result

@@ -17,6 +17,7 @@ struct FilterDetailView<L: View, R: View>: View {
     @Binding var filterTerm: String
     @Binding var exactMatch: Bool
     @Binding var useRegex: Bool
+    @Binding var isCaseSensitive: Bool
     
     var body: some View {
         rootView
@@ -95,6 +96,16 @@ extension FilterDetailView {
                             .foregroundColor(Color("TextDefaultColor"))
                     }.padding(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
                 }
+                Toggle(isOn: $isCaseSensitive) {
+                    VStack(alignment: .leading) {
+                        Text("IS_CASE_SENSITIVE")
+                            .padding(0)
+                        Spacer()
+                        Text("IS_CASE_SENSITIVE_DETAIL")
+                            .font(.caption)
+                            .foregroundColor(Color("TextDefaultColor"))
+                    }.padding(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
+                }
             }
         }
     }
@@ -109,6 +120,7 @@ struct FilterDetailView_Previews: PreviewProvider {
                          filterDestination: .constant(.transaction),
                          filterTerm: .constant("Query Term"),
                          exactMatch: .constant(false),
-                         useRegex: .constant(false))
+                         useRegex: .constant(false),
+                         isCaseSensitive: .constant(false))
     }
 }

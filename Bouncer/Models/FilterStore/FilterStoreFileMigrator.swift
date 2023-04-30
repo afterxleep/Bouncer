@@ -36,7 +36,7 @@ struct FilterStoreFileMigrator {
                 case .promotion:
                     subAction = .promotionOther
                 case .transaction:
-                    subAction = .promotionOther
+                    subAction = .transactionOther
                 default:
                     subAction = .none
                 }
@@ -45,7 +45,9 @@ struct FilterStoreFileMigrator {
                                            type: filter.type,
                                            action: filter.action,
                                            subAction: subAction,
-                                           useRegex: filter.useRegex)
+                                           useRegex: filter.useRegex,
+                                           caseSensitive: false)
+                print(updatedFilter)
                 _ = store.add(filter: updatedFilter)
             }
             // Re-fetch data

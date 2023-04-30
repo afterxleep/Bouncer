@@ -37,14 +37,16 @@ struct Filter: Hashable, Identifiable, Equatable, Codable {
     var phrase: String
     var action: FilterDestination
     var subAction: FilterDestination
-    var useRegex: Bool?
+    var caseSensitive: Bool = false
+    var useRegex: Bool = false
 
     init(id: UUID,
          phrase: String,
          type: FilterType = .any,
          action: FilterDestination = .junk,
          subAction: FilterDestination = .none,
-         useRegex: Bool? = nil
+         useRegex: Bool = false,
+         caseSensitive: Bool = false
     ) {
         self.id = id
         self.type = type
@@ -52,6 +54,7 @@ struct Filter: Hashable, Identifiable, Equatable, Codable {
         self.action = action
         self.subAction = subAction
         self.useRegex = useRegex
+        self.caseSensitive = caseSensitive
     }
 }
 

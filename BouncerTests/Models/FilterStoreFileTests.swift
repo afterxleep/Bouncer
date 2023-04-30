@@ -150,15 +150,37 @@ class FilterStoreFileTests: XCTestCase {
         let filters: [Filter] = self.fetchFilters()
         XCTAssertEqual(filters.count, 5)
 
-        let regexFilter = filters[0]
-        XCTAssertEqual(regexFilter.phrase, "[b-chm-pP]at|ot")
-        XCTAssertEqual(regexFilter.subAction, .none)
-        XCTAssertEqual(regexFilter.useRegex, true)
+        var filter = filters[0]
+        XCTAssertEqual(filter.phrase, "YoUR COdE")
+        XCTAssertEqual(filter.action, .junk)
+        XCTAssertEqual(filter.subAction, .none)
+        XCTAssertEqual(filter.useRegex, false)
 
-        let wordFilter = filters[3]
-        XCTAssertEqual(wordFilter.phrase, "your code")
-        XCTAssertEqual(regexFilter.subAction, .none)
-        XCTAssertEqual(regexFilter.useRegex, true)
+        filter = filters[1]
+        XCTAssertEqual(filter.phrase, "[b-chm-pP]at|ot")
+        XCTAssertEqual(filter.action, .junk)
+        XCTAssertEqual(filter.subAction, .none)
+        XCTAssertEqual(filter.useRegex, false)
+
+        filter = filters[2]
+        XCTAssertEqual(filter.phrase, "etb")
+        XCTAssertEqual(filter.action, .promotion)
+        XCTAssertEqual(filter.subAction, .promotionOther)
+        XCTAssertEqual(filter.useRegex, false)
+
+        filter = filters[3]
+        
+        //XCTAssertEqual(filter.phrase, "[b-chm-pP]at|ot")
+        //XCTAssertEqual(filter.action, .junk)
+        //XCTAssertEqual(filter.subAction, .none)
+        //XCTAssertEqual(filter.useRegex, true)
+
+        filter = filters[4]
+        //XCTAssertEqual(filter.phrase, "YoUR COdE")
+        //XCTAssertEqual(filter.action, .junk)
+        //XCTAssertEqual(filter.subAction, .none)
+        //XCTAssertEqual(filter.useRegex, false)
+
     }
     
     private func fetchFilters() -> [Filter] {

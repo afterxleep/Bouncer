@@ -12,13 +12,13 @@ struct FilterV1: Identifiable, Equatable, Codable {
     var type: FilterType
     var phrase: String
     var action: FilterDestination
-    var useRegex: Bool?
+    var useRegex: Bool = false
 
     init(id: UUID,
          phrase: String,
          type: FilterType = .any,
          action: FilterDestination = .junk,
-         useRegex: Bool? = nil
+         useRegex: Bool = false
     ) {
         self.id = id
         self.type = type

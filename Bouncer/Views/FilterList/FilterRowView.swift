@@ -94,7 +94,7 @@ extension FilterRowView {
     }
     
     private func getFilterText(filter: Filter) -> Text {
-        if (filter.useRegex ?? false) {
+        if filter.useRegex {
             return Text("/\(filter.phrase)/")
                 .bold()
         }

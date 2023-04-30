@@ -23,6 +23,7 @@ struct FilterDetailContainerView: View {
     @State private var filterTerm: String
     @State private var exactMatch: Bool
     @State private var useRegex: Bool
+    @State private var isCaseSensitive: Bool
     
     var body: some View {
         switch interactionType {
@@ -34,7 +35,8 @@ struct FilterDetailContainerView: View {
                              filterDestination: $filterDestination,
                              filterTerm: $filterTerm,
                              exactMatch: $exactMatch,
-                             useRegex: $useRegex)
+                             useRegex: $useRegex,
+                             isCaseSensitive: $isCaseSensitive)
         case .update:
             FilterDetailView(isEmbedded: false,
                              title: "FILTER_EDIT_VIEW_TITLE",
@@ -44,7 +46,8 @@ struct FilterDetailContainerView: View {
                              filterDestination: $filterDestination,
                              filterTerm: $filterTerm,
                              exactMatch: $exactMatch,
-                             useRegex: $useRegex)
+                             useRegex: $useRegex,
+                             isCaseSensitive: $isCaseSensitive)
         }
     }
     
@@ -60,7 +63,8 @@ extension FilterDetailContainerView {
         let action = filter?.subAction != FilterDestination.none ? filter?.subAction : filter?.action
         self._filterDestination = .init(initialValue: action ?? .junk)
         self._exactMatch = .init(initialValue: false)
-        self._useRegex = .init(initialValue: filter?.useRegex ?? false)        
+        self._useRegex = .init(initialValue: filter?.useRegex ?? false)
+        self._isCaseSensitive = .init(initialValue: filter?.caseSensitive ?? false)
     }
     
     private var cancelButton: some View {
@@ -111,7 +115,8 @@ extension FilterDetailContainerView {
                             type: filterType,
                             action: action,
                             subAction: subAction,
-                            useRegex: useRegex)
+                            useRegex: useRegex,
+                            caseSensitive: isCaseSensitive)
         return filter
     }
     
