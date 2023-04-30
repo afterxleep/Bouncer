@@ -3,7 +3,7 @@
   Bouncer
 
   Created by Saeed Taheri on 12/4/22.
- 
+
 */
 
 "FILTER_TYPE_SELECTION_LABEL" = "اگر";
@@ -45,11 +45,6 @@
 "TOGGLE" = "تغییر وضعیت";
 "BUTTON_TUTORIAL_FIRST_LAUNCH_TEXT" = "رفتن به تنظیمات";
 "BUTTON_TUTORIAL_HELP_TEXT" = "متوجه شدم!";
-"PAYMENT_PAGE_TITLE" = "آماده ارتقا هستید؟";
-"PAYMENT_PAGE_MESSAGE %lld" = "نسخه رایگان Bouncer محدود به %lld فیلتر است؛ معمولاً این تعداد برای اکثر افراد کافی است.";
-"UPGRADE_BUTTON_TEXT %@" = "با قیمت %@ در سال مشترک شوید";
-"RESTORE_PURCHASE" = "بازگردانی خرید";
-"UPGRADE_EXPLANATION" = "برای تنظیم فیلترهای نامحدود و همچنین کمک به من در بهبود اپ، ارتقا دهید.";
 "NEW_FILTER" = "فیلتر جدید";
 "UPDATE_FILTER" = "به روز رسانی فیلتر";
 "1." = ".۱";

@@ -13,7 +13,7 @@ struct FilterDetailView<L: View, R: View>: View {
     var trailingBarItem: R
     
     @Binding var filterType: FilterType
-    @Binding var filterDestination: FilterDestination
+    @Binding var filterDestination: FilterDestination    
     @Binding var filterTerm: String
     @Binding var exactMatch: Bool
     @Binding var useRegex: Bool
@@ -40,14 +40,22 @@ extension FilterDetailView {
         }
     }
     
+    private func filterPickerSectionFor(_ filterDestination: FilterDestination) -> some View {
+        HStack {
+            Image(systemName: filterDestination.listDescription.decoration.image)
+            Text(filterDestination.listDescription.text)            
+        }
+    }
+    
     private var form: some View {
         Form {
             Section(header: Text("FILTER_INFORMATION")) {
                 Picker(selection: $filterType, label: Text("FILTER_TYPE_SELECTION_LABEL")) {
                     ForEach(FilterType.allCases, id: \.self) { value in
                         HStack {
-                            Image(systemName: value.formDescription.decoration.image).foregroundColor(value.formDescription.decoration.color)
                             Text(value.formDescription.text)
+                            Spacer()
+                            Image(systemName: value.formDescription.decoration.image)
                         }
                     }
                 }
@@ -60,11 +68,19 @@ extension FilterDetailView {
                         .multilineTextAlignment(.trailing)
                 }
                 Picker(selection: $filterDestination, label: Text("FILTER_ACTION_LABEL")) {
-                    ForEach(FilterDestination.allCases, id: \.self) { value in
-                        HStack {
-                            Image(systemName: value.formDescription.decoration.image).foregroundColor(value.formDescription.decoration.color)
-                            Text(value.formDescription.text)
-                        }
+                    Section {
+                        filterPickerSectionFor(.junk).tag(FilterDestination.junk)
+                    }
+                    Section(header: Text("TRANSACTIONS")) {
+                        filterPickerSectionFor(.transactionOrder).tag(FilterDestination.transactionOrder)
+                        filterPickerSectionFor(.transactionFinance).tag(FilterDestination.transactionFinance)
+                        filterPickerSectionFor(.transactionReminders).tag(FilterDestination.transactionReminders)
+                        filterPickerSectionFor(.transaction).tag(FilterDestination.transaction)
+                    }
+                    Section(header: Text("PROMOTIONS")) {
+                        filterPickerSectionFor(.promotionOffers).tag(FilterDestination.promotionOffers)
+                        filterPickerSectionFor(.promotionCoupons).tag(FilterDestination.promotionCoupons)
+                        filterPickerSectionFor(.promotion).tag(FilterDestination.promotion)
                     }
                 }
             }
@@ -82,7 +98,6 @@ extension FilterDetailView {
             }
         }
     }
-    
 }
 
 struct FilterDetailView_Previews: PreviewProvider {

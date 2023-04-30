@@ -13,4 +13,5 @@ enum SettingsAction {
     case setHasLaunchedApp(status: Bool)
     case setNumberOfLaunches(number: Int)
     case setLastVersionPromptedForReview(version: String)
+    case setDatabaseVersion(version: Int)
 }

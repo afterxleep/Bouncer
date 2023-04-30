@@ -54,10 +54,20 @@ extension FilterRowView {
     private func getFilterDestinationDecoration(filter: Filter) -> FilterDestinationDecoration {
         var data: FilterDestinationDecoration
         switch (filter.action) {
-            case .junk:
+            case .junk, .none:
                 data = FilterDestination.junk.listDescription
+            case .promotionOffers:
+                data = FilterDestination.promotionOffers.listDescription
+            case .promotionCoupons:
+                data = FilterDestination.promotionCoupons.listDescription
             case .promotion:
                 data = FilterDestination.promotion.listDescription
+            case .transactionReminders:
+                data = FilterDestination.transactionReminders.listDescription
+            case .transactionFinance:
+                data = FilterDestination.transactionFinance.listDescription
+            case .transactionOrder:
+                data = FilterDestination.transactionOrder.listDescription
             case .transaction:
                 data = FilterDestination.transaction.listDescription
             }
@@ -66,11 +76,11 @@ extension FilterRowView {
 
     private func getFilterTypeColor(filter: Filter) -> Color {
         switch (filter.action) {
-            case .junk:
+            case .junk, .none:
                 return COLORS.ALERT_COLOR
-            case .promotion:
+            case .promotion, .promotionOffers, .promotionCoupons:
                 return COLORS.WARNING_COLOR
-            case .transaction:
+            case .transaction, .transactionOrder, .transactionFinance, .transactionReminders:
                 return COLORS.OK_COLOR
             }        
     }

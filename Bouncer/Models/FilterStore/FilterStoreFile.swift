@@ -18,10 +18,14 @@ final class FilterStoreFile: FilterStore {
     var filters: [Filter] = []
     var cancellables = [AnyCancellable]()
     
-    private var fileURL: URL? {
+    static var fileURL: URL? {
         return FileManager.default
             .containerURL(forSecurityApplicationGroupIdentifier: Self.groupContainer)?
             .appendingPathComponent(Self.filterListFile)
+    }
+    
+    private var fileURL: URL? {
+        return Self.fileURL
     }
     
     private func fileExists(url: URL) -> Bool {
@@ -46,7 +50,41 @@ final class FilterStoreFile: FilterStore {
             return errorMessage
         }
     }
-    
+
+    private func decodeData(data: Data) -> AnyPublisher<[Filter], FilterStoreError> {
+        return Future<[Filter], FilterStoreError> { promise in
+
+            // Decode with current version
+            guard let filters = try? JSONDecoder().decode([Filter].self, from: data) else {
+
+                // Try migrating the database if decoding fails
+                // TODO: For future versions, a more robust store might be needed - CoreData?
+                _ = self.migrateDatabase()
+                    .sink(receiveCompletion: { _ in }, receiveValue: { result in
+                        if result != [] {
+                            promise(.success(result))
+                        }
+                        else {
+                            promise(.failure(.decodingError))
+                        }
+                })
+                return
+
+            }
+            promise(.success(filters))
+
+        }.eraseToAnyPublisher()
+    }
+
+    private func migrateDatabase() -> Future<[Filter], FilterStoreMigrationError> {
+        let migrator = FilterStoreFileMigrator(store: self)
+        return Future<[Filter], FilterStoreMigrationError> { promise in
+            _ = migrator.migrateV1()
+                .sink(receiveCompletion: { _ in }, receiveValue: { filters in
+                    return promise(.success(filters))
+            })
+        }
+    }
 }
 
 
@@ -54,7 +92,6 @@ extension FilterStoreFile {
     
     func fetch() -> AnyPublisher<[Filter], FilterStoreError> {
         return Future<[Filter], FilterStoreError> { [weak self] promise in
-            var filters: [Filter] = []
             guard
                 let self = self,
                 let url = self.fileURL else {
@@ -75,8 +112,10 @@ extension FilterStoreFile {
             
             do {
                 let data = try Data(contentsOf: url)
-                filters = try JSONDecoder().decode([Filter].self, from: data)
-                promise(.success(filters))
+               _ = decodeData(data: data)
+                    .sink(receiveCompletion: { _ in }, receiveValue: { result in
+                        promise(.success(result))
+                    })
             } catch {
                 promise(.failure(.decodingError))
             }
@@ -102,6 +141,43 @@ extension FilterStoreFile {
                     filters = filters.sorted(by: { $1.phrase > $0.phrase })
                     
                     if let errorMessage = self.saveToDisk(filters: filters) {
+                        promise(.failure(.diskError(errorMessage)))
+                    } else {
+                        promise(.success(()))
+                    }
+                })
+                .store(in: &self.cancellables)
+        }.eraseToAnyPublisher()
+    }
+    
+    func addMany(filters: [Filter]) -> AnyPublisher<Void, FilterStoreError> {
+        return Future<Void, FilterStoreError> { promise in
+            self.fetch()
+                .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] result in
+                    guard let self = self else { return }
+                    
+                    var existingFilters: [Filter] = result
+
+                    let newFilters = filters.map { f in
+                        if (existingFilters.contains(f)) {
+                            return Filter(
+                                id: UUID(),
+                                phrase: f.phrase,
+                                type: f.type,
+                                action: f.action,
+                                subAction: f.subAction,
+                                useRegex: f.useRegex
+                            )
+                        } else {
+                            return f
+                        }
+                    }
+                    
+                    
+                    existingFilters.append(contentsOf: newFilters)
+                    existingFilters = existingFilters.sorted(by: { $1.phrase > $0.phrase })
+                    
+                    if let errorMessage = self.saveToDisk(filters: existingFilters) {
                         promise(.failure(.diskError(errorMessage)))
                     } else {
                         promise(.success(()))

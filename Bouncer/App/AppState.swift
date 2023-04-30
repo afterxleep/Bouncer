@@ -15,10 +15,12 @@ struct AppState {
 // MARK: Filter State
 struct FilterState {
     var filters: [Filter] = []
+    var importedFilters: [Filter] = []
 }
 
 struct SettingsState {
     var hasLaunchedApp: Bool = false
     var numberOfLaunches: Int = 0
     var lastVersionPromptedForReview: String = ""
+    var databaseVersion: Int = 0
 }

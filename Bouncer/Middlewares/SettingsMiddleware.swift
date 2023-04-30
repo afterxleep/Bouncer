@@ -21,7 +21,10 @@ func settingsMiddleware(appSettings: AppSettingsStore) -> Middleware<AppState, A
                                             .setNumberOfLaunches(number: appSettings.numberOfLaunches)))
                 let lastVersion = Just(AppAction.settings(action:
                                             .setLastVersionPromptedForReview(version: appSettings.lastVersionPromptedForReview)))
-                return hasLaunched.merge(with: numberOfLaunches, lastVersion).eraseToAnyPublisher()
+                let databaseVersion = Just(AppAction.settings(action:
+                                            .setDatabaseVersion(version: appSettings.databaseVersion)))
+
+            return hasLaunched.merge(with: numberOfLaunches, lastVersion, databaseVersion).eraseToAnyPublisher()
 
             case .settings(action: .setHasLaunchedApp(let status)):
                 settings.hasLaunchedApp = status
@@ -31,6 +34,9 @@ func settingsMiddleware(appSettings: AppSettingsStore) -> Middleware<AppState, A
 
             case .settings(action: .setNumberOfLaunches(let launches)):
                 settings.numberOfLaunches = launches
+
+            case .settings(action: .setDatabaseVersion(let version)):
+                settings.databaseVersion = version
 
             default:
                 break
