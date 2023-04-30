@@ -5,6 +5,7 @@
 
 import Foundation
 import IdentityLookup
+import OSLog
 
 typealias SMSOfflineFilterResponse = (action: ILMessageFilterAction,
                                       subaction: ILMessageFilterSubAction)
@@ -19,6 +20,7 @@ struct SMSOfflineFilter {
     }
     
     private func applyFilter(filter: Filter, message: SMSMessage) -> Bool {
+        os_log("FILTEREXTENSION - Applying filter: %@", log: OSLog.messageFilterLog, type: .info, "\(filter.phrase)")
         var txt = ""
         switch (filter.type) {
             case .sender:
@@ -39,28 +41,31 @@ struct SMSOfflineFilter {
             return matchRegex(text: txt, filter: filter)
         }
         else {
-            print("-- \(txt)")
-            print("\(filter.phrase): \(match(text: txt, filter: filter))")
-            print(match(text: txt, filter: filter))
             return match(text: txt, filter: filter)
         }
     }
 
     private func match(text: String, filter: Filter) -> Bool {
+        let result = text.range(of: filter.phrase, options: .caseInsensitive) != nil
+        os_log("FILTEREXTENSION - -- Match: %@", log: OSLog.messageFilterLog, type: .info, "\(result)")
+        os_log("FILTEREXTENSION - -- Method: Text", log: OSLog.messageFilterLog, type: .info)
         return text.range(of: filter.phrase, options: .caseInsensitive) != nil
     }
 
     private func matchRegex(text: String, filter: Filter) -> Bool {
-        return (text.range(of: filter.phrase, options:[.regularExpression, .caseInsensitive]) != nil)
+        let result = (text.range(of: filter.phrase, options:[.regularExpression, .caseInsensitive]) != nil)
+        os_log("FILTEREXTENSION - -- Match: %@", log: OSLog.messageFilterLog, type: .info, "\(result)")
+        os_log("FILTEREXTENSION - -- Method: Regex", log: OSLog.messageFilterLog, type: .info)
+        return result
     }
     
     private func getAction(_ filter: Filter) -> ILMessageFilterAction {
         switch filter.action {
         case .junk:
             return .junk
-        case .transaction:
+        case .transaction, .transactionOrder, .transactionReminders:
             return .transaction
-        case .promotion:
+        case .promotion,.promotionOffers, .promotionCoupons:
             return .promotion
         default:
             return .none
@@ -85,6 +90,7 @@ struct SMSOfflineFilter {
     }
     
     func filterMessage(message: SMSMessage) -> SMSOfflineFilterResponse  {
+        os_log("FILTEREXTENSION - Message Received: %@", log: OSLog.messageFilterLog, type: .info, "\(message)")
         for filter in filters {
             if(applyFilter(filter: filter, message: message)) {
                 return (getAction(filter), getSubAction(filter))

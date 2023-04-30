@@ -16,35 +16,38 @@ class SMSOfflineFilterTest: XCTestCase {
     func testFiltering() {
         var smsFilter: SMSOfflineFilter
 
-        let message = SMSMessage(sender: "ETB Comunicaciones", text: "ETB compra 100 megas y recibe 200 por 6 meses. Incluye extensor de velocidad mas promocion especial. Llama ya sin costo al 018000413807. Ver TyC. Hasta 31 ago 2020")
+        let messages = [
+            SMSMessage(sender: "ETB Comunicaciones", text: "ETB compra 100 megas y recibe 200 por 6 meses. Incluye extensor de velocidad mas promocion especial. Llama ya sin costo al 018000413807. Ver TyC. Hasta 31 ago 2020"),
+            SMSMessage(sender: "+16205261342", text: "ULANKA:  Get 50% in shoes starting today!")
+            ]
 
         var filterResult: SMSOfflineFilterResponse
         
         // Old style filters (Text + Regex)
         smsFilter = SMSOfflineFilter(filterList: [Filter(id: UUID(), phrase: "etb", type: .any, action: .junk)])
-        filterResult = smsFilter.filterMessage(message: message)
+        filterResult = smsFilter.filterMessage(message: messages[0])
         XCTAssertEqual(filterResult.action, .junk)
 
         smsFilter = SMSOfflineFilter(filterList: [Filter(id: UUID(), phrase: "comunica", type: .sender, action: .transaction)])
-        filterResult = smsFilter.filterMessage(message: message)
+        filterResult = smsFilter.filterMessage(message: messages[0])
         XCTAssertEqual(filterResult.action, .transaction)
 
         smsFilter = SMSOfflineFilter(filterList: [Filter(id: UUID(), phrase: "mega", type: .message, action: .promotion)])
-        filterResult = smsFilter.filterMessage(message: message)
+        filterResult = smsFilter.filterMessage(message: messages[0])
         XCTAssertEqual(filterResult.action, .promotion)
         
         smsFilter = SMSOfflineFilter(filterList: [Filter(id: UUID(), phrase: "[a-z]cidad", type: .message, action: .junk)])
-        filterResult = smsFilter.filterMessage(message: message)
+        filterResult = smsFilter.filterMessage(message: messages[0])
         XCTAssertEqual(filterResult.action, .junk)
                 
         // Regex filter test
         smsFilter = SMSOfflineFilter(filterList: [Filter(id: UUID(), phrase: "[E].*[l][o]cidad", type: .message, action: .junk, useRegex: true)])
-        filterResult = smsFilter.filterMessage(message: message)
+        filterResult = smsFilter.filterMessage(message: messages[0])
         XCTAssertEqual(filterResult.action, .junk)
         
         // Content filter test
         smsFilter = SMSOfflineFilter(filterList: [Filter(id: UUID(), phrase: "velocidad", type: .message, action: .junk, useRegex: false)])
-        filterResult = smsFilter.filterMessage(message: message)
+        filterResult = smsFilter.filterMessage(message: messages[0])
         XCTAssertEqual(filterResult.action, .junk)
         
         // SubAction filter tests
@@ -53,7 +56,7 @@ class SMSOfflineFilterTest: XCTestCase {
                                                          type: .any,
                                                          action: .transaction,
                                                          subAction: .transactionOrder)])
-        filterResult = smsFilter.filterMessage(message: message)
+        filterResult = smsFilter.filterMessage(message: messages[0])
         XCTAssertEqual(filterResult.action, .transaction)
         XCTAssertEqual(filterResult.subaction, .transactionalOrders)
         
@@ -62,7 +65,7 @@ class SMSOfflineFilterTest: XCTestCase {
                                                          type: .any,
                                                          action: .transaction,
                                                          subAction: .transactionFinance)])
-        filterResult = smsFilter.filterMessage(message: message)
+        filterResult = smsFilter.filterMessage(message: messages[0])
         XCTAssertEqual(filterResult.action, .transaction)
         XCTAssertEqual(filterResult.subaction, .transactionalFinance)
         
@@ -71,7 +74,7 @@ class SMSOfflineFilterTest: XCTestCase {
                                                          type: .any,
                                                          action: .transaction,
                                                          subAction: .transactionReminders)])
-        filterResult = smsFilter.filterMessage(message: message)
+        filterResult = smsFilter.filterMessage(message: messages[0])
         XCTAssertEqual(filterResult.action, .transaction)
         XCTAssertEqual(filterResult.subaction, .transactionalReminders)
         
@@ -80,7 +83,7 @@ class SMSOfflineFilterTest: XCTestCase {
                                                          type: .any,
                                                          action: .promotion,
                                                          subAction: .promotionOffers)])
-        filterResult = smsFilter.filterMessage(message: message)
+        filterResult = smsFilter.filterMessage(message: messages[0])
         XCTAssertEqual(filterResult.action, .promotion)
         XCTAssertEqual(filterResult.subaction, .promotionalOffers)
         
@@ -89,9 +92,18 @@ class SMSOfflineFilterTest: XCTestCase {
                                                          type: .any,
                                                          action: .promotion,
                                                          subAction: .promotionCoupons)])
-        filterResult = smsFilter.filterMessage(message: message)
+        filterResult = smsFilter.filterMessage(message: messages[0])
         XCTAssertEqual(filterResult.action, .promotion)
         XCTAssertEqual(filterResult.subaction, .promotionalCoupons)
+
+        smsFilter = SMSOfflineFilter(filterList: [Filter(id: UUID(),
+                                                         phrase: "ULANKA",
+                                                         type: .any,
+                                                         action: .promotion,
+                                                         subAction: .promotionOffers)])
+        filterResult = smsFilter.filterMessage(message: messages[1])
+        XCTAssertEqual(filterResult.action, .promotion)
+        XCTAssertEqual(filterResult.subaction, .promotionalOffers)
 
     }
 }
