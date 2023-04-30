@@ -75,8 +75,7 @@ extension FilterDetailView {
                         filterPickerSectionFor(.transactionOrder).tag(FilterDestination.transactionOrder)
                         filterPickerSectionFor(.transactionFinance).tag(FilterDestination.transactionFinance)
                         filterPickerSectionFor(.transactionReminders).tag(FilterDestination.transactionReminders)
-                        filterPickerSectionFor(.transactionOther).tag(FilterDestination.transactionOther)
-                        filterPickerSectionFor(.transactionHealth).tag(FilterDestination.transactionHealth)                        
+                        filterPickerSectionFor(.transactionOther).tag(FilterDestination.transactionOther)                                                
                     }
                     Section(header: Text("PROMOTIONS")) {
                         filterPickerSectionFor(.promotionOffers).tag(FilterDestination.promotionOffers)

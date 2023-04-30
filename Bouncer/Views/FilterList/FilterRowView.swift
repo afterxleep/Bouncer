@@ -60,7 +60,7 @@ extension FilterRowView {
                     case .promotionCoupons:
                         return FilterDestination.promotionCoupons.listDescription
                     default:
-                        return FilterDestination.promotion.listDescription
+                        return FilterDestination.promotionOther.listDescription
                 }
             case .transaction:
                 switch filter.subAction {
@@ -71,7 +71,7 @@ extension FilterRowView {
                     case .transactionOrder:
                         return FilterDestination.transactionOrder.listDescription
                     default:
-                        return FilterDestination.transaction.listDescription
+                        return FilterDestination.transactionOther.listDescription
                 }
             case .junk:
                 return FilterDestination.junk.listDescription
