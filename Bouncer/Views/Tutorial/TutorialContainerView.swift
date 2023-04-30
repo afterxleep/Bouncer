@@ -31,9 +31,8 @@ extension TutorialContainerView {
     }
 
     func openSettings() {
-        if let settingsURL = URL(string: UIApplication.openSettingsURLString),
-            UIApplication.shared.canOpenURL(settingsURL) {
-            UIApplication.shared.open(settingsURL, options: [:])
+        if let url = URL(string: "App-Prefs:") {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
         }
         setAppHasLaunched()
     }
