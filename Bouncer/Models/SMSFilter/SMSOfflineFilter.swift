@@ -31,7 +31,7 @@ struct SMSOfflineFilter {
         
         // Filters initially used both matchText and regex, so if the value is not assigned, use both
         guard let useRegex = filter.useRegex else {
-            return matchText(text: txt, filter: filter) || matchRegex(text: txt, filter: filter)
+            return match(text: txt, filter: filter) || matchRegex(text: txt, filter: filter)
         }
         
         // Use different filter strategies based on user selection
@@ -39,14 +39,17 @@ struct SMSOfflineFilter {
             return matchRegex(text: txt, filter: filter)
         }
         else {
-            return matchText(text: txt, filter: filter)
+            print("-- \(txt)")
+            print("\(filter.phrase): \(match(text: txt, filter: filter))")
+            print(match(text: txt, filter: filter))
+            return match(text: txt, filter: filter)
         }
     }
-    
-    private func matchText(text: String, filter: Filter) -> Bool {
-        return text.contains(filter.phrase)
+
+    private func match(text: String, filter: Filter) -> Bool {
+        return text.range(of: filter.phrase, options: .caseInsensitive) != nil
     }
-    
+
     private func matchRegex(text: String, filter: Filter) -> Bool {
         return (text.range(of: filter.phrase, options:[.regularExpression, .caseInsensitive]) != nil)
     }

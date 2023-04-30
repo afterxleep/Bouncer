@@ -51,7 +51,9 @@ extension MessageFilterExtension: ILMessageFilterQueryHandling {
                                                                                               text: messageBody))
         response.action = filterOutput.action
         response.subAction = filterOutput.subaction
-        os_log("FILTEREXTENSION - Filtering done", log: OSLog.messageFilterLog, type: .info)        
+        os_log("FILTEREXTENSION - Filtering action: %@", log: OSLog.messageFilterLog, type: .info, "\(response.action)")
+        os_log("FILTEREXTENSION - Filtering action: %@", log: OSLog.messageFilterLog, type: .info, "\(response.subAction)")
+        os_log("FILTEREXTENSION - Filtering done", log: OSLog.messageFilterLog, type: .info)
         completion(response)
     }
 }
