@@ -17,6 +17,7 @@ struct FilterDetailView<L: View, R: View>: View {
     @Binding var filterTerm: String
     @Binding var exactMatch: Bool
     @Binding var useRegex: Bool
+    @Binding var isCaseSensitive: Bool
     
     var body: some View {
         rootView
@@ -52,9 +53,8 @@ extension FilterDetailView {
             Section(header: Text("FILTER_INFORMATION")) {
                 Picker(selection: $filterType, label: Text("FILTER_TYPE_SELECTION_LABEL")) {
                     ForEach(FilterType.allCases, id: \.self) { value in
-                        HStack {
+                        VStack {
                             Text(value.formDescription.text)
-                            Spacer()
                             Image(systemName: value.formDescription.decoration.image)
                         }
                     }
@@ -75,12 +75,12 @@ extension FilterDetailView {
                         filterPickerSectionFor(.transactionOrder).tag(FilterDestination.transactionOrder)
                         filterPickerSectionFor(.transactionFinance).tag(FilterDestination.transactionFinance)
                         filterPickerSectionFor(.transactionReminders).tag(FilterDestination.transactionReminders)
-                        filterPickerSectionFor(.transaction).tag(FilterDestination.transaction)
+                        filterPickerSectionFor(.transactionOther).tag(FilterDestination.transactionOther)
                     }
                     Section(header: Text("PROMOTIONS")) {
                         filterPickerSectionFor(.promotionOffers).tag(FilterDestination.promotionOffers)
                         filterPickerSectionFor(.promotionCoupons).tag(FilterDestination.promotionCoupons)
-                        filterPickerSectionFor(.promotion).tag(FilterDestination.promotion)
+                        filterPickerSectionFor(.promotionOther).tag(FilterDestination.promotionOther)
                     }
                 }
             }
@@ -89,11 +89,19 @@ extension FilterDetailView {
                     VStack(alignment: .leading) {
                         Text("USE_REGULAR_EXPRESSIONS")
                             .padding(0)
-                        Spacer()
                         Text("USE_REGULAR_EXPRESSIONS_DETAIL")
                             .font(.caption)
                             .foregroundColor(Color("TextDefaultColor"))
-                    }.padding(.init(top: 10, leading: 0, bottom: 10, trailing: 10))
+                    }.padding(.init(top: 5, leading: 0, bottom: 5, trailing: 10))
+                }
+                Toggle(isOn: $isCaseSensitive) {
+                    VStack(alignment: .leading) {
+                        Text("IS_CASE_SENSITIVE")
+                            .padding(0)
+                        Text("IS_CASE_SENSITIVE_DETAIL")
+                            .font(.caption)
+                            .foregroundColor(Color("TextDefaultColor"))
+                    }.padding(.init(top: 5, leading: 0, bottom: 5, trailing: 10))
                 }
             }
         }
@@ -109,6 +117,7 @@ struct FilterDetailView_Previews: PreviewProvider {
                          filterDestination: .constant(.transaction),
                          filterTerm: .constant("Query Term"),
                          exactMatch: .constant(false),
-                         useRegex: .constant(false))
+                         useRegex: .constant(false),
+                         isCaseSensitive: .constant(false))
     }
 }

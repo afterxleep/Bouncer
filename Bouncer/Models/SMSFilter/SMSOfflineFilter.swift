@@ -5,6 +5,7 @@
 
 import Foundation
 import IdentityLookup
+import OSLog
 
 typealias SMSOfflineFilterResponse = (action: ILMessageFilterAction,
                                       subaction: ILMessageFilterSubAction)
@@ -19,6 +20,7 @@ struct SMSOfflineFilter {
     }
     
     private func applyFilter(filter: Filter, message: SMSMessage) -> Bool {
+        os_log("FILTEREXTENSION - Applying filter: %@", log: OSLog.messageFilterLog, type: .info, "\(filter.phrase)")
         var txt = ""
         switch (filter.type) {
             case .sender:
@@ -28,30 +30,36 @@ struct SMSOfflineFilter {
             default:
                 txt = "\(message.sender) \(message.text)"
         }
-        
-        // Filters initially used both matchText and regex, so if the value is not assigned, use both
-        guard let useRegex = filter.useRegex else {
-            return match(text: txt, filter: filter) || matchRegex(text: txt, filter: filter)
-        }
-        
+
         // Use different filter strategies based on user selection
-        if useRegex {
+        if filter.useRegex {
             return matchRegex(text: txt, filter: filter)
         }
         else {
-            print("-- \(txt)")
-            print("\(filter.phrase): \(match(text: txt, filter: filter))")
-            print(match(text: txt, filter: filter))
             return match(text: txt, filter: filter)
         }
     }
 
     private func match(text: String, filter: Filter) -> Bool {
+        var matchOptions: String.CompareOptions = []
+        if !filter.caseSensitive {
+            matchOptions.insert(.caseInsensitive)
+        }
+        let result = text.range(of: filter.phrase, options: matchOptions) != nil
+        os_log("FILTEREXTENSION - -- Match: %@", log: OSLog.messageFilterLog, type: .info, "\(result)")
+        os_log("FILTEREXTENSION - -- Method: Text", log: OSLog.messageFilterLog, type: .info)
         return text.range(of: filter.phrase, options: .caseInsensitive) != nil
     }
 
     private func matchRegex(text: String, filter: Filter) -> Bool {
-        return (text.range(of: filter.phrase, options:[.regularExpression, .caseInsensitive]) != nil)
+        var matchOptions: String.CompareOptions = [.regularExpression]
+        if !filter.caseSensitive {
+            matchOptions.insert(.caseInsensitive)
+        }
+        let result = (text.range(of: filter.phrase, options: matchOptions) != nil)
+        os_log("FILTEREXTENSION - -- Match: %@", log: OSLog.messageFilterLog, type: .info, "\(result)")
+        os_log("FILTEREXTENSION - -- Method: Regex", log: OSLog.messageFilterLog, type: .info)
+        return result
     }
     
     private func getAction(_ filter: Filter) -> ILMessageFilterAction {
@@ -80,11 +88,20 @@ struct SMSOfflineFilter {
         case .promotionCoupons:
             return .promotionalCoupons
         default:
-            return .none
+            // If no subaction pressent just return the base groups
+            switch filter.action {
+            case .promotion:
+                return .promotionalOthers
+            case .transaction:
+                return .transactionalOthers
+            default:
+                return .none
+            }
         }
     }
     
     func filterMessage(message: SMSMessage) -> SMSOfflineFilterResponse  {
+        os_log("FILTEREXTENSION - Message Received: %@", log: OSLog.messageFilterLog, type: .info, "\(message)")
         for filter in filters {
             if(applyFilter(filter: filter, message: message)) {
                 return (getAction(filter), getSubAction(filter))

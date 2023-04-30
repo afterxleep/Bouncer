@@ -74,3 +74,5 @@ Created by Daniel Bernal on 6/30/20.
 "ASK_ANYTHING" = "Frag alles!";
 "NO_EMAIL_CONFIGURED" = "Es scheint, dass Sie kein E-Mail-Konto eingerichtet haben. Sie können mir direkt unter danielbernal@hey.com schreiben";
 "SETUP_INFO" = "SMS-Filterung aktivieren";
+"IS_CASE_SENSITIVE" = "Groß- und Kleinschreibung beachten";
+"IS_CASE_SENSITIVE_DETAIL" = "Diese Option aktivieren, um Groß- und Kleinschreibung unterschiedlich zu behandeln.";

@@ -31,11 +31,23 @@ struct FilterStoreFileMigrator {
 
             // Update filters
             for filter in filters {
+                var subAction: FilterDestination
+                switch filter.action {
+                case .promotion:
+                    subAction = .promotionOther
+                case .transaction:
+                    subAction = .transactionOther
+                default:
+                    subAction = .none
+                }
                 let updatedFilter = Filter(id: filter.id,
                                            phrase: filter.phrase,
                                            type: filter.type,
                                            action: filter.action,
-                                           useRegex: filter.useRegex)
+                                           subAction: subAction,
+                                           useRegex: filter.useRegex,
+                                           caseSensitive: false)
+                print(updatedFilter)
                 _ = store.add(filter: updatedFilter)
             }
             // Re-fetch data

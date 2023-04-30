@@ -134,8 +134,8 @@ extension FilterStoreFile {
                     var newFilter = filter
                     
                     // If the filter is not a regular expression
-                    if !(newFilter.useRegex ?? false) {
-                        newFilter.phrase = newFilter.phrase.lowercased()
+                    if !newFilter.useRegex {
+                        newFilter.phrase = newFilter.phrase
                     }
                     filters.append(newFilter)
                     filters = filters.sorted(by: { $1.phrase > $0.phrase })

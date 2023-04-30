@@ -73,4 +73,5 @@
 "NEED_HELP" = "Necesitas ayuda?";
 "ASK_ANYTHING" = "Preguntame!";
 "NO_EMAIL_CONFIGURED" = "Parece que no tienes una cuenta de correo configurada en tu iPhone.  Puedes escribirme a daniebernal@hey.com";
-"SETUP_INFO" = "Enable SMS filtering";
+"IS_CASE_SENSITIVE" = "Sensible a mayúsculas";
+"IS_CASE_SENSITIVE_DETAIL" = "Active esta opción para tratar los caracteres en mayúscula y minúscula de manera diferente.";
