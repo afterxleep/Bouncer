@@ -67,10 +67,12 @@ extension MessageFilterExtension: ILMessageFilterCapabilitiesQueryHandling {
     func handle(_ capabilitiesQueryRequest: ILMessageFilterCapabilitiesQueryRequest, context: ILMessageFilterExtensionContext, completion: @escaping (ILMessageFilterCapabilitiesQueryResponse) -> Void) {
         let response = ILMessageFilterCapabilitiesQueryResponse()
         response.transactionalSubActions = [.transactionalOrders,
+                                            .transactionalOthers,
                                             .transactionalFinance,
                                             .transactionalReminders]
         response.promotionalSubActions = [.promotionalOffers,
-                                          .promotionalCoupons]
+                                          .promotionalCoupons,
+                                          .promotionalOthers]
         completion(response)
     }
 }

@@ -93,26 +93,25 @@ extension FilterDetailContainerView {
         var action: FilterDestination
         var subAction: FilterDestination
         switch filterDestination {
-            case .promotion, .promotionOffers, .promotionCoupons:
-                action = .promotion
-                subAction = filterDestination != .promotion ? filterDestination : .none
-            case .transaction, .transactionOrder, .transactionFinance, .transactionReminders:
-                action = .transaction
-                subAction = filterDestination != .transaction ? filterDestination : .none
-            case .junk:
-                action = .junk
-                subAction = .none
-            default:
-                action = .none
-                subAction = .none
-            }
+        case .promotion, .promotionOffers, .promotionCoupons, .promotionOther:
+            action = .promotion
+            subAction = filterDestination
+        case .transaction, .transactionOrder, .transactionFinance, .transactionReminders, .transactionHealth, .transactionOther:
+            action = .transaction
+            subAction = filterDestination
+        case .junk:
+            action = .junk
+            subAction = .none
+        case .none:
+            action = .none
+            subAction = .none
+        }
         let filter = Filter(id: filterId ?? UUID(),
                             phrase: filterTerm.trimmed,
                             type: filterType,
                             action: action,
                             subAction: subAction,
                             useRegex: useRegex)
-        print(filter)
         return filter
     }
     

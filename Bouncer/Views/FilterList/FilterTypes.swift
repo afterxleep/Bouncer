@@ -57,10 +57,12 @@ extension FilterDestination {
             return FilterDestinationDecoration(decoration: SYSTEM_IMAGES.PROMOTION_OFFERS, text: "PROMOTION_ACTION_OFFERS")
         case .promotionCoupons:
             return FilterDestinationDecoration(decoration: SYSTEM_IMAGES.PROMOTION_COUPONS, text: "PROMOTION_ACTION_COUPONS")
-        case .transaction:
+        case .transactionOther:
             return FilterDestinationDecoration(decoration: SYSTEM_IMAGES.TRANSACTION, text: "TRANSACTION_ACTION")
-        case .promotion:
+        case .promotionOther:
             return FilterDestinationDecoration(decoration: SYSTEM_IMAGES.PROMOTION, text: "PROMOTION_ACTION")
+        default:
+            return FilterDestinationDecoration(decoration: SYSTEM_IMAGES.SPAM, text: "JUNK_ACTION")
         }
         
     }

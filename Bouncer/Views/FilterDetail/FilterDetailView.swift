@@ -74,12 +74,13 @@ extension FilterDetailView {
                         filterPickerSectionFor(.transactionOrder).tag(FilterDestination.transactionOrder)
                         filterPickerSectionFor(.transactionFinance).tag(FilterDestination.transactionFinance)
                         filterPickerSectionFor(.transactionReminders).tag(FilterDestination.transactionReminders)
-                        filterPickerSectionFor(.transaction).tag(FilterDestination.transaction)
+                        filterPickerSectionFor(.transactionOther).tag(FilterDestination.transactionOther)
+                        filterPickerSectionFor(.transactionHealth).tag(FilterDestination.transactionHealth)                        
                     }
                     Section(header: Text("PROMOTIONS")) {
                         filterPickerSectionFor(.promotionOffers).tag(FilterDestination.promotionOffers)
                         filterPickerSectionFor(.promotionCoupons).tag(FilterDestination.promotionCoupons)
-                        filterPickerSectionFor(.promotion).tag(FilterDestination.promotion)
+                        filterPickerSectionFor(.promotionOther).tag(FilterDestination.promotionOther)
                     }
                 }
             }

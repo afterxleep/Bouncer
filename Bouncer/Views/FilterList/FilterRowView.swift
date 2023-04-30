@@ -84,10 +84,12 @@ extension FilterRowView {
         switch (filter.action) {
             case .junk, .none:
                 return COLORS.ALERT_COLOR
-            case .promotion, .promotionOffers, .promotionCoupons:
+            case .promotion, .promotionOther, .promotionOffers, .promotionCoupons:
                 return COLORS.WARNING_COLOR
-            case .transaction, .transactionOrder, .transactionFinance, .transactionReminders:
+            case .transaction, .transactionOrder, .transactionOther, .transactionFinance, .transactionReminders:
                 return COLORS.OK_COLOR
+            default:
+                return COLORS.ALERT_COLOR
             }        
     }
     

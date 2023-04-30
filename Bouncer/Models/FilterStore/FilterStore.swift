@@ -19,12 +19,15 @@ enum FilterDestination: String, Codable, Equatable, CaseIterable {
     case transaction
     case promotion
 
-    // SubActions (Apple allows 5 max.)
+    // SubActions
     case transactionOrder
     case transactionFinance
     case transactionReminders
+    case transactionHealth
+    case transactionOther
     case promotionOffers
     case promotionCoupons
+    case promotionOther
 
 }
 
