@@ -155,31 +155,35 @@ class FilterStoreFileTests: XCTestCase {
         XCTAssertEqual(filter.action, .junk)
         XCTAssertEqual(filter.subAction, .none)
         XCTAssertEqual(filter.useRegex, false)
+        XCTAssertEqual(filter.caseSensitive, false)
 
         filter = filters[1]
         XCTAssertEqual(filter.phrase, "[b-chm-pP]at|ot")
         XCTAssertEqual(filter.action, .junk)
         XCTAssertEqual(filter.subAction, .none)
-        XCTAssertEqual(filter.useRegex, false)
+        XCTAssertEqual(filter.useRegex, true)
+        XCTAssertEqual(filter.caseSensitive, false)
 
         filter = filters[2]
         XCTAssertEqual(filter.phrase, "etb")
         XCTAssertEqual(filter.action, .promotion)
         XCTAssertEqual(filter.subAction, .promotionOther)
         XCTAssertEqual(filter.useRegex, false)
+        XCTAssertEqual(filter.caseSensitive, false)
 
         filter = filters[3]
-        
-        //XCTAssertEqual(filter.phrase, "[b-chm-pP]at|ot")
-        //XCTAssertEqual(filter.action, .junk)
-        //XCTAssertEqual(filter.subAction, .none)
-        //XCTAssertEqual(filter.useRegex, true)
+        XCTAssertEqual(filter.phrase, "rappi")
+        XCTAssertEqual(filter.action, .junk)
+        XCTAssertEqual(filter.subAction, .none)
+        XCTAssertEqual(filter.useRegex, false)
 
         filter = filters[4]
-        //XCTAssertEqual(filter.phrase, "YoUR COdE")
-        //XCTAssertEqual(filter.action, .junk)
-        //XCTAssertEqual(filter.subAction, .none)
-        //XCTAssertEqual(filter.useRegex, false)
+        print(filter)
+        XCTAssertEqual(filter.phrase, "your code")
+        XCTAssertEqual(filter.action, .transaction)
+        XCTAssertEqual(filter.subAction, .transactionOther)
+        XCTAssertEqual(filter.useRegex, false)
+
 
     }
     
