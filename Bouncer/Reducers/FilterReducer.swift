@@ -13,7 +13,15 @@ func filterReducer(state: inout FilterState, action: FilterAction) -> Void {
         
     case .import(let filters):
         state.importedFilters = filters
-        
+        state.filterImportInProgress = false
+
+    case .decodeComplete(let filters):
+        state.importedFilters = filters
+        state.filterImportInProgress = true
+
+    case .decodingError(_):
+        state.filterImportInProgress = false
+
     default:
         break
     }

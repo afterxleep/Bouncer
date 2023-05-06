@@ -19,7 +19,6 @@ struct ImportFilterListContainerView: View {
             },
             onCancel: doneImporting
         )
-        .environmentObject(store)
     }
 }
 
@@ -36,7 +35,7 @@ extension ImportFilterListContainerView {
     }
     
     func doneImporting() {
-        store.dispatch(.filter(action: .import(filters: [])))
+        store.dispatch(.filter(action: .import(filters: [])))        
         self.dismiss()
     }
 }

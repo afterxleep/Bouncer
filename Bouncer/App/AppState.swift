@@ -16,6 +16,7 @@ struct AppState {
 struct FilterState {
     var filters: [Filter] = []
     var importedFilters: [Filter] = []
+    var filterImportInProgress: Bool = false
 }
 
 struct SettingsState {

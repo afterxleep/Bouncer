@@ -66,7 +66,7 @@ enum FilterStoreError: Error {
     case updateError
     case deleteError
     case diskError(String)
-    case other
+    case other    
 }
 
 protocol FilterStore {
@@ -76,4 +76,5 @@ protocol FilterStore {
     func update(filter: Filter) -> AnyPublisher<Void, FilterStoreError>
     func remove(uuid: UUID) -> AnyPublisher<Void, FilterStoreError>
     func reset() -> AnyPublisher<Void, FilterStoreError>
+    func decodeFromURL(url: URL) -> AnyPublisher<[Filter], FilterStoreError>
 }

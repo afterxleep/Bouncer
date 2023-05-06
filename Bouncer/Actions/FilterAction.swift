@@ -19,4 +19,7 @@ enum FilterAction {
     case deleteError(error: FilterMiddlewareError)
     case `import`(filters: [Filter])
     case importError(error: FilterMiddlewareError)
+    case loadFromURL(url: URL)
+    case decodeComplete(filters: [Filter])
+    case decodingError(error: FilterMiddlewareError)
 }

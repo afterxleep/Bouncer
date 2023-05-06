@@ -10,7 +10,7 @@ import os.log
 private typealias DiskWriteError = String
 
 final class FilterStoreFile: FilterStore {
-    
+
     static let filterListFile = "filters.json"
     static let groupContainer = "group.com.banshai.bouncer"
     static let filterListFileV1 = "wordlist.filter"
@@ -234,6 +234,20 @@ extension FilterStoreFile {
             }
         }.eraseToAnyPublisher()
     }
+
+    func decodeFromURL(url: URL) -> AnyPublisher<[Filter], FilterStoreError> {
+        return Future<[Filter], FilterStoreError> { promise in
+            do {
+                _ = url.startAccessingSecurityScopedResource()
+                let filters = try JSONDecoder().decode([Filter].self, from: Data(contentsOf: url))
+                url.stopAccessingSecurityScopedResource()
+                promise(.success(filters))
+            } catch {
+                promise(.failure(.decodingError))
+            }
+        }.eraseToAnyPublisher()
+    }
+
     
     
 }

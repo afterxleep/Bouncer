@@ -12,6 +12,7 @@ enum FilterMiddlewareError {
     case updateError
     case deleteError
     case unknown
+    case decodingError
 }
 
 func filterMiddleware(filterStore: FilterStore) -> Middleware<AppState, AppAction> {
@@ -85,11 +86,24 @@ func filterMiddleware(filterStore: FilterStore) -> Middleware<AppState, AppActio
                     }
                 }
                 .eraseToAnyPublisher()
-            
+
+        case .filter(action: .loadFromURL(url: let url)):
+            return filterStore.decodeFromURL(url: url)
+                .map { AppAction.filter(action: .decodeComplete(filters: $0 )) }
+                .catch { (error: FilterStoreError) -> Just<AppAction> in
+                    switch(error) {
+                    default:
+                        return Just(AppAction.filter(action: .decodingError(error: FilterMiddlewareError.decodingError)))
+                    }
+                }
+                .eraseToAnyPublisher()
+
         default:
             break
         }
         return Empty().eraseToAnyPublisher()
+
+
     }
     
 }
