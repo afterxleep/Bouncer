@@ -13,35 +13,14 @@ struct FilterListView: View {
     let onImport: ([Filter]) -> Void
     let importFiltersFromURL: (URL) -> Void
     let openSettings: () -> Void
+    let showError: (FilterListError) -> Void
     @Binding var shouldShowImportList: Bool
 
     @State var showingSettings = false
     @State var showingFilterDetail = false
     @State var showingInApp = false
     @State var showingFileImporter = false
-    @State var importError: ImportError? = nil
 
-    enum ImportError: Identifiable {
-        case emptyImportFileError
-        case decodingError(String)
-        case unknownError(String)
-        
-        var id: String {
-            switch self {
-                case .emptyImportFileError: return "EMPTY_IMPORT_FILE"
-                case .decodingError(let str): return str
-                case .unknownError(let str): return str
-            }
-        }
-        
-        var textView: Text {
-            switch self {
-                case .emptyImportFileError: return Text("EMPTY_IMPORT_FILE")
-                case .decodingError(let str): return Text("IMPORT_ERROR \(str)")
-                case .unknownError(let str): return Text("IMPORT_ERROR \(str)")
-            }
-        }
-    }
 
     var body: some View {
         ZStack {
@@ -62,8 +41,6 @@ struct FilterListView: View {
     }
 }
 
-
-
 struct FilterListView_Previews: PreviewProvider {
     static var previews: some View {
         FilterListView(filters: [],
@@ -71,6 +48,7 @@ struct FilterListView_Previews: PreviewProvider {
                        onImport: {_ in },
                        importFiltersFromURL: { _ in },
                        openSettings: {},
+                       showError: { _ in },
                        shouldShowImportList: .constant(false)
         )
     }
@@ -117,10 +95,7 @@ extension FilterListView {
                     importFiltersFromURL(url)
                 }
             case .failure(let error):
-                os_log(.error, log: .errorLog,
-                       "Failed to load import file: %{public}@",
-                       error.localizedDescription)
-                self.importError = .unknownError(error.localizedDescription)
+                showError(.unknownError(error.localizedDescription))
             }
         }
         .sheet(isPresented: $shouldShowImportList) {
@@ -128,9 +103,7 @@ extension FilterListView {
         }.sheet(isPresented: $showingSettings) {
             TutorialContainerView()
         }
-        .alert(item: $importError) { error in
-            Alert(title: Text("ERROR"), message: error.textView)
-        }        
+    
 
     }
     
