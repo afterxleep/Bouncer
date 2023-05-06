@@ -76,3 +76,4 @@ Created by Daniel Bernal on 6/30/20.
 "SETUP_INFO" = "فعال‌سازی فیلترینگ پیام‌های SMS";
 "IS_CASE_SENSITIVE" = "حساس به حروف بزرگ/کوچک";
 "IS_CASE_SENSITIVE_DETAIL" = "این گزینه را فعال کنید تا حروف بزرگ و";
+"INCORRECT_FILE_FORMAT" = "فایل JSON به نظر نمی‌رسد دارای فرمت درستی باشد یا با سیستم سازگار نباشد";
