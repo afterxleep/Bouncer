@@ -1,57 +1,78 @@
 /*
-  Localizable.strings
-  Bouncer
+Localizable.strings
+Bouncer
 
-  Created by Saeed Taheri on 12/4/22.
+Created by Daniel Bernal on 6/30/20.
 
 */
 
-"FILTER_TYPE_SELECTION_LABEL" = "اگر";
+"FILTER_TYPE_SELECTION_LABEL" = "هنگامی که";
 "FILTER_TEXT_PLACEHOLDER" = "یک کلمه یا عبارت وارد کنید";
-"FILTER_CONTAINS_TEXT_LABEL" = "شامل";
+"FILTER_CONTAINS_TEXT_LABEL" = "حاوی";
 "FILTER_ADD_VIEW_TITLE" = "افزودن فیلتر";
-"FILTER_EDIT_VIEW_TITLE" = "به روز رسانی فیلتر";
+"FILTER_EDIT_VIEW_TITLE" = "به‌روزرسانی فیلتر";
 "SAVE" = "ذخیره";
-"CANCEL" = "انصراف";
+"CANCEL" = "لغو";
 "ADVANCED" = "پیشرفته";
 "FILTER_INFORMATION" = "تنظیمات فیلتر";
-"EXACT_MATCH" = "تطابق کامل";
-"EXACT_MATCH_CAPTION" = "فیلتر کردن پیام‌ها فقط در صورتی که فرستنده یا پیام با کلمه یا عبارت تعیین شده تطابق کامل داشته باشد.";
-"FILTER_ACTION_LABEL" = "علامت‌گذاری به عنوان";
-"JUNK_ACTION" = "اسپم (Junk)";
-"TRANSACTION_ACTION" = "تراکنش (Transaction)";
-"PROMOTION_ACTION" = "تبلیغ (Promotion)";
-"ANYTHING_IN_MESSAGE" = "هر بخشی از پیام";
-"SENDER_NUMBER" = "شماره یا نام فرستنده";
+"EXACT_MATCH" = "مطابقت دقیق";
+"EXACT_MATCH_CAPTION" = "فقط پیام‌هایی که فرستنده/پیام با عبارت وارد شده به صورت دقیق مطابقت دارد را فیلتر کنید.";
+"FILTER_ACTION_LABEL" = "علامت گذاری به عنوان";
+"TRANSACTIONS" = "تراکنش‌ها";
+"JUNK_ACTION" = "نامطلوب";
+"TRANSACTION_ACTION" = "تراکنش‌های دیگر";
+"TRANSACTION_ACTION_ORDERS" = "سفارش‌ها";
+"TRANSACTION_ACTION_FINANCE" = "مالی";
+"TRANSACTION_ACTION_REMINDERS" = "یادآوری‌ها";
+"PROMOTIONS" = "تبلیغات";
+"PROMOTION_ACTION" = "تبلیغات دیگر";
+"PROMOTION_ACTION_OFFERS" = "پیشنهادها";
+"PROMOTION_ACTION_COUPONS" = "کوپن‌ها";
+"ANYTHING_IN_MESSAGE" = "هر قسمتی از پیام";
+"SENDER_NUMBER" = "نام یا شماره فرستنده";
 "TEXT" = "متن پیام";
-"LIST_VIEW_TITLE" = "فهرست مسدود شده ها";
-"EMPTY_LIST_TITLE" = "فهرست مسدود شده ها خالی است";
-"EMPTY_LIST_MESSAGE" = "اپ Bouncer پیامک‌ها را بر اساس فیلترهایی که اینجا اضافه می‌کنید فیلتر می‌کند.";
-"TAP_SPACE" = "با لمس ";
-"TO_ADD_A_FILTER_SPACE" = " می‌توانید فیلتر اضافه کنید.";
+"LIST_VIEW_TITLE" = "فیلترها";
+"EMPTY_LIST_TITLE" = "لیست فیلترهای شما خالی است";
+"EMPTY_LIST_MESSAGE" = "با اضافه کردن فیلترهایی که در اینجا می‌افزایید، Bouncer پیام‌های SMS از فرستندگان ناشناس را فیلتر خواهد کرد.";
+"TAP_SPACE" = "برای افزودن فیلتر '";
+"TO_ADD_A_FILTER_SPACE" = "' را لمس کنید.";
 "WELCOME_TITLE" = "سلام!";
 "WELCOME_SUBTITLE" = "به Bouncer خوش آمدید";
 "HELP" = "راهنما";
-"LETS" = "بریم برای ";
+"LETS" = "بیایید ";
 "HERE_IS_HOW" = "برای ";
-"ENABLE_SMS_FILTERING" = "فعال‌سازی فیلتر کردن پیامک";
-"ON_YOUR_IPHONE" = " در آیفون شما:";
-"OPEN_SPACE" = "باز کردن ";
-"THE_APP" = "‌";
-"SETTINGS_APP" = "Settings";
-"TAP" = "انتخاب ";
-"MESSAGES_APP" = "Messages";
-"UNKNOWN_SOURCES" = "Unknown & Spam ";
-"TOGGLE" = "تغییر وضعیت";
-"BUTTON_TUTORIAL_FIRST_LAUNCH_TEXT" = "رفتن به تنظیمات";
-"BUTTON_TUTORIAL_HELP_TEXT" = "متوجه شدم!";
+"ENABLE_SMS_FILTERING" = "فعال کردن فیلترینگ پیام‌های SMS";
+"ON_YOUR_IPHONE" = "بر روی دستگاه آیفون خود:";
+"OPEN_SPACE" = "برنامه‌ی ";
+"THE_APP" = "تنظیمات";
+"SETTINGS_APP" = "تنظیمات";
+"TAP" = "لمس کنید";
+"MESSAGES_APP" = "پیام‌ها";
+"UNKNOWN_SOURCES" = "ناشناس و هرزنامه";
+"TOGGLE" = "روشن/خاموش";
+"BUTTON_TUTORIAL_FIRST_LAUNCH_TEXT" = "من را به تنظیمات هدایت کن!";
+"BUTTON_TUTORIAL_HELP_TEXT" = "فهمیدم!";
 "NEW_FILTER" = "فیلتر جدید";
-"UPDATE_FILTER" = "به روز رسانی فیلتر";
-"1." = ".۱";
-"2." = ".۲";
-"3." = ".۳";
-"4." = ".۴";
-"USE_REGULAR_EXPRESSIONS" = "تطابق به عنوان Regex";
-"USE_REGULAR_EXPRESSIONS_DETAIL" = "اگر فیلتر شما حاوی Regex است، این گزینه را فعال کنید. (Regex باید در قالب PCRE نوشته شود).";
-"IS_CASE_SENSITIVE" = "حساسیت به بزرگی و کوچکی حروف";
-"IS_CASE_SENSITIVE_DETAIL" = "فعال‌سازی این گزینه برای برخورد با حروف بزرگ و کوچک به صورت متفاوت";
+"UPDATE_FILTER" = "به‌روزرسانی فیلتر";
+"1." = "۱.";
+"2." = "۲.";
+"3." = "۳.";
+"4." = "۴.";
+"USE_REGULAR_EXPRESSIONS" = "مطابقت با عبارات منظم";
+"USE_REGULAR_EXPRESSIONS_DETAIL" = "این گزینه را فعال کنید اگر فیلتر شما شامل عبارت منظم است (Regex باید در فرمت PCRE ارائه شده باشد).";
+"EXPORT_BLOCK_LIST" = "خروجی گرفتن از لیست مسدود شده‌ها";
+"IMPORT_BLOCK_LIST" = "وارد کردن لیست مسدود شده‌ها";
+"NEW_FILTERS" = "فیلترهای جدید";
+"DUPLICATE_FILTERS" = "کپی فیلترها";
+"SELECT_ALL" = "انتخاب همه";
+"SELECT_NEW" = "انتخاب جدید";
+"SELECT_NONE" = "عدم انتخاب";
+"ERROR" = "خطا";
+"EMPTY_IMPORT_FILE" = "فایل انتخابی شما شامل فیلتری نیست.";
+"IMPORT_ERROR %@" = "در وارد کردن فایل انتخابی خطایی رخ داد.\n\n%@";
+"NEED_HELP" = "نیاز به راهنمایی دارید؟";
+"ASK_ANYTHING" = "هر سوالی دارید بپرسید!";
+"NO_EMAIL_CONFIGURED" = "به نظر می‌رسد شما هیچ حساب ایمیلی را تنظیم نکرده‌اید. می‌توانید به طور مستقیم به danielbernal@hey.com ایمیل بزنید.";
+"SETUP_INFO" = "فعال‌سازی فیلترینگ پیام‌های SMS";
+"IS_CASE_SENSITIVE" = "حساس به حروف بزرگ/کوچک";
+"IS_CASE_SENSITIVE_DETAIL" = "این گزینه را فعال کنید تا حروف بزرگ و";

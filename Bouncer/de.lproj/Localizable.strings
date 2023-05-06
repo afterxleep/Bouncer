@@ -76,3 +76,4 @@ Created by Daniel Bernal on 6/30/20.
 "SETUP_INFO" = "SMS-Filterung aktivieren";
 "IS_CASE_SENSITIVE" = "Groß- und Kleinschreibung beachten";
 "IS_CASE_SENSITIVE_DETAIL" = "Diese Option aktivieren, um Groß- und Kleinschreibung unterschiedlich zu behandeln.";
+"INCORRECT_FILE_FORMAT" = "Die JSON-Datei hat anscheinend nicht das richtige Format oder ist nicht kompatibel.";

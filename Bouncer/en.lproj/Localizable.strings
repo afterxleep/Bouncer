@@ -76,3 +76,4 @@
 "SETUP_INFO" = "Enable SMS filtering";
 "IS_CASE_SENSITIVE" = "Case sensitive";
 "IS_CASE_SENSITIVE_DETAIL" = "Enable this option to treat uppercase and lowercase characters differently.";
+"INCORRECT_FILE_FORMAT" = "فایل JSON به نظر نمی‌رسد دارای فرمت درستی باشد یا با سیستم سازگار نباشد";

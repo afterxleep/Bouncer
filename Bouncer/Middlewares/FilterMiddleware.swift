@@ -93,7 +93,7 @@ func filterMiddleware(filterStore: FilterStore) -> Middleware<AppState, AppActio
                 .catch { (error: FilterStoreError) -> Just<AppAction> in
                     switch(error) {
                     default:
-                        return Just(AppAction.filter(action: .error(.decodingError(error.localizedDescription))))
+                        return Just(AppAction.filter(action: .error(.decodingError("INCORRECT_FILE_FORMAT"))))
                     }
                 }
                 .eraseToAnyPublisher()

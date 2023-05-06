@@ -76,3 +76,4 @@ Créé par Daniel Bernal le 6/30/20.
 "SETUP_INFO" = "Activer la filtration SMS";
 "IS_CASE_SENSITIVE" = "Sensible à la casse";
 "IS_CASE_SENSITIVE_DETAIL" = "Active cette option pour traiter les caractères majuscules et minuscules différemment.";
+"INCORRECT_FILE_FORMAT" = "Le fichier JSON ne semble pas avoir le bon format ou est incompatible.";
