@@ -75,3 +75,4 @@
 "NO_EMAIL_CONFIGURED" = "Parece que no tienes una cuenta de correo configurada en tu iPhone.  Puedes escribirme a daniebernal@hey.com";
 "IS_CASE_SENSITIVE" = "Sensible a mayúsculas";
 "IS_CASE_SENSITIVE_DETAIL" = "Active esta opción para tratar los caracteres en mayúscula y minúscula de manera diferente.";
+"INCORRECT_FILE_FORMAT" = "El archivo JSON no tiene el formato correcto o es incompatible.";
