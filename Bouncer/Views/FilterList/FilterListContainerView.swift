@@ -5,7 +5,7 @@
 
 import SwiftUI
 
-enum FilterListError: Identifiable {
+enum FilterError: Identifiable {
     case emptyImportFileError
     case decodingError(String)
     case unknownError(String)
@@ -13,7 +13,7 @@ enum FilterListError: Identifiable {
     var id: String {
         switch self {
             case .emptyImportFileError: return "EMPTY_IMPORT_FILE"
-            case .decodingError(let str): return str
+            case .decodingError: return "INCORRECT_FILE_FORMAT"
             case .unknownError(let str): return str
         }
     }
@@ -32,8 +32,15 @@ struct FilterListContainerView: View {
 
     @State var shouldShowImportList: Bool = false
     @State var shouldDisplayErrorMessage: Bool = false
-    @State var errorAlert: FilterListError? = nil
-    var errorMessage: String = ""
+    @State var filterError: FilterError? = nil
+
+    var errorBinding: Binding<FilterError?> {
+        Binding(
+            get: { store.state.filters.filterError },
+            set: { _ in
+                let action: FilterAction = .clearError
+                store.dispatch(.filter(action: action))
+            })}
 
     var body: some View {
         FilterListView(filters: store.state.filters.filters,
@@ -53,7 +60,7 @@ struct FilterListContainerView: View {
             })
 
             // Import Error Display
-            .alert(item: $errorAlert) { error in
+            .alert(item: errorBinding) { error in
                 Alert(title: Text("ERROR"), message: error.textView)
             }
     }
@@ -83,8 +90,8 @@ extension FilterListContainerView {
         store.dispatch(.filter(action: action))
     }
 
-    func showError(error: FilterListError) {
-        errorAlert = error
+    func showError(error: FilterError) {
+
     }
 
 }

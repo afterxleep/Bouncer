@@ -19,8 +19,12 @@ func filterReducer(state: inout FilterState, action: FilterAction) -> Void {
         state.importedFilters = filters
         state.filterImportInProgress = true
 
-    case .decodingError(_):
+    case .error(let error):
+        state.filterError = error
         state.filterImportInProgress = false
+
+    case .clearError:
+        state.filterError = nil        
 
     default:
         break

@@ -13,7 +13,7 @@ struct FilterListView: View {
     let onImport: ([Filter]) -> Void
     let importFiltersFromURL: (URL) -> Void
     let openSettings: () -> Void
-    let showError: (FilterListError) -> Void
+    let showError: (FilterError) -> Void
     @Binding var shouldShowImportList: Bool
 
     @State var showingSettings = false
