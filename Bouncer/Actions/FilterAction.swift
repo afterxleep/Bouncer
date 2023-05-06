@@ -18,5 +18,8 @@ enum FilterAction {
     case delete(uuid: UUID)
     case deleteError(error: FilterMiddlewareError)
     case `import`(filters: [Filter])
-    case importError(error: FilterMiddlewareError)
+    case loadFromURL(url: URL)
+    case decodeComplete(filters: [Filter])    
+    case error(FilterError)
+    case clearError
 }

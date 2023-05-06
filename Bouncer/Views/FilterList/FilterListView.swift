@@ -11,38 +11,17 @@ struct FilterListView: View {
     var filters: [Filter]
     let onDelete: (IndexSet) -> Void
     let onImport: ([Filter]) -> Void
+    let importFiltersFromURL: (URL) -> Void
     let openSettings: () -> Void
-    
+    let showError: (FilterError) -> Void
+    @Binding var shouldShowImportList: Bool
+
     @State var showingSettings = false
     @State var showingFilterDetail = false
     @State var showingInApp = false
     @State var showingFileImporter = false
-    @State var showingImportFilterList = false    
-    
-    enum ImportError: Identifiable {
-        case emptyImportFileError
-        case decodingError(String)
-        case unknownError(String)
-        
-        var id: String {
-            switch self {
-                case .emptyImportFileError: return "EMPTY_IMPORT_FILE"
-                case .decodingError(let str): return str
-                case .unknownError(let str): return str
-            }
-        }
-        
-        var textView: Text {
-            switch self {
-                case .emptyImportFileError: return Text("EMPTY_IMPORT_FILE")
-                case .decodingError(let str): return Text("IMPORT_ERROR \(str)")
-                case .unknownError(let str): return Text("IMPORT_ERROR \(str)")
-            }
-        }
-    }
-    
-    @State var importError: ImportError? = nil
-    
+
+
     var body: some View {
         ZStack {
             BackgroundView()
@@ -62,14 +41,15 @@ struct FilterListView: View {
     }
 }
 
-
-
 struct FilterListView_Previews: PreviewProvider {
     static var previews: some View {
-        FilterListView(filters: [],                       
+        FilterListView(filters: [],
                        onDelete: {_ in },
                        onImport: {_ in },
-                       openSettings: {}
+                       importFiltersFromURL: { _ in },
+                       openSettings: {},
+                       showError: { _ in },
+                       shouldShowImportList: .constant(false)
         )
     }
 }
@@ -112,37 +92,19 @@ extension FilterListView {
             switch result {
             case .success(let url):
                 do {
-                    let filters = try JSONDecoder().decode([Filter].self, from: Data(contentsOf: url))
-                    
-                    if (filters.count > 0) {
-                        self.onImport(filters)
-                    } else {
-                        self.importError = .emptyImportFileError
-                    }
-                } catch {
-                    os_log(.error, log: .errorLog,
-                           "Failed to load JSON from file: %{public}@",
-                           error.localizedDescription)
-                    self.importError = .decodingError(error.localizedDescription)
+                    importFiltersFromURL(url)
                 }
-                
             case .failure(let error):
-                os_log(.error, log: .errorLog,
-                       "Failed to load import file: %{public}@",
-                       error.localizedDescription)
-                self.importError = .unknownError(error.localizedDescription)
+                showError(.unknownError(error.localizedDescription))
             }
-            
-            showingImportFilterList = true
         }
-        .sheet(isPresented: $showingImportFilterList) {
+        .sheet(isPresented: $shouldShowImportList) {
             ImportFilterListContainerView()
         }.sheet(isPresented: $showingSettings) {
             TutorialContainerView()
         }
-        .alert(item: $importError) { error in
-            Alert(title: Text("ERROR"), message: error.textView)
-        }
+    
+
     }
     
     var helpButton: some View {
