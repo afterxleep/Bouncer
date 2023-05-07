@@ -107,8 +107,7 @@ struct SMSOfflineFilter {
 
         // Allow List filters first
         for filter in filters.allowList() {
-            if(applyFilter(filter: filter, message: message)) {
-                print(getAction(filter), getSubAction(filter))
+            if(applyFilter(filter: filter, message: message)) {                
                 return (getAction(filter), getSubAction(filter))
             }
         }
