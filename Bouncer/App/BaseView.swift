@@ -47,7 +47,9 @@ extension BaseView {
         UINavigationBar.appearance().scrollEdgeAppearance = appearance
         UINavigationBar.appearance().standardAppearance = appearance
 
-        
+        // Set SearchBar background color to default white
+        UITextField.appearance(whenContainedInInstancesOf: [UISearchBar.self]).backgroundColor = UIColor.init(named: "DefaultColor")
+
     }
 }
 
