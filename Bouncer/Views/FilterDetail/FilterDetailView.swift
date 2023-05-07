@@ -69,6 +69,7 @@ extension FilterDetailView {
                 }
                 Picker(selection: $filterDestination, label: Text("FILTER_ACTION_LABEL")) {
                     Section {
+                        filterPickerSectionFor(.allow).tag(FilterDestination.allow)
                         filterPickerSectionFor(.junk).tag(FilterDestination.junk)
                     }
                     Section(header: Text("TRANSACTIONS")) {

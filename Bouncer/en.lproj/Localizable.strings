@@ -17,8 +17,9 @@
 "FILTER_INFORMATION" = "Filter settings";
 "EXACT_MATCH" = "Exact match";
 "EXACT_MATCH_CAPTION" = "Filter messages only when the sender/message are an exact match to the provided word or phrase.";
-"FILTER_ACTION_LABEL" = "Mark as";
+"FILTER_ACTION_LABEL" = "Label";
 "TRANSACTIONS" = "Transactions";
+"SAFE_ACTION" = "Safe (Allow)";
 "JUNK_ACTION" = "Junk";
 "TRANSACTION_ACTION" = "Other Transactions";
 "TRANSACTION_ACTION_ORDERS" = "Orders";

@@ -17,8 +17,9 @@
 "FILTER_INFORMATION" = "تنظیمات فیلتر";
 "EXACT_MATCH" = "تطابق کامل";
 "EXACT_MATCH_CAPTION" = "فیلتر کردن پیام‌ها فقط در صورتی که فرستنده یا پیام با کلمه یا عبارت تعیین شده تطابق کامل داشته باشد.";
-"FILTER_ACTION_LABEL" = "علامت‌گذاری به عنوان";
+"FILTER_ACTION_LABEL" = "رچسب گذاری";
 "TRANSACTIONS" = "تراکنش‌ها";
+"SAFE_ACTION" = "امن (مجاز)";
 "JUNK_ACTION" = "اسپم";
 "TRANSACTION_ACTION" = "تراکنش‌های دیگر";
 "TRANSACTION_ACTION_ORDERS" = "سفارش‌ها";

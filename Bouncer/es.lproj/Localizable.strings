@@ -17,7 +17,8 @@
 "FILTER_INFORMATION" = "Información del filtro";
 "EXACT_MATCH" = "Ocurrencia Exacta";
 "EXACT_MATCH_CAPTION" = "Filtra los mensajes solo cuando el remitente/mensaje es exactamente igual a la palabra o frase especificada arriba.";
-"FILTER_ACTION_LABEL" = "Marcar como";
+"FILTER_ACTION_LABEL" = "Etiqueta";
+"SAFE_ACTION" = "Seguro (No filtrar)";
 "JUNK_ACTION" = "Spam";
 "TRANSACTIONS" = "Transacciones";
 "TRANSACTION_ACTION" = "Otras Transacciones";

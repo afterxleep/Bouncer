@@ -17,8 +17,9 @@ Créé par Daniel Bernal le 6/30/20.
 "FILTER_INFORMATION" = "Paramètres de filtre";
 "EXACT_MATCH" = "Correspondance exacte";
 "EXACT_MATCH_CAPTION" = "Filtrer les messages uniquement lorsque l'expéditeur/le message correspond exactement au mot ou à l'expression fourni(e).";
-"FILTER_ACTION_LABEL" = "Marquer comme";
+"FILTER_ACTION_LABEL" = "Étiqueter";
 "TRANSACTIONS" = "Transactions";
+"SAFE_ACTION" = "Sûr (Autoriser)";
 "JUNK_ACTION" = "Indésirable";
 "TRANSACTION_ACTION" = "Autres transactions";
 "TRANSACTION_ACTION_ORDERS" = "Commandes";

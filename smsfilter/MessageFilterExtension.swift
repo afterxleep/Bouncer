@@ -40,7 +40,6 @@ final class MessageFilterExtension: ILMessageFilterExtension {
         completion(response)
     }
 
-
 }
 
 extension MessageFilterExtension: ILMessageFilterQueryHandling {
