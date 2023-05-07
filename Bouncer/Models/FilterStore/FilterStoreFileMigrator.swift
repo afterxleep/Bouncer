@@ -45,7 +45,7 @@ struct FilterStoreFileMigrator {
                                            type: filter.type,
                                            action: filter.action,
                                            subAction: subAction,
-                                           useRegex: filter.useRegex,
+                                           useRegex: filter.useRegex ?? false,
                                            caseSensitive: false)
                 print(updatedFilter)
                 _ = store.add(filter: updatedFilter)

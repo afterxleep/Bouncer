@@ -21,8 +21,8 @@ enum FilterError: Identifiable {
     var textView: Text {
         switch self {
             case .emptyImportFileError: return Text("EMPTY_IMPORT_FILE")
-            case .decodingError(let str): return Text("IMPORT_ERROR \(str)")
-            case .unknownError(let str): return Text("IMPORT_ERROR \(str)")
+        case .decodingError(let str): return Text("IMPORT_ERROR \(NSLocalizedString(str, comment: ""))")
+            case .unknownError(let str): return Text("IMPORT_ERROR \(NSLocalizedString(str, comment: ""))")
         }
     }
 }
