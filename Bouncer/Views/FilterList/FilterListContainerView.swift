@@ -90,8 +90,8 @@ extension FilterListContainerView {
         store.dispatch(.filter(action: action))
     }
 
-    func showError(error: FilterError) {
-
+    func showError(error: FilterError) {        
+        shouldDisplayErrorMessage = true
     }
 
 }

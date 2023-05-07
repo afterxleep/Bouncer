@@ -20,7 +20,7 @@ struct FilterListView: View {
     @State var showingFilterDetail = false
     @State var showingInApp = false
     @State var showingFileImporter = false
-
+    @State private var searchText = ""
 
     var body: some View {
         ZStack {
@@ -36,7 +36,7 @@ struct FilterListView: View {
                             addButton
                         }
                     }
-            }
+            }.searchable(text: $searchText)
         }
     }
 }
@@ -60,7 +60,10 @@ extension FilterListView {
         Group {
             if(filters.count > 0) {
                 List {
-                    ForEach(filters) { filter in
+                    ForEach(filters.filter {
+                        searchText.isEmpty ||
+                        $0.phrase.localizedCaseInsensitiveContains(searchText)
+                    }) { filter in
                         NavigationLink(destination: FilterDetailContainerView(interactionType: .update,
                                                                               filter: filter)) {
                             FilterRowView(filter: filter)
