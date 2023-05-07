@@ -66,6 +66,8 @@ struct SMSOfflineFilter {
         switch filter.action {
         case .junk:
             return .junk
+        case .allow:
+            return .allow
         case .transaction:
             return .transaction
         case .promotion:
@@ -102,7 +104,17 @@ struct SMSOfflineFilter {
     
     func filterMessage(message: SMSMessage) -> SMSOfflineFilterResponse  {
         os_log("FILTEREXTENSION - Message Received: %@", log: OSLog.messageFilterLog, type: .info, "\(message)")
-        for filter in filters {
+
+        // Allow List filters first
+        for filter in filters.allowList() {
+            if(applyFilter(filter: filter, message: message)) {
+                print(getAction(filter), getSubAction(filter))
+                return (getAction(filter), getSubAction(filter))
+            }
+        }
+
+        // Block List filters if nothing found
+        for filter in filters.blockList() {
             if(applyFilter(filter: filter, message: message)) {
                 return (getAction(filter), getSubAction(filter))
             }
@@ -111,3 +123,4 @@ struct SMSOfflineFilter {
     }
 
 }
+

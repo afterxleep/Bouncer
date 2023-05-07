@@ -19,6 +19,7 @@ Created by Daniel Bernal on 6/30/20.
 "EXACT_MATCH_CAPTION" = "Filtere Nachrichten nur, wenn der Absender/die Nachricht genau mit dem angegebenen Wort oder Ausdruck übereinstimmt.";
 "FILTER_ACTION_LABEL" = "Als markieren";
 "TRANSACTIONS" = "Transaktionen";
+"SAFE_ACTION" = "Sicher (Erlauben)";
 "JUNK_ACTION" = "Junk";
 "TRANSACTION_ACTION" = "Andere Transaktionen";
 "TRANSACTION_ACTION_ORDERS" = "Bestellungen";

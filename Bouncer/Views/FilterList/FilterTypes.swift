@@ -45,8 +45,6 @@ extension FilterType {
 extension FilterDestination {
     var listDescription: FilterDestinationDecoration {
         switch self {
-        case .junk, .none:
-            return FilterDestinationDecoration(decoration: SYSTEM_IMAGES.SPAM, text: "JUNK_ACTION")
         case .transactionOrder:
             return FilterDestinationDecoration(decoration: SYSTEM_IMAGES.TRANSACTION_ORDERS, text: "TRANSACTION_ACTION_ORDERS")
         case .transactionFinance:
@@ -61,6 +59,8 @@ extension FilterDestination {
             return FilterDestinationDecoration(decoration: SYSTEM_IMAGES.TRANSACTION, text: "TRANSACTION_ACTION")
         case .promotionOther:
             return FilterDestinationDecoration(decoration: SYSTEM_IMAGES.PROMOTION, text: "PROMOTION_ACTION")
+        case .allow:
+            return FilterDestinationDecoration(decoration: SYSTEM_IMAGES.ALLOW, text: "SAFE_ACTION")
         default:
             return FilterDestinationDecoration(decoration: SYSTEM_IMAGES.SPAM, text: "JUNK_ACTION")
         }

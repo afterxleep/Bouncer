@@ -15,6 +15,7 @@ enum FilterType: String, Codable, Equatable, CaseIterable {
 enum FilterDestination: String, Codable, Equatable, CaseIterable {
     // Base Actions
     case none
+    case allow
     case junk
     case transaction
     case promotion
@@ -56,6 +57,18 @@ struct Filter: Hashable, Identifiable, Equatable, Codable {
         self.useRegex = useRegex
         self.caseSensitive = caseSensitive
     }
+}
+
+extension Array where Element == Filter {
+
+    func allowList() -> [Filter] {
+        return self.filter { $0.action == .allow }
+    }
+
+    func blockList() -> [Filter] {
+        return self.filter { $0.action != .allow }
+    }
+
 }
 
 
