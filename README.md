@@ -10,7 +10,7 @@ Messages text is checked against a simple user defined blacklist.
 * Filter SMS messages using a simple list of words
 * Catalog filtered messages in iOS 16+ categories (Junk, Transaction, Promotion) and its subcategories
 * Unlimited number of filter rules
-* Localized in English, Spanish, French, German and more!
+* Localized in English, Spanish and more!
 * Supports both word lists and regular (PCRE) expressions
 * Import and Export your filter rules
 
