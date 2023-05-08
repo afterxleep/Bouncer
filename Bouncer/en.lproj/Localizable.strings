@@ -83,3 +83,4 @@
 "IS_CASE_SENSITIVE_DETAIL" = "Enable this option to treat uppercase and lowercase characters differently.";
 "INCORRECT_FILE_FORMAT" = "The JSON file does not appear to have the right format or is incompatible";
 "OK" = "OK";
+"GENERAL" = "GENERAL";
