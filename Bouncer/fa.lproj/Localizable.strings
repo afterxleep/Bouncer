@@ -83,3 +83,4 @@
 "IS_CASE_SENSITIVE_DETAIL" = "فعال‌سازی این گزینه برای برخورد با حروف بزرگ و کوچک به صورت متفاوت";
 "INCORRECT_FILE_FORMAT" = "The JSON file does not appear to have the right format or is incompatible";
 "OK" = "بسیار خوب";
+"GENERAL" = "GENERAL";

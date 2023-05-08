@@ -68,7 +68,7 @@ extension FilterDetailView {
                         .multilineTextAlignment(.trailing)
                 }
                 Picker(selection: $filterDestination, label: Text("FILTER_ACTION_LABEL")) {
-                    Section {
+                    Section(header: Text("GENERAL")) {
                         filterPickerSectionFor(.allow).tag(FilterDestination.allow)
                         filterPickerSectionFor(.junk).tag(FilterDestination.junk)
                     }

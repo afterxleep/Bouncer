@@ -43,7 +43,7 @@
 "TO_ADD_A_FILTER_SPACE" = "' para agregar una regla.";
 "WELCOME_TITLE" = "Hola!";
 "WELCOME_SUBTITLE" = "Bienvenid@ a Bouncer!";
-"HELP" = "Help";
+"HELP" = "Ayuda";
 "LETS" = "Vamos a";
 "HERE_IS_HOW" = "Para ";
 "ENABLE_SMS_FILTERING" = "configurar el filtrado SMS";
@@ -83,3 +83,4 @@
 "IS_CASE_SENSITIVE_DETAIL" = "Active esta opción para tratar los caracteres en mayúscula y minúscula de manera diferente.";
 "INCORRECT_FILE_FORMAT" = "El archivo JSON no tiene el formato correcto o es incompatible.";
 "OK" = "OK";
+"GENERAL" = "GENERAL";
