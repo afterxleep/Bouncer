@@ -161,7 +161,7 @@ extension FilterListView {
                 action: { showingFilterDetail = true }) {
                 Image(systemName: SYSTEM_IMAGES.ADD.image).imageScale(.large)
             }.sheet(isPresented: $showingFilterDetail) {
-                FilterDetailContainerView()
+                FilterDetailContainerView(selectedDestination: selectedFilterType)
             }
         }
     }
