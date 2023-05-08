@@ -8,7 +8,7 @@
 import Foundation
 import SwiftUI
 
-struct SystemImage {
+struct SystemImage: Hashable {
     var image: String
     var color: Color
 }

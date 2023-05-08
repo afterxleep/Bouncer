@@ -75,8 +75,8 @@ extension FilterRowView {
                 }
             case .junk:
                 return FilterDestination.junk.listDescription
-            case .none:
-            return FilterDestination.none.listDescription
+            case .allow:
+            return FilterDestination.allow.listDescription
 
             default:
                 return FilterDestination.junk.listDescription

@@ -74,10 +74,9 @@ struct FilterListContainerView_Previews: PreviewProvider {
 
 extension FilterListContainerView {
 
-    func deleteFilter(at offsets: IndexSet) {
-        for o in offsets {
-            store.dispatch(.filter(action: .delete(uuid: store.state.filters.filters[o].id)))
-        }
+    func deleteFilter(id: UUID) {
+        store.dispatch(.filter(action: .delete(uuid: id)))
+
     }
     
     func importFilters(filters: [Filter]) {
