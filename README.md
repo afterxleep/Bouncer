@@ -1,49 +1,51 @@
-## Bouncer SMS Filter
+# Bouncer: SMS Filter for iOS
 
-This is a simple SMS filtering app for iOS that uses the ILMessageFilterExtension to move unwanted and specific messages to the "Junk", "Promotion" and "Transaction" sections of the Messages app.
+Welcome to **Bouncer**, a privacy-focused SMS filtering app for iOS devices. Utilizing the ILMessageFilterExtension, Bouncer organizes unwanted and specific messages into the "Junk", "Promotion", and "Transaction" sections of the Messages app.
 
-Different to other apps, Bouncer does not share, upload or send any of your personal information or SMS messages to a remote server.   All the filtering happens locally on your phone.
+## Prioritizing Privacy and Security
 
-Messages text is checked against a simple user defined blacklist.
+Unlike other SMS filtering apps, Bouncer does not share, upload, or send any of your personal information or SMS messages to a remote server. All filtering processes occur locally on your phone, ensuring data privacy and security.
+
+## Customize Your Messaging Experience
+
+Bouncer checks messages against a user-defined blacklist, providing a personalized and clutter-free messaging experience.
 
 ## Features
 * Filter SMS messages using a simple list of words
-* Catalog filtered messages in iOS 16+ categories (Junk, Transaction, Promotion) and its subcategories
-* Unlimited number of filter rules
-* Localized in English, Spanish and more!
-* Supports both word lists and regular (PCRE) expressions
-* Import and Export your filter rules
+* Categorize filtered messages in iOS 16+ sections (Junk, Transaction, Promotion) and subcategories
+* Unlimited filter rules
+* Localized in English, Spanish, and more
+* Support for both word lists and regular (PCRE) expressions
+* Import and export filter rules
 
 ## Latest Release
 
-### Stable version
-Version 2.x is [available in the App Store](https://apps.apple.com/us/app/bouncer-private-sms-blocker/id1457476313)
+### Stable Version
+Version 2.x is [available in the App Store](https://apps.apple.com/us/app/bouncer-private-sms-blocker/id1457476313).
 
-### Feeling adventurous?. Try the beta!
-Join the [beta test group in Testflight](https://testflight.apple.com/join/Lls6XUfx)
+### Try the Beta
+Feeling adventurous? Join the [beta test group in TestFlight](https://testflight.apple.com/join/Lls6XUfx).
 
-### Looking for the older version?
-The old 1.x version (UIkit based) is not avaiable from the App Store anymore, but you can grab the source and build it from [the 1.20 release](https://github.com/afterxleep/Bouncer/releases/tag/v1.2.0).
-
+### Looking for an Older Version?
+The older 1.x version (UIKit-based) is no longer available in the App Store, but you can obtain the source code and build it from [the 1.20 release](https://github.com/afterxleep/Bouncer/releases/tag/v1.2.0).
 
 ## Tech Stack/Specs
-Bouncer is written 100% in Swift and features things like:
+Bouncer is written entirely in Swift and features:
 
-* All new SwiftUI lifecycle (No storyboards or Appdelegate)
+* SwiftUI lifecycle (no storyboards or AppDelegate)
 * Redux-like architecture
-* Combine
+* Combine framework
 * SwiftUI 2.x features and improvements
-* Zero UIKit
-* No 3rd party dependencies 💪
+* Zero UIKit dependency
+* No third-party dependencies
 
-If you are curious about the architecture approach, check out my [Redux-like architecture with SwiftUI series](https://danielbernal.co/redux-like-architecture-with-swiftui-basics/)
-
+For more information on the architectural approach, check out the [Redux-like architecture with SwiftUI series](https://danielbernal.co/redux-like-architecture-with-swiftui-basics/).
 
 ## Building
-Fire up XCode open Bouncer.xcodeproj and hit Build.  There are no dependencies or additional requirements.
+To build Bouncer, simply open Bouncer.xcodeproj in Xcode and click Build. No dependencies or additional requirements are needed.
 
 ## Contribute
-Please report any found issues or feel free to fork the repo and open pull requests with fixes, features or updates.
+Feel free to report any issues, fork the repo, and open pull requests with fixes, features, or updates.
 
 ## License
-Bouncer is distributed under [MIT license](https://github.com/afterxleep/Bouncer/blob/master/LICENSE)
+Bouncer is distributed under the [MIT license](https://github.com/afterxleep/Bouncer/blob/master/LICENSE).
