@@ -14,17 +14,18 @@ struct FilterDetailContainerView: View {
     
     var interactionType: InteractionType
     var filterId: UUID?
-    
-    @EnvironmentObject var store: AppStore
-    @Environment(\.presentationMode) var presentationMode
-    
+    var selectedDestination: FilterDestination
+
     @State private var filterType: FilterType
-    @State private var filterDestination: FilterDestination
+    @State var filterDestination: FilterDestination
     @State private var filterTerm: String
     @State private var exactMatch: Bool
     @State private var useRegex: Bool
     @State private var isCaseSensitive: Bool
-    
+
+    @EnvironmentObject var store: AppStore
+    @Environment(\.presentationMode) var presentationMode
+
     var body: some View {
         switch interactionType {
         case .add:
@@ -55,12 +56,13 @@ struct FilterDetailContainerView: View {
 
 extension FilterDetailContainerView {
     
-    init(interactionType: InteractionType = .add, filter: Filter? = nil) {
+    init(interactionType: InteractionType = .add, filter: Filter? = nil, selectedDestination: FilterDestination = .junk) {
         self.interactionType = interactionType
         self.filterId = filter?.id
+        self.selectedDestination = selectedDestination
         self._filterType = .init(initialValue: filter?.type ?? .any)
         self._filterTerm = .init(initialValue: filter?.phrase ?? "")
-        let action = filter?.subAction != FilterDestination.none ? filter?.subAction : filter?.action
+        let action = filter?.subAction != FilterDestination.none && filter?.subAction != nil ? filter?.subAction : selectedDestination
         self._filterDestination = .init(initialValue: action ?? .junk)
         self._exactMatch = .init(initialValue: false)
         self._useRegex = .init(initialValue: filter?.useRegex ?? false)
