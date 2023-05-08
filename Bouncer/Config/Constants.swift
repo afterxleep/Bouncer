@@ -24,6 +24,8 @@ struct COLORS {
     static let PALLETE_5 = Color("Rosebud")
     static let PALLETE_6 = Color("Trinidad")
     static let PALLETE_7 = Color("Pizazz")
+    static let NAVBG1 = Color("NavigationBarGradient1Color")
+    static let NAVBG2 = Color("NavigationBarGradient2Color")
 }
 
 

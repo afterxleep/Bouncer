@@ -144,8 +144,6 @@
 		D696D0C428D92153002FB15E /* AppIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcon.xcassets; sourceTree = "<group>"; };
 		D6B2CC8C24EF16C6004F72C4 /* wordlist.filter */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = wordlist.filter; sourceTree = "<group>"; };
 		D6B790C529F52BEE00613F98 /* ContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactView.swift; sourceTree = "<group>"; };
-		D6B790C729F536F500613F98 /* fr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = fr; path = fr.lproj/Localizable.strings; sourceTree = "<group>"; };
-		D6B790C829F536FB00613F98 /* de */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = de; path = de.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D6BAC9EE26D7A156007ACCBE /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D6BE8B8628CFE0C3004E7274 /* OSLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSLog.swift; sourceTree = "<group>"; };
 		D6C90BF124CAAF7B00426B31 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
@@ -541,8 +539,6 @@
 				es,
 				Base,
 				ar,
-				fr,
-				de,
 				fa,
 			);
 			mainGroup = D6529F6624A41371009AE3FF;
@@ -682,8 +678,6 @@
 				D621CB4424ABABF6008883AA /* es */,
 				D621CB4724ABC56E008883AA /* en */,
 				D6BAC9EE26D7A156007ACCBE /* ar */,
-				D6B790C729F536F500613F98 /* fr */,
-				D6B790C829F536FB00613F98 /* de */,
 				D6DA734729F539B300C3A831 /* fa */,
 			);
 			name = Localizable.strings;
@@ -697,7 +691,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = SMSFilter/SMSFilter.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 846;
+				CURRENT_PROJECT_VERSION = 952;
 				DEVELOPMENT_TEAM = JM9222EF99;
 				INFOPLIST_FILE = SMSFilter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -720,7 +714,7 @@
 				CODE_SIGN_ENTITLEMENTS = SMSFilter/SMSFilter.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 846;
+				CURRENT_PROJECT_VERSION = 952;
 				DEVELOPMENT_TEAM = JM9222EF99;
 				INFOPLIST_FILE = SMSFilter/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -866,7 +860,7 @@
 				CODE_SIGN_ENTITLEMENTS = Bouncer/Bouncer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 846;
+				CURRENT_PROJECT_VERSION = 952;
 				DEVELOPMENT_ASSET_PATHS = "\"Bouncer/Preview Content\"";
 				DEVELOPMENT_TEAM = JM9222EF99;
 				ENABLE_PREVIEWS = YES;
@@ -878,7 +872,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.2;
+				MARKETING_VERSION = 2.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.banshai.bouncer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -897,7 +891,7 @@
 				CODE_SIGN_ENTITLEMENTS = Bouncer/Bouncer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 846;
+				CURRENT_PROJECT_VERSION = 952;
 				DEVELOPMENT_ASSET_PATHS = "\"Bouncer/Preview Content\"";
 				DEVELOPMENT_TEAM = JM9222EF99;
 				ENABLE_PREVIEWS = YES;
@@ -909,7 +903,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.3.2;
+				MARKETING_VERSION = 2.4.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.banshai.bouncer;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";

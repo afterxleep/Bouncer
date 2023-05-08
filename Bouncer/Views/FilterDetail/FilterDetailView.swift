@@ -112,8 +112,8 @@ extension FilterDetailView {
 struct FilterDetailView_Previews: PreviewProvider {
     static var previews: some View {
         FilterDetailView(title: "Add Filter",
-                         leadingBarItem: Text("LBI"),
-                         trailingBarItem: Text("RBI"),
+                         leadingBarItem: Text(""),
+                         trailingBarItem: Text(""),
                          filterType: .constant(.any),
                          filterDestination: .constant(.transaction),
                          filterTerm: .constant("Query Term"),
