@@ -25,12 +25,12 @@ struct FilterListView: View {
 
     var filteredFilters: [Filter] {
         switch selectedFilterType {
-            case .none:
+            case .allow:
                 return filters.filter { $0.action == .allow }
             case .junk:
                 return filters.filter { $0.action == .junk }
             default:
-                return filters.filter { $0.action != .junk && $0.action != .none }
+                return filters.filter { $0.action != .junk && $0.action != .allow }
         }
     }
 
@@ -77,7 +77,7 @@ extension FilterListView {
 
     var picker: some View {
         Picker("", selection: $selectedFilterType) {
-            Image(systemName: SYSTEM_IMAGES.ALLOW.image).tag(FilterDestination.none)
+            Image(systemName: SYSTEM_IMAGES.ALLOW.image).tag(FilterDestination.allow)
             Image(systemName: SYSTEM_IMAGES.SPAM.image).tag(FilterDestination.junk)
             Image(systemName: SYSTEM_IMAGES.PROMOTION.image).tag(FilterDestination.promotionOther)
         }
@@ -93,7 +93,7 @@ extension FilterListView {
                 Group() {
                     emptyListTitle.font(.title2).bold().padding()
                     Group {
-                        emptyListMessage
+                        emptyListMessage.padding(.bottom, 10)
                         HStack(spacing: 0) {
                             Text("TAP_SPACE")
                             Image(systemName: "plus.circle")
