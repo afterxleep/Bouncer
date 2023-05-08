@@ -2,12 +2,12 @@
   "colors" : [
     {
       "color" : {
-        "color-space" : "display-p3",
+        "color-space" : "srgb",
         "components" : {
           "alpha" : "1.000",
-          "blue" : "0.263",
-          "green" : "0.196",
-          "red" : "0.690"
+          "blue" : "0x50",
+          "green" : "0x3D",
+          "red" : "0x2E"
         }
       },
       "idiom" : "universal"
@@ -19,10 +19,6 @@
           "value" : "dark"
         }
       ],
-      "color" : {
-        "platform" : "ios",
-        "reference" : "systemGrayColor"
-      },
       "idiom" : "universal"
     }
   ],

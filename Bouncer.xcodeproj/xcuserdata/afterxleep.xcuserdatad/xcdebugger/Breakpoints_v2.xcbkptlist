@@ -7,48 +7,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "7BC03F19-0BAF-40D3-B3BB-7287C2485646"
-            shouldBeEnabled = "No"
+            uuid = "578DCDA4-D7BB-4BAF-9711-B082B55E7BC1"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Bouncer/Views/FilterList/FilterRowView.swift"
+            filePath = "SMSFilter/MessageFilterExtension.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "56"
-            endingLineNumber = "56"
-            landmarkName = "getFilterDestinationDecoration(filter:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "F474ADB6-8709-49E7-BF63-521B48F2747E"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Bouncer/Views/FilterList/FilterRowView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
-            landmarkName = "getFilterDestinationDecoration(filter:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "0A32DD54-C7CE-4776-A020-53A583CE7605"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Bouncer/Views/FilterList/FilterRowView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "65"
-            endingLineNumber = "65"
-            landmarkName = "getFilterDestinationDecoration(filter:)"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "runFilters(_:context:completion:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

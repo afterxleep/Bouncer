@@ -23,7 +23,7 @@ struct FilterRowView: View {
                 Image(systemName: actionDecoration.decoration.image)
                 Text(actionDecoration.text)
             }
-            .font(.caption2)
+            .font(.caption)
             .padding(.horizontal, 6)
             .padding(.vertical, 4)
             .foregroundColor(COLORS.DEFAULT_COLOR)
@@ -75,22 +75,46 @@ extension FilterRowView {
                 }
             case .junk:
                 return FilterDestination.junk.listDescription
+            case .allow:
+            return FilterDestination.allow.listDescription
+
             default:
                 return FilterDestination.junk.listDescription
             }
     }
 
     private func getFilterTypeColor(filter: Filter) -> Color {
-        switch (filter.action) {
-            case .junk, .none:
-                return COLORS.ALERT_COLOR
-            case .promotion, .promotionOther, .promotionOffers, .promotionCoupons:
-                return COLORS.WARNING_COLOR
-            case .transaction, .transactionOrder, .transactionOther, .transactionFinance, .transactionReminders:
-                return COLORS.OK_COLOR
-            default:
-                return COLORS.ALERT_COLOR
-            }        
+        if filter.subAction == .none {
+            switch (filter.action) {
+                case .promotion:
+                    return COLORS.PALLETE_1
+                case .transaction:
+                    return COLORS.PALLETE_4
+                case .junk:
+                    return COLORS.ALERT_COLOR
+                default:
+                    return COLORS.OK_COLOR
+            }
+        } else {
+            switch (filter.subAction) {
+                case .promotionOther:
+                    return COLORS.PALLETE_1
+                case .promotionOffers:
+                    return COLORS.PALLETE_2
+                case .promotionCoupons:
+                    return COLORS.PALLETE_3
+                case .transactionOrder:
+                    return COLORS.PALLETE_4
+                case .transactionOther:
+                    return COLORS.PALLETE_5
+                case .transactionFinance:
+                    return COLORS.PALLETE_6
+                case .transactionReminders:
+                    return COLORS.PALLETE_7
+                default:
+                    return COLORS.OK_COLOR
+            }
+        }
     }
     
     private func getFilterText(filter: Filter) -> Text {

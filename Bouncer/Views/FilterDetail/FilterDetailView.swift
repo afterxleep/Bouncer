@@ -69,6 +69,7 @@ extension FilterDetailView {
                 }
                 Picker(selection: $filterDestination, label: Text("FILTER_ACTION_LABEL")) {
                     Section {
+                        filterPickerSectionFor(.allow).tag(FilterDestination.allow)
                         filterPickerSectionFor(.junk).tag(FilterDestination.junk)
                     }
                     Section(header: Text("TRANSACTIONS")) {
@@ -111,8 +112,8 @@ extension FilterDetailView {
 struct FilterDetailView_Previews: PreviewProvider {
     static var previews: some View {
         FilterDetailView(title: "Add Filter",
-                         leadingBarItem: Text("LBI"),
-                         trailingBarItem: Text("RBI"),
+                         leadingBarItem: Text(""),
+                         trailingBarItem: Text(""),
                          filterType: .constant(.any),
                          filterDestination: .constant(.transaction),
                          filterTerm: .constant("Query Term"),

@@ -9,7 +9,7 @@ import os.log
 
 struct FilterListView: View {
     var filters: [Filter]
-    let onDelete: (IndexSet) -> Void
+    let onDelete: (UUID) -> Void
     let onImport: ([Filter]) -> Void
     let importFiltersFromURL: (URL) -> Void
     let openSettings: () -> Void
@@ -20,23 +20,42 @@ struct FilterListView: View {
     @State var showingFilterDetail = false
     @State var showingInApp = false
     @State var showingFileImporter = false
+    @State private var searchText = ""
+    @State private var selectedFilterType = FilterDestination.junk
 
+    var filteredFilters: [Filter] {
+        switch selectedFilterType {
+            case .none:
+                return filters.filter { $0.action == .allow }
+            case .junk:
+                return filters.filter { $0.action == .junk }
+            default:
+                return filters.filter { $0.action != .junk && $0.action != .none }
+        }
+    }
 
     var body: some View {
         ZStack {
             BackgroundView()
             NavigationView {
-                filterList
-                    .navigationBarTitle("LIST_VIEW_TITLE")
-                    .toolbar {
-                        ToolbarItemGroup(placement: .navigationBarLeading) {
-                            menu
-                        }
-                        ToolbarItemGroup(placement: .navigationBarTrailing) {
-                            addButton
-                        }
+                ZStack {
+                    emptyMessage
+                    VStack {
+                        picker
+                        filterList
+                            .navigationBarTitle("LIST_VIEW_TITLE")
+                            .toolbar {
+                                ToolbarItemGroup(placement: .navigationBarLeading) {
+                                    menu
+                                }
+                                ToolbarItemGroup(placement: .navigationBarTrailing) {
+                                    addButton
+                                }
+                            }
                     }
-            }
+                }
+
+            }.searchable(text: $searchText)
         }
     }
 }
@@ -55,38 +74,61 @@ struct FilterListView_Previews: PreviewProvider {
 }
 
 extension FilterListView {
-    
-    var filterList: some View {
-        Group {
-            if(filters.count > 0) {
-                List {
-                    ForEach(filters) { filter in
-                        NavigationLink(destination: FilterDetailContainerView(interactionType: .update,
-                                                                              filter: filter)) {
-                            FilterRowView(filter: filter)
+
+    var picker: some View {
+        Picker("", selection: $selectedFilterType) {
+            Image(systemName: SYSTEM_IMAGES.ALLOW.image).tag(FilterDestination.none)
+            Image(systemName: SYSTEM_IMAGES.SPAM.image).tag(FilterDestination.junk)
+            Image(systemName: SYSTEM_IMAGES.PROMOTION.image).tag(FilterDestination.promotionOther)
+        }
+        .pickerStyle(SegmentedPickerStyle())
+        .padding(.all)
+        .accentColor(COLORS.DEFAULT_COLOR)
+    }
+
+    @ViewBuilder
+    var emptyMessage: some View {
+        if filteredFilters.count == 0 {
+            VStack(alignment: .center) {
+                Group() {
+                    emptyListTitle.font(.title2).bold().padding()
+                    Group {
+                        emptyListMessage
+                        HStack(spacing: 0) {
+                            Text("TAP_SPACE")
+                            Image(systemName: "plus.circle")
+                            Text("TO_ADD_A_FILTER_SPACE")
                         }
-                    }.onDelete(perform: onDelete)
+                    }.frame(width: 260)
                 }
-                .listStyle(PlainListStyle())
-            }
-            else {
-                VStack(alignment: .center) {
-                    Group() {
-                        Text("EMPTY_LIST_TITLE").font(.title2).bold().padding()
-                        Group {
-                            Text("EMPTY_LIST_MESSAGE")
-                            HStack(spacing: 0) {
-                                Text("TAP_SPACE")
-                                Image(systemName: "plus.circle")
-                                Text("TO_ADD_A_FILTER_SPACE")
-                            }
-                        }.frame(width: 260)
+                .foregroundColor(Color("TextDefaultColor"))
+                .multilineTextAlignment(.center)
+
+            }.padding(.bottom, 10)
+            Spacer().padding(.bottom, 100)
+        }
+        }
+
+
+    var filterList: some View {
+        VStack {
+            List {
+                ForEach(filteredFilters.filter {
+                    searchText.isEmpty ||
+                    $0.phrase.localizedCaseInsensitiveContains(searchText)
+                }) { filter in
+                    NavigationLink(destination: FilterDetailContainerView(interactionType: .update,
+                                                                          filter: filter)) {
+                        FilterRowView(filter: filter)
                     }
-                    .foregroundColor(Color("TextDefaultColor"))
-                    .multilineTextAlignment(.center)
-                    .padding(.bottom, 10)
-                }.padding(.bottom, 200)
+                }.onDelete { indices in
+                    for index in indices {
+                        let deletedItem = filteredFilters[index]
+                        onDelete(deletedItem.id)
+                    }
+                }
             }
+            .listStyle(PlainListStyle())
         }
         .fileImporter(isPresented: $showingFileImporter, allowedContentTypes: [.json]) { result in
             switch result {
@@ -103,8 +145,6 @@ extension FilterListView {
         }.sheet(isPresented: $showingSettings) {
             TutorialContainerView()
         }
-    
-
     }
     
     var helpButton: some View {
@@ -140,6 +180,30 @@ extension FilterListView {
             helpButton            
         } label: {
             Image(systemName: SYSTEM_IMAGES.IMPORT_EXPORT_MENU.image).imageScale(.large)
+        }
+    }
+
+    @ViewBuilder
+    var emptyListTitle: some View {
+        switch selectedFilterType {
+            case .allow:
+                Text("EMPTY_LIST_ALLOW_TITLE")
+            case .junk:
+                Text("EMPTY_LIST_JUNK_TITLE")
+            default:
+                Text("EMPTY_LIST_OTHER_TITLE")
+        }
+    }
+
+    @ViewBuilder
+    var emptyListMessage: some View {
+        switch selectedFilterType {
+            case .allow:
+                Text("EMPTY_LIST_ALLOW_MESSAGE")
+            case .junk:
+                Text("EMPTY_LIST_JUNK_MESSAGE")
+            default:
+                Text("EMPTY_LIST_OTHER_MESSAGE")
         }
     }
 }

@@ -109,6 +109,9 @@ extension FilterDetailContainerView {
         case .none:
             action = .none
             subAction = .none
+        case .allow:
+            action = .allow
+            subAction = .allow
         }
         let filter = Filter(id: filterId ?? UUID(),
                             phrase: filterTerm.trimmed,

@@ -120,4 +120,26 @@ class SMSOfflineFilterTest: XCTestCase {
         XCTAssertEqual(filterResult.action, .promotion)
         XCTAssertEqual(filterResult.subaction, .promotionalOffers)
     }
+
+    func testWhilelistFilters() {
+        var smsFilter: SMSOfflineFilter
+        var filterResult: SMSOfflineFilterResponse
+        
+        // Allow list filter tests
+        smsFilter = SMSOfflineFilter(filterList: [Filter(id: UUID(),
+                                                         phrase: "etb",
+                                                         type: .any,
+                                                         action: .allow,
+                                                         subAction: .none),
+                                                  Filter(id: UUID(),
+                                                         phrase: "etb",
+                                                         type: .any,
+                                                         action: .junk,
+                                                         subAction: .none)
+        ])
+        filterResult = smsFilter.filterMessage(message: messages[0])
+        XCTAssertEqual(filterResult.action, .allow)
+        XCTAssertEqual(filterResult.subaction, .none)
+    }
+
 }
