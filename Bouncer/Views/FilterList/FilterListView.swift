@@ -51,7 +51,7 @@ struct FilterListView: View {
                                 ToolbarItemGroup(placement: .navigationBarTrailing) {
                                     addButton
                                 }
-                            }
+                            }                            
                     }
                 }
 

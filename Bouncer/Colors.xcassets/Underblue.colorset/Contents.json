@@ -19,6 +19,10 @@
           "value" : "dark"
         }
       ],
+      "color" : {
+        "platform" : "universal",
+        "reference" : "systemGrayColor"
+      },
       "idiom" : "universal"
     }
   ],
