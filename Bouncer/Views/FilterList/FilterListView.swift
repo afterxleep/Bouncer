@@ -55,7 +55,7 @@ struct FilterListView: View {
                     }
                 }
 
-            }.searchable(text: $searchText)
+            }.searchable(text: $searchText, prompt: Text("SEARCH"))
         }
     }
 }
