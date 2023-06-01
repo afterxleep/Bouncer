@@ -84,3 +84,4 @@
 "INCORRECT_FILE_FORMAT" = "El archivo JSON no tiene el formato correcto o es incompatible.";
 "OK" = "OK";
 "GENERAL" = "GENERAL";
+"SEARCH" = "Buscar";
