@@ -113,17 +113,18 @@ extension FilterListView {
     var filterList: some View {
         VStack {
             List {
-                ForEach(filteredFilters.filter {
+                let filters = filteredFilters.filter {
                     searchText.isEmpty ||
                     $0.phrase.localizedCaseInsensitiveContains(searchText)
-                }) { filter in
+                }
+                ForEach(filters) { filter in
                     NavigationLink(destination: FilterDetailContainerView(interactionType: .update,
                                                                           filter: filter)) {
                         FilterRowView(filter: filter)
                     }
                 }.onDelete { indices in
                     for index in indices {
-                        let deletedItem = filteredFilters[index]
+                        let deletedItem = filters[index]                        
                         onDelete(deletedItem.id)
                     }
                 }
