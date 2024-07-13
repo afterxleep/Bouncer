@@ -59,6 +59,24 @@ class SMSOfflineFilterTest: XCTestCase {
         smsFilter = SMSOfflineFilter(filterList: [Filter(id: UUID(), phrase: "[E].*[l][o]cidAd", type: .message, action: .junk, useRegex: true, caseSensitive: true)])
         filterResult = smsFilter.filterMessage(message: messages[0])
         XCTAssertEqual(filterResult.action, .junk)
+        
+        // Regex filter test (Case sensitive)
+        smsFilter = SMSOfflineFilter(filterList: [Filter(id: UUID(), phrase: "compra|algo|nuevo", type: .message, action: .junk, useRegex: true, caseSensitive: true)])
+        filterResult = smsFilter.filterMessage(message: messages[0])
+        XCTAssertEqual(filterResult.action, .junk)
+        
+        smsFilter = SMSOfflineFilter(filterList: [Filter(id: UUID(), phrase: "compra|extensor|nuevo", type: .message, action: .junk, useRegex: true, caseSensitive: true)])
+        filterResult = smsFilter.filterMessage(message: messages[0])
+        XCTAssertEqual(filterResult.action, .junk)
+        
+        smsFilter = SMSOfflineFilter(filterList: [Filter(id: UUID(), phrase: "(?=.*especial)(?=.*meses)(?=.*megas).*", type: .message, action: .junk, useRegex: true, caseSensitive: true)])
+        filterResult = smsFilter.filterMessage(message: messages[0])
+        XCTAssertEqual(filterResult.action, .junk)
+        
+        smsFilter = SMSOfflineFilter(filterList: [Filter(id: UUID(), phrase: "(?=.*compra)(?=.*casa)(?=.*megas).*", type: .message, action: .junk, useRegex: true, caseSensitive: false)])
+        filterResult = smsFilter.filterMessage(message: messages[0])
+        print(filterResult.action)
+        XCTAssertEqual(filterResult.action, .none)
     }
 
     func testSubactionFilters() {

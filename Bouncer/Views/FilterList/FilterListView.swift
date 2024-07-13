@@ -55,7 +55,7 @@ struct FilterListView: View {
                     }
                 }
 
-            }.searchable(text: $searchText, prompt: Text("SEARCH"))
+            }.searchable(text: $searchText)
         }
     }
 }
@@ -113,18 +113,17 @@ extension FilterListView {
     var filterList: some View {
         VStack {
             List {
-                let filters = filteredFilters.filter {
+                ForEach(filteredFilters.filter {
                     searchText.isEmpty ||
                     $0.phrase.localizedCaseInsensitiveContains(searchText)
-                }
-                ForEach(filters) { filter in
+                }) { filter in
                     NavigationLink(destination: FilterDetailContainerView(interactionType: .update,
                                                                           filter: filter)) {
                         FilterRowView(filter: filter)
                     }
                 }.onDelete { indices in
                     for index in indices {
-                        let deletedItem = filters[index]                        
+                        let deletedItem = filteredFilters[index]
                         onDelete(deletedItem.id)
                     }
                 }
