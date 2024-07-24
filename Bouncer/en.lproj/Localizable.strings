@@ -55,6 +55,7 @@
 "MESSAGES_APP" = " 'Messages'";
 "UNKNOWN_SOURCES" = " 'Unknown and Spam'";
 "TOGGLE" = "Toggle";
+"BOUNCER" = "'Bouncer'";
 "BUTTON_TUTORIAL_FIRST_LAUNCH_TEXT" = "Take me to Settings!";
 "BUTTON_TUTORIAL_HELP_TEXT" = "Got it!";
 "NEW_FILTER" = "New Rule";
