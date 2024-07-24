@@ -55,6 +55,7 @@
 "MESSAGES_APP" = "Messages";
 "UNKNOWN_SOURCES" = "Unknown & Spam ";
 "TOGGLE" = "تغییر وضعیت";
+"BOUNCER" = "'Bouncer'";
 "BUTTON_TUTORIAL_FIRST_LAUNCH_TEXT" = "رفتن به تنظیمات";
 "BUTTON_TUTORIAL_HELP_TEXT" = "متوجه شدم!";
 "NEW_FILTER" = "New Rule";

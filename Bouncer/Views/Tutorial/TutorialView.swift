@@ -72,7 +72,7 @@ struct TutorialView: View {
                     .foregroundColor(Color("TextHighLightColor"))
                     .bold()
                 Image("toggle-icon")
-                Text( "'Bouncer'").foregroundColor(Color("TextDefaultColor"))
+                Text( "BOUNCER").foregroundColor(Color("TextDefaultColor"))
             }
         }
     }
