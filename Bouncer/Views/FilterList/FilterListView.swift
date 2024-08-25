@@ -123,7 +123,9 @@ extension FilterListView {
                     }
                 }.onDelete { indices in
                     for index in indices {
-                        let deletedItem = filteredFilters[index]
+                        let deletedItem = filteredFilters.filter {
+                            searchText.isEmpty ||
+                            $0.phrase.localizedCaseInsensitiveContains(searchText) }[index]                        
                         onDelete(deletedItem.id)
                     }
                 }
