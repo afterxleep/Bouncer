@@ -7,6 +7,6 @@ Different from other apps. Bouncer does not upload or send SMS messages or sende
 
 For added privacy, the app does not store local copies of your messages or their contents, and message filtering happens in real time when your messages reach your phone.
 
-Bouncer is designed with privacy in mind, will always be free, open source, and will never collect usage data or track you in any way.
+Bouncer is designed with privacy in mind, will always be open source, and will never collect usage data or track you in any way.
 
 

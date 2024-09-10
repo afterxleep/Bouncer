@@ -57,16 +57,6 @@
                ReferencedContainer = "container:Bouncer.xcodeproj">
             </BuildableReference>
          </TestableReference>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D6529F8A24A41372009AE3FF"
-               BuildableName = "BouncerUITests.xctest"
-               BlueprintName = "BouncerUITests"
-               ReferencedContainer = "container:Bouncer.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
    </TestAction>
    <LaunchAction

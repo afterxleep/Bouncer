@@ -48,7 +48,7 @@ struct SMSOfflineFilter {
         let result = text.range(of: filter.phrase, options: matchOptions) != nil
         os_log("FILTEREXTENSION - -- Match: %@", log: OSLog.messageFilterLog, type: .info, "\(result)")
         os_log("FILTEREXTENSION - -- Method: Text", log: OSLog.messageFilterLog, type: .info)
-        return text.range(of: filter.phrase, options: .caseInsensitive) != nil
+        return result
     }
 
     private func matchRegex(text: String, filter: Filter) -> Bool {
