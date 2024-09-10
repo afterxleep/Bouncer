@@ -55,6 +55,7 @@ Created by asaah18 on 7/13/21.
 "MESSAGES_APP" = " 'الرسائل'";
 "UNKNOWN_SOURCES" = " 'غير معروف ومزعج'";
 "TOGGLE" = "بدّل";
+"BOUNCER" = "'Bouncer'";
 "BUTTON_TUTORIAL_FIRST_LAUNCH_TEXT" = "خذني إلى الإعدادات!";
 "BUTTON_TUTORIAL_HELP_TEXT" = "فهمت!";
 "NEW_FILTER" = "New Rule";
