@@ -54,20 +54,29 @@ struct TutorialView: View {
                 Text("TAP")
                     .foregroundColor(Color("TextHighLightColor"))
                     .bold()
+                Image("apps-icon")
+                Text("APPS").foregroundColor(Color("TextDefaultColor"))
+            }
+            
+            HStack {
+                Text("3.").foregroundColor(Color("TextDefaultColor"))
+                Text("TAP")
+                    .foregroundColor(Color("TextHighLightColor"))
+                    .bold()
                 Image("messages-icon")
                 Text("MESSAGES_APP").foregroundColor(Color("TextDefaultColor"))
             }
 
             HStack {
-                Text("3.").foregroundColor(Color("TextDefaultColor"))
+                Text("4.").foregroundColor(Color("TextDefaultColor"))
                 Text("TAP")
                     .foregroundColor(Color("TextHighLightColor"))
                     .bold() +
                     Text("UNKNOWN_SOURCES").foregroundColor(Color("TextDefaultColor"))
-            }.frame(width: nil, height: 28, alignment: .bottom)
+            }
 
             HStack {
-                Text("4.").foregroundColor(Color("TextDefaultColor"))
+                Text("5.").foregroundColor(Color("TextDefaultColor"))
                 Text("TOGGLE")
                     .foregroundColor(Color("TextHighLightColor"))
                     .bold()

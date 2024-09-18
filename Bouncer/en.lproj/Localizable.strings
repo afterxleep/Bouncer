@@ -84,3 +84,4 @@
 "INCORRECT_FILE_FORMAT" = "The JSON file does not appear to have the right format or is incompatible";
 "OK" = "OK";
 "GENERAL" = "GENERAL";
+"APPS" = "'Apps'";
