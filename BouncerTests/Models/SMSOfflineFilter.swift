@@ -52,14 +52,14 @@ class SMSOfflineFilterTest: XCTestCase {
     func testRegexFilter() {
         var smsFilter: SMSOfflineFilter
         var filterResult: SMSOfflineFilterResponse
-
-        let message = SMSMessage(sender: "ETB Comunicaciones", text: "ETB compra 100 megas y recibe 200 por 6 meses. Incluye extensor de velocidAd mas promocion especial. Llama ya sin costo al 018000413807. Ver TyC. Hasta 31 ago 2020")
+        
+        var message = SMSMessage(sender: "ETB Comunicaciones", text: "ETB compra 100 megas y recibe 200 por 6 meses. Incluye extensor de velocidAd mas promocion especial. Llama ya sin costo al 018000413807. Ver TyC. Hasta 31 ago 2020")
         
         // Regex filter test
         smsFilter = SMSOfflineFilter(filterList: [Filter(id: UUID(), phrase: "[E].*[l][o]cidad", type: .message, action: .junk, useRegex: true)])
         filterResult = smsFilter.filterMessage(message: message)
         XCTAssertEqual(filterResult.action, .junk)
-
+        
         // Regex filter test (Case sensitive)
         smsFilter = SMSOfflineFilter(filterList: [Filter(id: UUID(), phrase: "[E].*[l][o]CidAd", type: .message, action: .junk, useRegex: true, caseSensitive: true)])
         filterResult = smsFilter.filterMessage(message: message)
@@ -71,22 +71,42 @@ class SMSOfflineFilterTest: XCTestCase {
         XCTAssertEqual(filterResult.action, .junk)
         
         // Regex filter test (Case sensitive)
+        // Match any string that contains any words “compra,” “extensor,” and “nuevo” in any order and at any position
         smsFilter = SMSOfflineFilter(filterList: [Filter(id: UUID(), phrase: "compra|algo|nuevo", type: .message, action: .junk, useRegex: true, caseSensitive: true)])
         filterResult = smsFilter.filterMessage(message: message)
         XCTAssertEqual(filterResult.action, .junk)
         
+        // Match any string that contains any words “compra,” “extensor,” and “nuevo” in any order and at any position
         smsFilter = SMSOfflineFilter(filterList: [Filter(id: UUID(), phrase: "compra|extensor|nuevo", type: .message, action: .junk, useRegex: true)])
         filterResult = smsFilter.filterMessage(message: message)
         XCTAssertEqual(filterResult.action, .junk)
         
+        // Match any string that contains all words “compra,” “meses,” and “megas” in any order and at any position
+        // All Are included
         smsFilter = SMSOfflineFilter(filterList: [Filter(id: UUID(), phrase: "(?=.*especial)(?=.*meses)(?=.*megas).*", type: .message, action: .junk, useRegex: true)])
         filterResult = smsFilter.filterMessage(message: message)
         XCTAssertEqual(filterResult.action, .junk)
         
+        // Match any string that contains all words “compra,” “casa,” and “megas” in any order and at any position
+        // Word casa is not included
         smsFilter = SMSOfflineFilter(filterList: [Filter(id: UUID(), phrase: "(?=.*compra)(?=.*casa)(?=.*megas).*", type: .message, action: .junk, useRegex: true)])
         filterResult = smsFilter.filterMessage(message: message)
         print(filterResult.action)
         XCTAssertEqual(filterResult.action, .none)
+        
+        message = SMSMessage(sender: "Trump", text: """
+        Shocked you didn't sign..will you PLEASE sign to STRIP Trump of immunity by passing the No Kings Act! SIGN: go.freedom-dems.org/0930a3
+        
+        Freedom Dems
+        
+        Stop2End
+        """)
+        
+        // Match any word starting with 'dem' or 'Dem' in the message
+        smsFilter = SMSOfflineFilter(filterList: [Filter(id: UUID(), phrase: "\\bdem\\w+", type: .message, action: .junk, useRegex: true)])
+        filterResult = smsFilter.filterMessage(message: message)
+        print(filterResult.action)
+        XCTAssertEqual(filterResult.action, .junk)
         
     }
 
