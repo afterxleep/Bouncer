@@ -114,6 +114,7 @@
 		D617B44924EB19C8009E0D40 /* AppSettingsDefaultsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsDefaultsTests.swift; sourceTree = "<group>"; };
 		D621CB4424ABABF6008883AA /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D621CB4724ABC56E008883AA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D621CB4724ABC56E008883AB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		D6233A6F24A650B700B37A6A /* SMSFilter.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = SMSFilter.appex; sourceTree = BUILT_PRODUCTS_DIR; };
 		D6233A7124A650B700B37A6A /* MessageFilterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFilterExtension.swift; sourceTree = "<group>"; };
 		D6233A7324A650B700B37A6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -542,6 +543,7 @@
 				ar,
 				fa,
 				"ko-KR",
+				"zh-Hans",
 			);
 			mainGroup = D6529F6624A41371009AE3FF;
 			productRefGroup = D6529F7024A41371009AE3FF /* Products */;
@@ -682,6 +684,7 @@
 				D6BAC9EE26D7A156007ACCBE /* ar */,
 				D6DA734729F539B300C3A831 /* fa */,
 				6DB560402C509DBA00A06D58 /* ko-KR */,
+				D621CB4724ABC56E008883AB /* zh-Hans */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
