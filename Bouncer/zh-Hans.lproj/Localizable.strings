@@ -1,0 +1,87 @@
+/*
+  Localizable.strings
+  Bouncer
+
+  Created by Alex (@haozi04) on 2/5/25.
+
+*/
+
+"FILTER_TYPE_SELECTION_LABEL" = "时间";
+"FILTER_TEXT_PLACEHOLDER" = "输入关键字词";
+"FILTER_CONTAINS_TEXT_LABEL" = "包含";
+"FILTER_ADD_VIEW_TITLE" = "添加规则";
+"FILTER_EDIT_VIEW_TITLE" = "更新规则";
+"SAVE" = "保存";
+"CANCEL" = "取消";
+"ADVANCED" = "高级设置";
+"FILTER_INFORMATION" = "规则设置";
+"EXACT_MATCH" = "完全符合";
+"EXACT_MATCH_CAPTION" = "仅当信息内容/发送者完全符合指定条件时才归类";
+"FILTER_ACTION_LABEL" = "标签";
+"TRANSACTIONS" = "所有交易";
+"SAFE_ACTION" = "安全（允许）";
+"JUNK_ACTION" = "垃圾短信";
+"TRANSACTION_ACTION" = "其他交易信息";
+"TRANSACTION_ACTION_ORDERS" = "订单";
+"TRANSACTION_ACTION_FINANCE" = "财务";
+"TRANSACTION_ACTION_REMINDERS" = "提醒";
+"PROMOTIONS" = "推广";
+"PROMOTION_ACTION" = "其他推广";
+"PROMOTION_ACTION_OFFERS" = "优惠";
+"PROMOTION_ACTION_COUPONS" = "优惠券";
+"ANYTHING_IN_MESSAGE" = "信息的任何部分";
+"SENDER_NUMBER" = "发送者名称或号码";
+"TEXT" = "信息正文";
+"LIST_VIEW_TITLE" = "规则";
+"EMPTY_LIST_JUNK_TITLE" = "你的垃圾信息规则列表为空";
+"EMPTY_LIST_JUNK_MESSAGE" = "使用垃圾信息规则来阻止来自未知发送者的短信。你不会收到关于垃圾信息的通知。";
+"EMPTY_LIST_ALLOW_TITLE" = "你的安全信息规则列表为空";
+"EMPTY_LIST_ALLOW_MESSAGE" = "使用安全信息规则来确保重要短信永远会被接收进收信箱。";
+"EMPTY_LIST_OTHER_TITLE" = "你的分类信息规则列表为空";
+"EMPTY_LIST_OTHER_MESSAGE" = "使用分类信息规则来将符合条件的短信划出收信箱然后归类，你仍然会收到相关通知。";
+"TAP_SPACE" = "点击 '";
+"TO_ADD_A_FILTER_SPACE" = "' 添加规则";
+"WELCOME_TITLE" = "你好！";
+"WELCOME_SUBTITLE" = "欢迎来到Bouncer";
+"HELP" = "帮助";
+"LETS" = "让我们";
+"HERE_IS_HOW" = "在iPhone上";
+"ENABLE_SMS_FILTERING" = "开启短信息过滤";
+"ON_YOUR_IPHONE" = "：";
+"OPEN_SPACE" = "打开";
+"THE_APP" = "";
+"SETTINGS_APP" = "'设置' 应用";
+"TAP" = "点击";
+"MESSAGES_APP" = " '信息'";
+"UNKNOWN_SOURCES" = " '未知与过滤信息'";
+"TOGGLE" = "打开";
+"BOUNCER" = "'Bouncer'";
+"BUTTON_TUTORIAL_FIRST_LAUNCH_TEXT" = "帮我打开设置！";
+"BUTTON_TUTORIAL_HELP_TEXT" = "好的！";
+"NEW_FILTER" = "新建规则";
+"UPDATE_FILTER" = "更新规则";
+"1." = "1.";
+"2." = "2.";
+"3." = "3.";
+"4." = "4.";
+"USE_REGULAR_EXPRESSIONS" = "通过正则表达式匹配";
+"USE_REGULAR_EXPRESSIONS_DETAIL" = "如果你的规则包含正则表达式，请启用。（正则表达式须为PCRE格式）";
+"EXPORT_BLOCK_LIST" = "导出规则";
+"IMPORT_BLOCK_LIST" = "导入规则";
+"NEW_FILTERS" = "新建规则";
+"DUPLICATE_FILTERS" = "复制规则";
+"SELECT_ALL" = "选择全部";
+"SELECT_NEW" = "选择新的";
+"SELECT_NONE" = "取消选择";
+"ERROR" = "错误";
+"EMPTY_IMPORT_FILE" = "你选择的文件不包含规则";
+"IMPORT_ERROR %@" = "在导入选择的文件中发生了错误。\n\n%@";
+"NEED_HELP" = "需要更多帮助？";
+"ASK_ANYTHING" = "询问我任何问题！（请以英语）";
+"NO_EMAIL_CONFIGURED" = "似乎你没有设置任何电子邮件账户。你可以直接给我写信：danielbernal@hey.com";
+"SETUP_INFO" = "启用短信过滤";
+"IS_CASE_SENSITIVE" = "区分大小写";
+"IS_CASE_SENSITIVE_DETAIL" = "启用此选项以区分对待大小写字符。";
+"INCORRECT_FILE_FORMAT" = "JSON文件格式不正确或者不兼容";
+"OK" = "好的";
+"GENERAL" = "一般设置";
