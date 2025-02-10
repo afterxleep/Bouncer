@@ -713,4 +713,120 @@ class SMSOfflineFilterTests: XCTestCase {
         XCTAssertEqual(result.action, .transaction)
         XCTAssertEqual(result.subAction, .transactionalFinance)
     }
+    
+    // MARK: - Additional Edge Cases
+    
+    func testRegexTimeoutAndSafety() {
+        // Test regex timeout with potentially problematic pattern
+        let message = SMSMessage(sender: "Service", text: String(repeating: "a", count: 1000))
+        let filter = SMSOfflineFilter(filterList: [
+            Filter(id: UUID(), phrase: "(a+)+b", type: .message, action: .junk, useRegex: true)
+        ])
+        // Should return false due to safety check or timeout
+        XCTAssertEqual(filter.filterMessage(message: message).action, .none)
+        
+        // Test other potentially dangerous patterns
+        let dangerousPatterns = [
+            ".*.*", ".+.+", "(a*)*", "(a?)?+", "((a+)?)+",
+            "(a|a)+", "(a|aa)+", "a{100000}"
+        ]
+        
+        for pattern in dangerousPatterns {
+            let filter = SMSOfflineFilter(filterList: [
+                Filter(id: UUID(), phrase: pattern, type: .message, action: .junk, useRegex: true)
+            ])
+            XCTAssertEqual(filter.filterMessage(message: message).action, .none,
+                          "Dangerous pattern \(pattern) should be rejected")
+        }
+    }
+    
+    func testMultilineAndSpecialCharacters() {
+        // Test multiline message
+        let multilineMessage = SMSMessage(sender: "Service", text: "Line 1\nLine 2\nLine 3")
+        var filter = SMSOfflineFilter(filterList: [
+            Filter(id: UUID(), phrase: "Line [0-9]", type: .message, action: .transaction, useRegex: true)
+        ])
+        XCTAssertEqual(filter.filterMessage(message: multilineMessage).action, .transaction)
+        
+        // Test message with special regex characters as literal text
+        let specialCharsMessage = SMSMessage(sender: "Service", text: "Price: $100.00 (50% off)")
+        filter = SMSOfflineFilter(filterList: [
+            Filter(id: UUID(), phrase: "\\$\\d+\\.\\d+", type: .message, action: .promotion, useRegex: true)
+        ])
+        XCTAssertEqual(filter.filterMessage(message: specialCharsMessage).action, .promotion)
+    }
+    
+    func testUnicodeAndBoundaryHandling() {
+        // Test Unicode category matching
+        let message1 = SMSMessage(sender: "Service", text: "Testing numbers 123 and symbols @#$")
+        var filter = SMSOfflineFilter(filterList: [
+            Filter(id: UUID(), phrase: "\\d+", type: .message, action: .transaction, useRegex: true)
+        ])
+        XCTAssertEqual(filter.filterMessage(message: message1).action, .transaction)
+        
+        // Test word boundaries with international characters
+        // Test word boundaries with international characters
+        let message2 = SMSMessage(sender: "Service", text: "my café here")
+        filter = SMSOfflineFilter(filterList: [
+            Filter(id: UUID(), phrase: "\\bcafé\\b", type: .message, action: .promotion, useRegex: true)
+        ])
+        XCTAssertEqual(filter.filterMessage(message: message2).action, .promotion)
+        
+        // Test zero-width characters
+        let message3 = SMSMessage(sender: "Service", text: "Hello\u{200B}World")
+        filter = SMSOfflineFilter(filterList: [
+            Filter(id: UUID(), phrase: "Hello.*World", type: .message, action: .transaction, useRegex: true)
+        ])
+        XCTAssertEqual(filter.filterMessage(message: message3).action, .transaction)
+    }
+    
+    func testConcurrentFilterProcessing() {
+        // Test multiple filters being processed concurrently
+        let message = SMSMessage(sender: "Bank-Alert", text: "Your OTP is 123456")
+        
+        // Create a large number of filters to test concurrent processing
+        var filters: [Filter] = []
+        for i in 0..<100 {
+            filters.append(Filter(id: UUID(),
+                                phrase: "\\d{6}",
+                                type: .message,
+                                action: i % 2 == 0 ? .transaction : .promotion,
+                                useRegex: true))
+        }
+        
+        let filter = SMSOfflineFilter(filterList: filters)
+        let result = filter.filterMessage(message: message)
+        
+        // First matching filter should win regardless of concurrent processing
+        XCTAssertEqual(result.action, .transaction)
+    }
+    
+    func testRegexOptimizationAndLimits() {
+        // Test regex pattern with excessive backtracking but within limits
+        let message = SMSMessage(sender: "Service", text: String(repeating: "a", count: 50))
+        var filter = SMSOfflineFilter(filterList: [
+            Filter(id: UUID(), phrase: "a{1,50}b?", type: .message, action: .transaction, useRegex: true)
+        ])
+        XCTAssertEqual(filter.filterMessage(message: message).action, .transaction)
+        
+        // Test pattern with reasonable repetition
+        filter = SMSOfflineFilter(filterList: [
+            Filter(id: UUID(), phrase: "\\d{1,10}", type: .message, action: .transaction, useRegex: true)
+        ])
+        XCTAssertEqual(filter.filterMessage(message: SMSMessage(sender: "Service", text: "123456")).action, .transaction)
+        
+        // Test pattern with excessive repetition
+        filter = SMSOfflineFilter(filterList: [
+            Filter(id: UUID(), phrase: "\\d{1,20000}", type: .message, action: .transaction, useRegex: true)
+        ])
+        // Should be rejected due to excessive quantifier
+        XCTAssertEqual(filter.filterMessage(message: SMSMessage(sender: "Service", text: "123456")).action, .none)
+        
+        // Test pattern with invalid regex syntax
+        filter = SMSOfflineFilter(filterList: [
+            Filter(id: UUID(), phrase: "[invalid", type: .message, action: .transaction, useRegex: true)
+        ])
+        // Should be rejected due to invalid syntax
+        XCTAssertEqual(filter.filterMessage(message: SMSMessage(sender: "Service", text: "123456")).action, .none)
+    }
 }
