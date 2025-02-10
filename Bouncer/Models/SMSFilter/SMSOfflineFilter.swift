@@ -8,7 +8,7 @@ import IdentityLookup
 import OSLog
 
 typealias SMSOfflineFilterResponse = (action: ILMessageFilterAction,
-                                      subaction: ILMessageFilterSubAction)
+                                      subAction: ILMessageFilterSubAction)
 
 struct SMSOfflineFilter {
     
@@ -21,22 +21,27 @@ struct SMSOfflineFilter {
     
     private func applyFilter(filter: Filter, message: SMSMessage) -> Bool {
         os_log("FILTEREXTENSION - Applying filter: %@", log: OSLog.messageFilterLog, type: .info, "\(filter.phrase)")
-        var txt = ""
+        
+        // Handle messages based on filter type
         switch (filter.type) {
             case .sender:
-                txt = message.sender
+                // For sender, we always trim
+                let txt = message.sender.trimmingCharacters(in: .whitespacesAndNewlines)
+                if txt.isEmpty { return false }
+                return filter.useRegex ? matchRegex(text: txt, filter: filter) : match(text: txt, filter: filter)
+                
             case .message:
-                txt = message.text
+                // For message content, only trim if not using regex
+                let txt = filter.useRegex ? message.text : message.text.trimmingCharacters(in: .whitespacesAndNewlines)
+                if !filter.useRegex && txt.isEmpty { return false }
+                return filter.useRegex ? matchRegex(text: txt, filter: filter) : match(text: txt, filter: filter)
+                
             default:
-                txt = "\(message.sender) \(message.text)"
-        }
-
-        // Use different filter strategies based on user selection
-        if filter.useRegex {
-            return matchRegex(text: txt, filter: filter)
-        }
-        else {
-            return match(text: txt, filter: filter)
+                // For 'any' type, concatenate raw strings first
+                let combined = "\(message.sender) \(message.text)"
+                let txt = filter.useRegex ? combined : combined.trimmingCharacters(in: .whitespacesAndNewlines)
+                if !filter.useRegex && txt.isEmpty { return false }
+                return filter.useRegex ? matchRegex(text: txt, filter: filter) : match(text: txt, filter: filter)
         }
     }
 
@@ -45,17 +50,25 @@ struct SMSOfflineFilter {
         if !filter.caseSensitive {
             matchOptions.insert(.caseInsensitive)
         }
-        let result = text.range(of: filter.phrase, options: matchOptions) != nil
+        // Text is already trimmed in applyFilter, only trim the filter phrase
+        let trimmedPhrase = filter.phrase.trimmingCharacters(in: .whitespacesAndNewlines)
+        let result = text.range(of: trimmedPhrase, options: matchOptions) != nil
         os_log("FILTEREXTENSION - -- Match: %@", log: OSLog.messageFilterLog, type: .info, "\(result)")
         os_log("FILTEREXTENSION - -- Method: Text", log: OSLog.messageFilterLog, type: .info)
         return result
     }
 
     private func matchRegex(text: String, filter: Filter) -> Bool {
+        // Handle empty text or filter phrase
+        if text.isEmpty || filter.phrase.isEmpty {
+            return false
+        }
+        
         var matchOptions: String.CompareOptions = [.regularExpression]
         if !filter.caseSensitive {
             matchOptions.insert(.caseInsensitive)
         }
+        // Text is already trimmed in applyFilter
         let result = (text.range(of: filter.phrase, options: matchOptions) != nil)
         os_log("FILTEREXTENSION - -- Match: %@", log: OSLog.messageFilterLog, type: .info, "\(result)")
         os_log("FILTEREXTENSION - -- Method: Regex", log: OSLog.messageFilterLog, type: .info)

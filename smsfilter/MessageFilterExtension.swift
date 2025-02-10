@@ -33,7 +33,7 @@ final class MessageFilterExtension: ILMessageFilterExtension {
         let filterOutput: SMSOfflineFilterResponse = filter.filterMessage(message: SMSMessage(sender: sender,
                                                                                               text: messageBody))
         response.action = filterOutput.action
-        response.subAction = filterOutput.subaction
+        response.subAction = filterOutput.subAction
         os_log("FILTEREXTENSION - Filtering action: %@", log: OSLog.messageFilterLog, type: .info, "\(response.action.rawValue)")
         os_log("FILTEREXTENSION - Filtering sub-action: %@", log: OSLog.messageFilterLog, type: .info, "\(response.subAction.rawValue)")
         os_log("FILTEREXTENSION - Filtering done", log: OSLog.messageFilterLog, type: .info)
