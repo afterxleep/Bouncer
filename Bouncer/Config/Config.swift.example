@@ -1,0 +1,8 @@
+import Foundation
+
+struct AppConfig {
+    
+    /// Supabase instance URL & Key - Required for analytics
+    static let supabaseURL = "YOUR_SUPABASE_URL_HERE"    
+    static let supabaseKey = "YOUR_SUPABASE_KEY_HERE"
+} 
