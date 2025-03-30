@@ -6,6 +6,7 @@
 import Foundation
 import Combine
 import Supabase
+import os.log
 
 enum AnalyticsServiceError: Error, CustomStringConvertible {
     case saveError
@@ -58,6 +59,7 @@ protocol AnalyticsService {
 class DefaultAnalyticsService: AnalyticsService {
     
     private let client: SupabaseClient?
+    private let logger = Logger(subsystem: Bundle.main.bundleIdentifier!, category: "Analytics")
     
     var hasValidClient: Bool {
         return client != nil
@@ -82,7 +84,7 @@ class DefaultAnalyticsService: AnalyticsService {
     func saveEvent(filter: Filter, eventType: AnalyticsEventType = .filterCreated) -> AnyPublisher<Void, AnalyticsServiceError> {
         // If no client is available, return early without error
         guard let client = client else {
-            print("Analytics: No Supabase client available - check configuration")
+            logger.warning("No Supabase client available - check configuration")
             return Just(())
                 .setFailureType(to: AnalyticsServiceError.self)
                 .eraseToAnyPublisher()
@@ -103,13 +105,13 @@ class DefaultAnalyticsService: AnalyticsService {
             cleanLocale = regionCode.isEmpty ? languageCode : "\(languageCode)_\(regionCode)"
         }
         
-        print("Analytics: Using sanitized locale: \(cleanLocale) (from raw: \(rawLocale))")
+        logger.debug("Using sanitized locale: \(cleanLocale) (from raw: \(rawLocale))")
         
         // Format current date as ISO 8601 string for PostgreSQL compatibility
         let dateFormatter = ISO8601DateFormatter()
         dateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
         let timestampString = dateFormatter.string(from: Date())
-        print("Analytics: Using formatted timestamp: \(timestampString)")
+        logger.debug("Using formatted timestamp: \(timestampString)")
         
         // Create a sanitized analytics event
         let event = FilterAnalyticsEvent(
@@ -120,17 +122,17 @@ class DefaultAnalyticsService: AnalyticsService {
         )
         
         // Debug the data being sent
-        print("Analytics: Sending event data:")
-        print("Analytics: - Event type: \(eventType.rawValue)")
-        print("Analytics: - Filter ID: \(filter.id)")
-        print("Analytics: - Filter phrase: \(filter.phrase)")
+        logger.debug("Sending event data:")
+        logger.debug("- Event type: \(eventType.rawValue)")
+        logger.debug("- Filter ID: \(filter.id)")
+        logger.debug("- Filter phrase: \(filter.phrase)")
         
         // Function to attempt the database operation with a retry mechanism
         func attemptSaveWithRetry(retryCount: Int = 3, currentAttempt: Int = 1) -> Future<Void, AnalyticsServiceError> {
             return Future { promise in
                 Task {
                     do {
-                        print("Analytics: Inserting into table: \(Constants.filterAnalyticsTable) (attempt \(currentAttempt)/\(retryCount))")
+                        self.logger.debug("Inserting into table: \(Constants.filterAnalyticsTable) (attempt \(currentAttempt)/\(retryCount))")
                         
                         // Store the event in the "filter_analytics" table
                         _ = try await client.database
@@ -138,31 +140,31 @@ class DefaultAnalyticsService: AnalyticsService {
                             .insert(event)
                             .execute()
                         
-                        print("Analytics: Successfully saved event")
+                        self.logger.info("Successfully saved event")
                         promise(.success(()))
                     } catch let error {
                         // Check if this is a network error that could benefit from a retry
                         let isNetworkError = self.isNetworkRelatedError(error)
                         
-                        print("Analytics ERROR: Failed to save data (attempt \(currentAttempt)/\(retryCount))")
-                        print("Analytics ERROR: \(error)")
+                        self.logger.error("Failed to save data (attempt \(currentAttempt)/\(retryCount))")
+                        self.logger.error("\(error.localizedDescription)")
                         
                         if let postgrestError = error as? PostgrestError {
-                            print("Analytics ERROR details:")
-                            print("- Detail: \(postgrestError.detail ?? "nil")")
-                            print("- Code: \(postgrestError.code ?? "nil")")
-                            print("- Message: \(postgrestError.message ?? "nil")")
+                            self.logger.error("ERROR details:")
+                            self.logger.error("- Detail: \(postgrestError.detail ?? "nil")")
+                            self.logger.error("- Code: \(postgrestError.code ?? "nil")")
+                            self.logger.error("- Message: \(postgrestError.message ?? "nil")")
                             
                             // Check if it's a table not found error
                             let errorMessage = postgrestError.message ?? ""
                             if errorMessage.contains("relation") && errorMessage.contains("does not exist") {
-                                print("Analytics: Table may not exist. Please check Supabase schema.")
+                                self.logger.error("Table may not exist. Please check Supabase schema.")
                             }
                         }
                         
                         // If we have retries left and it's a network error, try again
                         if currentAttempt < retryCount && isNetworkError {
-                            print("Analytics: Network error detected. Retrying in 1 second...")
+                            self.logger.notice("Network error detected. Retrying in 1 second...")
                             
                             // Wait 1 second before retrying
                             try? await Task.sleep(nanoseconds: 1_000_000_000)
@@ -181,7 +183,7 @@ class DefaultAnalyticsService: AnalyticsService {
                             ).cancel()
                         } else {
                             if isNetworkError {
-                                print("Analytics: Exhausted retry attempts. Network error persists.")
+                                self.logger.error("Exhausted retry attempts. Network error persists.")
                             }
                             promise(.failure(.saveErrorWithDetails(error)))
                         }
