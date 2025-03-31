@@ -5,6 +5,7 @@
 
 import XCTest
 import Combine
+import SwiftUI
 @testable import Bouncer
 
 final class AnalyticsServiceTests: XCTestCase {
@@ -21,7 +22,7 @@ final class AnalyticsServiceTests: XCTestCase {
         let mockAnalyticsService = MockAnalyticsService(shouldReturnNilClient: true)
         
         // Create test filter
-        let filter = Filter(name: "Test Filter", regex: "Test.*", isEnabled: true)
+        let filter = Filter(id: UUID(), phrase: "Test.*", type: .any, action: .junk, useRegex: true)
         
         // Expectation for async operation
         let expectation = XCTestExpectation(description: "Save event without client")
@@ -47,7 +48,7 @@ final class AnalyticsServiceTests: XCTestCase {
         let mockAnalyticsService = MockAnalyticsService(shouldReturnNilClient: false)
         
         // Create test filter
-        let filter = Filter(name: "Test Filter", regex: "Test.*", isEnabled: true)
+        let filter = Filter(id: UUID(), phrase: "Test.*", type: .any, action: .junk, useRegex: true)
         
         // Expectation for async operation
         let expectation = XCTestExpectation(description: "Save event with client")
@@ -75,7 +76,7 @@ final class AnalyticsServiceTests: XCTestCase {
         let mockAnalyticsService = MockAnalyticsService(shouldReturnNilClient: false, shouldFailEncoding: true)
         
         // Create test filter
-        let filter = Filter(name: "Test Filter", regex: "Test.*", isEnabled: true)
+        let filter = Filter(id: UUID(), phrase: "Test.*", type: .any, action: .junk, useRegex: true)
         
         // Expectation for async operation
         let expectation = XCTestExpectation(description: "Save event with encoding error")
@@ -85,7 +86,7 @@ final class AnalyticsServiceTests: XCTestCase {
             .sink(
                 receiveCompletion: { completion in
                     if case .failure(let error) = completion {
-                        XCTAssertEqual(error, .encodingError, "Should fail with encoding error")
+                        XCTAssertTrue(error.description.contains("Failed to encode analytics data"), "Should fail with encoding error")
                     } else {
                         XCTFail("Should fail with encoding error")
                     }
@@ -99,17 +100,53 @@ final class AnalyticsServiceTests: XCTestCase {
         
         wait(for: [expectation], timeout: 1.0)
     }
+    
+    func testSaveEventWithNetworkError() {
+        // Setup a mock analytics service that will simulate network errors
+        let mockAnalyticsService = MockAnalyticsService(shouldReturnNilClient: false, shouldFailWithNetworkError: true)
+        
+        // Create test filter
+        let filter = Filter(id: UUID(), phrase: "Test.*", type: .any, action: .junk, useRegex: true)
+        
+        // Expectation for async operation
+        let expectation = XCTestExpectation(description: "Save event with network error")
+        
+        // Test network error handling
+        mockAnalyticsService.saveEvent(filter: filter, eventType: .filterCreated)
+            .sink(
+                receiveCompletion: { completion in
+                    if case .failure(let error) = completion {
+                        XCTAssertTrue(error.description.contains("Failed to save analytics data"), "Should fail with save error")
+                    } else {
+                        XCTFail("Should fail with save error")
+                    }
+                    expectation.fulfill()
+                },
+                receiveValue: { _ in
+                    XCTFail("Should not receive value on network error")
+                }
+            )
+            .store(in: &cancellables)
+        
+        wait(for: [expectation], timeout: 1.0)
+    }
 }
 
 // MARK: - Mock Analytics Service
 class MockAnalyticsService: AnalyticsService {
     private let shouldReturnNilClient: Bool
     private let shouldFailEncoding: Bool
+    private let shouldFailWithNetworkError: Bool
     var eventSaved = false
     
-    init(shouldReturnNilClient: Bool, shouldFailEncoding: Bool = false) {
+    init(shouldReturnNilClient: Bool, shouldFailEncoding: Bool = false, shouldFailWithNetworkError: Bool = false) {
         self.shouldReturnNilClient = shouldReturnNilClient
         self.shouldFailEncoding = shouldFailEncoding
+        self.shouldFailWithNetworkError = shouldFailWithNetworkError
+    }
+    
+    var hasValidClient: Bool {
+        return !shouldReturnNilClient
     }
     
     func saveEvent(filter: Filter, eventType: AnalyticsEventType) -> AnyPublisher<Void, AnalyticsServiceError> {
@@ -121,6 +158,11 @@ class MockAnalyticsService: AnalyticsService {
         
         if shouldFailEncoding {
             return Fail(error: AnalyticsServiceError.encodingError)
+                .eraseToAnyPublisher()
+        }
+        
+        if shouldFailWithNetworkError {
+            return Fail(error: AnalyticsServiceError.saveError)
                 .eraseToAnyPublisher()
         }
         

@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 70;
+	objectVersion = 54;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -36,6 +36,9 @@
 		D6529FA424A413EB009AE3FF /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FA324A413EB009AE3FF /* BackgroundView.swift */; };
 		D6529FC324A54AAD009AE3FF /* FilterListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FC224A54AAD009AE3FF /* FilterListView.swift */; };
 		D6529FCB24A54ADE009AE3FF /* FilterStoreFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FC824A54ADE009AE3FF /* FilterStoreFile.swift */; };
+		D6625F3A2D9A122C005D05BF /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6625F342D9A122C005D05BF /* Config.swift */; };
+		D6625F3B2D9A122C005D05BF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6625F362D9A122C005D05BF /* Constants.swift */; };
+		D6625F3C2D9A122C005D05BF /* Config.swift.example in Resources */ = {isa = PBXBuildFile; fileRef = D6625F352D9A122C005D05BF /* Config.swift.example */; };
 		D664B24424AA92AA00EB826D /* Colors.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D664B24324AA92AA00EB826D /* Colors.xcassets */; };
 		D664B24624AA92D200EB826D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D664B24524AA92D200EB826D /* Assets.xcassets */; };
 		D664B24824AA998700EB826D /* UIImage+Gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = D664B24724AA998700EB826D /* UIImage+Gradient.swift */; };
@@ -51,6 +54,8 @@
 		D67F582E24E4496300165365 /* AppSettingsDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67F582C24E4496300165365 /* AppSettingsDefaults.swift */; };
 		D67F582F24E4496300165365 /* AppSettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67F582D24E4496300165365 /* AppSettingsStore.swift */; };
 		D696D0C528D92153002FB15E /* AppIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D696D0C428D92153002FB15E /* AppIcon.xcassets */; };
+		D6A388892D9A0B7C00CEA386 /* AnalyticsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A388882D9A0B7C00CEA386 /* AnalyticsService.swift */; };
+		D6A3888D2D9A0FCA00CEA386 /* AnalyticsServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6A3888C2D9A0FCA00CEA386 /* AnalyticsServiceTests.swift */; };
 		D6B2CC8D24EF16C6004F72C4 /* wordlist.filter in Resources */ = {isa = PBXBuildFile; fileRef = D6B2CC8C24EF16C6004F72C4 /* wordlist.filter */; };
 		D6B790C629F52BEE00613F98 /* ContactView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6B790C529F52BEE00613F98 /* ContactView.swift */; };
 		D6BE8B8728CFE0C3004E7274 /* OSLog.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6BE8B8628CFE0C3004E7274 /* OSLog.swift */; };
@@ -139,6 +144,9 @@
 		D6529FA324A413EB009AE3FF /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		D6529FC224A54AAD009AE3FF /* FilterListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListView.swift; sourceTree = "<group>"; };
 		D6529FC824A54ADE009AE3FF /* FilterStoreFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterStoreFile.swift; sourceTree = "<group>"; };
+		D6625F342D9A122C005D05BF /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		D6625F352D9A122C005D05BF /* Config.swift.example */ = {isa = PBXFileReference; lastKnownFileType = text; path = Config.swift.example; sourceTree = "<group>"; };
+		D6625F362D9A122C005D05BF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D664B24324AA92AA00EB826D /* Colors.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Colors.xcassets; sourceTree = "<group>"; };
 		D664B24524AA92D200EB826D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D664B24724AA998700EB826D /* UIImage+Gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Gradient.swift"; sourceTree = "<group>"; };
@@ -148,6 +156,8 @@
 		D67F582C24E4496300165365 /* AppSettingsDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSettingsDefaults.swift; sourceTree = "<group>"; };
 		D67F582D24E4496300165365 /* AppSettingsStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppSettingsStore.swift; sourceTree = "<group>"; };
 		D696D0C428D92153002FB15E /* AppIcon.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = AppIcon.xcassets; sourceTree = "<group>"; };
+		D6A388882D9A0B7C00CEA386 /* AnalyticsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsService.swift; sourceTree = "<group>"; };
+		D6A3888C2D9A0FCA00CEA386 /* AnalyticsServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsServiceTests.swift; sourceTree = "<group>"; };
 		D6B2CC8C24EF16C6004F72C4 /* wordlist.filter */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = wordlist.filter; sourceTree = "<group>"; };
 		D6B790C529F52BEE00613F98 /* ContactView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactView.swift; sourceTree = "<group>"; };
 		D6BE8B8628CFE0C3004E7274 /* OSLog.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OSLog.swift; sourceTree = "<group>"; };
@@ -165,11 +175,6 @@
 		D6FC672824E49B2B0083C9FA /* FilterListContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListContainerView.swift; sourceTree = "<group>"; };
 		D6FC672D24E4ACCF0083C9FA /* FilterMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterMiddleware.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
-
-/* Begin PBXFileSystemSynchronizedRootGroup section */
-		D66E4EC32D99CD39007244FA /* Analytics */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Analytics; sourceTree = "<group>"; };
-		D66E4ED12D9A0017007244FA /* Config */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = Config; sourceTree = "<group>"; };
-/* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		D6233A6C24A650B700B37A6A /* Frameworks */ = {
@@ -243,6 +248,7 @@
 		D617B44824EB199B009E0D40 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				D6A3888C2D9A0FCA00CEA386 /* AnalyticsServiceTests.swift */,
 				D617B44924EB19C8009E0D40 /* AppSettingsDefaultsTests.swift */,
 				D66A7C2824EB3F8C00349C3F /* SMSOfflineFilterTests.swift */,
 				D6F0621024EC69F800F47BA2 /* FilterStoreFileTests.swift */,
@@ -319,7 +325,7 @@
 		D6529F7124A41371009AE3FF /* Bouncer */ = {
 			isa = PBXGroup;
 			children = (
-				D66E4ED12D9A0017007244FA /* Config */,
+				D6625F3E2D9A123E005D05BF /* Config */,
 				D6529FD324A550A9009AE3FF /* Models */,
 				D664B28624AA9E3500EB826D /* App */,
 				D61497E724E442F100AF997E /* Actions */,
@@ -402,7 +408,7 @@
 		D6529FD324A550A9009AE3FF /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				D66E4EC32D99CD39007244FA /* Analytics */,
+				D6A3888B2D9A0F1300CEA386 /* AnalyticsService */,
 				D6B2CC8524EED357004F72C4 /* Mocks */,
 				D67F582B24E4495700165365 /* AppSettings */,
 				D62B331924BAB15C002DFB81 /* ReviewService */,
@@ -410,6 +416,16 @@
 				D6529FC624A54AC7009AE3FF /* FilterStore */,
 			);
 			path = Models;
+			sourceTree = "<group>";
+		};
+		D6625F3E2D9A123E005D05BF /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				D6625F342D9A122C005D05BF /* Config.swift */,
+				D6625F352D9A122C005D05BF /* Config.swift.example */,
+				D6625F362D9A122C005D05BF /* Constants.swift */,
+			);
+			path = Config;
 			sourceTree = "<group>";
 		};
 		D664B24924AA998C00EB826D /* Extensions */ = {
@@ -460,6 +476,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		D6A3888B2D9A0F1300CEA386 /* AnalyticsService */ = {
+			isa = PBXGroup;
+			children = (
+				D6A388882D9A0B7C00CEA386 /* AnalyticsService.swift */,
+			);
+			path = AnalyticsService;
+			sourceTree = "<group>";
+		};
 		D6B2CC8524EED357004F72C4 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
@@ -502,10 +526,6 @@
 			dependencies = (
 				D6233A7524A650B700B37A6A /* PBXTargetDependency */,
 			);
-			fileSystemSynchronizedGroups = (
-				D66E4EC32D99CD39007244FA /* Analytics */,
-				D66E4ED12D9A0017007244FA /* Config */,
-			);
 			name = Bouncer;
 			productName = Bouncer;
 			productReference = D6529F6F24A41371009AE3FF /* Bouncer.app */;
@@ -523,10 +543,6 @@
 			);
 			dependencies = (
 				D6529F8224A41372009AE3FF /* PBXTargetDependency */,
-			);
-			fileSystemSynchronizedGroups = (
-				D66E4EC32D99CD39007244FA /* Analytics */,
-				D66E4ED12D9A0017007244FA /* Config */,
 			);
 			name = BouncerTests;
 			productName = BouncerTests;
@@ -599,6 +615,7 @@
 				D664B24624AA92D200EB826D /* Assets.xcassets in Resources */,
 				D6B2CC8D24EF16C6004F72C4 /* wordlist.filter in Resources */,
 				D6529F7A24A41372009AE3FF /* Preview Assets.xcassets in Resources */,
+				D6625F3C2D9A122C005D05BF /* Config.swift.example in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -641,6 +658,8 @@
 				D664B24824AA998700EB826D /* UIImage+Gradient.swift in Sources */,
 				D673E75224C68404008B1072 /* FilterTypes.swift in Sources */,
 				D6CC125124E4837800388160 /* SettingsReducer.swift in Sources */,
+				D6625F3A2D9A122C005D05BF /* Config.swift in Sources */,
+				D6625F3B2D9A122C005D05BF /* Constants.swift in Sources */,
 				D6FC672924E49B2B0083C9FA /* FilterListContainerView.swift in Sources */,
 				D6CC124B24E452E100388160 /* TutorialContainerView.swift in Sources */,
 				D6529FCB24A54ADE009AE3FF /* FilterStoreFile.swift in Sources */,
@@ -660,6 +679,7 @@
 				D6FC672E24E4ACCF0083C9FA /* FilterMiddleware.swift in Sources */,
 				D62B331B24BAB16C002DFB81 /* ReviewService.swift in Sources */,
 				D679D67424AA758C00579223 /* Constants.swift in Sources */,
+				D6A388892D9A0B7C00CEA386 /* AnalyticsService.swift in Sources */,
 				D61497EC24E4433800AF997E /* FilterReducer.swift in Sources */,
 				D6529F7324A41371009AE3FF /* BouncerApp.swift in Sources */,
 				D616A7F329F42EEC00D5523F /* FilterStoreFileMigrator.swift in Sources */,
@@ -678,6 +698,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6A3888D2D9A0FCA00CEA386 /* AnalyticsServiceTests.swift in Sources */,
 				D617B44A24EB19C8009E0D40 /* AppSettingsDefaultsTests.swift in Sources */,
 				D6F0621124EC69F800F47BA2 /* FilterStoreFileTests.swift in Sources */,
 				D66A7C2924EB3F8C00349C3F /* SMSOfflineFilterTests.swift in Sources */,
@@ -717,7 +738,7 @@
 			buildSettings = {
 				CODE_SIGN_ENTITLEMENTS = SMSFilter/SMSFilter.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1198;
+				CURRENT_PROJECT_VERSION = 1209;
 				DEVELOPMENT_TEAM = J9F8F3PWTV;
 				INFOPLIST_FILE = SMSFilter/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
@@ -745,7 +766,7 @@
 				CODE_SIGN_ENTITLEMENTS = SMSFilter/SMSFilter.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1198;
+				CURRENT_PROJECT_VERSION = 1209;
 				DEVELOPMENT_TEAM = J9F8F3PWTV;
 				INFOPLIST_FILE = SMSFilter/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.0;
@@ -896,7 +917,7 @@
 				CODE_SIGN_ENTITLEMENTS = Bouncer/Bouncer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1198;
+				CURRENT_PROJECT_VERSION = 1209;
 				DEVELOPMENT_ASSET_PATHS = "\"Bouncer/Preview Content\"";
 				DEVELOPMENT_TEAM = J9F8F3PWTV;
 				ENABLE_PREVIEWS = YES;
@@ -931,7 +952,7 @@
 				CODE_SIGN_ENTITLEMENTS = Bouncer/Bouncer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1198;
+				CURRENT_PROJECT_VERSION = 1209;
 				DEVELOPMENT_ASSET_PATHS = "\"Bouncer/Preview Content\"";
 				DEVELOPMENT_TEAM = J9F8F3PWTV;
 				ENABLE_PREVIEWS = YES;
