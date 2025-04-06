@@ -37,12 +37,14 @@ Bouncer is written entirely in Swift and features:
 * Combine framework
 * SwiftUI 2.x features and improvements
 * Zero UIKit dependency
-* No third-party dependencies
 
 For more information on the architectural approach, check out the [Redux-like architecture with SwiftUI series](https://danielbernal.co/redux-like-architecture-with-swiftui-basics/).
 
 ## Building
-To build Bouncer, simply open Bouncer.xcodeproj in Xcode and click Build. No dependencies or additional requirements are needed.
+To build Bouncer, simply open Bouncer.xcodeproj in Xcode and click Build. 
+
+## Analytics
+The production version of Bouncer stores basic analytics for filter creation/update/deletion, using a SupaDB backend.
 
 ## Contribute
 Feel free to report any issues, fork the repo, and open pull requests with fixes, features, or updates.
