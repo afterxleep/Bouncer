@@ -8,7 +8,7 @@ import StoreKit
 
 struct ReviewServiceStoreKit: ReviewService {
     
-    let launchesMultipleRqeuired: Int = 3
+    let launchesMultipleRqeuired: Int = 10
     var appSettings: AppSettingsStore
     
     init(appSettings: AppSettingsStore) {
