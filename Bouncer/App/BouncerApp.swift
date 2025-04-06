@@ -9,15 +9,15 @@ import StoreKit
 @main
 struct BouncerApp: App {
     
-    let store = AppStore(initialState: .init(                            
+    let store = AppStore(initialState: .init(
                         settings: SettingsState(),
                         filters: FilterState() 
                         ),
                       reducer: appReducer,
                       middlewares: [
                         settingsMiddleware(appSettings: AppSettingsDefaults(userDefaults: UserDefaults.standard)),
-                        filterMiddleware(filterStore: FilterStoreFile()),
-                        reviewMiddleware(reviewService: ReviewServiceStoreKit(appSettings: AppSettingsDefaults(userDefaults: UserDefaults.standard)))                        
+                        filterMiddleware(filterStore: FilterStoreFile(), analyticsService: DefaultAnalyticsService()),
+                        reviewMiddleware(reviewService: ReviewServiceStoreKit(appSettings: AppSettingsDefaults(userDefaults: UserDefaults.standard)))
                       ]
     )
 
