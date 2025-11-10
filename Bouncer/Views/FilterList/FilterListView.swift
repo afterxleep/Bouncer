@@ -45,13 +45,20 @@ struct FilterListView: View {
                         filterList
                             .navigationBarTitle("LIST_VIEW_TITLE")
                             .toolbar {
-                                ToolbarItemGroup(placement: .navigationBarLeading) {
-                                    menu
+                                if #available(iOS 26.0, *) {
+                                    DefaultToolbarItem(kind: .search, placement: .bottomBar)
+                                    ToolbarSpacer(.flexible, placement: .bottomBar)
+                                    ToolbarItemGroup(placement: .bottomBar) {
+                                        menu
+                                        addButton
+                                    }
+                                } else {
+                                    ToolbarItemGroup(placement: .navigationBarTrailing) {
+                                        menu
+                                        addButton
+                                    }
                                 }
-                                ToolbarItemGroup(placement: .navigationBarTrailing) {
-                                    addButton
-                                }
-                            }                            
+                            }
                     }
                 }
 

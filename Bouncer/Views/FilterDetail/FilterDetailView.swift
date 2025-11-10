@@ -31,13 +31,27 @@ extension FilterDetailView {
         if isEmbedded {
             NavigationView {
                 form
-                    .navigationBarTitle("NEW_FILTER")
-                    .navigationBarItems(leading: leadingBarItem, trailing: trailingBarItem)
+                    .navigationTitle(title)
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            leadingBarItem
+                        }
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            trailingBarItem
+                        }
+                    }
             }
+            .presentationDetents([.large])
         } else {
             form
-                .navigationBarTitle("UPDATE_FILTER")
-                .navigationBarItems(trailing: trailingBarItem)
+                .navigationTitle(title)
+                .navigationBarTitleDisplayMode(.inline)
+                .toolbar {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        trailingBarItem
+                    }
+                }
         }
     }
     

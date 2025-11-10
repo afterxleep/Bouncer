@@ -29,7 +29,7 @@ struct FilterDetailContainerView: View {
     var body: some View {
         switch interactionType {
         case .add:
-            FilterDetailView(title: "FILTER_ADD_VIEW_TITLE",
+            FilterDetailView(title: "New Rule",
                              leadingBarItem: cancelButton,
                              trailingBarItem: saveButton,
                              filterType: $filterType,
@@ -40,7 +40,7 @@ struct FilterDetailContainerView: View {
                              isCaseSensitive: $isCaseSensitive)
         case .update:
             FilterDetailView(isEmbedded: false,
-                             title: "FILTER_EDIT_VIEW_TITLE",
+                             title: "Edit Rule",
                              leadingBarItem: cancelButton.hidden(),
                              trailingBarItem: saveButton,
                              filterType: $filterType,
@@ -70,13 +70,11 @@ extension FilterDetailContainerView {
     }
     
     private var cancelButton: some View {
-        Button(action: {
+        Button(role: .close) {
             presentationMode.wrappedValue.dismiss()
-        }) {
-            Text("CANCEL")
         }
     }
-    
+
     private var saveButton: some View {
         Button(action: {
             if(!filterTerm.isBlank) {
@@ -85,7 +83,8 @@ extension FilterDetailContainerView {
             }
         })
         {
-            Text("SAVE").disabled(filterTerm.isBlank)
+            Image(systemName: "checkmark")
+                .disabled(filterTerm.isBlank)
         }
     }
     
