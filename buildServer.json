@@ -1,7 +1,7 @@
 {
 	"name": "xcode build server",
-	"version": "0.2",
-	"bspVersion": "2.0",
+	"version": "1.3.0",
+	"bspVersion": "2.2.0",
 	"languages": [
 		"c",
 		"cpp",
@@ -10,10 +10,11 @@
 		"swift"
 	],
 	"argv": [
-		"/opt/homebrew/bin/xcode-build-server"
+		"/Users/afterxleep/.flowdeck/tools/lib/xcode-build-server/xcode-build-server.py"
 	],
 	"workspace": "/Users/afterxleep/Developer/Bouncer/Bouncer.xcodeproj/project.xcworkspace",
 	"build_root": "/Users/afterxleep/Library/Developer/Xcode/DerivedData/Bouncer-chlbwibbgytcundxavhafkgtdffg",
 	"scheme": "Bouncer",
-	"kind": "xcode"
+	"kind": "manual",
+	"indexStorePath": "/Users/afterxleep/Developer/Bouncer/.build/Index.noindex/DataStore"
 }
