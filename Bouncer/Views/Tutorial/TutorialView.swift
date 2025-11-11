@@ -38,7 +38,7 @@ struct TutorialView: View {
     }
 
     private var instructions: some View {
-        VStack(alignment: .leading) {
+        VStack(alignment: .leading, spacing: 9) {
             HStack {
                 Text("1.").foregroundColor(Color("TextDefaultColor"))
                 Text("OPEN_SPACE")
@@ -72,7 +72,7 @@ struct TutorialView: View {
                 Text("TAP")
                     .foregroundColor(Color("TextHighLightColor"))
                     .bold() +
-                    Text("UNKNOWN_SOURCES").foregroundColor(Color("TextDefaultColor"))
+                    Text("TEXT_MESSAGE_FILTER").foregroundColor(Color("TextDefaultColor"))
             }
 
             HStack {
@@ -80,7 +80,7 @@ struct TutorialView: View {
                 Text("TOGGLE")
                     .foregroundColor(Color("TextHighLightColor"))
                     .bold()
-                Image("toggle-icon")
+                Image(systemName: "checkmark").foregroundColor(Color("TextHighLightColor"))
                 Text( "'Bouncer'").foregroundColor(Color("TextDefaultColor"))
             }
         }

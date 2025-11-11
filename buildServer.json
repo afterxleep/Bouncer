@@ -15,5 +15,6 @@
 	"workspace": "/Users/afterxleep/Developer/Bouncer/Bouncer.xcodeproj/project.xcworkspace",
 	"build_root": "/Users/afterxleep/Library/Developer/Xcode/DerivedData/Bouncer-chlbwibbgytcundxavhafkgtdffg",
 	"scheme": "Bouncer",
-	"kind": "manual"
+	"kind": "manual",
+	"indexStorePath": "/Users/afterxleep/Library/Developer/FlowDeck/DerivedData/Index.noindex/DataStore"
 }

@@ -53,8 +53,8 @@
 "SETTINGS_APP" = "'Preferencias'";
 "TAP" = "Toca";
 "MESSAGES_APP" = " 'Mensajes'";
-"UNKNOWN_SOURCES" = " 'Desconocidos y No deseado'";
-"TOGGLE" = "Activa";
+"TEXT_MESSAGE_FILTER" = " 'Filtro de mensajes de texto'";
+"TOGGLE" = "Selecciona";
 "BUTTON_TUTORIAL_FIRST_LAUNCH_TEXT" = "Llévame a Ajustes!";
 "BUTTON_TUTORIAL_HELP_TEXT" = "Hecho!";
 "NEW_FILTER" = "Nueva Regla";

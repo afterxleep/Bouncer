@@ -32,7 +32,8 @@ extension FilterDetailView {
             NavigationView {
                 form
                     .navigationTitle(title)
-                    .navigationBarTitleDisplayMode(.inline)
+                    .navigationBarTitleDisplayMode(.large)
+                    .toolbarTitleLargeIfAvailable()
                     .toolbar {
                         ToolbarItem(placement: .navigationBarLeading) {
                             leadingBarItem
@@ -46,7 +47,8 @@ extension FilterDetailView {
         } else {
             form
                 .navigationTitle(title)
-                .navigationBarTitleDisplayMode(.inline)
+                .navigationBarTitleDisplayMode(.large)
+                .toolbarTitleLargeIfAvailable()
                 .toolbar {
                     ToolbarItem(placement: .navigationBarTrailing) {
                         trailingBarItem
@@ -119,6 +121,18 @@ extension FilterDetailView {
                     }.padding(.init(top: 5, leading: 0, bottom: 5, trailing: 10))
                 }
             }
+        }
+    }
+}
+
+private extension View {
+    @ViewBuilder
+    func toolbarTitleLargeIfAvailable() -> some View {
+        if #available(iOS 16.0, *) {
+            self
+                .toolbarTitleDisplayMode(.large)
+        } else {
+            self
         }
     }
 }

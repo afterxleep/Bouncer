@@ -43,7 +43,8 @@ struct FilterListView: View {
                     VStack {
                         picker
                         filterList
-                            .navigationBarTitle("LIST_VIEW_TITLE")
+                            .navigationTitle("LIST_VIEW_TITLE")
+                            .navigationBarTitleDisplayMode(.large)
                             .toolbar {
                                 if #available(iOS 26.0, *) {
                                     DefaultToolbarItem(kind: .search, placement: .bottomBar)
