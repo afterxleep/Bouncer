@@ -1,39 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Bucket
-   uuid = "AAE4EFE0-A5FD-4BAD-87B1-07E6F6EF3471"
    type = "1"
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "181E32EE-2022-40AA-9162-6FA8824683F9"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
+            endingColumnNumber = "9223372036854775807"
+            endingLineNumber = "14"
             filePath = "Bouncer/Views/Tutorial/TutorialView.swift"
             startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "14"
-            endingLineNumber = "14"
-            landmarkName = "TutorialView"
-            landmarkType = "14">
+            startingLineNumber = "14">
+            <Actions>
+            </Actions>
+            <Locations>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A6820D3D-89E6-47ED-8B1E-31FAABE78361"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
+            endingColumnNumber = "9223372036854775807"
+            endingLineNumber = "10"
             filePath = "BouncerTests/Models/SMSOfflineFilterTests.swift"
             startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "10"
-            endingLineNumber = "10"
-            landmarkName = "SMSOfflineFilterTests"
-            landmarkType = "3">
+            startingLineNumber = "10">
+            <Actions>
+            </Actions>
+            <Locations>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
