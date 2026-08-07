@@ -154,7 +154,7 @@ struct SMSOfflineFilter {
         return result
     }
     
-    private func getAction(_ filter: Filter) -> ILMessageFilterAction {
+    func action(for filter: Filter) -> ILMessageFilterAction {
         switch filter.action {
         case .junk:
             return .junk
@@ -169,7 +169,7 @@ struct SMSOfflineFilter {
         }
     }
     
-    private func getSubAction(_ filter: Filter) -> ILMessageFilterSubAction {
+    func subAction(for filter: Filter) -> ILMessageFilterSubAction {
         switch filter.subAction {
         case .transactionOrder:
             return .transactionalOrders
@@ -194,23 +194,27 @@ struct SMSOfflineFilter {
         }
     }
     
-    func filterMessage(message: SMSMessage) -> SMSOfflineFilterResponse  {
+    /// The first rule that matches, in evaluation order: allow rules win over
+    /// block rules. Exposed separately from `filterMessage` so the extension can
+    /// record which rule fired without re-running the match.
+    func matchingFilter(message: SMSMessage) -> Filter? {
         os_log("FILTEREXTENSION - Message Received: %@", log: OSLog.messageFilterLog, type: .info, "\(message)")
 
         // Allow List filters first
         for filter in filters.allowList() {
-            if(applyFilter(filter: filter, message: message)) {
-                return (getAction(filter), getSubAction(filter))
-            }
+            if applyFilter(filter: filter, message: message) { return filter }
         }
 
         // Block List filters if nothing found
         for filter in filters.blockList() {
-            if(applyFilter(filter: filter, message: message)) {
-                return (getAction(filter), getSubAction(filter))
-            }
+            if applyFilter(filter: filter, message: message) { return filter }
         }
-        return (.none, .none)
+        return nil
+    }
+
+    func filterMessage(message: SMSMessage) -> SMSOfflineFilterResponse  {
+        guard let filter = matchingFilter(message: message) else { return (.none, .none) }
+        return (action(for: filter), subAction(for: filter))
     }
 
 }

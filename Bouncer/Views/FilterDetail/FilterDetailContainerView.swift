@@ -24,12 +24,12 @@ struct FilterDetailContainerView: View {
     @State private var isCaseSensitive: Bool
 
     @EnvironmentObject var store: AppStore
-    @Environment(\.presentationMode) var presentationMode
+    @Environment(\.dismiss) private var dismiss
 
     var body: some View {
         switch interactionType {
         case .add:
-            FilterDetailView(title: "New Rule",
+            FilterDetailView(title: "NEW_FILTER",
                              leadingBarItem: cancelButton,
                              trailingBarItem: saveButton,
                              filterType: $filterType,
@@ -40,8 +40,8 @@ struct FilterDetailContainerView: View {
                              isCaseSensitive: $isCaseSensitive)
         case .update:
             FilterDetailView(isEmbedded: false,
-                             title: "Edit Rule",
-                             leadingBarItem: cancelButton.hidden(),
+                             title: "UPDATE_FILTER",
+                             leadingBarItem: EmptyView(),
                              trailingBarItem: saveButton,
                              filterType: $filterType,
                              filterDestination: $filterDestination,
@@ -69,23 +69,34 @@ extension FilterDetailContainerView {
         self._isCaseSensitive = .init(initialValue: filter?.caseSensitive ?? false)
     }
     
+    /// Neutral, never tinted: the destination colour on the dismiss action made
+    /// "Cancel" read in the same green that means "allow".
     private var cancelButton: some View {
-        Button(role: .close) {
-            presentationMode.wrappedValue.dismiss()
+        Button("CANCEL", role: .cancel) {
+            dismiss()
         }
+        .tint(Stage.secondary)
+        .accessibilityIdentifier("rule.cancel")
     }
 
+    /// `.disabled` belongs on the button, not on its label — on the label the
+    /// control stayed tappable and a blank rule could be saved.
+    /// Filled, so the primary action outranks the escape hatch by shape rather
+    /// than by colour alone.
     private var saveButton: some View {
-        Button(action: {
-            if(!filterTerm.isBlank) {
-                saveFilter()
-                presentationMode.wrappedValue.dismiss()
-            }
-        })
-        {
-            Image(systemName: "checkmark")
-                .disabled(filterTerm.isBlank)
+        Button("SAVE") {
+            guard !filterTerm.isBlank else { return }
+            saveFilter()
+            dismiss()
         }
+        .buttonStyle(.borderedProminent)
+        .buttonBorderShape(.capsule)
+        .fontWeight(.semibold)
+        .tint(filterDestination.category.tint)
+        // Dimmed rather than stroked-and-greyed, which read as a broken button.
+        .opacity(filterTerm.isBlank ? 0.4 : 1)
+        .disabled(filterTerm.isBlank)
+        .accessibilityIdentifier("rule.save")
     }
     
     private func saveFilter() {

@@ -23,7 +23,13 @@ struct ReviewServiceStoreKit: ReviewService {
         let lastVersionPromptedForReview = appSettings.lastVersionPromptedForReview
         
         // Has the process been completed several times and the user has not already been prompted for this version?
-        if ((appSettings.numberOfLaunches % launchesMultipleRqeuired) == 0) && currentVersion != lastVersionPromptedForReview {
+        // The launch count must clear the threshold before the modulo means
+        // anything — at zero launches `0 % 10` is also 0, which asked brand new
+        // users to rate the app the first time they added a rule.
+        let launches = appSettings.numberOfLaunches
+        if launches >= launchesMultipleRqeuired,
+           launches % launchesMultipleRqeuired == 0,
+           currentVersion != lastVersionPromptedForReview {
             appSettings.lastVersionPromptedForReview = currentVersion
 
             if #available(iOS 14.0, *) {
