@@ -8,7 +8,7 @@
 
 "FILTER_TYPE_SELECTION_LABEL" = "Cuando";
 "FILTER_TEXT_PLACEHOLDER" = "Ingresa una palabra o frase";
-"FILTER_CONTAINS_TEXT_LABEL" = "Contenga";
+"FILTER_CONTAINS_TEXT_LABEL" = "Coincide con";
 "FILTER_ADD_VIEW_TITLE" = "Add Regla";
 "FILTER_EDIT_VIEW_TITLE" = "Actualizar Regla";
 "SAVE" = "Guardar";
@@ -18,7 +18,7 @@
 "EXACT_MATCH" = "Ocurrencia Exacta";
 "EXACT_MATCH_CAPTION" = "Clasifica los mensajes solo cuando el remitente/mensaje es exactamente igual a la palabra o frase especificada arriba.";
 "FILTER_ACTION_LABEL" = "Etiqueta";
-"SAFE_ACTION" = "Seguro (No filtrar)";
+"SAFE_ACTION" = "Seguro";
 "JUNK_ACTION" = "Spam";
 "TRANSACTIONS" = "Transacciones";
 "TRANSACTION_ACTION" = "Otras Transacciones";
@@ -41,30 +41,11 @@
 "EMPTY_LIST_OTHER_MESSAGE" = "Utiliza diferentes categorías para archivar tus mensajes SMS, pero aún recibir notificaciones.";
 "TAP_SPACE" = "Toca '";
 "TO_ADD_A_FILTER_SPACE" = "' para agregar una regla.";
-"WELCOME_TITLE" = "Hola!";
-"WELCOME_SUBTITLE" = "Bienvenid@ a Bouncer!";
 "HELP" = "Ayuda";
-"LETS" = "Vamos a";
-"HERE_IS_HOW" = "Para ";
-"ENABLE_SMS_FILTERING" = "configurar el filtrado SMS";
-"ON_YOUR_IPHONE" = " en tu iPhone:";
-"OPEN_SPACE" = "Abre ";
-"THE_APP" = "la aplicación";
-"SETTINGS_APP" = "'Preferencias'";
-"TAP" = "Toca";
-"MESSAGES_APP" = " 'Mensajes'";
-"TEXT_MESSAGE_FILTER" = " 'Filtro de mensajes de texto'";
-"TOGGLE" = "Selecciona";
-"BUTTON_TUTORIAL_FIRST_LAUNCH_TEXT" = "Llévame a Ajustes!";
-"BUTTON_TUTORIAL_HELP_TEXT" = "Hecho!";
 "NEW_FILTER" = "Nueva Regla";
 "UPDATE_FILTER" = "Editar Regla";
-"1." = "1.";
-"2." = "2.";
-"3." = "3.";
-"4." = "4.";
 "USE_REGULAR_EXPRESSIONS" = "Filtrar como Expresión Regular";
-"USE_REGULAR_EXPRESSIONS_DETAIL" = "Activa esta opción si tu regla contiene una Expresión Regular (Regex). (Las expresiones regulares deben usar el formato PCRE).";
+"USE_REGULAR_EXPRESSIONS_DETAIL" = "Trata la frase como un patrón PCRE.";
 "EXPORT_BLOCK_LIST" = "Exportar Lista de reglas";
 "IMPORT_BLOCK_LIST" = "Importar Lista de reglas";
 "NEW_FILTERS" = "Reglas Nuevas";
@@ -78,10 +59,133 @@
 "NEED_HELP" = "Necesitas ayuda?";
 "ASK_ANYTHING" = "Preguntame!";
 "NO_EMAIL_CONFIGURED" = "Parece que no tienes una cuenta de correo configurada en tu iPhone.  Puedes escribirme a daniebernal@hey.com";
-"SETUP_INFO" = "Enable SMS filtering";
 "IS_CASE_SENSITIVE" = "Sensible a mayúsculas";
-"IS_CASE_SENSITIVE_DETAIL" = "Active esta opción para tratar los caracteres en mayúscula y minúscula de manera diferente.";
+"IS_CASE_SENSITIVE_DETAIL" = "Distingue mayúsculas de minúsculas.";
 "INCORRECT_FILE_FORMAT" = "El archivo JSON no tiene el formato correcto o es incompatible.";
 "OK" = "OK";
-"GENERAL" = "GENERAL";
-"APPS" = "'Aplicaciones'";
+"GENERAL" = "General";
+
+/* Onboarding */
+"ONBOARDING_WELCOME_TITLE" = "Bienvenido a Bouncer";
+"ONBOARDING_WELCOME_BODY" = "Bouncer filtra los SMS no deseados antes de que lleguen a tu bandeja. Configurarlo toma menos de un minuto.";
+"ONBOARDING_BULLET_JUNK" = "Manda la basura fuera de tu bandeja";
+"ONBOARDING_BULLET_ALLOW" = "Deja pasar los mensajes que importan";
+"ONBOARDING_BULLET_CATEGORIES" = "Ordena pedidos, ofertas y recordatorios";
+"ONBOARDING_GET_STARTED" = "Empezar";
+"ONBOARDING_SKIP" = "Omitir";
+"ONBOARDING_NEXT" = "Siguiente";
+"ONBOARDING_BACK" = "Atrás";
+"ONBOARDING_OPEN_SETTINGS" = "Abrir Ajustes";
+"ONBOARDING_DONE" = "Listo";
+"ONBOARDING_STEP_COUNTER %1$d %2$d" = "Paso %1$d de %2$d";
+"ONBOARDING_SCREENSHOT_PENDING" = "Captura pendiente";
+"ONBOARDING_STEP_1_TITLE" = "Abre Ajustes";
+"ONBOARDING_STEP_1_BODY" = "Toca «Abrir Ajustes» aquí abajo. Se abrirá la página principal de Ajustes.";
+"ONBOARDING_STEP_2_TITLE" = "Entra en Apps";
+"ONBOARDING_STEP_2_BODY" = "Desplázate hacia abajo y toca «Apps».";
+"ONBOARDING_STEP_3_TITLE" = "Elige Mensajes";
+"ONBOARDING_STEP_3_BODY" = "En la lista de aplicaciones, toca «Mensajes».";
+"ONBOARDING_STEP_4_TITLE" = "Toca Filtro de mensajes de texto";
+"ONBOARDING_STEP_4_BODY" = "Activa «Filtrar remitentes desconocidos» y luego toca «Filtro de mensajes de texto».";
+"ONBOARDING_STEP_5_TITLE" = "Activa Bouncer";
+"ONBOARDING_STEP_5_BODY" = "Selecciona «Bouncer» y acepta el aviso. Tranquilo: no enviamos tus mensajes a ningún servidor. La marca de verificación significa que el filtrado está activo.";
+
+/* Rule list */
+"SCOPE_SAFE" = "Seguros";
+"SCOPE_JUNK" = "Basura";
+"SCOPE_CATEGORIES" = "Categorías";
+"SCOPE_PICKER_LABEL" = "Lista de reglas";
+"SEARCH_RULES" = "Buscar reglas";
+"RULE_COUNT %lld" = "^[%lld regla](inflect: true)";
+"ADD_RULE" = "Añadir regla";
+"DELETE" = "Eliminar";
+"MORE_ACTIONS" = "Más";
+
+/* Rule row */
+"SCOPE_SHORT_ANY" = "Todo el mensaje";
+"SCOPE_SHORT_SENDER" = "Remitente";
+"SCOPE_SHORT_MESSAGE" = "Texto del mensaje";
+"MODIFIER_REGEX" = "Regex";
+"MODIFIER_CASE_SENSITIVE" = "Distingue mayúsculas";
+
+/* Rule editor */
+"FILTER_SCOPE_SECTION" = "Buscar en";
+"FILTER_ACTION_SECTION" = "Enviar a";
+"FILTER_TEXT_FOOTER" = "Coincidirán los mensajes que contengan esta palabra o frase.";
+"FILTER_TEXT_FOOTER_REGEX" = "Coincidirán los mensajes que cumplan esta expresión regular.";
+
+/* Import */
+"IMPORT_TITLE" = "Importar reglas";
+"IMPORT_CONFIRM %lld" = "Añadir %lld";
+"SELECTION_OPTIONS" = "Selección";
+"EMPTY_IMPORT_FILE_DETAIL" = "Elige una lista de reglas de Bouncer exportada desde esta app.";
+"NEW_FILTERS_FOOTER" = "Estas reglas aún no están en tu lista.";
+"DUPLICATE_FILTERS_FOOTER" = "Ya tienes estas reglas. Añadirlas de nuevo creará duplicados.";
+
+/* Onboarding illustrations: these mirror the labels iOS shows in Settings */
+"ONBOARDING_MOCK_SETTINGS" = "Ajustes";
+"ONBOARDING_MOCK_GENERAL" = "General";
+"ONBOARDING_MOCK_ACCESSIBILITY" = "Accesibilidad";
+"ONBOARDING_MOCK_PRIVACY" = "Privacidad";
+"ONBOARDING_MOCK_APPS" = "Apps";
+"ONBOARDING_MOCK_CALENDAR" = "Calendario";
+"ONBOARDING_MOCK_CONTACTS" = "Contactos";
+"ONBOARDING_MOCK_MAPS" = "Mapas";
+"ONBOARDING_MOCK_MESSAGES" = "Mensajes";
+"ONBOARDING_MOCK_SCREEN_UNKNOWN" = "Filtrar remitentes desconocidos";
+"ONBOARDING_MOCK_FILTERING" = "Filtrado de mensajes";
+"ONBOARDING_MOCK_OFF" = "No";
+"ONBOARDING_MOCK_BOUNCER" = "Bouncer";
+"ONBOARDING_CLOSE" = "Cerrar";
+"ONBOARDING_MOCK_ICLOUD" = "iCloud";
+"ONBOARDING_MOCK_SAFARI" = "Safari";
+"ONBOARDING_MOCK_IMESSAGE" = "iMessage";
+"ONBOARDING_MOCK_READ_RECEIPTS" = "Enviar confirmaciones";
+"ONBOARDING_MOCK_UNKNOWN_FOOTER" = "Ordena los mensajes de quienes no están en tus contactos.";
+"ONBOARDING_MOCK_FILTERING_FOOTER" = "Elige una app para filtrar tus mensajes.";
+"FILTER_PREVIEW_PLACEHOLDER" = "Tu nueva regla";
+"NO_RESULTS %@" = "Sin resultados para «%@»";
+"NO_RESULTS_DETAIL" = "Revisa la ortografía o prueba otra palabra.";
+"IMPORT_CONFIRM_EMPTY" = "Añadir";
+"HEADER_NO_RULES" = "Aún no hay reglas";
+"HEADER_RULE_SUMMARY %lld" = "^[%lld regla](inflect: true) vigilando tu bandeja";
+"ADD_RULE_JUNK" = "Bloquear palabra o remitente";
+"ADD_RULE_SAFE" = "Permitir siempre un remitente";
+"ADD_RULE_CATEGORY" = "Clasificar un tipo de mensaje";
+"CATCH_TOTAL %lld" = "%lld filtrados";
+"CATCH_NONE" = "Sin coincidencias";
+"HEADER_CAUGHT %lld" = "^[%lld mensaje](inflect: true) filtrados en los últimos 30 días";
+
+/* The rule read back as a sentence */
+"RULE_SENTENCE_PREFIX" = "Los mensajes donde";
+"RULE_SENTENCE_SCOPE_ANY" = "cualquier parte";
+"RULE_SENTENCE_SCOPE_SENDER" = "el remitente";
+"RULE_SENTENCE_SCOPE_MESSAGE" = "el texto";
+"RULE_SENTENCE_CONTAINS" = "contenga";
+"RULE_SENTENCE_ANY_PHRASE" = "una palabra o frase";
+"RULE_SENTENCE_GO_TO" = "van a";
+"LANE_WINDOW" = "Últimos 30 días";
+"LANE_SUMMARY %lld" = "^[%lld mensaje](inflect: true) filtrados por estas reglas";
+"LANE_SUMMARY_NONE" = "Aún no ha coincidido ningún mensaje";
+
+"OTHER_SHORT" = "Otros";
+"RULE_SENTENCE %1$@ %2$@ %3$@" = "Los mensajes donde %1$@ contenga %2$@ van a %3$@.";
+"LANE_IDLE_ONE %@" = "«%@» no ha coincidido con nada. Quizá convenga cambiarla o eliminarla.";
+"LANE_IDLE_MANY %lld" = "^[%lld regla](inflect: true) aquí no han coincidido con nada.";
+
+/* Help */
+"HELP_TITLE" = "Ayuda";
+"HELP_INTRO" = "Bouncer solo filtra mensajes cuando le has indicado a iOS que lo use. Si no se filtra nada, casi siempre es por la configuración de abajo.";
+"HELP_SETUP_SECTION" = "Activar el filtrado";
+"HELP_SETUP_FOOTER" = "iOS no permite que una app active su propio filtro de mensajes, así que hay que hacerlo una vez en Ajustes.";
+"HELP_OPEN_SETTINGS" = "Llévame a Ajustes";
+"HELP_SHOW_WALKTHROUGH" = "Ver los pasos";
+"HELP_SUPPORT_SECTION" = "Soporte";
+"HELP_SUPPORT_FOOTER" = "Preguntas, errores y sugerencias llegan directamente al desarrollador.";
+"HELP_EMAIL_SUPPORT" = "Escribir a soporte";
+"HELP_PRIVACY" = "Tus mensajes se filtran en tu iPhone y nunca se envían a ningún servidor. Ni a Bouncer ni a nadie.";
+"HELP_VERSION %@" = "Bouncer %@";
+"DONE" = "OK";
+"LANE_WINDOW_CAPTION" = "mensajes filtrados en los últimos 30 días";
+"RULE_SECTION_HEADER %lld" = "^[%lld regla](inflect: true)";
+"REGEX_LEARN_MORE" = "¿Qué es una expresión regular?";

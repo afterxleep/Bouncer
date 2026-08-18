@@ -29,11 +29,19 @@ final class MessageFilterExtension: ILMessageFilterExtension {
         guard let sender = queryRequest.sender, let messageBody = queryRequest.messageBody else {
             return
         }
-        let filter = SMSOfflineFilter(filterList: filters)
-        let filterOutput: SMSOfflineFilterResponse = filter.filterMessage(message: SMSMessage(sender: sender,
-                                                                                              text: messageBody))
-        response.action = filterOutput.action
-        response.subAction = filterOutput.subAction
+        let engine = SMSOfflineFilter(filterList: filters)
+        let message = SMSMessage(sender: sender, text: messageBody)
+
+        if let matched = engine.matchingFilter(message: message) {
+            response.action = engine.action(for: matched)
+            response.subAction = engine.subAction(for: matched)
+            // Record that this rule earned its place. Counts only — no part of
+            // the message is written anywhere.
+            RuleActivityStore.shared.record(match: matched.id)
+        } else {
+            response.action = .none
+            response.subAction = .none
+        }
         os_log("FILTEREXTENSION - Filtering action: %@", log: OSLog.messageFilterLog, type: .info, "\(response.action.rawValue)")
         os_log("FILTEREXTENSION - Filtering sub-action: %@", log: OSLog.messageFilterLog, type: .info, "\(response.subAction.rawValue)")
         os_log("FILTEREXTENSION - Filtering done", log: OSLog.messageFilterLog, type: .info)

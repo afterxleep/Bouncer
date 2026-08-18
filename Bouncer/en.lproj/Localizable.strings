@@ -8,7 +8,7 @@
 
 "FILTER_TYPE_SELECTION_LABEL" = "When";
 "FILTER_TEXT_PLACEHOLDER" = "Enter a word or phrase";
-"FILTER_CONTAINS_TEXT_LABEL" = "Contains";
+"FILTER_CONTAINS_TEXT_LABEL" = "Match this text";
 "FILTER_ADD_VIEW_TITLE" = "Add Rule";
 "FILTER_EDIT_VIEW_TITLE" = "Update Rule";
 "SAVE" = "Save";
@@ -19,7 +19,7 @@
 "EXACT_MATCH_CAPTION" = "Classify messages only when the sender/message exactly matches specified term.";
 "FILTER_ACTION_LABEL" = "Label";
 "TRANSACTIONS" = "Transactions";
-"SAFE_ACTION" = "Safe (Allow)";
+"SAFE_ACTION" = "Safe";
 "JUNK_ACTION" = "Junk";
 "TRANSACTION_ACTION" = "Other Transactions";
 "TRANSACTION_ACTION_ORDERS" = "Orders";
@@ -41,30 +41,11 @@
 "EMPTY_LIST_OTHER_MESSAGE" = "Use category rules to classify SMS messages out of your inbox, but still get notifications.";
 "TAP_SPACE" = "Tap '";
 "TO_ADD_A_FILTER_SPACE" = "' to add a rule.";
-"WELCOME_TITLE" = "Hello there!";
-"WELCOME_SUBTITLE" = "Welcome to Bouncer";
 "HELP" = "Help";
-"LETS" = "Let's ";
-"HERE_IS_HOW" = "To ";
-"ENABLE_SMS_FILTERING" = "enable SMS filtering";
-"ON_YOUR_IPHONE" = " on your iPhone:";
-"OPEN_SPACE" = "Open ";
-"THE_APP" = "the";
-"SETTINGS_APP" = "'Settings' app";
-"TAP" = "Tap";
-"MESSAGES_APP" = " 'Messages'";
-"TEXT_MESSAGE_FILTER" = " 'Text Message Filter'";
-"TOGGLE" = "Enable";
-"BUTTON_TUTORIAL_FIRST_LAUNCH_TEXT" = "Take me to Settings!";
-"BUTTON_TUTORIAL_HELP_TEXT" = "Got it!";
 "NEW_FILTER" = "New Rule";
 "UPDATE_FILTER" = "Update Rule";
-"1." = "1.";
-"2." = "2.";
-"3." = "3.";
-"4." = "4.";
-"USE_REGULAR_EXPRESSIONS" = "Match as Regular Expression";
-"USE_REGULAR_EXPRESSIONS_DETAIL" = "Enable this option if your rule contains a regular expression.  (Regex should be provided in PCRE format).";
+"USE_REGULAR_EXPRESSIONS" = "Regular expression";
+"USE_REGULAR_EXPRESSIONS_DETAIL" = "Treat the phrase as a PCRE pattern.";
 "EXPORT_BLOCK_LIST" = "Export Rule List";
 "IMPORT_BLOCK_LIST" = "Import Rule List";
 "NEW_FILTERS" = "New Rules";
@@ -78,10 +59,133 @@
 "NEED_HELP" = "Need more help?";
 "ASK_ANYTHING" = "Ask anything!";
 "NO_EMAIL_CONFIGURED" = "It seems you don't have an email account set up. You can write me directly at danielbernal@hey.com";
-"SETUP_INFO" = "Enable SMS filtering";
 "IS_CASE_SENSITIVE" = "Case sensitive";
-"IS_CASE_SENSITIVE_DETAIL" = "Enable this option to treat uppercase and lowercase characters differently.";
+"IS_CASE_SENSITIVE_DETAIL" = "Match upper and lower case exactly.";
 "INCORRECT_FILE_FORMAT" = "The JSON file does not appear to have the right format or is incompatible";
 "OK" = "OK";
-"GENERAL" = "GENERAL";
-"APPS" = "'Apps'";
+"GENERAL" = "General";
+
+/* Onboarding */
+"ONBOARDING_WELCOME_TITLE" = "Welcome to Bouncer";
+"ONBOARDING_WELCOME_BODY" = "Bouncer filters unwanted SMS before it reaches your inbox. Setting it up takes about a minute.";
+"ONBOARDING_BULLET_JUNK" = "Send junk straight out of your inbox";
+"ONBOARDING_BULLET_ALLOW" = "Keep the messages that matter";
+"ONBOARDING_BULLET_CATEGORIES" = "Sort orders, offers and reminders";
+"ONBOARDING_GET_STARTED" = "Get Started";
+"ONBOARDING_SKIP" = "Skip";
+"ONBOARDING_NEXT" = "Next";
+"ONBOARDING_BACK" = "Back";
+"ONBOARDING_OPEN_SETTINGS" = "Open Settings";
+"ONBOARDING_DONE" = "Done";
+"ONBOARDING_STEP_COUNTER %1$d %2$d" = "Step %1$d of %2$d";
+"ONBOARDING_SCREENSHOT_PENDING" = "Screenshot coming soon";
+"ONBOARDING_STEP_1_TITLE" = "Open Settings";
+"ONBOARDING_STEP_1_BODY" = "Tap Open Settings below. The Settings app opens on its main page.";
+"ONBOARDING_STEP_2_TITLE" = "Go to Apps";
+"ONBOARDING_STEP_2_BODY" = "Scroll down and tap Apps.";
+"ONBOARDING_STEP_3_TITLE" = "Choose Messages";
+"ONBOARDING_STEP_3_BODY" = "In the list of apps, tap Messages.";
+"ONBOARDING_STEP_4_TITLE" = "Tap Text Message Filter";
+"ONBOARDING_STEP_4_BODY" = "Enable “Screen Unknown Senders” and then tap “Text Message Filter”.";
+"ONBOARDING_STEP_5_TITLE" = "Turn on Bouncer";
+"ONBOARDING_STEP_5_BODY" = "Select Bouncer and accept the notice. It's OK: we don't send your messages to a server. A checkmark means filtering is active.";
+
+/* Rule list */
+"SCOPE_SAFE" = "Safe";
+"SCOPE_JUNK" = "Junk";
+"SCOPE_CATEGORIES" = "Categories";
+"SCOPE_PICKER_LABEL" = "Rule list";
+"SEARCH_RULES" = "Search rules";
+"RULE_COUNT %lld" = "^[%lld rule](inflect: true)";
+"ADD_RULE" = "Add Rule";
+"DELETE" = "Delete";
+"MORE_ACTIONS" = "More";
+
+/* Rule row */
+"SCOPE_SHORT_ANY" = "Anywhere";
+"SCOPE_SHORT_SENDER" = "Sender";
+"SCOPE_SHORT_MESSAGE" = "Message text";
+"MODIFIER_REGEX" = "Regex";
+"MODIFIER_CASE_SENSITIVE" = "Case sensitive";
+
+/* Rule editor */
+"FILTER_SCOPE_SECTION" = "Look in";
+"FILTER_ACTION_SECTION" = "Send to";
+"FILTER_TEXT_FOOTER" = "Messages containing this word or phrase will match.";
+"FILTER_TEXT_FOOTER_REGEX" = "Messages matching this regular expression will match.";
+
+/* Import */
+"IMPORT_TITLE" = "Import Rules";
+"IMPORT_CONFIRM %lld" = "Add %lld";
+"SELECTION_OPTIONS" = "Selection";
+"EMPTY_IMPORT_FILE_DETAIL" = "Choose a Bouncer rule list exported from this app.";
+"NEW_FILTERS_FOOTER" = "These rules aren't in your list yet.";
+"DUPLICATE_FILTERS_FOOTER" = "You already have these rules. Adding them again will create duplicates.";
+
+/* Onboarding illustrations: these mirror the labels iOS shows in Settings */
+"ONBOARDING_MOCK_SETTINGS" = "Settings";
+"ONBOARDING_MOCK_GENERAL" = "General";
+"ONBOARDING_MOCK_ACCESSIBILITY" = "Accessibility";
+"ONBOARDING_MOCK_PRIVACY" = "Privacy";
+"ONBOARDING_MOCK_APPS" = "Apps";
+"ONBOARDING_MOCK_CALENDAR" = "Calendar";
+"ONBOARDING_MOCK_CONTACTS" = "Contacts";
+"ONBOARDING_MOCK_MAPS" = "Maps";
+"ONBOARDING_MOCK_MESSAGES" = "Messages";
+"ONBOARDING_MOCK_SCREEN_UNKNOWN" = "Screen Unknown Senders";
+"ONBOARDING_MOCK_FILTERING" = "Text Message Filtering";
+"ONBOARDING_MOCK_OFF" = "Off";
+"ONBOARDING_MOCK_BOUNCER" = "Bouncer";
+"ONBOARDING_CLOSE" = "Close";
+"ONBOARDING_MOCK_ICLOUD" = "iCloud";
+"ONBOARDING_MOCK_SAFARI" = "Safari";
+"ONBOARDING_MOCK_IMESSAGE" = "iMessage";
+"ONBOARDING_MOCK_READ_RECEIPTS" = "Send Read Receipts";
+"ONBOARDING_MOCK_UNKNOWN_FOOTER" = "Sort messages from people who aren't in your contacts.";
+"ONBOARDING_MOCK_FILTERING_FOOTER" = "Choose an app to filter your messages.";
+"FILTER_PREVIEW_PLACEHOLDER" = "Your new rule";
+"NO_RESULTS %@" = "No results for “%@”";
+"NO_RESULTS_DETAIL" = "Check the spelling or try a different word.";
+"IMPORT_CONFIRM_EMPTY" = "Add";
+"HEADER_NO_RULES" = "No rules yet";
+"HEADER_RULE_SUMMARY %lld" = "^[%lld rule](inflect: true) watching your inbox";
+"ADD_RULE_JUNK" = "Block a word or sender";
+"ADD_RULE_SAFE" = "Always allow a sender";
+"ADD_RULE_CATEGORY" = "Sort a kind of message";
+"CATCH_TOTAL %lld" = "%lld caught";
+"CATCH_NONE" = "No matches yet";
+"HEADER_CAUGHT %lld" = "^[%lld message](inflect: true) handled in the last 30 days";
+
+/* The rule read back as a sentence */
+"RULE_SENTENCE_PREFIX" = "Messages where";
+"RULE_SENTENCE_SCOPE_ANY" = "any part";
+"RULE_SENTENCE_SCOPE_SENDER" = "the sender";
+"RULE_SENTENCE_SCOPE_MESSAGE" = "the message text";
+"RULE_SENTENCE_CONTAINS" = "contains";
+"RULE_SENTENCE_ANY_PHRASE" = "a word or phrase";
+"RULE_SENTENCE_GO_TO" = "go to";
+"LANE_WINDOW" = "Last 30 days";
+"LANE_SUMMARY %lld" = "^[%lld message](inflect: true) handled by these rules";
+"LANE_SUMMARY_NONE" = "Nothing has matched these rules yet";
+
+"OTHER_SHORT" = "Other";
+"RULE_SENTENCE %1$@ %2$@ %3$@" = "Messages where %1$@ contains %2$@ go to %3$@.";
+"LANE_IDLE_ONE %@" = "“%@” hasn’t matched anything. It may be worth changing or removing.";
+"LANE_IDLE_MANY %lld" = "^[%lld rule](inflect: true) here haven’t matched anything.";
+
+/* Help */
+"HELP_TITLE" = "Help";
+"HELP_INTRO" = "Bouncer only filters messages once iOS has been told to use it. If nothing is being filtered, the setup below is almost always why.";
+"HELP_SETUP_SECTION" = "Turn on filtering";
+"HELP_SETUP_FOOTER" = "iOS doesn’t let an app switch on its own message filter, so this has to be done once in Settings.";
+"HELP_OPEN_SETTINGS" = "Take me to Settings";
+"HELP_SHOW_WALKTHROUGH" = "Show me each step";
+"HELP_SUPPORT_SECTION" = "Support";
+"HELP_SUPPORT_FOOTER" = "Questions, bugs and feature requests all reach the developer directly.";
+"HELP_EMAIL_SUPPORT" = "Email support";
+"HELP_PRIVACY" = "Your messages are filtered on your iPhone and are never sent to a server. Not to Bouncer, not to anyone.";
+"HELP_VERSION %@" = "Bouncer %@";
+"DONE" = "Done";
+"LANE_WINDOW_CAPTION" = "messages handled in the last 30 days";
+"RULE_SECTION_HEADER %lld" = "^[%lld rule](inflect: true)";
+"REGEX_LEARN_MORE" = "What is a regular expression?";
