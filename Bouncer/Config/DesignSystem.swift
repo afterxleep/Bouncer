@@ -80,7 +80,7 @@ extension FilterDestination {
         case .allow:
             return Category(symbol: "checkmark.shield.fill", tint: Brand.safe, titleKey: "SAFE_ACTION", shortKey: "SAFE_ACTION")
         case .junk, .none:
-            return Category(symbol: "hand.raised.fill", tint: Brand.junk, titleKey: "JUNK_ACTION", shortKey: "JUNK_ACTION")
+            return Category(symbol: "trash.fill", tint: Brand.junk, titleKey: "JUNK_ACTION", shortKey: "JUNK_ACTION")
         case .transactionOrder:
             return Category(symbol: "shippingbox.fill", tint: Brand.orders, titleKey: "TRANSACTION_ACTION_ORDERS", shortKey: "TRANSACTION_ACTION_ORDERS")
         case .transactionFinance:

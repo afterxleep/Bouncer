@@ -66,7 +66,7 @@
 "GENERAL" = "General";
 
 /* Onboarding */
-"ONBOARDING_WELCOME_TITLE" = "Welcome to Bouncer";
+"ONBOARDING_WELCOME_TITLE" = "Welcome to Bouncer!";
 "ONBOARDING_WELCOME_BODY" = "Bouncer filters unwanted SMS before it reaches your inbox. Setting it up takes about a minute.";
 "ONBOARDING_BULLET_JUNK" = "Send junk straight out of your inbox";
 "ONBOARDING_BULLET_ALLOW" = "Keep the messages that matter";

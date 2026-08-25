@@ -21,7 +21,6 @@
 		AA0300000000000000000002 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0300000000000000000001 /* DesignSystem.swift */; };
 		AA0300000000000000000004 /* OnboardingIllustrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0300000000000000000003 /* OnboardingIllustrations.swift */; };
 		AA0400000000000000000002 /* RuleListComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0400000000000000000001 /* RuleListComponents.swift */; };
-		AA0400000000000000000004 /* DoorScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0400000000000000000003 /* DoorScene.swift */; };
 		AA0500000000000000000002 /* RuleActivityStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0500000000000000000001 /* RuleActivityStore.swift */; };
 		AA0500000000000000000003 /* RuleActivityStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0500000000000000000001 /* RuleActivityStore.swift */; };
 		AA0600000000000000000002 /* SystemSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0600000000000000000001 /* SystemSettings.swift */; };
@@ -133,7 +132,6 @@
 		AA0300000000000000000001 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
 		AA0300000000000000000003 /* OnboardingIllustrations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingIllustrations.swift; sourceTree = "<group>"; };
 		AA0400000000000000000001 /* RuleListComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleListComponents.swift; sourceTree = "<group>"; };
-		AA0400000000000000000003 /* DoorScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DoorScene.swift; sourceTree = "<group>"; };
 		AA0500000000000000000001 /* RuleActivityStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleActivityStore.swift; sourceTree = "<group>"; };
 		AA0600000000000000000001 /* SystemSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemSettings.swift; sourceTree = "<group>"; };
 		AA0600000000000000000003 /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
@@ -433,7 +431,6 @@
 			children = (
 				D6529FA324A413EB009AE3FF /* BackgroundView.swift */,
 				AA0600000000000000000001 /* SystemSettings.swift */,
-				AA0400000000000000000003 /* DoorScene.swift */,
 			);
 			path = SharedViews;
 			sourceTree = "<group>";
@@ -745,7 +742,6 @@
 				D644F1EC24E59FBE006C5EE2 /* FilterDetailContainerView.swift in Sources */,
 				D6529FA424A413EB009AE3FF /* BackgroundView.swift in Sources */,
 				AA0600000000000000000002 /* SystemSettings.swift in Sources */,
-				AA0400000000000000000004 /* DoorScene.swift in Sources */,
 				D6FC672E24E4ACCF0083C9FA /* FilterMiddleware.swift in Sources */,
 				D62B331B24BAB16C002DFB81 /* ReviewService.swift in Sources */,
 				D6A388892D9A0B7C00CEA386 /* AnalyticsService.swift in Sources */,
@@ -812,7 +808,7 @@
 				CODE_SIGN_ENTITLEMENTS = SMSFilter/SMSFilter.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1344;
+				CURRENT_PROJECT_VERSION = 1386;
 				DEVELOPMENT_TEAM = J9F8F3PWTV;
 				INFOPLIST_FILE = SMSFilter/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
@@ -841,7 +837,7 @@
 				CODE_SIGN_ENTITLEMENTS = SMSFilter/SMSFilter.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1344;
+				CURRENT_PROJECT_VERSION = 1386;
 				DEVELOPMENT_TEAM = J9F8F3PWTV;
 				INFOPLIST_FILE = SMSFilter/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
@@ -999,7 +995,7 @@
 				CODE_SIGN_ENTITLEMENTS = Bouncer/Bouncer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1344;
+				CURRENT_PROJECT_VERSION = 1386;
 				DEVELOPMENT_ASSET_PATHS = "\"Bouncer/Preview Content\"";
 				DEVELOPMENT_TEAM = J9F8F3PWTV;
 				ENABLE_PREVIEWS = YES;
@@ -1033,7 +1029,7 @@
 				CODE_SIGN_ENTITLEMENTS = Bouncer/Bouncer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1344;
+				CURRENT_PROJECT_VERSION = 1386;
 				DEVELOPMENT_ASSET_PATHS = "\"Bouncer/Preview Content\"";
 				DEVELOPMENT_TEAM = J9F8F3PWTV;
 				ENABLE_PREVIEWS = YES;

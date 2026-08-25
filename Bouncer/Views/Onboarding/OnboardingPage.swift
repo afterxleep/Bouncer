@@ -46,9 +46,6 @@ enum OnboardingPage: Int, CaseIterable, Identifiable {
 }
 
 struct OnboardingWelcomePage: View {
-    /// True only while this is the visible page.
-    var isActive: Bool = true
-
 
     private func bullet(_ destination: FilterDestination, _ textKey: LocalizedStringKey) -> some View {
         let category = destination.category
@@ -72,8 +69,12 @@ struct OnboardingWelcomePage: View {
     var body: some View {
         GeometryReader { proxy in
             ScrollView {
-                content
-                    .frame(maxWidth: .infinity, minHeight: proxy.size.height)
+                VStack(spacing: 0) {
+                    Spacer(minLength: 0)
+                    content
+                    Spacer(minLength: 0)
+                }
+                .frame(maxWidth: .infinity, minHeight: proxy.size.height)
             }
             .scrollBounceBehavior(.basedOnSize)
         }
@@ -81,21 +82,16 @@ struct OnboardingWelcomePage: View {
 
     private var content: some View {
         VStack(spacing: OnboardingStyle.contentSpacing) {
-                // The product in one moving picture: mail queues, the door
-                // rules on it, junk is turned away.
-                DoorScene(presence: .hero, isActive: isActive)
-                    .frame(height: 150)
-                    .mask {
-                        LinearGradient(stops: [
-                            .init(color: .clear, location: 0.0),
-                            .init(color: .black, location: 0.16),
-                            .init(color: .black, location: 0.80),
-                            .init(color: .clear, location: 1.0),
-                        ], startPoint: .top, endPoint: .bottom)
-                    }
-                    .padding(.horizontal, -OnboardingStyle.pageHorizontalPadding)
+                Image("AppLogo")
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 72, height: 72)
+                    .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                    .shadow(color: .black.opacity(Stage.isDarkFallbackShadow), radius: 12, y: 6)
+                    .accessibilityHidden(true)
+                    .padding(.bottom, 4)
                 Text("ONBOARDING_WELCOME_TITLE")
-                    .font(.system(.largeTitle, design: .rounded).weight(.bold))
+                    .font(.system(.largeTitle).weight(.bold))
                     .foregroundStyle(OnboardingStyle.textPrimary)
                     .multilineTextAlignment(.center)
                 Text("ONBOARDING_WELCOME_BODY")
@@ -112,7 +108,6 @@ struct OnboardingWelcomePage: View {
                 .padding(.leading, OnboardingStyle.bulletInset)
                 .padding(.trailing, 4)
                 .padding(.top, 12)
-                Spacer(minLength: 0)
             }
             .frame(maxWidth: .infinity)
             .padding(.horizontal, OnboardingStyle.pageHorizontalPadding)
@@ -143,7 +138,7 @@ struct OnboardingStepPage: View {
                     .background(Capsule().fill(OnboardingStyle.surfaceFill))
                     .overlay(Capsule().strokeBorder(Stage.cardStroke, lineWidth: 1))
                 Text(page.titleKey)
-                    .font(.system(.title2, design: .rounded).weight(.bold))
+                    .font(.system(.title2).weight(.bold))
                     .foregroundStyle(OnboardingStyle.textPrimary)
                     .multilineTextAlignment(.center)
                 Text(page.bodyKey)

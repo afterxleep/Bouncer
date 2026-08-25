@@ -51,7 +51,7 @@ struct OnboardingView: View {
             ForEach(pages) { page in
                 Group {
                     if page == .welcome {
-                        OnboardingWelcomePage(isActive: selection == .welcome)
+                        OnboardingWelcomePage()
                     } else {
                         OnboardingStepPage(page: page)
                     }
