@@ -4,11 +4,13 @@
 //
 //  Bouncer's signature: the door.
 //
-//  Messages drift up toward a lit threshold. Ones you allow pass through and
-//  keep going. Junk hits the line, flares, and is turned away. Categorised mail
-//  passes but veers off to be filed. It runs live behind the rules header and
-//  full-size on the welcome screen, so the product explains itself before a
-//  word is read.
+//  Messages fall straight down past a lit threshold. Ones you allow pass
+//  through and keep going, all the way to the end of the road before they
+//  fade — that's the whole palette here: safe ships blue-green, junk fades
+//  away right at the line in red. Every bubble travels a plain vertical line;
+//  only its lane, size and timing are randomised, and only a handful are ever
+//  on screen at once. It runs live behind the rules header and full-size on
+//  the welcome screen, so the product explains itself before a word is read.
 //
 //  Drawn in a single `Canvas` inside a `TimelineView` — one draw call per
 //  frame, no view churn, and every bubble's path is a pure function of time so
@@ -21,14 +23,14 @@ import SwiftUI
 
 private enum Verdict {
     case allow
-    case junk
     case sorted(Color)
+    case junk
 
     var tint: Color {
         switch self {
         case .allow: return Brand.safe
-        case .junk: return Brand.junk
         case .sorted(let color): return color
+        case .junk: return Brand.junk
         }
     }
 }
@@ -37,45 +39,46 @@ private enum Verdict {
 
 /// One message. Everything about it is fixed at build time; only `time` moves.
 private struct Bubble {
-    let lane: Double        // 0...1 across the width
-    let drift: Double       // sideways travel over the run
+    let lane: Double        // 0...1 across the width — fixed for the whole run, no sideways travel
     let speed: Double       // runs per second
     let phase: Double       // offset so they don't march in step
     let depth: Double       // 0 = far (small, dim, slow), 1 = near
     let width: Double       // relative bubble width
     let verdict: Verdict
 
+    /// Fraction of the run spent travelling before a clean pass sits at the
+    /// end of the road; the rest is spent fading there, not fading en route.
+    private let roadEnd = 0.82
+
     /// Where the bubble is, and how it looks, at a point in its run.
-    /// `p` is 0...1. Y is normalised with 0 at the top of the scene.
+    /// `p` is 0...1. Y is normalised with 0 at the top of the scene. Every
+    /// verdict falls the same straight vertical line — only where it ends up,
+    /// and when it fades, differs.
     func state(at p: Double, thresholdY: Double) -> (x: Double, y: Double, opacity: Double, flare: Double) {
         switch verdict {
         case .allow, .sorted:
-            // A clean pass: rise from below the frame and out through the top.
-            let y = 1.12 - p * 1.24
-            let veer: Double
-            if case .sorted = verdict {
-                // Filed away: once past the door it slides toward its shelf.
-                let past = max(0, (thresholdY - y) / max(thresholdY, 0.001))
-                veer = drift * past * past
-            } else {
-                veer = drift * p * 0.35
-            }
-            let fade = ramp(p, in: 0.00, out: 0.10) * ramp(1 - p, in: 0.00, out: 0.18)
-            return (lane + veer, y, fade, 0)
+            // A clean pass: falls from above the frame all the way to the end
+            // of the road at full strength, and only fades once it's arrived.
+            let travel = min(p, roadEnd) / roadEnd
+            let y = -0.12 + eased(travel) * 1.12
+            let fadeIn = ramp(p, in: 0.00, out: 0.08)
+            let fadeOut = p < roadEnd ? 1.0 : 1 - ramp(p, in: roadEnd, out: 1.00)
+            return (lane, y, fadeIn * fadeOut, 0)
 
         case .junk:
-            // Turned away: up to the line, a flare, then pushed back down.
-            let turn = 0.52
-            if p < turn {
-                let t = p / turn
-                let y = 1.12 - eased(t) * (1.12 - thresholdY)
-                return (lane + drift * t * 0.2, y, ramp(p, in: 0, out: 0.08), 0)
-            } else {
-                let t = (p - turn) / (1 - turn)
-                let y = thresholdY + eased(t) * 0.75
-                let flare = max(0, 1 - t * 5)
-                return (lane + drift * (0.2 + t * 1.5), y, 1 - t * t, flare)
-            }
+            // Falls toward the line, stops short of it, and dissolves there —
+            // position and fade are decoupled so it's fully gone well before
+            // it would ever touch the line, never mind cross it.
+            let stopY = thresholdY - 0.08
+            let approachEnd = 0.78
+            let travel = min(p, approachEnd) / approachEnd
+            let y = -0.12 + eased(travel) * (stopY + 0.12)
+            let fadeIn = ramp(p, in: 0.00, out: 0.08)
+            let fadeOut = p < approachEnd ? 1.0 : 1 - ramp(p, in: approachEnd, out: 1.00)
+            let flareStart = approachEnd
+            let flarePeak = approachEnd + 0.06
+            let flare = ramp(p, in: flareStart, out: flarePeak) * (1 - ramp(p, in: flarePeak, out: 1.00))
+            return (lane, y, fadeIn * fadeOut, flare)
         }
     }
 
@@ -100,12 +103,12 @@ struct DoorScene: View {
         case hero
         case ambient
 
-        var bubbleCount: Int { self == .hero ? 18 : 15 }
-        /// The line sits high in the ambient band so messages have room to rise
-        /// into it, and the verdict lands just above the masthead.
+        var bubbleCount: Int { self == .hero ? 11 : 9 }
+        /// The line sits high in the ambient band so messages have room to
+        /// fall into it, and the verdict lands just above the masthead.
         var thresholdY: Double { self == .hero ? 0.46 : 0.44 }
         var opacity: Double { self == .hero ? 1.0 : 0.8 }
-        var lineWidth: Double { self == .hero ? 1.6 : 1.2 }
+        var lineWidth: Double { self == .hero ? 1.2 : 1.0 }
         var scale: Double { self == .hero ? 0.72 : 0.8 }
     }
 
@@ -119,12 +122,13 @@ struct DoorScene: View {
     /// composition was tuned by eye and shouldn't reshuffle.
     private var bubbles: [Bubble] {
         var generator = SeededGenerator(seed: 0xB0_9C_E7_11)
-        let hues: [Color] = [Brand.orders, Brand.offers, Brand.finance, Brand.coupons, Brand.reminders]
+        // Just the two colours that ship, plus junk red — no other hues.
+        let hues: [Color] = [Brand.orders]
         return (0..<presence.bubbleCount).map { index in
             let roll = Double.random(in: 0...1, using: &generator)
             let verdict: Verdict
-            // Junk is the common case at a real door, and the flare is the part
-            // worth showing — so it gets the largest share.
+            // Junk is the common case at a real door, and the fade at the
+            // line is the part worth showing — so it gets the largest share.
             if roll < 0.46 {
                 verdict = .junk
             } else if roll < 0.70 {
@@ -135,7 +139,6 @@ struct DoorScene: View {
             let depth = Double.random(in: 0.25...1, using: &generator)
             return Bubble(
                 lane: Double.random(in: 0.08...0.92, using: &generator),
-                drift: Double.random(in: -0.22...0.22, using: &generator),
                 speed: (0.055 + Double.random(in: 0...0.05, using: &generator)) * (0.6 + depth * 0.7),
                 phase: Double.random(in: 0...1, using: &generator),
                 depth: depth,
@@ -153,7 +156,7 @@ struct DoorScene: View {
                 let thresholdY = presence.thresholdY
 
                 drawBubbles(cast, in: &context, size: size, time: t, thresholdY: thresholdY)
-                drawThreshold(in: &context, size: size, time: t, y: thresholdY)
+                drawThreshold(in: &context, size: size, y: thresholdY)
             }
             .drawingGroup()
         }
@@ -167,28 +170,41 @@ struct DoorScene: View {
 extension DoorScene {
 
     /// An incoming message balloon: rounded body with a tail hooking off the
-    /// bottom-left. These are meant to read as texts arriving, and a plain
-    /// rounded rectangle read as a lozenge.
+    /// bottom-left, traced as a single unbroken outline so the tail always
+    /// meets the body with no seam or gap, at any size.
     static func bubble(in rect: CGRect) -> Path {
         let radius = min(rect.height * 0.48, rect.width * 0.42)
-        let tail = rect.height * 0.34
-        let body = CGRect(x: rect.minX + tail * 0.6,
+        let tailLength = rect.height * 0.34
+        let body = CGRect(x: rect.minX + tailLength * 0.6,
                           y: rect.minY,
-                          width: max(rect.width - tail * 0.6, 1),
+                          width: max(rect.width - tailLength * 0.6, 1),
                           height: rect.height)
 
-        var path = Path(roundedRect: body,
-                        cornerSize: CGSize(width: radius, height: radius),
-                        style: .continuous)
+        // Anchors sit on the body's own straight edges, safely clear of the
+        // bottom-left corner, so the tail always attaches to solid geometry
+        // rather than approximating where a separate corner curve would be.
+        let leftAnchor = CGPoint(x: body.minX, y: body.maxY - radius * 1.15)
+        let bottomAnchor = CGPoint(x: body.minX + radius * 1.15, y: body.maxY)
+        let tip = CGPoint(x: rect.minX, y: rect.maxY)
 
-        var hook = Path()
-        hook.move(to: CGPoint(x: body.minX + radius * 0.05, y: body.maxY - radius * 0.85))
-        hook.addQuadCurve(to: CGPoint(x: rect.minX, y: rect.maxY),
-                          control: CGPoint(x: body.minX - tail * 0.05, y: body.maxY - radius * 0.1))
-        hook.addQuadCurve(to: CGPoint(x: body.minX + radius * 1.05, y: body.maxY),
-                          control: CGPoint(x: body.minX + tail * 0.35, y: rect.maxY))
-        hook.closeSubpath()
-        path.addPath(hook)
+        var path = Path()
+        path.move(to: CGPoint(x: body.minX, y: body.minY + radius))
+        path.addArc(center: CGPoint(x: body.minX + radius, y: body.minY + radius),
+                    radius: radius, startAngle: .degrees(180), endAngle: .degrees(270), clockwise: false)
+        path.addLine(to: CGPoint(x: body.maxX - radius, y: body.minY))
+        path.addArc(center: CGPoint(x: body.maxX - radius, y: body.minY + radius),
+                    radius: radius, startAngle: .degrees(270), endAngle: .degrees(0), clockwise: false)
+        path.addLine(to: CGPoint(x: body.maxX, y: body.maxY - radius))
+        path.addArc(center: CGPoint(x: body.maxX - radius, y: body.maxY - radius),
+                    radius: radius, startAngle: .degrees(0), endAngle: .degrees(90), clockwise: false)
+        path.addLine(to: bottomAnchor)
+        // The tail takes the place of the bottom-left corner entirely, rather
+        // than a separate shape laid over it.
+        path.addQuadCurve(to: tip, control: CGPoint(x: body.minX + tailLength * 0.35, y: body.maxY))
+        path.addQuadCurve(to: leftAnchor,
+                          control: CGPoint(x: body.minX - tailLength * 0.05, y: body.maxY - radius * 0.1))
+        path.addLine(to: CGPoint(x: body.minX, y: body.minY + radius))
+        path.closeSubpath()
         return path
     }
 }
@@ -214,22 +230,15 @@ private extension DoorScene {
             let rect = CGRect(origin: origin, size: CGSize(width: w, height: h))
             let shape = Self.bubble(in: rect)
 
-            // Before the door every message is anonymous; the colour is the
-            // verdict, so it only appears once the door has ruled. Queueing
-            // messages are dimmer than judged ones, so the eye is pulled to the
-            // line rather than to the crowd.
-            // Queueing messages carry the brand tint rather than neutral grey:
-            // grey lozenges on a dark field read as a loading skeleton.
-            let ruled = state.y <= thresholdY + 0.01
-            let tint = ruled ? bubble.verdict.tint : Brand.tint
-            let alpha = state.opacity * (0.22 + bubble.depth * 0.42) * (ruled ? 1.4 : 1.0)
+            let tint = bubble.verdict.tint
+            let alpha = state.opacity * (0.22 + bubble.depth * 0.42)
 
             if state.flare > 0 {
-                // A brief flash at the moment of the verdict, not a standing
-                // halo — the rest of the app has no coloured glows.
+                // A brief flash as a junk bubble dissolves at the line, not a
+                // standing halo — the rest of the app has no coloured glows.
                 context.drawLayer { layer in
                     layer.addFilter(.blur(radius: h * 0.45))
-                    layer.fill(shape, with: .color(bubble.verdict.tint.opacity(state.flare * 0.55)))
+                    layer.fill(shape, with: .color(tint.opacity(state.flare * 0.55)))
                 }
             }
 
@@ -240,30 +249,19 @@ private extension DoorScene {
         }
     }
 
-    /// The threshold: a hard bright core with a wide bloom, and a highlight that
-    /// sweeps along it so the door reads as live rather than painted on.
-    func drawThreshold(in context: inout GraphicsContext,
-                       size: CGSize,
-                       time: Double,
-                       y: Double) {
+    /// A thin, quiet line — just enough to read as the threshold junk fades
+    /// away at, without competing with the bubbles or the type above it.
+    func drawThreshold(in context: inout GraphicsContext, size: CGSize, y: Double) {
         let lineY = y * size.height
         let inset = size.width * 0.14
         let line = Path { path in
             path.move(to: CGPoint(x: inset, y: lineY))
             path.addLine(to: CGPoint(x: size.width - inset, y: lineY))
         }
-
-        // Bloom.
-        context.drawLayer { layer in
-            layer.addFilter(.blur(radius: 12))
-            layer.stroke(line, with: .color(Stage.beam.opacity(0.18)), lineWidth: 4)
-        }
-
-        // Core, fading out at both ends so it reads as light rather than a rule.
         let gradient = Gradient(stops: [
-            .init(color: Stage.beam.opacity(0.0), location: 0.0),
-            .init(color: Stage.beam.opacity(0.55), location: 0.5),
-            .init(color: Stage.beam.opacity(0.0), location: 1.0),
+            .init(color: Brand.tint.opacity(0.0), location: 0.0),
+            .init(color: Brand.tint.opacity(0.28), location: 0.5),
+            .init(color: Brand.tint.opacity(0.0), location: 1.0),
         ])
         context.stroke(
             line,
@@ -271,25 +269,6 @@ private extension DoorScene {
                                   startPoint: CGPoint(x: inset, y: lineY),
                                   endPoint: CGPoint(x: size.width - inset, y: lineY)),
             lineWidth: presence.lineWidth)
-
-        // Sweeping highlight.
-        let travel = (time * 0.18).truncatingRemainder(dividingBy: 1)
-        let centre = inset + travel * (size.width - inset * 2)
-        let span = size.width * 0.22
-        context.drawLayer { layer in
-            layer.addFilter(.blur(radius: 6))
-            layer.stroke(
-                Path { path in
-                    path.move(to: CGPoint(x: centre - span / 2, y: lineY))
-                    path.addLine(to: CGPoint(x: centre + span / 2, y: lineY))
-                },
-                with: .linearGradient(
-                    Gradient(colors: [Stage.beam.opacity(0), Stage.beam.opacity(0.85),
-                                      Stage.beam.opacity(0)]),
-                    startPoint: CGPoint(x: centre - span / 2, y: lineY),
-                    endPoint: CGPoint(x: centre + span / 2, y: lineY)),
-                lineWidth: presence.lineWidth * 2.2)
-        }
     }
 }
 
