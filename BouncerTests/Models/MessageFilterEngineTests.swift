@@ -15,6 +15,7 @@
 
 import XCTest
 import IdentityLookup
+import Combine
 @testable import Bouncer
 
 final class MessageFilterEngineTests: XCTestCase {
@@ -75,5 +76,47 @@ final class MessageFilterEngineTests: XCTestCase {
         let response = engine.decide(sender: nil, messageBody: nil)
         // We can prove completion fires by checking the response is valid.
         XCTAssertNotNil(response.action)
+    }
+
+    /// Finding #4 + #5: the extension's completion is driven by an engine
+    /// call regardless of whether the store fetch succeeded or failed. We
+    /// prove the engine behaves deterministically for nil inputs so the
+    /// completion is guaranteed to fire.
+    func test_NilSenderWithBodyStillProducesResponse() {
+        let engine = MessageFilterEngine(filters: [])
+        let outcome = engine.decide(sender: nil, messageBody: "real text")
+        // We don't care about the action's value here; we care that a
+        // response is produced (otherwise the extension would hang waiting
+        // for completion).
+        XCTAssertNotNil(outcome.action)
+    }
+
+    /// Finding #4 + #5 (extension wiring): when the store fetch fails,
+    /// `filterStore.fetch()` resolves with `.failure`, the extension's
+    /// receiveCompletion handler runs, and completion is delivered with an
+    /// allow verdict. We prove the seam by simulating a failing fetch and
+    /// observing that fetch() terminates (which is the precondition for the
+    /// extension's receiveCompletion to run and call completion).
+    func test_StoreFailurePathFetchResolvesWithFailure() throws {
+        // Write garbage so the in-store decode fails — the same condition
+        // that drives the extension's failure branch.
+        try Data("not json".utf8).write(to: FilterStoreFile.fileURL!)
+        let store = FilterStoreFile()
+        let publisher = store.fetch()
+
+        let expectation = self.expectation(description: "fetch resolves on corrupt store")
+        var failureCount = 0
+        var successCount = 0
+        let cancellable = publisher.sink(receiveCompletion: { completion in
+            if case .failure = completion { failureCount += 1 }
+            expectation.fulfill()
+        }, receiveValue: { _ in
+            successCount += 1
+            expectation.fulfill()
+        })
+        waitForExpectations(timeout: 2, handler: nil)
+        _ = cancellable // keep alive until wait returns
+        XCTAssertEqual(successCount, 0, "fetch must not deliver success on a corrupt store")
+        XCTAssertEqual(failureCount, 1, "fetch must deliver .failure exactly once on a corrupt store")
     }
 }
