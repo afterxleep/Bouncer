@@ -7,24 +7,10 @@ import UIKit
 
 enum SystemSettings {
 
-    /// Opens the Settings app at its root rather than Bouncer's own page, so the
-    /// user lands where the setup steps expect them.
-    ///
-    /// `UIApplication.openSettingsURLString` always deep-links to the app's own
-    /// settings pane; there is no public API for the Settings root, so this uses
-    /// the `App-Prefs:` scheme and falls back to the public one if the system
-    /// refuses to open it.
+    /// Opens the Settings app at the Bouncer pane. The setup steps walk the user
+    /// from there to Apps → Messages → Text Message Filtering, so the Bouncer
+    /// pane is the right landing place.
     static func open() {
-        guard let root = URL(string: "App-Prefs:") else {
-            openAppPane()
-            return
-        }
-        UIApplication.shared.open(root, options: [:]) { opened in
-            if !opened { openAppPane() }
-        }
-    }
-
-    private static func openAppPane() {
         guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
         UIApplication.shared.open(url, options: [:], completionHandler: nil)
     }
