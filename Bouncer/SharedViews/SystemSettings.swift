@@ -24,7 +24,11 @@ enum SystemSettings {
     /// `UIApplication.shared.open` call.
     static var opener: SystemSettingsOpening = UIKitSystemSettingsOpening()
 
-    /// Opens the Settings app at the Bouncer pane.
+    /// Opens the Settings app. On the iOS versions we target this lands on
+    /// the Settings root — not on Bouncer's own pane — because the public
+    /// Settings URL is treated as a root navigation. The onboarding
+    /// walkthrough is written for that root: Apps → Messages →
+    /// Unknown & Junk → Text Message Filtering → Bouncer.
     static func open() {
         guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
         opener.open(url, options: [:])

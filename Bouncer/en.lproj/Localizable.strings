@@ -80,13 +80,13 @@
 "ONBOARDING_STEP_COUNTER %1$d %2$d" = "Step %1$d of %2$d";
 "ONBOARDING_SCREENSHOT_PENDING" = "Screenshot coming soon";
 "ONBOARDING_STEP_1_TITLE" = "Open Settings";
-"ONBOARDING_STEP_1_BODY" = "Tap Open Settings below. The Settings app opens on its main page.";
-"ONBOARDING_STEP_2_TITLE" = "Go to Apps";
-"ONBOARDING_STEP_2_BODY" = "Scroll down and tap Apps.";
+"ONBOARDING_STEP_1_BODY" = "Tap Open Settings below. iOS opens the Settings app on its main page — that’s where you start, not Bouncer’s own pane.";
+"ONBOARDING_STEP_2_TITLE" = "Open Apps";
+"ONBOARDING_STEP_2_BODY" = "Scroll down past General, Privacy and the rest until you see Apps, then tap it. From there you’ll go to Messages → Unknown & Junk → Text Message Filtering → Bouncer.";
 "ONBOARDING_STEP_3_TITLE" = "Choose Messages";
 "ONBOARDING_STEP_3_BODY" = "In the list of apps, tap Messages.";
-"ONBOARDING_STEP_4_TITLE" = "Tap Text Message Filter";
-"ONBOARDING_STEP_4_BODY" = "Enable “Screen Unknown Senders” and then tap “Text Message Filter”.";
+"ONBOARDING_STEP_4_TITLE" = "Open Text Message Filtering";
+"ONBOARDING_STEP_4_BODY" = "In the Messages screen, scroll to Unknown & Junk, turn on Filter Unknown Senders, then tap Text Message Filtering.";
 "ONBOARDING_STEP_5_TITLE" = "Turn on Bouncer";
 "ONBOARDING_STEP_5_BODY" = "Select Bouncer and accept the notice. It's OK: we don't send your messages to a server. A checkmark means filtering is active.";
 
@@ -132,7 +132,7 @@
 "ONBOARDING_MOCK_CONTACTS" = "Contacts";
 "ONBOARDING_MOCK_MAPS" = "Maps";
 "ONBOARDING_MOCK_MESSAGES" = "Messages";
-"ONBOARDING_MOCK_SCREEN_UNKNOWN" = "Screen Unknown Senders";
+"ONBOARDING_MOCK_SCREEN_UNKNOWN" = "Filter Unknown Senders";
 "ONBOARDING_MOCK_FILTERING" = "Text Message Filtering";
 "ONBOARDING_MOCK_OFF" = "Off";
 "ONBOARDING_MOCK_BOUNCER" = "Bouncer";
