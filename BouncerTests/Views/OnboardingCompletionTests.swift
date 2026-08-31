@@ -70,10 +70,9 @@ final class OnboardingCompletionTests: XCTestCase {
         XCTAssertFalse(store.state.settings.hasLaunchedApp)
     }
 
-    /// Step 1 opens the Settings root via `App-Prefs:` and falls back to the
-    /// public per-app URL if the system refuses. Both URLs must stay well formed.
-    func testBothSettingsUrlsAreWellFormed() {
-        XCTAssertNotNil(URL(string: "App-Prefs:"))
+    /// The only Settings URL the app opens must stay well formed — it's the
+    /// single path now that the private URL scheme is gone.
+    func testPublicSettingsUrlIsWellFormed() {
         XCTAssertEqual(UIApplication.openSettingsURLString, "app-settings:")
         XCTAssertNotNil(URL(string: UIApplication.openSettingsURLString))
     }
