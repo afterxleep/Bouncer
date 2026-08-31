@@ -118,8 +118,16 @@ final class FilterListFlowTests: XCTestCase {
 
     func testDecodingErrorUsesTheIncorrectFormatMessage() {
         let store = makeStore()
-        store.dispatch(AppAction.filter(action: .error(.decodingError("bad json"))))
+        store.dispatch(AppAction.filter(action: .error(.decodingFailed(reason: "bad json"))))
         XCTAssertEqual(store.state.filters.filterError?.id, "INCORRECT_FILE_FORMAT")
+    }
+
+    func testDiskErrorPropagatesUnderlyingMessage() {
+        let store = makeStore()
+        store.dispatch(AppAction.filter(action: .error(.diskError(message: "Out of space"))))
+        XCTAssertEqual(store.state.filters.filterError?.id, "ERROR_DISK")
+        XCTAssertTrue(store.state.filters.filterError?.localizedMessage.contains("Out of space") ?? false,
+                      "diskError message should surface the underlying disk reason, not a generic stub")
     }
 
     func testClearErrorResetsTheAlert() {
