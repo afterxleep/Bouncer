@@ -25,6 +25,7 @@
 		AA0500000000000000000003 /* RuleActivityStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0500000000000000000001 /* RuleActivityStore.swift */; };
 		AA0600000000000000000002 /* SystemSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0600000000000000000001 /* SystemSettings.swift */; };
 		AA0600000000000000000004 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0600000000000000000003 /* HelpView.swift */; };
+		AA0600000000000000000020 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = AA0600000000000000000021 /* PrivacyInfo.xcprivacy */; };
 		D60A19C724A69F1F0002E8BD /* SMSMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60A19C624A69F1F0002E8BD /* SMSMessage.swift */; };
 		D60A19C824A6A2C80002E8BD /* SMSMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60A19C624A69F1F0002E8BD /* SMSMessage.swift */; };
 		D61497E924E4430E00AF997E /* FilterAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61497E824E4430E00AF997E /* FilterAction.swift */; };
@@ -135,6 +136,7 @@
 		AA0500000000000000000001 /* RuleActivityStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleActivityStore.swift; sourceTree = "<group>"; };
 		AA0600000000000000000001 /* SystemSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemSettings.swift; sourceTree = "<group>"; };
 		AA0600000000000000000003 /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
+		AA0600000000000000000021 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		D60A19C624A69F1F0002E8BD /* SMSMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSMessage.swift; sourceTree = "<group>"; };
 		D61497E824E4430E00AF997E /* FilterAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterAction.swift; sourceTree = "<group>"; };
 		D61497EB24E4433800AF997E /* FilterReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterReducer.swift; sourceTree = "<group>"; };
@@ -392,6 +394,7 @@
 				D67F583024E44B0E00165365 /* Views */,
 				D6233A8524A6553C00B37A6A /* Bouncer.entitlements */,
 				D664B24524AA92D200EB826D /* Assets.xcassets */,
+				AA0600000000000000000021 /* PrivacyInfo.xcprivacy */,
 				D6529F7B24A41372009AE3FF /* Info.plist */,
 				D6529F7824A41372009AE3FF /* Preview Content */,
 				D621CB4524ABABF6008883AA /* Localizable.strings */,
@@ -676,6 +679,7 @@
 				D6B2CC8D24EF16C6004F72C4 /* wordlist.filter in Resources */,
 				D6529F7A24A41372009AE3FF /* Preview Assets.xcassets in Resources */,
 				D6625F3C2D9A122C005D05BF /* Config.swift.example in Resources */,
+				AA0600000000000000000020 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
