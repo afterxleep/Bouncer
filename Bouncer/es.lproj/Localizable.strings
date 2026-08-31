@@ -141,7 +141,7 @@
 "ONBOARDING_MOCK_MAPS" = "Mapas";
 "ONBOARDING_MOCK_MESSAGES" = "Mensajes";
 "ONBOARDING_MOCK_SCREEN_UNKNOWN" = "Filtrar remitentes desconocidos";
-"ONBOARDING_MOCK_FILTERING" = "Filtrado de mensajes de texto";
+"ONBOARDING_MOCK_FILTERING" = "Filtrado de mensajes";
 "ONBOARDING_MOCK_OFF" = "No";
 "ONBOARDING_MOCK_BOUNCER" = "Bouncer";
 "ONBOARDING_CLOSE" = "Cerrar";
