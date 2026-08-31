@@ -113,13 +113,13 @@ final class FilterListFlowTests: XCTestCase {
         store.dispatch(AppAction.filter(action: .error(.emptyImportFileError)))
 
         XCTAssertFalse(store.state.filters.filterImportInProgress)
-        XCTAssertEqual(store.state.filters.filterError?.id, "EMPTY_IMPORT_FILE")
+        XCTAssertEqual(store.state.filters.filterError?.id, "ERROR_EMPTY_IMPORT_FILE")
     }
 
     func testDecodingErrorUsesTheIncorrectFormatMessage() {
         let store = makeStore()
         store.dispatch(AppAction.filter(action: .error(.decodingFailed(reason: "bad json"))))
-        XCTAssertEqual(store.state.filters.filterError?.id, "INCORRECT_FILE_FORMAT")
+        XCTAssertEqual(store.state.filters.filterError?.id, "ERROR_DECODING_FAILED")
     }
 
     func testDiskErrorPropagatesUnderlyingMessage() {
