@@ -40,6 +40,8 @@
 		D6233A7624A650B700B37A6A /* SMSFilter.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D6233A6F24A650B700B37A6A /* SMSFilter.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D6233A7F24A651A200B37A6A /* SMSOfflineFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6233A7D24A651A200B37A6A /* SMSOfflineFilter.swift */; };
 		D6233A8124A6538D00B37A6A /* SMSOfflineFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6233A7D24A651A200B37A6A /* SMSOfflineFilter.swift */; };
+		AA0800000000000000000001 /* MessageFilterEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0800000000000000000000 /* MessageFilterEngine.swift */; };
+		AA0800000000000000000002 /* MessageFilterEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0800000000000000000000 /* MessageFilterEngine.swift */; };
 		D6233A8324A653F200B37A6A /* FilterStoreFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FC824A54ADE009AE3FF /* FilterStoreFile.swift */; };
 		D62B331B24BAB16C002DFB81 /* ReviewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62B331A24BAB16C002DFB81 /* ReviewService.swift */; };
 		D62B331D24BAB18E002DFB81 /* RatingServiceDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62B331C24BAB18E002DFB81 /* RatingServiceDefault.swift */; };
@@ -79,6 +81,8 @@
 		D6EA9A8424AD2244000135E7 /* FilterStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EA9A8324AD2244000135E7 /* FilterStore.swift */; };
 		D6EA9A8524AD2319000135E7 /* FilterStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EA9A8324AD2244000135E7 /* FilterStore.swift */; };
 		D6F0621124EC69F800F47BA2 /* FilterStoreFileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F0621024EC69F800F47BA2 /* FilterStoreFileTests.swift */; };
+		AA0700000000000000000001 /* FilterStoreRobustnessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0700000000000000000000 /* FilterStoreRobustnessTests.swift */; };
+		AA0900000000000000000001 /* MessageFilterEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0900000000000000000000 /* MessageFilterEngineTests.swift */; };
 		D6F14E8824E8A1780029A0DF /* ReviewMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F14E8724E8A1780029A0DF /* ReviewMiddleware.swift */; };
 		D6F184BC29F490430018FB7F /* FilterStoreFileMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D616A7F229F42EEC00D5523F /* FilterStoreFileMigrator.swift */; };
 		D6F184BD29F4904E0018FB7F /* FilterV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = D616A7F029F42E2900D5523F /* FilterV1.swift */; };
@@ -150,6 +154,7 @@
 		D6233A7124A650B700B37A6A /* MessageFilterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFilterExtension.swift; sourceTree = "<group>"; };
 		D6233A7324A650B700B37A6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6233A7D24A651A200B37A6A /* SMSOfflineFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSOfflineFilter.swift; sourceTree = "<group>"; };
+		AA0800000000000000000000 /* MessageFilterEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageFilterEngine.swift; sourceTree = "<group>"; };
 		D6233A8524A6553C00B37A6A /* Bouncer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bouncer.entitlements; sourceTree = "<group>"; };
 		D6233A8624A655BF00B37A6A /* SMSFilter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SMSFilter.entitlements; sourceTree = "<group>"; };
 		D62B331A24BAB16C002DFB81 /* ReviewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewService.swift; sourceTree = "<group>"; };
@@ -187,6 +192,8 @@
 		D6EA9A8124AD2201000135E7 /* SMSFiltering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSFiltering.swift; sourceTree = "<group>"; };
 		D6EA9A8324AD2244000135E7 /* FilterStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterStore.swift; sourceTree = "<group>"; };
 		D6F0621024EC69F800F47BA2 /* FilterStoreFileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterStoreFileTests.swift; sourceTree = "<group>"; };
+		AA0700000000000000000000 /* FilterStoreRobustnessTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterStoreRobustnessTests.swift; sourceTree = "<group>"; };
+		AA0900000000000000000000 /* MessageFilterEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFilterEngineTests.swift; sourceTree = "<group>"; };
 		D6F14E8724E8A1780029A0DF /* ReviewMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewMiddleware.swift; sourceTree = "<group>"; };
 		D6FC672824E49B2B0083C9FA /* FilterListContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListContainerView.swift; sourceTree = "<group>"; };
 		D6FC672D24E4ACCF0083C9FA /* FilterMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterMiddleware.swift; sourceTree = "<group>"; };
@@ -307,6 +314,8 @@
 				D617B44924EB19C8009E0D40 /* AppSettingsDefaultsTests.swift */,
 				D66A7C2824EB3F8C00349C3F /* SMSOfflineFilterTests.swift */,
 				D6F0621024EC69F800F47BA2 /* FilterStoreFileTests.swift */,
+				AA0700000000000000000000 /* FilterStoreRobustnessTests.swift */,
+				AA0900000000000000000000 /* MessageFilterEngineTests.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -327,6 +336,7 @@
 				D60A19C624A69F1F0002E8BD /* SMSMessage.swift */,
 				D6EA9A8124AD2201000135E7 /* SMSFiltering.swift */,
 				D6233A7D24A651A200B37A6A /* SMSOfflineFilter.swift */,
+				AA0800000000000000000000 /* MessageFilterEngine.swift */,
 			);
 			path = SMSFilter;
 			sourceTree = "<group>";
@@ -699,6 +709,7 @@
 				D6BE8B8828CFE230004E7274 /* OSLog.swift in Sources */,
 				D60A19C824A6A2C80002E8BD /* SMSMessage.swift in Sources */,
 				D6233A8124A6538D00B37A6A /* SMSOfflineFilter.swift in Sources */,
+				AA0800000000000000000002 /* MessageFilterEngine.swift in Sources */,
 				D6F184BC29F490430018FB7F /* FilterStoreFileMigrator.swift in Sources */,
 				D6F184BD29F4904E0018FB7F /* FilterV1.swift in Sources */,
 				D6233A7224A650B700B37A6A /* MessageFilterExtension.swift in Sources */,
@@ -712,6 +723,7 @@
 				AA0500000000000000000002 /* RuleActivityStore.swift in Sources */,
 				AA0400000000000000000002 /* RuleListComponents.swift in Sources */,
 				D6233A7F24A651A200B37A6A /* SMSOfflineFilter.swift in Sources */,
+				AA0800000000000000000001 /* MessageFilterEngine.swift in Sources */,
 				AA0100000000000000000002 /* OnboardingPage.swift in Sources */,
 				AA0100000000000000000004 /* OnboardingComponents.swift in Sources */,
 				AA0100000000000000000006 /* OnboardingView.swift in Sources */,
@@ -771,6 +783,8 @@
 				D617B44A24EB19C8009E0D40 /* AppSettingsDefaultsTests.swift in Sources */,
 				D6F0621124EC69F800F47BA2 /* FilterStoreFileTests.swift in Sources */,
 				D66A7C2924EB3F8C00349C3F /* SMSOfflineFilterTests.swift in Sources */,
+				AA0700000000000000000001 /* FilterStoreRobustnessTests.swift in Sources */,
+				AA0900000000000000000001 /* MessageFilterEngineTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -808,7 +822,7 @@
 				CODE_SIGN_ENTITLEMENTS = SMSFilter/SMSFilter.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1386;
+				CURRENT_PROJECT_VERSION = 1391;
 				DEVELOPMENT_TEAM = J9F8F3PWTV;
 				INFOPLIST_FILE = SMSFilter/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
@@ -837,7 +851,7 @@
 				CODE_SIGN_ENTITLEMENTS = SMSFilter/SMSFilter.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1386;
+				CURRENT_PROJECT_VERSION = 1391;
 				DEVELOPMENT_TEAM = J9F8F3PWTV;
 				INFOPLIST_FILE = SMSFilter/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
@@ -995,7 +1009,7 @@
 				CODE_SIGN_ENTITLEMENTS = Bouncer/Bouncer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1386;
+				CURRENT_PROJECT_VERSION = 1391;
 				DEVELOPMENT_ASSET_PATHS = "\"Bouncer/Preview Content\"";
 				DEVELOPMENT_TEAM = J9F8F3PWTV;
 				ENABLE_PREVIEWS = YES;
@@ -1029,7 +1043,7 @@
 				CODE_SIGN_ENTITLEMENTS = Bouncer/Bouncer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1386;
+				CURRENT_PROJECT_VERSION = 1391;
 				DEVELOPMENT_ASSET_PATHS = "\"Bouncer/Preview Content\"";
 				DEVELOPMENT_TEAM = J9F8F3PWTV;
 				ENABLE_PREVIEWS = YES;
