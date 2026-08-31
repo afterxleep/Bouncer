@@ -858,6 +858,101 @@ class SMSOfflineFilterTests: XCTestCase {
         XCTAssertEqual(filter.filterMessage(message: message).action, .none)
     }
 
+    func testInvalidRegexIsSurfacedAsFilterErrorRatherThanSaved() {
+        // The save flow must reject an invalid regex pattern instead of
+        // accepting it. The store receives a .filter(action: .error(.invalidRegex))
+        // carrying the validator's message — the existing FilterError alert
+        // path then shows it. This is the unit-level proof that an invalid
+        // regex cannot be saved as a silently-dead rule.
+        let store = AppStore(
+            initialState: AppState(
+                settings: SettingsState(hasLaunchedApp: true),
+                filters: FilterState(filters: [])
+            ),
+            reducer: appReducer
+        )
+        let outcome = RuleSaveValidator.makeRule(
+            id: nil,
+            phrase: "(free|win",
+            type: .message,
+            destination: .junk,
+            useRegex: true
+        )
+        let initialCount = store.state.filters.filters.count
+
+        switch outcome {
+        case .accept:
+            XCTFail("An invalid regex must not be accepted by the save validator")
+        case .reject(let message):
+            store.dispatch(.filter(action: .error(.invalidRegex(message))))
+            let err = store.state.filters.filterError
+            XCTAssertNotNil(err, "The store must hold the error so the alert surfaces it")
+            if case let .invalidRegex(captured) = err {
+                XCTAssertTrue(captured.contains("(free|win"),
+                              "The validator should echo the offending pattern so the user sees what they typed")
+            } else {
+                XCTFail("Expected .invalidRegex(\"...\"); got \(String(describing: err))")
+            }
+        }
+
+        // Nothing got added — the rule list is still empty.
+        XCTAssertEqual(store.state.filters.filters.count, initialCount,
+                      "An invalid regex must not produce a saved rule")
+    }
+
+    func testValidRegexRoundTripsThroughTheSaveValidator() {
+        // The happy path: a legal pattern must produce an .accept with a
+        // proper Filter.
+        let outcome = RuleSaveValidator.makeRule(
+            id: nil,
+            phrase: "win.*.*prize",
+            type: .message,
+            destination: .junk,
+            useRegex: true
+        )
+        switch outcome {
+        case .accept(let rule):
+            XCTAssertEqual(rule.phrase, "win.*.*prize")
+            XCTAssertTrue(rule.useRegex)
+            XCTAssertEqual(rule.action, .junk)
+        case .reject(let message):
+            XCTFail("win.*.*prize should be accepted, got: \(message)")
+        }
+    }
+
+    func testNestedQuantifierPatternIsRejectedAtSave() {
+        let outcome = RuleSaveValidator.makeRule(
+            id: nil,
+            phrase: "(win+)+!",
+            type: .message,
+            destination: .junk,
+            useRegex: true
+        )
+        switch outcome {
+        case .accept:
+            XCTFail("(win+)+! is catastrophic and must be rejected at save time")
+        case .reject(let message):
+            XCTAssertTrue(message.contains("nested quantifiers"),
+                          "Rejection message should explain why: \(message)")
+        }
+    }
+
+    func testBlankPhraseIsRejectedAtSave() {
+        let outcome = RuleSaveValidator.makeRule(
+            id: nil,
+            phrase: "   ",
+            type: .message,
+            destination: .junk,
+            useRegex: false
+        )
+        switch outcome {
+        case .accept:
+            XCTFail("Blank phrase must be rejected")
+        case .reject:
+            break
+        }
+    }
+
     // MARK: - Defect (2): ReDoS guard — false positives and false negatives
 
     func testWinDotStarDotStarPrizeIsAcceptedAndMatches() {
