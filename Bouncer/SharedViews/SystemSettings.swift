@@ -5,14 +5,29 @@
 
 import UIKit
 
+/// Thin seam over `UIApplication.shared.open` so a test can assert which URL
+/// `SystemSettings.open` asks the system to open. The production implementation
+/// is the only one used at runtime; tests substitute a recording spy.
+protocol SystemSettingsOpening {
+    func open(_ url: URL, options: [UIApplication.OpenExternalURLOptionsKey: Any])
+}
+
+private struct UIKitSystemSettingsOpening: SystemSettingsOpening {
+    func open(_ url: URL, options: [UIApplication.OpenExternalURLOptionsKey: Any]) {
+        UIApplication.shared.open(url, options: options, completionHandler: nil)
+    }
+}
+
 enum SystemSettings {
 
-    /// Opens the Settings app at the Bouncer pane. The setup steps walk the user
-    /// from there to Apps → Messages → Text Message Filtering, so the Bouncer
-    /// pane is the right landing place.
+    /// Injected so tests can swap in a recording opener. Default is the real
+    /// `UIApplication.shared.open` call.
+    static var opener: SystemSettingsOpening = UIKitSystemSettingsOpening()
+
+    /// Opens the Settings app at the Bouncer pane.
     static func open() {
         guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        opener.open(url, options: [:])
     }
 }
 
