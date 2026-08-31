@@ -88,13 +88,13 @@
 "ONBOARDING_STEP_COUNTER %1$d %2$d" = "Paso %1$d de %2$d";
 "ONBOARDING_SCREENSHOT_PENDING" = "Captura pendiente";
 "ONBOARDING_STEP_1_TITLE" = "Abre Ajustes";
-"ONBOARDING_STEP_1_BODY" = "Toca «Abrir Ajustes» aquí abajo. Se abrirá la página principal de Ajustes.";
-"ONBOARDING_STEP_2_TITLE" = "Entra en Apps";
-"ONBOARDING_STEP_2_BODY" = "Desplázate hacia abajo y toca «Apps».";
+"ONBOARDING_STEP_1_BODY" = "Toca «Abrir Ajustes» aquí abajo. iOS abre Ajustes en su página principal — ese es el punto de partida, no el panel propio de Bouncer.";
+"ONBOARDING_STEP_2_TITLE" = "Abrir Apps";
+"ONBOARDING_STEP_2_BODY" = "Desplázate hacia abajo pasando General, Privacidad y los demás hasta ver Apps y tócala. Desde ahí irás a Mensajes → Desconocidos y no deseados → Filtrado de mensajes de texto → Bouncer.";
 "ONBOARDING_STEP_3_TITLE" = "Elige Mensajes";
 "ONBOARDING_STEP_3_BODY" = "En la lista de aplicaciones, toca «Mensajes».";
-"ONBOARDING_STEP_4_TITLE" = "Toca Filtro de mensajes de texto";
-"ONBOARDING_STEP_4_BODY" = "Activa «Filtrar remitentes desconocidos» y luego toca «Filtro de mensajes de texto».";
+"ONBOARDING_STEP_4_TITLE" = "Abrir Filtrado de mensajes de texto";
+"ONBOARDING_STEP_4_BODY" = "En la pantalla de Mensajes, baja hasta «Desconocidos y no deseados», activa «Filtrar remitentes desconocidos» y luego toca «Filtrado de mensajes de texto».";
 "ONBOARDING_STEP_5_TITLE" = "Activa Bouncer";
 "ONBOARDING_STEP_5_BODY" = "Selecciona «Bouncer» y acepta el aviso. Tranquilo: no enviamos tus mensajes a ningún servidor. La marca de verificación significa que el filtrado está activo.";
 
@@ -141,7 +141,7 @@
 "ONBOARDING_MOCK_MAPS" = "Mapas";
 "ONBOARDING_MOCK_MESSAGES" = "Mensajes";
 "ONBOARDING_MOCK_SCREEN_UNKNOWN" = "Filtrar remitentes desconocidos";
-"ONBOARDING_MOCK_FILTERING" = "Filtrado de mensajes";
+"ONBOARDING_MOCK_FILTERING" = "Filtrado de mensajes de texto";
 "ONBOARDING_MOCK_OFF" = "No";
 "ONBOARDING_MOCK_BOUNCER" = "Bouncer";
 "ONBOARDING_CLOSE" = "Cerrar";
@@ -191,7 +191,7 @@
 "HELP_SUPPORT_SECTION" = "Soporte";
 "HELP_SUPPORT_FOOTER" = "Preguntas, errores y sugerencias llegan directamente al desarrollador.";
 "HELP_EMAIL_SUPPORT" = "Escribir a soporte";
-"HELP_PRIVACY" = "Tus mensajes se filtran en tu iPhone y nunca se envían a ningún servidor. Ni a Bouncer ni a nadie.";
+"HELP_PRIVACY" = "Tus mensajes se filtran por completo en tu iPhone y nunca salen de él. Ni a Bouncer ni a nadie. Cuando creas, cambias o eliminas una regla, la regla en sí — la frase, dónde buscar y qué hace — se envía a un servidor que controla el desarrollador, junto con tu región general y la hora.";
 "HELP_VERSION %@" = "Bouncer %@";
 "DONE" = "OK";
 "LANE_WINDOW_CAPTION" = "mensajes filtrados en los últimos 30 días";

@@ -4,7 +4,7 @@ Welcome to **Bouncer**, a privacy-focused SMS filtering app for iOS devices. Uti
 
 ## Prioritizing Privacy and Security
 
-Unlike other SMS filtering apps, Bouncer does not share, upload, or send any of your personal information or SMS messages to a remote server. All filtering processes occur locally on your phone, ensuring data privacy and security.
+Unlike other SMS filtering apps, Bouncer does not upload or send your SMS messages to a remote server — every filter decision happens on your phone. When you create, change, or delete a rule, the rule itself (the phrase, where to look, what it does) is sent to a server the developer controls, along with your general region and the time. A sender rule's phrase can be a phone number, so treat it like any other personal detail you choose to type into the app.
 
 ## Customize Your Messaging Experience
 
