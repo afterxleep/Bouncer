@@ -9,26 +9,28 @@
 //
 
 import Foundation
-
-enum MessageFilterOutcome: Equatable {
-    case allow
-    case deny(action: FilterDestination, subAction: FilterDestination)
-}
+import IdentityLookup
 
 struct MessageFilterEngine {
 
     let filters: [Filter]
 
-    func decide(sender: String?, messageBody: String?) -> MessageFilterOutcome {
+    func decide(sender: String?, messageBody: String?) -> ILMessageFilterQueryResponse {
+        let response = ILMessageFilterQueryResponse()
         guard let sender = sender, let messageBody = messageBody else {
-            return .allow
+            response.action = .none
+            response.subAction = .none
+            return response
         }
         let engine = SMSOfflineFilter(filterList: filters)
         let message = SMSMessage(sender: sender, text: messageBody)
         guard let matched = engine.matchingFilter(message: message) else {
-            return .allow
+            response.action = .none
+            response.subAction = .none
+            return response
         }
-        return .deny(action: matched.action,
-                     subAction: matched.subAction)
+        response.action = engine.action(for: matched)
+        response.subAction = engine.subAction(for: matched)
+        return response
     }
 }

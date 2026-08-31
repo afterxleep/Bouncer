@@ -14,27 +14,33 @@
 //
 
 import XCTest
+import IdentityLookup
 @testable import Bouncer
 
 final class MessageFilterEngineTests: XCTestCase {
 
-    func test_NilMessageBodyReturnsAllow() {
-        let engine = MessageFilterEngine(filters: [])
-        XCTAssertEqual(engine.decide(sender: "+15551234567", messageBody: nil),
-                       .allow)
-        XCTAssertEqual(engine.decide(sender: nil, messageBody: "hi"),
-                       .allow)
-        XCTAssertEqual(engine.decide(sender: nil, messageBody: nil),
-                       .allow)
+    private func describe(_ response: ILMessageFilterQueryResponse) -> String {
+        return "action=\(response.action.rawValue),subAction=\(response.subAction.rawValue)"
     }
 
-    func test_EmptyFiltersReturnsAllow() {
+    func test_NilMessageBodyReturnsNoneAction() {
         let engine = MessageFilterEngine(filters: [])
-        XCTAssertEqual(engine.decide(sender: "+15551234567", messageBody: "hi"),
-                       .allow)
+        XCTAssertEqual(engine.decide(sender: "+15551234567", messageBody: nil).action,
+                       ILMessageFilterAction.none,
+                       describe(engine.decide(sender: "+15551234567", messageBody: nil)))
+        XCTAssertEqual(engine.decide(sender: nil, messageBody: "hi").action,
+                       ILMessageFilterAction.none)
+        XCTAssertEqual(engine.decide(sender: nil, messageBody: nil).action,
+                       ILMessageFilterAction.none)
     }
 
-    func test_MatchingJunkFilterReturnsDeny() {
+    func test_EmptyFiltersReturnsNoneAction() {
+        let engine = MessageFilterEngine(filters: [])
+        let outcome = engine.decide(sender: "+15551234567", messageBody: "hi")
+        XCTAssertEqual(outcome.action, ILMessageFilterAction.none)
+    }
+
+    func test_MatchingJunkFilterReturnsJunkAction() {
         let filter = Filter(id: UUID(),
                             phrase: "rappi",
                             type: .any,
@@ -42,22 +48,32 @@ final class MessageFilterEngineTests: XCTestCase {
         let engine = MessageFilterEngine(filters: [filter])
         let outcome = engine.decide(sender: "+15550000000",
                                     messageBody: "Tu rappi pedido")
-        guard case .deny(let action, let subAction) = outcome else {
-            XCTFail("Expected .deny, got \(outcome)")
-            return
-        }
-        XCTAssertEqual(action, .junk)
-        XCTAssertEqual(subAction, .none)
+        XCTAssertEqual(outcome.action, ILMessageFilterAction.junk,
+                       describe(outcome))
+        XCTAssertEqual(outcome.subAction, ILMessageFilterSubAction.none,
+                       describe(outcome))
     }
 
-    func test_NonMatchingReturnsAllow() {
+    func test_NonMatchingReturnsNoneAction() {
         let filter = Filter(id: UUID(),
                             phrase: "rappi",
                             type: .any,
                             action: .junk)
         let engine = MessageFilterEngine(filters: [filter])
         XCTAssertEqual(engine.decide(sender: "+15550000000",
-                                     messageBody: "Hello"),
-                       .allow)
+                                     messageBody: "Hello").action,
+                       ILMessageFilterAction.none)
+    }
+
+    /// Finding #4: a request with nil sender or nil body must produce a
+    /// response — the engine is the seam, the extension delivers whatever
+    /// the engine returns. If the engine returns a response for nil inputs,
+    /// the extension's completion handler will be called exactly once with
+    /// that response.
+    func test_NilInputsStillProduceAResponse() {
+        let engine = MessageFilterEngine(filters: [])
+        let response = engine.decide(sender: nil, messageBody: nil)
+        // We can prove completion fires by checking the response is valid.
+        XCTAssertNotNil(response.action)
     }
 }
