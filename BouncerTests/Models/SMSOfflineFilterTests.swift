@@ -977,15 +977,16 @@ class SMSOfflineFilterTests: XCTestCase {
     }
 
     func testGenuinelyCatastrophicPatternIsBounded() {
-        // (a+)+$ is the textbook ReDoS pattern. The old engine's timeout
-        // returned false in 100 ms but left a thread burning CPU; the
-        // catastrophic work kept going and could be hit again on the next
-        // SMS. After the fix the pattern is rejected by the structural
-        // safety check, so there is no work for any thread to do.
-        let longText = String(repeating: "a", count: 30) + "b"
+        // (.*.)+x against 14 'a's is genuinely catastrophic on the ICU
+        // regex engine — about 500 ms per match on this Mac. The old code's
+        // substring guard does not list this shape, so the pattern slipped
+        // through and the 100 ms timeout returned false while leaving a
+        // thread burning CPU. The fix's structural guard rejects the
+        // pattern in microseconds, so the whole call returns in <50 ms.
+        let longText = String(repeating: "a", count: 14)
         let message = SMSMessage(sender: "Service", text: longText)
         let filter = SMSOfflineFilter(filterList: [
-            Filter(id: UUID(), phrase: "(a+)+$", type: .message, action: .junk, useRegex: true)
+            Filter(id: UUID(), phrase: "(.*.)+x", type: .message, action: .junk, useRegex: true)
         ])
 
         let start = Date()
@@ -1040,15 +1041,15 @@ class SMSOfflineFilterTests: XCTestCase {
     }
 
     func testRepeatedCatastrophicPatternsDoNotAccumulateBackgroundWork() {
-        // The old code's timeout returned false in 100 ms per call but
-        // left the regex thread running on the global queue. With enough
-        // abandoned threads the global queue backs up and subsequent
-        // calls stall. The fix returns immediately because the structural
-        // check rejects the pattern before any regex work is dispatched.
-        let longText = String(repeating: "a", count: 30) + "b"
+        // (.*.)+x against 14 'a's takes the old engine past its 100 ms
+        // timeout on every call. Twenty sequential calls would each
+        // consume the full 100 ms timeout window (≈2 s total) and spawn
+        // twenty abandoned regex threads. The fix rejects the pattern
+        // outright so each call returns in microseconds.
+        let longText = String(repeating: "a", count: 14)
         let message = SMSMessage(sender: "Service", text: longText)
         let filter = SMSOfflineFilter(filterList: [
-            Filter(id: UUID(), phrase: "(a+)+$", type: .message, action: .junk, useRegex: true)
+            Filter(id: UUID(), phrase: "(.*.)+x", type: .message, action: .junk, useRegex: true)
         ])
 
         let start = Date()
