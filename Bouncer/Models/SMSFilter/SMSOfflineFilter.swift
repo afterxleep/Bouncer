@@ -84,7 +84,7 @@ struct SMSOfflineFilter {
             return false
         }
 
-        if RegexSafetyChecker.containsNestedQuantifier(filter.phrase) {
+        if Self.containsNestedQuantifier(filter.phrase) {
             os_log("FILTEREXTENSION - Rejected pattern with nested quantifier: %@", log: OSLog.messageFilterLog, type: .error, filter.phrase)
             return false
         }
@@ -162,4 +162,91 @@ struct SMSOfflineFilter {
         return (action(for: filter), subAction(for: filter))
     }
 
+    /// Structural detection of a nested-quantifier pattern: a group whose body
+    /// already contains a quantifier and which is itself quantified. That is
+    /// the shape of `(a+)+`, `(.*)+`, `(\d{1,9})+` — the canonical catastrophic
+    /// backtracking trap.
+    ///
+    /// Tokenised by hand so the check itself never depends on running a regex:
+    /// a guard for a regex bug cannot itself be implemented in terms of regex.
+    /// Respects backslash escapes and `[...]` character classes, and does not
+    /// mistake `?` in `(?:`/`?P<name>` group headers for a quantifier.
+    static func containsNestedQuantifier(_ pattern: String) -> Bool {
+        let chars = Array(pattern)
+        var index = 0
+        var inCharClass = false
+        var escaped = false
+        var parenDepth = 0
+        // For each open paren, whether the body seen so far contained a quantifier.
+        var bodyHadQuantifier: [Bool] = []
+        var lastClosedHadQuantifier = false
+
+        while index < chars.count {
+            let ch = chars[index]
+            if escaped { escaped = false; index += 1; continue }
+            if ch == "\\" { escaped = true; index += 1; continue }
+            if inCharClass {
+                if ch == "]" { inCharClass = false }
+                index += 1
+                continue
+            }
+            switch ch {
+            case "[":
+                inCharClass = true
+                index += 1
+            case "(":
+                let next = index + 1 < chars.count ? chars[index + 1] : Character(" ")
+                if next == "?" {
+                    var j = index + 2
+                    while j < chars.count {
+                        let c = chars[j]
+                        if c == ">" { j += 1; break }
+                        if c == "(" { break }
+                        j += 1
+                    }
+                    index = j
+                } else {
+                    index += 1
+                }
+                bodyHadQuantifier.append(false)
+                parenDepth += 1
+            case ")":
+                if parenDepth > 0 {
+                    let insideHadQuantifier = bodyHadQuantifier.removeLast()
+                    parenDepth -= 1
+                    lastClosedHadQuantifier = insideHadQuantifier
+                    if parenDepth > 0 {
+                        bodyHadQuantifier[parenDepth - 1] = bodyHadQuantifier[parenDepth - 1] || insideHadQuantifier
+                    }
+                }
+                index += 1
+            case "*", "+":
+                if lastClosedHadQuantifier { return true }
+                if parenDepth > 0 {
+                    bodyHadQuantifier[parenDepth - 1] = true
+                }
+                index += 1
+            case "?":
+                index += 1
+            case "{":
+                var sawDigits = false
+                var j = index + 1
+                while j < chars.count {
+                    let c = chars[j]
+                    if c.isNumber || c == "," { sawDigits = true; j += 1 } else { break }
+                }
+                if sawDigits {
+                    if lastClosedHadQuantifier { return true }
+                    if parenDepth > 0 {
+                        bodyHadQuantifier[parenDepth - 1] = true
+                    }
+                }
+                index = j
+            default:
+                index += 1
+            }
+        }
+        _ = bodyHadQuantifier
+        return false
+    }
 }
