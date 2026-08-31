@@ -9,4 +9,4 @@ What is sent. When you create, change, or delete a rule, Bouncer sends that rule
 
 What is not sent. Bouncer does not send your messages, your contacts, your phone number, your Apple ID, your location, your advertising identifier, or any other identifier that can be used to track you across apps. Analytics are not linked to a user account and are not used for advertising.
 
-Bouncer is designed with privacy in mind, will always be open source, and will never track you across apps or services. The data above is the only data Bouncer sends anywhere.
+Bouncer is designed with privacy in mind, will always be open source, and will never track you across apps or services. The data above is the only data Bouncer sends to the developer's server. Like every network request, that HTTPS POST necessarily exposes some network metadata — for example your device's IP address, the connection timestamp, and the TLS handshake that the transport layer carries — to the operators of any network the request traverses, including Apple's and your carrier's, and Bouncer also exchanges requests with Apple to fulfil StoreKit transactions.
