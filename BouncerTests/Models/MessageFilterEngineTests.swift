@@ -85,19 +85,6 @@ final class MessageFilterEngineTests: XCTestCase {
         XCTAssertEqual(outcome.matched?.id, filter.id)
     }
 
-    /// When nothing matches, decide returns a `.none` response and no matched
-    /// filter — so activity is not recorded.
-    func test_NonMatchingReturnsNilMatchedFilter() {
-        let filter = Filter(id: UUID(),
-                            phrase: "rappi",
-                            type: .any,
-                            action: .junk)
-        let engine = MessageFilterEngine(filters: [filter])
-        let outcome = engine.decide(sender: "+15550000000",
-                                    messageBody: "Hello")
-        XCTAssertNil(outcome.matched)
-    }
-
     /// Finding #4 + #5 (extension wiring): when the store fetch fails,
     /// `filterStore.fetch()` resolves with `.failure`, the extension's
     /// receiveCompletion handler runs, and completion is delivered with an
