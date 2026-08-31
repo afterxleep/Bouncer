@@ -977,21 +977,23 @@ class SMSOfflineFilterTests: XCTestCase {
     }
 
     func testGenuinelyCatastrophicPatternIsBounded() {
-        // (win+)+! on a long non-matching input is genuinely catastrophic.
-        // The matcher must not hang the test runner. The test is allowed to
-        // return either a real match or .none — only the timing matters.
-        let longText = String(repeating: "w", count: 4000)
+        // (a+)+$ is the textbook ReDoS pattern. The old engine's timeout
+        // returned false in 100 ms but left a thread burning CPU; the
+        // catastrophic work kept going and could be hit again on the next
+        // SMS. After the fix the pattern is rejected by the structural
+        // safety check, so there is no work for any thread to do.
+        let longText = String(repeating: "a", count: 30) + "b"
         let message = SMSMessage(sender: "Service", text: longText)
         let filter = SMSOfflineFilter(filterList: [
-            Filter(id: UUID(), phrase: "(win+)+!", type: .message, action: .junk, useRegex: true)
+            Filter(id: UUID(), phrase: "(a+)+$", type: .message, action: .junk, useRegex: true)
         ])
 
         let start = Date()
         let response = filter.filterMessage(message: message)
         let elapsed = Date().timeIntervalSince(start)
 
-        XCTAssertLessThan(elapsed, 2.0,
-            "Catastrophic pattern must not take more than 2s; took \(elapsed)s. action=\(response.action)")
+        XCTAssertLessThan(elapsed, 0.05,
+            "Catastrophic pattern must not take more than 50 ms; took \(elapsed)s. action=\(response.action)")
     }
 
     // MARK: - Defect (3): The timeout abandons work and races on `var result`
@@ -1038,14 +1040,15 @@ class SMSOfflineFilterTests: XCTestCase {
     }
 
     func testRepeatedCatastrophicPatternsDoNotAccumulateBackgroundWork() {
-        // After the fix, repeated calls with a catastrophic pattern must
-        // each complete in bounded time. If the old code's "abandoned thread"
-        // behaviour leaks, the test would slow down as more dispatches pile up
-        // on the global queue.
-        let longText = String(repeating: "w", count: 4000)
+        // The old code's timeout returned false in 100 ms per call but
+        // left the regex thread running on the global queue. With enough
+        // abandoned threads the global queue backs up and subsequent
+        // calls stall. The fix returns immediately because the structural
+        // check rejects the pattern before any regex work is dispatched.
+        let longText = String(repeating: "a", count: 30) + "b"
         let message = SMSMessage(sender: "Service", text: longText)
         let filter = SMSOfflineFilter(filterList: [
-            Filter(id: UUID(), phrase: "(win+)+!", type: .message, action: .junk, useRegex: true)
+            Filter(id: UUID(), phrase: "(a+)+$", type: .message, action: .junk, useRegex: true)
         ])
 
         let start = Date()
@@ -1053,8 +1056,8 @@ class SMSOfflineFilterTests: XCTestCase {
             _ = filter.filterMessage(message: message)
         }
         let elapsed = Date().timeIntervalSince(start)
-        XCTAssertLessThan(elapsed, 5.0,
-            "20 catastrophic matches must finish in under 5s; took \(elapsed)s")
+        XCTAssertLessThan(elapsed, 0.3,
+            "20 catastrophic matches must finish in under 300 ms; took \(elapsed)s")
     }
 
     // MARK: - Defect (4): The "Health" category is half-wired
