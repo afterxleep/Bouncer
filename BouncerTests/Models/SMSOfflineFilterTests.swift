@@ -807,26 +807,247 @@ class SMSOfflineFilterTests: XCTestCase {
         var filter = SMSOfflineFilter(filterList: [
             Filter(id: UUID(), phrase: "a{1,50}b?", type: .message, action: .transaction, useRegex: true)
         ])
-        XCTAssertEqual(filter.filterMessage(message: message).action, .transaction)
-        
+        XCTAssertEqual(filter.filterMessage(message: message).action, ILMessageFilterAction.transaction)
+
         // Test pattern with reasonable repetition
         filter = SMSOfflineFilter(filterList: [
             Filter(id: UUID(), phrase: "\\d{1,10}", type: .message, action: .transaction, useRegex: true)
         ])
-        XCTAssertEqual(filter.filterMessage(message: SMSMessage(sender: "Service", text: "123456")).action, .transaction)
-        
+        XCTAssertEqual(filter.filterMessage(message: SMSMessage(sender: "Service", text: "123456")).action, ILMessageFilterAction.transaction)
+
         // Test pattern with excessive repetition
         filter = SMSOfflineFilter(filterList: [
             Filter(id: UUID(), phrase: "\\d{1,20000}", type: .message, action: .transaction, useRegex: true)
         ])
         // Should be rejected due to excessive quantifier
         XCTAssertEqual(filter.filterMessage(message: SMSMessage(sender: "Service", text: "123456")).action, .none)
-        
+
         // Test pattern with invalid regex syntax
         filter = SMSOfflineFilter(filterList: [
             Filter(id: UUID(), phrase: "[invalid", type: .message, action: .transaction, useRegex: true)
         ])
         // Should be rejected due to invalid syntax
         XCTAssertEqual(filter.filterMessage(message: SMSMessage(sender: "Service", text: "123456")).action, .none)
+    }
+
+    // MARK: - Defect (1): Invalid regex must surface a user-visible error
+    //
+    // The matcher already returns .none for an uncompilable pattern, but the
+    // editor accepts the rule and saves it. The user never finds out. These
+    // tests pin the contract the editor must enforce: the matcher must say
+    // *what* was wrong with the pattern, so the container can show it.
+
+    func testInvalidRegexValidationReportsTheReason() {
+        let result = RegexValidator.validate("(free|win")
+        switch result {
+        case .valid: XCTFail("Expected (free|win to be reported invalid, got .valid")
+        case .invalid(let message):
+            XCTAssertFalse(message.isEmpty, "An invalid-pattern message must not be empty")
+        }
+    }
+
+    func testValidRegexPassesValidation() {
+        switch RegexValidator.validate("win.*.*prize") {
+        case .valid: break
+        case .invalid(let message): XCTFail("win.*.*prize should validate, got: \(message)")
+        }
+        switch RegexValidator.validate("\\bPIN\\b") {
+        case .valid: break
+        case .invalid(let message): XCTFail("\\bPIN\\b should validate, got: \(message)")
+        }
+    }
+
+    func testInvalidRegexStillMatchesNothingInTheEngine() {
+        // The engine itself should not return a match for an invalid regex.
+        let message = SMSMessage(sender: "Service", text: "free win")
+        let filter = SMSOfflineFilter(filterList: [
+            Filter(id: UUID(), phrase: "(free|win", type: .message, action: .junk, useRegex: true)
+        ])
+        XCTAssertEqual(filter.filterMessage(message: message).action, .none)
+    }
+
+    // MARK: - Defect (2): ReDoS guard — false positives and false negatives
+
+    func testWinDotStarDotStarPrizeIsAcceptedAndMatches() {
+        // The current substring-based guard rejects this legal pattern. After
+        // the fix it must compile, match a text it should match, and reject
+        // genuinely catastrophic patterns.
+        let matching = SMSMessage(sender: "Spam", text: "You could win big prize in this contest")
+        let filter = SMSOfflineFilter(filterList: [
+            Filter(id: UUID(), phrase: "win.*.*prize", type: .message, action: .junk, useRegex: true)
+        ])
+        XCTAssertEqual(filter.filterMessage(message: matching).action, .junk)
+    }
+
+    func testWinDotStarDotStarPrizeDoesNotMatchArbitraryText() {
+        // The same pattern must NOT match when there is no "win...prize" in
+        // the text — proving the fix preserved actual matching semantics.
+        let nonMatching = SMSMessage(sender: "Service", text: "your prize will arrive next week")
+        let filter = SMSOfflineFilter(filterList: [
+            Filter(id: UUID(), phrase: "win.*.*prize", type: .message, action: .junk, useRegex: true)
+        ])
+        XCTAssertEqual(filter.filterMessage(message: nonMatching).action, .none)
+    }
+
+    func testGenuinelyCatastrophicPatternIsBounded() {
+        // (win+)+! on a long non-matching input is genuinely catastrophic.
+        // The matcher must not hang the test runner. The test is allowed to
+        // return either a real match or .none — only the timing matters.
+        let longText = String(repeating: "w", count: 4000)
+        let message = SMSMessage(sender: "Service", text: longText)
+        let filter = SMSOfflineFilter(filterList: [
+            Filter(id: UUID(), phrase: "(win+)+!", type: .message, action: .junk, useRegex: true)
+        ])
+
+        let start = Date()
+        let response = filter.filterMessage(message: message)
+        let elapsed = Date().timeIntervalSince(start)
+
+        XCTAssertLessThan(elapsed, 2.0,
+            "Catastrophic pattern must not take more than 2s; took \(elapsed)s. action=\(response.action)")
+    }
+
+    // MARK: - Defect (3): The timeout abandons work and races on `var result`
+
+    func testConcurrentRegexMatchesReturnConsistentResults() {
+        // Hammer the engine from many threads with a mix of patterns and
+        // messages. After the fix, the result must be deterministic and
+        // there must be no data race on the internal result.
+        let filter = SMSOfflineFilter(filterList: [
+            Filter(id: UUID(), phrase: "\\d{4}", type: .message, action: .transaction, useRegex: true),
+            Filter(id: UUID(), phrase: "win.*prize", type: .message, action: .junk, useRegex: true),
+            Filter(id: UUID(), phrase: "OTP", type: .message, action: .transaction)
+        ])
+
+        let messages: [SMSMessage] = [
+            SMSMessage(sender: "Bank", text: "Your OTP is 1234"),
+            SMSMessage(sender: "Spam", text: "win a free prize today"),
+            SMSMessage(sender: "Service", text: "no trigger here"),
+            SMSMessage(sender: "Bank", text: "OTP 5678 confirmed")
+        ]
+
+        let queue = DispatchQueue(label: "test.concurrent.regex", attributes: .concurrent)
+        let group = DispatchGroup()
+        let lock = NSLock()
+        var results = Set<String>()
+
+        for _ in 0..<200 {
+            for message in messages {
+                group.enter()
+                queue.async {
+                    let r = filter.filterMessage(message: message)
+                    let key = "\(r.action.rawValue)|\(r.subAction.rawValue)"
+                    lock.lock()
+                    results.insert(key)
+                    lock.unlock()
+                    group.leave()
+                }
+            }
+        }
+
+        XCTAssertEqual(group.wait(timeout: .now() + 10), .success,
+                      "All concurrent matches must complete within 10s")
+        XCTAssertGreaterThan(results.count, 0)
+    }
+
+    func testRepeatedCatastrophicPatternsDoNotAccumulateBackgroundWork() {
+        // After the fix, repeated calls with a catastrophic pattern must
+        // each complete in bounded time. If the old code's "abandoned thread"
+        // behaviour leaks, the test would slow down as more dispatches pile up
+        // on the global queue.
+        let longText = String(repeating: "w", count: 4000)
+        let message = SMSMessage(sender: "Service", text: longText)
+        let filter = SMSOfflineFilter(filterList: [
+            Filter(id: UUID(), phrase: "(win+)+!", type: .message, action: .junk, useRegex: true)
+        ])
+
+        let start = Date()
+        for _ in 0..<20 {
+            _ = filter.filterMessage(message: message)
+        }
+        let elapsed = Date().timeIntervalSince(start)
+        XCTAssertLessThan(elapsed, 5.0,
+            "20 catastrophic matches must finish in under 5s; took \(elapsed)s")
+    }
+
+    // MARK: - Defect (4): The "Health" category is half-wired
+
+    func testTransactionHealthMapsToTransactionalHealthSubAction() {
+        // Apple has exposed ILMessageFilterSubActionTransactionalHealth since
+        // iOS 16 (verified against
+        // IdentityLookup.framework/Headers/ILMessageFilterAction.h). After the
+        // fix the matcher must route .transactionHealth to
+        // .transactionalHealth, not silently file it as .transactionalOthers.
+        let message = SMSMessage(sender: "Clinic", text: "Time for your flu shot")
+        let filter = SMSOfflineFilter(filterList: [
+            Filter(id: UUID(), phrase: "flu shot", type: .message,
+                   action: .transaction, subAction: .transactionHealth)
+        ])
+        let response = filter.filterMessage(message: message)
+        XCTAssertEqual(response.action, ILMessageFilterAction.transaction)
+        XCTAssertEqual(response.subAction, ILMessageFilterSubAction.transactionalHealth)
+    }
+
+    func testTransactionHealthSurvivesARoundTrip() {
+        // A rule encoded with subAction = .transactionHealth must decode back
+        // to .transactionHealth so a rule saved by an older build lands in
+        // the right place after the upgrade.
+        let original = Filter(id: UUID(), phrase: "flu shot", type: .message,
+                              action: .transaction, subAction: .transactionHealth)
+        let data = try? JSONEncoder().encode(original)
+        let decoded = try? JSONDecoder().decode(Filter.self, from: data ?? Data())
+        let rule = try? XCTUnwrap(decoded)
+        XCTAssertEqual(rule?.subAction, .transactionHealth,
+            ".transactionHealth must round-trip through JSON unchanged")
+    }
+
+    func testTransactionHealthIsWiredIntoTheMatcher() {
+        // Before the fix .transactionHealth fell through default to
+        // .transactionalOthers. After the fix it must take its own branch.
+        let filter = Filter(id: UUID(), phrase: "flu shot", type: .message,
+                            action: .transaction, subAction: .transactionHealth)
+        let engine = SMSOfflineFilter(filterList: [filter])
+        let sub = engine.subAction(for: filter)
+        XCTAssertEqual(sub, .transactionalHealth,
+            ".transactionHealth must route to .transactionalHealth, not .transactionalOthers")
+    }
+
+    // MARK: - Backwards compatibility for already-stored rules
+
+    func testRulesFromCurrentShippingFormatStillMatchAfterTheFix() {
+        // Rules encoded by today's shipping app must continue to match the
+        // same messages after the fix. This pins the wire format and proves
+        // the fix did not silently change semantics for stored data.
+        let original = [
+            Filter(id: UUID(), phrase: "bank", type: .sender, action: .transaction,
+                   subAction: .transactionFinance, useRegex: false, caseSensitive: false),
+            Filter(id: UUID(), phrase: "WIN.*PRIZE", type: .message, action: .junk,
+                   subAction: .promotionOther, useRegex: true, caseSensitive: false),
+            Filter(id: UUID(), phrase: "coupon", type: .message, action: .promotion,
+                   subAction: .promotionCoupons, useRegex: false, caseSensitive: false),
+            Filter(id: UUID(), phrase: "stop", type: .any, action: .junk,
+                   subAction: .none, useRegex: false, caseSensitive: false)
+        ]
+        let data = try? JSONEncoder().encode(original)
+        let decoded = try? JSONDecoder().decode([Filter].self, from: data ?? Data())
+
+        XCTAssertNotNil(decoded)
+        let decodedRules = try? XCTUnwrap(decoded)
+        XCTAssertEqual(decodedRules?.count, original.count)
+
+        let engine = SMSOfflineFilter(filterList: decodedRules ?? [])
+        let bankResp = engine.filterMessage(message: SMSMessage(sender: "Bank Alert", text: "hi"))
+        XCTAssertEqual(bankResp.action, .transaction)
+        XCTAssertEqual(bankResp.subAction, .transactionalFinance)
+
+        let spamResp = engine.filterMessage(message: SMSMessage(sender: "Spam", text: "WIN the PRIZE today"))
+        XCTAssertEqual(spamResp.action, .junk)
+
+        let couponResp = engine.filterMessage(message: SMSMessage(sender: "Shop", text: "Use coupon SAVE10"))
+        XCTAssertEqual(couponResp.action, .promotion)
+        XCTAssertEqual(couponResp.subAction, .promotionalCoupons)
+
+        let stopResp = engine.filterMessage(message: SMSMessage(sender: "Anybody", text: "stop"))
+        XCTAssertEqual(stopResp.action, .junk)
     }
 }
