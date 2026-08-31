@@ -15,22 +15,22 @@ struct MessageFilterEngine {
 
     let filters: [Filter]
 
-    func decide(sender: String?, messageBody: String?) -> ILMessageFilterQueryResponse {
+    func decide(sender: String?, messageBody: String?) -> (response: ILMessageFilterQueryResponse, matched: Filter?) {
         let response = ILMessageFilterQueryResponse()
         guard let sender = sender, let messageBody = messageBody else {
             response.action = .none
             response.subAction = .none
-            return response
+            return (response, nil)
         }
         let engine = SMSOfflineFilter(filterList: filters)
         let message = SMSMessage(sender: sender, text: messageBody)
         guard let matched = engine.matchingFilter(message: message) else {
             response.action = .none
             response.subAction = .none
-            return response
+            return (response, nil)
         }
         response.action = engine.action(for: matched)
         response.subAction = engine.subAction(for: matched)
-        return response
+        return (response, matched)
     }
 }
