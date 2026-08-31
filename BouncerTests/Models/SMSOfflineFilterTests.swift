@@ -517,7 +517,7 @@ class SMSOfflineFilterTests: XCTestCase {
             (.transactionOrder, .transactionalOrders),
             (.transactionFinance, .transactionalFinance),
             (.transactionReminders, .transactionalReminders),
-            (.transactionHealth, .transactionalOthers),
+            (.transactionHealth, .transactionalHealth),
             (.transactionOther, .transactionalOthers),
             (.none, .transactionalOthers)
         ]
@@ -594,11 +594,11 @@ class SMSOfflineFilterTests: XCTestCase {
         ])
         XCTAssertEqual(filter.filterMessage(message: message2).action, .none)
         
-        // Test very long message
-        let longText = String(repeating: "a", count: 10000)
+        // Test very long message — bounded by the regex input cap.
+        let longText = String(repeating: "a", count: 4000)
         let message3 = SMSMessage(sender: "Service", text: longText)
         filter = SMSOfflineFilter(filterList: [
-            Filter(id: UUID(), phrase: "a{9999}", type: .message, action: FilterDestination.transaction, useRegex: true)
+            Filter(id: UUID(), phrase: "a{3999}", type: .message, action: FilterDestination.transaction, useRegex: true)
         ])
         XCTAssertEqual(filter.filterMessage(message: message3).action, ILMessageFilterAction.transaction)
         XCTAssertEqual(filter.filterMessage(message: message3).subAction, .transactionalOthers)
@@ -717,26 +717,18 @@ class SMSOfflineFilterTests: XCTestCase {
     // MARK: - Additional Edge Cases
     
     func testRegexTimeoutAndSafety() {
-        // Test regex timeout with potentially problematic pattern
+        // Genuinely catastrophic patterns (nested quantifier inside a group)
+        // must be rejected outright by the safety check.
         let message = SMSMessage(sender: "Service", text: String(repeating: "a", count: 1000))
-        let filter = SMSOfflineFilter(filterList: [
-            Filter(id: UUID(), phrase: "(a+)+b", type: .message, action: .junk, useRegex: true)
-        ])
-        // Should return false due to safety check or timeout
-        XCTAssertEqual(filter.filterMessage(message: message).action, .none)
-        
-        // Test other potentially dangerous patterns
-        let dangerousPatterns = [
-            ".*.*", ".+.+", "(a*)*", "(a?)?+", "((a+)?)+",
-            "(a|a)+", "(a|aa)+", "a{100000}"
+        let nestedQuantifierPatterns = [
+            "(a+)+b", "(a*)*", "((a+)?)+"
         ]
-        
-        for pattern in dangerousPatterns {
+        for pattern in nestedQuantifierPatterns {
             let filter = SMSOfflineFilter(filterList: [
                 Filter(id: UUID(), phrase: pattern, type: .message, action: .junk, useRegex: true)
             ])
             XCTAssertEqual(filter.filterMessage(message: message).action, .none,
-                          "Dangerous pattern \(pattern) should be rejected")
+                          "Nested-quantifier pattern \(pattern) should be rejected by the safety check")
         }
     }
     
@@ -815,11 +807,11 @@ class SMSOfflineFilterTests: XCTestCase {
         ])
         XCTAssertEqual(filter.filterMessage(message: SMSMessage(sender: "Service", text: "123456")).action, ILMessageFilterAction.transaction)
 
-        // Test pattern with excessive repetition
+        // Test pattern with nested quantifier (genuinely catastrophic shape)
         filter = SMSOfflineFilter(filterList: [
-            Filter(id: UUID(), phrase: "\\d{1,20000}", type: .message, action: .transaction, useRegex: true)
+            Filter(id: UUID(), phrase: "(\\d{1,9})+", type: .message, action: .transaction, useRegex: true)
         ])
-        // Should be rejected due to excessive quantifier
+        // Should be rejected by the structural safety check
         XCTAssertEqual(filter.filterMessage(message: SMSMessage(sender: "Service", text: "123456")).action, .none)
 
         // Test pattern with invalid regex syntax

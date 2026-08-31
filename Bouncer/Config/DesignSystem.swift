@@ -24,6 +24,7 @@ enum Brand {
     static let orders = Color("SteelBlue")          // blue
     static let finance = Color("Victoria")          // indigo
     static let reminders = Color("Jakarta")         // violet
+    static let health = Color("Mantle")             // teal
     static let offers = Color("Pizazz")             // amber
     static let coupons = Color("RoseBud")           // pink
     static let promotionOther = Color("Trinidad")   // coral
@@ -87,7 +88,9 @@ extension FilterDestination {
             return Category(symbol: "creditcard.fill", tint: Brand.finance, titleKey: "TRANSACTION_ACTION_FINANCE", shortKey: "TRANSACTION_ACTION_FINANCE")
         case .transactionReminders:
             return Category(symbol: "calendar.badge.clock", tint: Brand.reminders, titleKey: "TRANSACTION_ACTION_REMINDERS", shortKey: "TRANSACTION_ACTION_REMINDERS")
-        case .transaction, .transactionHealth, .transactionOther:
+        case .transactionHealth:
+            return Category(symbol: "heart.text.square.fill", tint: Brand.health, titleKey: "TRANSACTION_ACTION_HEALTH", shortKey: "TRANSACTION_ACTION_HEALTH")
+        case .transaction, .transactionOther:
             return Category(symbol: "tray.full.fill", tint: Brand.transactionOther, titleKey: "TRANSACTION_ACTION", shortKey: "OTHER_SHORT")
         case .promotionOffers:
             return Category(symbol: "tag.fill", tint: Brand.offers, titleKey: "PROMOTION_ACTION_OFFERS", shortKey: "PROMOTION_ACTION_OFFERS")

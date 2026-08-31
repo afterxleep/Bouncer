@@ -9,12 +9,14 @@ enum FilterError: Identifiable {
     case emptyImportFileError
     case decodingError(String)
     case unknownError(String)
+    case invalidRegex(String)
 
     var id: String {
         switch self {
             case .emptyImportFileError: return "EMPTY_IMPORT_FILE"
             case .decodingError: return "INCORRECT_FILE_FORMAT"
             case .unknownError(let str): return str
+            case .invalidRegex(let str): return "INVALID_REGEX_\(str)"
         }
     }
 
@@ -23,6 +25,7 @@ enum FilterError: Identifiable {
             case .emptyImportFileError: return Text("EMPTY_IMPORT_FILE")
         case .decodingError(let str): return Text("IMPORT_ERROR \(NSLocalizedString(str, comment: ""))")
             case .unknownError(let str): return Text("IMPORT_ERROR \(NSLocalizedString(str, comment: ""))")
+            case .invalidRegex(let str): return Text(str)
         }
     }
 }

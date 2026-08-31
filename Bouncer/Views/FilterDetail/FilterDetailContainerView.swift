@@ -86,6 +86,15 @@ extension FilterDetailContainerView {
     private var saveButton: some View {
         Button("SAVE") {
             guard !filterTerm.isBlank else { return }
+            if useRegex {
+                switch RegexValidator.validate(filterTerm) {
+                case .valid:
+                    break
+                case .invalid(let message):
+                    store.dispatch(.filter(action: .error(.invalidRegex(message))))
+                    return
+                }
+            }
             saveFilter()
             dismiss()
         }
