@@ -183,7 +183,7 @@
 "HELP_SUPPORT_SECTION" = "Support";
 "HELP_SUPPORT_FOOTER" = "Questions, bugs and feature requests all reach the developer directly.";
 "HELP_EMAIL_SUPPORT" = "Email support";
-"HELP_PRIVACY" = "Your messages are filtered entirely on your iPhone and never leave it. Not to Bouncer, not to anyone. The rules you write — your phrases, sender patterns, and what each rule does — are sent to the developer so common rules can be improved over time.";
+"HELP_PRIVACY" = "Your messages are filtered entirely on your iPhone and never leave it. Not to Bouncer, not to anyone. When you create, change, or delete a rule, the rule itself — the phrase, where to look, what it does — is sent to a server the developer controls, along with your general region and the time.";
 "HELP_VERSION %@" = "Bouncer %@";
 "DONE" = "Done";
 "LANE_WINDOW_CAPTION" = "messages handled in the last 30 days";
