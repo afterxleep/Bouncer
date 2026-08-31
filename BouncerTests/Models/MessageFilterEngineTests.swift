@@ -26,19 +26,19 @@ final class MessageFilterEngineTests: XCTestCase {
 
     func test_NilMessageBodyReturnsNoneAction() {
         let engine = MessageFilterEngine(filters: [])
-        XCTAssertEqual(engine.decide(sender: "+15551234567", messageBody: nil).action,
+        XCTAssertEqual(engine.decide(sender: "+15551234567", messageBody: nil).response.action,
                        ILMessageFilterAction.none,
-                       describe(engine.decide(sender: "+15551234567", messageBody: nil)))
-        XCTAssertEqual(engine.decide(sender: nil, messageBody: "hi").action,
+                       describe(engine.decide(sender: "+15551234567", messageBody: nil).response))
+        XCTAssertEqual(engine.decide(sender: nil, messageBody: "hi").response.action,
                        ILMessageFilterAction.none)
-        XCTAssertEqual(engine.decide(sender: nil, messageBody: nil).action,
+        XCTAssertEqual(engine.decide(sender: nil, messageBody: nil).response.action,
                        ILMessageFilterAction.none)
     }
 
     func test_EmptyFiltersReturnsNoneAction() {
         let engine = MessageFilterEngine(filters: [])
         let outcome = engine.decide(sender: "+15551234567", messageBody: "hi")
-        XCTAssertEqual(outcome.action, ILMessageFilterAction.none)
+        XCTAssertEqual(outcome.response.action, ILMessageFilterAction.none)
     }
 
     func test_MatchingJunkFilterReturnsJunkAction() {
@@ -49,10 +49,10 @@ final class MessageFilterEngineTests: XCTestCase {
         let engine = MessageFilterEngine(filters: [filter])
         let outcome = engine.decide(sender: "+15550000000",
                                     messageBody: "Tu rappi pedido")
-        XCTAssertEqual(outcome.action, ILMessageFilterAction.junk,
-                       describe(outcome))
-        XCTAssertEqual(outcome.subAction, ILMessageFilterSubAction.none,
-                       describe(outcome))
+        XCTAssertEqual(outcome.response.action, ILMessageFilterAction.junk,
+                       describe(outcome.response))
+        XCTAssertEqual(outcome.response.subAction, ILMessageFilterSubAction.none,
+                       describe(outcome.response))
     }
 
     func test_NonMatchingReturnsNoneAction() {
@@ -62,33 +62,27 @@ final class MessageFilterEngineTests: XCTestCase {
                             action: .junk)
         let engine = MessageFilterEngine(filters: [filter])
         XCTAssertEqual(engine.decide(sender: "+15550000000",
-                                     messageBody: "Hello").action,
+                                     messageBody: "Hello").response.action,
                        ILMessageFilterAction.none)
     }
 
-    /// Finding #4: a request with nil sender or nil body must produce a
-    /// response — the engine is the seam, the extension delivers whatever
-    /// the engine returns. If the engine returns a response for nil inputs,
-    /// the extension's completion handler will be called exactly once with
-    /// that response.
-    func test_NilInputsStillProduceAResponse() {
-        let engine = MessageFilterEngine(filters: [])
-        let response = engine.decide(sender: nil, messageBody: nil)
-        // We can prove completion fires by checking the response is valid.
-        XCTAssertNotNil(response.action)
-    }
-
-    /// Finding #4 + #5: the extension's completion is driven by an engine
-    /// call regardless of whether the store fetch succeeded or failed. We
-    /// prove the engine behaves deterministically for nil inputs so the
-    /// completion is guaranteed to fire.
-    func test_NilSenderWithBodyStillProducesResponse() {
-        let engine = MessageFilterEngine(filters: [])
-        let outcome = engine.decide(sender: nil, messageBody: "real text")
-        // We don't care about the action's value here; we care that a
-        // response is produced (otherwise the extension would hang waiting
-        // for completion).
-        XCTAssertNotNil(outcome.action)
+    /// A rule with `.none` action still matches messages — it is used to bucket
+    /// or sort a message without filtering it. Activity recording must fire for
+    /// it the same as for any other matching rule, so `decide` returns the
+    /// matched `Filter` regardless of action. The previous gate in the
+    /// extension (`response.action != .none`) silently suppressed activity for
+    /// these rules.
+    func test_NoneActionFilterStillReturnsMatchedFilter() {
+        let filter = Filter(id: UUID(),
+                            phrase: "rappi",
+                            type: .any,
+                            action: .none)
+        let engine = MessageFilterEngine(filters: [filter])
+        let outcome = engine.decide(sender: "+15550000000",
+                                    messageBody: "Tu rappi pedido")
+        XCTAssertNotNil(outcome.matched,
+                        "a .none-action rule that matched must come back as the matched filter so activity is recorded")
+        XCTAssertEqual(outcome.matched?.id, filter.id)
     }
 
     /// Finding #4 + #5 (extension wiring): when the store fetch fails,

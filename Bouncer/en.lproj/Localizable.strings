@@ -66,6 +66,14 @@
 "OK" = "OK";
 "GENERAL" = "General";
 
+/* Filter error alerts */
+"ERROR_EMPTY_IMPORT_FILE" = "The file you selected contained no rules.";
+"ERROR_LOAD_FAILED" = "Bouncer couldn’t read your rules. Try restarting the app; if that doesn’t help, reinstall Bouncer.";
+"ERROR_SAVE_FAILED" = "Bouncer couldn’t save your rule. Make sure you have free storage and try again.";
+"ERROR_DELETE_FAILED" = "Bouncer couldn’t delete that rule. Try again in a moment.";
+"ERROR_DECODING_FAILED" = "The file you selected isn’t a Bouncer rule list. Pick a file exported from Bouncer and try again.";
+"ERROR_DISK %@" = "Bouncer couldn’t write to its storage: %@. Make sure you have free space and try again.";
+
 /* Onboarding */
 "ONBOARDING_WELCOME_TITLE" = "Welcome to Bouncer!";
 "ONBOARDING_WELCOME_BODY" = "Bouncer filters unwanted SMS before it reaches your inbox. Setting it up takes about a minute.";

@@ -24,19 +24,16 @@ final class MessageFilterExtension: ILMessageFilterExtension {
 
     private func respond(queryRequest: ILMessageFilterQueryRequest,
                          completion: @escaping (ILMessageFilterQueryResponse) -> Void) {
-        let response = MessageFilterEngine(filters: filters)
+        let outcome = MessageFilterEngine(filters: filters)
             .decide(sender: queryRequest.sender,
                     messageBody: queryRequest.messageBody)
-        if response.action != .none,
-           let matched = SMSOfflineFilter(filterList: filters)
-            .matchingFilter(message: SMSMessage(sender: queryRequest.sender ?? "",
-                                               text: queryRequest.messageBody ?? "")) {
+        if let matched = outcome.matched {
             RuleActivityStore.shared.record(match: matched.id)
         }
-        os_log("FILTEREXTENSION - Filtering action: %@", log: OSLog.messageFilterLog, type: .info, "\(response.action.rawValue)")
-        os_log("FILTEREXTENSION - Filtering sub-action: %@", log: OSLog.messageFilterLog, type: .info, "\(response.subAction.rawValue)")
+        os_log("FILTEREXTENSION - Filtering action: %@", log: OSLog.messageFilterLog, type: .info, "\(outcome.response.action.rawValue)")
+        os_log("FILTEREXTENSION - Filtering sub-action: %@", log: OSLog.messageFilterLog, type: .info, "\(outcome.response.subAction.rawValue)")
         os_log("FILTEREXTENSION - Filtering done", log: OSLog.messageFilterLog, type: .info)
-        completion(response)
+        completion(outcome.response)
     }
 
 }

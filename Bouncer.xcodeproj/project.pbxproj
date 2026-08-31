@@ -40,13 +40,9 @@
 		D6233A7624A650B700B37A6A /* SMSFilter.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D6233A6F24A650B700B37A6A /* SMSFilter.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D6233A7F24A651A200B37A6A /* SMSOfflineFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6233A7D24A651A200B37A6A /* SMSOfflineFilter.swift */; };
 		D6233A8124A6538D00B37A6A /* SMSOfflineFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6233A7D24A651A200B37A6A /* SMSOfflineFilter.swift */; };
-		AA0700000000000000000010 /* RegexValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0700000000000000000011 /* RegexValidator.swift */; };
-		AA0700000000000000000012 /* RegexValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0700000000000000000011 /* RegexValidator.swift */; };
-		AA0700000000000000000020 /* RegexSafetyChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0700000000000000000021 /* RegexSafetyChecker.swift */; };
-		AA0700000000000000000022 /* RegexSafetyChecker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0700000000000000000021 /* RegexSafetyChecker.swift */; };
-		AA0700000000000000000030 /* RuleSaveValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0700000000000000000031 /* RuleSaveValidator.swift */; };
-		AA0700000000000000000032 /* RuleSaveValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0700000000000000000031 /* RuleSaveValidator.swift */; };
 		AA0800000000000000000001 /* MessageFilterEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0800000000000000000000 /* MessageFilterEngine.swift */; };
+		AA1000000000000000000002 /* RegexValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000000000000000000000 /* RegexValidator.swift */; };
+		AA1000000000000000000003 /* RuleSaveValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000000000000000000001 /* RuleSaveValidator.swift */; };
 		AA0800000000000000000002 /* MessageFilterEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0800000000000000000000 /* MessageFilterEngine.swift */; };
 		D6233A8324A653F200B37A6A /* FilterStoreFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FC824A54ADE009AE3FF /* FilterStoreFile.swift */; };
 		D62B331B24BAB16C002DFB81 /* ReviewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62B331A24BAB16C002DFB81 /* ReviewService.swift */; };
@@ -160,10 +156,11 @@
 		D6233A7124A650B700B37A6A /* MessageFilterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFilterExtension.swift; sourceTree = "<group>"; };
 		D6233A7324A650B700B37A6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6233A7D24A651A200B37A6A /* SMSOfflineFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSOfflineFilter.swift; sourceTree = "<group>"; };
-		AA0700000000000000000011 /* RegexValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexValidator.swift; sourceTree = "<group>"; };
-		AA0700000000000000000021 /* RegexSafetyChecker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexSafetyChecker.swift; sourceTree = "<group>"; };
-		AA0700000000000000000031 /* RuleSaveValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleSaveValidator.swift; sourceTree = "<group>"; };
 		AA0800000000000000000000 /* MessageFilterEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageFilterEngine.swift; sourceTree = "<group>"; };
+		AA1000000000000000000000 /* RegexValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexValidator.swift; sourceTree = "<group>"; };
+		AA1000000000000000000001 /* RuleSaveValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleSaveValidator.swift; sourceTree = "<group>"; };
+		AA1000000000000000000000 /* RegexValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexValidator.swift; sourceTree = "<group>"; };
+		AA1000000000000000000001 /* RuleSaveValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleSaveValidator.swift; sourceTree = "<group>"; };
 		D6233A8524A6553C00B37A6A /* Bouncer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bouncer.entitlements; sourceTree = "<group>"; };
 		D6233A8624A655BF00B37A6A /* SMSFilter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SMSFilter.entitlements; sourceTree = "<group>"; };
 		D62B331A24BAB16C002DFB81 /* ReviewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewService.swift; sourceTree = "<group>"; };
@@ -345,10 +342,9 @@
 				D60A19C624A69F1F0002E8BD /* SMSMessage.swift */,
 				D6EA9A8124AD2201000135E7 /* SMSFiltering.swift */,
 				D6233A7D24A651A200B37A6A /* SMSOfflineFilter.swift */,
-				AA0700000000000000000011 /* RegexValidator.swift */,
-				AA0700000000000000000021 /* RegexSafetyChecker.swift */,
-				AA0700000000000000000031 /* RuleSaveValidator.swift */,
 				AA0800000000000000000000 /* MessageFilterEngine.swift */,
+				AA1000000000000000000000 /* RegexValidator.swift */,
+				AA1000000000000000000001 /* RuleSaveValidator.swift */,
 			);
 			path = SMSFilter;
 			sourceTree = "<group>";
@@ -721,9 +717,6 @@
 				D6BE8B8828CFE230004E7274 /* OSLog.swift in Sources */,
 				D60A19C824A6A2C80002E8BD /* SMSMessage.swift in Sources */,
 				D6233A8124A6538D00B37A6A /* SMSOfflineFilter.swift in Sources */,
-				AA0700000000000000000012 /* RegexValidator.swift in Sources */,
-				AA0700000000000000000022 /* RegexSafetyChecker.swift in Sources */,
-				AA0700000000000000000032 /* RuleSaveValidator.swift in Sources */,
 				AA0800000000000000000002 /* MessageFilterEngine.swift in Sources */,
 				D6F184BC29F490430018FB7F /* FilterStoreFileMigrator.swift in Sources */,
 				D6F184BD29F4904E0018FB7F /* FilterV1.swift in Sources */,
@@ -738,10 +731,9 @@
 				AA0500000000000000000002 /* RuleActivityStore.swift in Sources */,
 				AA0400000000000000000002 /* RuleListComponents.swift in Sources */,
 				D6233A7F24A651A200B37A6A /* SMSOfflineFilter.swift in Sources */,
-				AA0700000000000000000010 /* RegexValidator.swift in Sources */,
-				AA0700000000000000000020 /* RegexSafetyChecker.swift in Sources */,
-				AA0700000000000000000030 /* RuleSaveValidator.swift in Sources */,
 				AA0800000000000000000001 /* MessageFilterEngine.swift in Sources */,
+				AA1000000000000000000002 /* RegexValidator.swift in Sources */,
+				AA1000000000000000000003 /* RuleSaveValidator.swift in Sources */,
 				AA0100000000000000000002 /* OnboardingPage.swift in Sources */,
 				AA0100000000000000000004 /* OnboardingComponents.swift in Sources */,
 				AA0100000000000000000006 /* OnboardingView.swift in Sources */,
@@ -840,7 +832,7 @@
 				CODE_SIGN_ENTITLEMENTS = SMSFilter/SMSFilter.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1401;
+				CURRENT_PROJECT_VERSION = 1387;
 				DEVELOPMENT_TEAM = J9F8F3PWTV;
 				INFOPLIST_FILE = SMSFilter/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
@@ -869,7 +861,7 @@
 				CODE_SIGN_ENTITLEMENTS = SMSFilter/SMSFilter.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1401;
+				CURRENT_PROJECT_VERSION = 1387;
 				DEVELOPMENT_TEAM = J9F8F3PWTV;
 				INFOPLIST_FILE = SMSFilter/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
@@ -1027,7 +1019,7 @@
 				CODE_SIGN_ENTITLEMENTS = Bouncer/Bouncer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1401;
+				CURRENT_PROJECT_VERSION = 1387;
 				DEVELOPMENT_ASSET_PATHS = "\"Bouncer/Preview Content\"";
 				DEVELOPMENT_TEAM = J9F8F3PWTV;
 				ENABLE_PREVIEWS = YES;
@@ -1061,7 +1053,7 @@
 				CODE_SIGN_ENTITLEMENTS = Bouncer/Bouncer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1401;
+				CURRENT_PROJECT_VERSION = 1387;
 				DEVELOPMENT_ASSET_PATHS = "\"Bouncer/Preview Content\"";
 				DEVELOPMENT_TEAM = J9F8F3PWTV;
 				ENABLE_PREVIEWS = YES;

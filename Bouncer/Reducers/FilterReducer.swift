@@ -51,8 +51,14 @@ func filterReducer(state: inout FilterState, action: FilterAction) -> Void {
 private func mapMiddlewareError(_ error: FilterMiddlewareError) -> FilterError {
     switch error {
     case .decodingError:
-        return .decodingError("INCORRECT_FILE_FORMAT")
-    case .loadError, .addError, .updateError, .deleteError, .unknown:
-        return .unknownError(String(describing: error))
+        return .decodingFailed(reason: "INCORRECT_FILE_FORMAT")
+    case .loadError:
+        return .loadFailed
+    case .addError, .addManyError, .updateError:
+        return .saveFailed
+    case .deleteError:
+        return .deleteFailed
+    case .unknown(let message):
+        return .diskError(message: message)
     }
 }

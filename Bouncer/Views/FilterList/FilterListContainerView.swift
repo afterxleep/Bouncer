@@ -7,27 +7,54 @@ import SwiftUI
 
 enum FilterError: Identifiable {
     case emptyImportFileError
-    case decodingError(String)
-    case unknownError(String)
+    case decodingFailed(reason: String)
+    case loadFailed
+    case saveFailed
+    case deleteFailed
+    case diskError(message: String)
     case invalidRegex(String)
 
+    /// Stable identifier used for tests, analytics, and any external caller
+    /// comparing errors. Localised strings live in en.lproj / es.lproj with
+    /// identical key sets.
     var id: String {
         switch self {
-            case .emptyImportFileError: return "EMPTY_IMPORT_FILE"
-            case .decodingError: return "INCORRECT_FILE_FORMAT"
-            case .unknownError(let str): return str
-            case .invalidRegex(let str): return "INVALID_REGEX_\(str)"
+        case .emptyImportFileError:  return "ERROR_EMPTY_IMPORT_FILE"
+        case .decodingFailed:        return "ERROR_DECODING_FAILED"
+        case .loadFailed:            return "ERROR_LOAD_FAILED"
+        case .saveFailed:            return "ERROR_SAVE_FAILED"
+        case .deleteFailed:          return "ERROR_DELETE_FAILED"
+        case .diskError:             return "ERROR_DISK"
+        case .invalidRegex(let str): return "ERROR_INVALID_REGEX_\(str)"
         }
     }
 
-    var textView: Text {
+    /// The user-facing message. Every case resolves to a localised string key
+    /// that exists in both en.lproj and es.lproj.
+    var localizedMessage: String {
         switch self {
-            case .emptyImportFileError: return Text("EMPTY_IMPORT_FILE")
-        case .decodingError(let str): return Text("IMPORT_ERROR \(NSLocalizedString(str, comment: ""))")
-            case .unknownError(let str): return Text("IMPORT_ERROR \(NSLocalizedString(str, comment: ""))")
-            case .invalidRegex(let str): return Text(str)
+        case .emptyImportFileError:
+            return NSLocalizedString("ERROR_EMPTY_IMPORT_FILE", comment: "")
+        case .decodingFailed:
+            return NSLocalizedString("ERROR_DECODING_FAILED", comment: "")
+        case .loadFailed:
+            return NSLocalizedString("ERROR_LOAD_FAILED", comment: "")
+        case .saveFailed:
+            return NSLocalizedString("ERROR_SAVE_FAILED", comment: "")
+        case .deleteFailed:
+            return NSLocalizedString("ERROR_DELETE_FAILED", comment: "")
+        case .diskError(let message):
+            return String.localizedStringWithFormat(
+                NSLocalizedString("ERROR_DISK %@", comment: ""),
+                message
+            )
+        case .invalidRegex(let message):
+            return message
         }
     }
+
+    /// For the alert, which needs a `Text`.
+    var textView: Text { Text(localizedMessage) }
 }
 
 struct FilterListContainerView: View {

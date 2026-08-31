@@ -38,7 +38,7 @@ enum RuleSaveValidator {
             case .invalid(let message):
                 return .reject(message)
             }
-            if RegexSafetyChecker.containsNestedQuantifier(trimmed) {
+            if SMSOfflineFilter.containsNestedQuantifier(trimmed) {
                 return .reject("“\(trimmed)” has nested quantifiers and could hang the message filter.")
             }
         }
