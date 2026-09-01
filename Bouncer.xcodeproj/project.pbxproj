@@ -86,6 +86,7 @@
 		D6F0621124EC69F800F47BA2 /* FilterStoreFileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F0621024EC69F800F47BA2 /* FilterStoreFileTests.swift */; };
 		AA0700000000000000000001 /* FilterStoreRobustnessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0700000000000000000000 /* FilterStoreRobustnessTests.swift */; };
 		AA0E00000000000000000001 /* FilterStoreCorruptRecoveryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0E00000000000000000000 /* FilterStoreCorruptRecoveryTests.swift */; };
+		AA1100000000000000000001 /* FilterStoreExtensionSafetyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1100000000000000000000 /* FilterStoreExtensionSafetyTests.swift */; };
 		AA0F00000000000000000001 /* ReviewServiceBundleVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0F00000000000000000000 /* ReviewServiceBundleVersionTests.swift */; };
 		AA0900000000000000000001 /* MessageFilterEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0900000000000000000000 /* MessageFilterEngineTests.swift */; };
 		D6F14E8824E8A1780029A0DF /* ReviewMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F14E8724E8A1780029A0DF /* ReviewMiddleware.swift */; };
@@ -202,6 +203,7 @@
 		D6F0621024EC69F800F47BA2 /* FilterStoreFileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterStoreFileTests.swift; sourceTree = "<group>"; };
 		AA0700000000000000000000 /* FilterStoreRobustnessTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterStoreRobustnessTests.swift; sourceTree = "<group>"; };
 		AA0E00000000000000000000 /* FilterStoreCorruptRecoveryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterStoreCorruptRecoveryTests.swift; sourceTree = "<group>"; };
+		AA1100000000000000000000 /* FilterStoreExtensionSafetyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterStoreExtensionSafetyTests.swift; sourceTree = "<group>"; };
 		AA0F00000000000000000000 /* ReviewServiceBundleVersionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewServiceBundleVersionTests.swift; sourceTree = "<group>"; };
 		AA0900000000000000000000 /* MessageFilterEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFilterEngineTests.swift; sourceTree = "<group>"; };
 		D6F14E8724E8A1780029A0DF /* ReviewMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewMiddleware.swift; sourceTree = "<group>"; };
@@ -326,6 +328,7 @@
 				D6F0621024EC69F800F47BA2 /* FilterStoreFileTests.swift */,
 				AA0700000000000000000000 /* FilterStoreRobustnessTests.swift */,
 				AA0E00000000000000000000 /* FilterStoreCorruptRecoveryTests.swift */,
+				AA1100000000000000000000 /* FilterStoreExtensionSafetyTests.swift */,
 				AA0F00000000000000000000 /* ReviewServiceBundleVersionTests.swift */,
 				AA0900000000000000000000 /* MessageFilterEngineTests.swift */,
 			);
@@ -803,6 +806,7 @@
 				D66A7C2924EB3F8C00349C3F /* SMSOfflineFilterTests.swift in Sources */,
 				AA0700000000000000000001 /* FilterStoreRobustnessTests.swift in Sources */,
 				AA0E00000000000000000001 /* FilterStoreCorruptRecoveryTests.swift in Sources */,
+				AA1100000000000000000001 /* FilterStoreExtensionSafetyTests.swift in Sources */,
 				AA0F00000000000000000001 /* ReviewServiceBundleVersionTests.swift in Sources */,
 				AA0900000000000000000001 /* MessageFilterEngineTests.swift in Sources */,
 			);
@@ -842,7 +846,7 @@
 				CODE_SIGN_ENTITLEMENTS = SMSFilter/SMSFilter.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1386;
+				CURRENT_PROJECT_VERSION = 1390;
 				DEVELOPMENT_TEAM = J9F8F3PWTV;
 				INFOPLIST_FILE = SMSFilter/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
@@ -871,7 +875,7 @@
 				CODE_SIGN_ENTITLEMENTS = SMSFilter/SMSFilter.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1386;
+				CURRENT_PROJECT_VERSION = 1390;
 				DEVELOPMENT_TEAM = J9F8F3PWTV;
 				INFOPLIST_FILE = SMSFilter/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
@@ -1029,7 +1033,7 @@
 				CODE_SIGN_ENTITLEMENTS = Bouncer/Bouncer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1386;
+				CURRENT_PROJECT_VERSION = 1390;
 				DEVELOPMENT_ASSET_PATHS = "\"Bouncer/Preview Content\"";
 				DEVELOPMENT_TEAM = J9F8F3PWTV;
 				ENABLE_PREVIEWS = YES;
@@ -1063,7 +1067,7 @@
 				CODE_SIGN_ENTITLEMENTS = Bouncer/Bouncer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1386;
+				CURRENT_PROJECT_VERSION = 1390;
 				DEVELOPMENT_ASSET_PATHS = "\"Bouncer/Preview Content\"";
 				DEVELOPMENT_TEAM = J9F8F3PWTV;
 				ENABLE_PREVIEWS = YES;

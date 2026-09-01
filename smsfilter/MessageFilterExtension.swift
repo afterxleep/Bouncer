@@ -68,7 +68,7 @@ extension MessageFilterExtension: ILMessageFilterQueryHandling {
             completion(fallback)
         }
 
-        filterStore.fetch()
+        filterStore.fetch(policy: .preserve)
             .receive(on: DispatchQueue.main)
             .sink(receiveCompletion: { completionCase in
                 if case .failure = completionCase {

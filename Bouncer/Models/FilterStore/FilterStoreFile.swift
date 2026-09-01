@@ -13,6 +13,23 @@ final class FilterStoreFile: FilterStore {
     static let groupContainer = "group.com.banshai.bouncer"
     static let filterListFileV1 = "wordlist.filter"
 
+    /// Policy applied on a decode failure. The app may heal the store so the
+    /// next launch is clean; the MessageFilterExtension never gets a UI to
+    /// show the user, so it must use `.preserve` and leave the on-disk bytes
+    /// alone. A destructive write from the extension silently wipes every
+    /// rule.
+    enum FetchHealPolicy {
+        /// The store may quarantine the corrupt bytes and overwrite
+        /// `filters.json` with a fresh empty payload so the next launch is
+        /// clean. Reserved for the app process.
+        case heal
+        /// The store must never write `filters.json` and must never create
+        /// any sidecar. Required for the MessageFilterExtension: the user
+        /// is never told a heal happened, and silently destroying their
+        /// rules is data loss.
+        case preserve
+    }
+
     var filters: [Filter] = []
     var cancellables = [AnyCancellable]()
 
@@ -31,6 +48,35 @@ final class FilterStoreFile: FilterStore {
             return false
         }
         return FileManager.default.fileExists(atPath: url.path)
+    }
+
+    /// Move the corrupt bytes at `url` to a sibling sidecar named
+    /// `filters.json.corrupt-<timestamp>` so a partially-recoverable file
+    /// can be salvaged by hand. The move uses `FileManager.moveItem` so
+    /// the original location is empty after the call and a subsequent
+    /// write at the original path succeeds.
+    ///
+    /// Failure is logged but never surfaced: a quarantine miss must not
+    /// block the heal that the user is waiting for. The worst case is the
+    /// user sees the alert and the bytes are gone, the same outcome as
+    /// before this fix.
+    private func quarantineCorruptBytes(at url: URL) {
+        let container = url.deletingLastPathComponent()
+        let timestamp = Self.quarantineTimestamp()
+        let sidecar = container.appendingPathComponent("filters.json.corrupt-\(timestamp)")
+        do {
+            try FileManager.default.moveItem(at: url, to: sidecar)
+        } catch {
+            os_log("Failed to quarantine corrupt store: %s.", type: .error, error.localizedDescription)
+        }
+    }
+
+    private static func quarantineTimestamp() -> String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.dateFormat = "yyyy-MM-dd'T'HH-mm-ss'Z'"
+        return formatter.string(from: Date())
     }
 
     /// Write the given filters atomically to the shared store.
@@ -88,6 +134,13 @@ final class FilterStoreFile: FilterStore {
 extension FilterStoreFile {
 
     func fetch() -> AnyPublisher<[Filter], FilterStoreError> {
+        return fetch(policy: .heal)
+    }
+
+    /// Read the on-disk store, with a policy for what to do on a decode
+    /// failure. The app calls `fetch()` (heal); the MessageFilterExtension
+    /// calls `fetch(policy: .preserve)` so its failure path never writes.
+    func fetch(policy: FetchHealPolicy) -> AnyPublisher<[Filter], FilterStoreError> {
         return Future<[Filter], FilterStoreError> { [weak self] promise in
             guard let self = self else {
                 promise(.failure(.loadError))
@@ -99,8 +152,13 @@ extension FilterStoreFile {
             }
 
             // First-launch bootstrap: create an empty file so the rest of the
-            // pipeline sees a parseable payload.
+            // pipeline sees a parseable payload. Only the app does this —
+            // the extension's preserve policy keeps the store untouched.
             if !self.fileExists(url: url) {
+                if policy == .preserve {
+                    promise(.success([]))
+                    return
+                }
                 if let error = self.saveToDisk(filters: []) {
                     promise(.failure(error))
                     return
@@ -120,12 +178,16 @@ extension FilterStoreFile {
             _ = self.decodeData(data: data)
                 .sink(receiveCompletion: { completion in
                     if case .failure(let error) = completion {
-                        // Heal the corrupt on-disk file so the next launch
-                        // reaches a working app. The first launch still
-                        // surfaces the error to the UI (the alert is the
-                        // intended first-launch UX); subsequent launches see
-                        // the freshly-written empty payload.
-                        _ = self.saveToDisk(filters: [])
+                        if policy == .heal {
+                            // Quarantine the corrupt bytes to a sidecar
+                            // before overwriting, so a partially-recoverable
+                            // file can still be salvaged. The extension
+                            // reaches this path only under .heal, never
+                            // .preserve, so a destructive write from the
+                            // extension process is impossible.
+                            self.quarantineCorruptBytes(at: url)
+                            _ = self.saveToDisk(filters: [])
+                        }
                         promise(.failure(error))
                     }
                 }, receiveValue: { result in
