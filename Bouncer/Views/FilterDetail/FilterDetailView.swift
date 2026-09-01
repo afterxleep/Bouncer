@@ -191,7 +191,8 @@ private extension FilterDetailView {
             VStack(alignment: .leading, spacing: Metrics.m) {
                 destinationGroup("GENERAL", [.allow, .junk])
                 destinationGroup("TRANSACTIONS", [.transactionOrder, .transactionFinance,
-                                                  .transactionReminders, .transactionOther])
+                                                  .transactionReminders, .transactionHealth,
+                                                  .transactionOther])
                 destinationGroup("PROMOTIONS", [.promotionOffers, .promotionCoupons, .promotionOther])
             }
             .accessibilityIdentifier("rule.destination")

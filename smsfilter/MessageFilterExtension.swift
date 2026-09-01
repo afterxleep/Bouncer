@@ -90,7 +90,8 @@ extension MessageFilterExtension: ILMessageFilterCapabilitiesQueryHandling {
         response.transactionalSubActions = [.transactionalOrders,
                                             .transactionalOthers,
                                             .transactionalFinance,
-                                            .transactionalReminders]
+                                            .transactionalReminders,
+                                            .transactionalHealth]
         response.promotionalSubActions = [.promotionalOffers,
                                           .promotionalCoupons,
                                           .promotionalOthers]

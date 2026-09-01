@@ -12,24 +12,25 @@ enum FilterError: Identifiable {
     case saveFailed
     case deleteFailed
     case diskError(message: String)
+    case invalidRegex(String)
 
     /// Stable identifier used for tests, analytics, and any external caller
     /// comparing errors. Localised strings live in en.lproj / es.lproj with
     /// identical key sets.
     var id: String {
         switch self {
-        case .emptyImportFileError:  return "EMPTY_IMPORT_FILE"
-        case .decodingFailed:        return "INCORRECT_FILE_FORMAT"
+        case .emptyImportFileError:  return "ERROR_EMPTY_IMPORT_FILE"
+        case .decodingFailed:        return "ERROR_DECODING_FAILED"
         case .loadFailed:            return "ERROR_LOAD_FAILED"
         case .saveFailed:            return "ERROR_SAVE_FAILED"
         case .deleteFailed:          return "ERROR_DELETE_FAILED"
         case .diskError:             return "ERROR_DISK"
+        case .invalidRegex(let str): return "ERROR_INVALID_REGEX_\(str)"
         }
     }
 
     /// The user-facing message. Every case resolves to a localised string key
-    /// that exists in both en.lproj and es.lproj — the disk-error case is the
-    /// only one that interpolates a value (the underlying disk message).
+    /// that exists in both en.lproj and es.lproj.
     var localizedMessage: String {
         switch self {
         case .emptyImportFileError:
@@ -47,6 +48,8 @@ enum FilterError: Identifiable {
                 NSLocalizedString("ERROR_DISK %@", comment: ""),
                 message
             )
+        case .invalidRegex(let message):
+            return message
         }
     }
 
