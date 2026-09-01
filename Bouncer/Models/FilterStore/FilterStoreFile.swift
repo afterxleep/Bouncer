@@ -120,6 +120,12 @@ extension FilterStoreFile {
             _ = self.decodeData(data: data)
                 .sink(receiveCompletion: { completion in
                     if case .failure(let error) = completion {
+                        // Heal the corrupt on-disk file so the next launch
+                        // reaches a working app. The first launch still
+                        // surfaces the error to the UI (the alert is the
+                        // intended first-launch UX); subsequent launches see
+                        // the freshly-written empty payload.
+                        _ = self.saveToDisk(filters: [])
                         promise(.failure(error))
                     }
                 }, receiveValue: { result in
