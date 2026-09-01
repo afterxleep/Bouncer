@@ -73,6 +73,7 @@
 "ERROR_DELETE_FAILED" = "Bouncer couldn’t delete that rule. Try again in a moment.";
 "ERROR_DECODING_FAILED" = "The file you selected isn’t a Bouncer rule list. Pick a file exported from Bouncer and try again.";
 "ERROR_DISK %@" = "Bouncer couldn’t write to its storage: %@. Make sure you have free space and try again.";
+"ERROR_INVALID_REGEX %@" = "Bouncer couldn’t save that rule: %@";
 
 /* Onboarding */
 "ONBOARDING_WELCOME_TITLE" = "Welcome to Bouncer!";

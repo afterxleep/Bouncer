@@ -49,7 +49,10 @@ enum FilterError: Identifiable {
                 message
             )
         case .invalidRegex(let message):
-            return message
+            return String.localizedStringWithFormat(
+                NSLocalizedString("ERROR_INVALID_REGEX %@", comment: ""),
+                message
+            )
         }
     }
 
