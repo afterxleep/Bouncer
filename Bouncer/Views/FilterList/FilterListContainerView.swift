@@ -61,8 +61,6 @@ struct FilterListContainerView: View {
     @EnvironmentObject var store: AppStore
 
     @State var shouldShowImportList: Bool = false
-    @State var shouldDisplayErrorMessage: Bool = false
-    @State var filterError: FilterError? = nil
 
     var errorBinding: Binding<FilterError?> {
         Binding(
@@ -119,8 +117,17 @@ extension FilterListContainerView {
         store.dispatch(.filter(action: action))
     }
 
-    func showError(error: FilterError) {        
-        shouldDisplayErrorMessage = true
+    func showError(error: FilterError) {
+        Self.show(error, on: store)
+    }
+
+    /// Routes a view-level `FilterError` through the same `.error` action the
+    /// reducer and `FilterDetailContainerView` use. Extracted as a static
+    /// helper so the file-import failure path can be exercised from a unit
+    /// test: the pre-fix `showError` set an unread `@State` and the alert
+    /// never appeared.
+    static func show(_ error: FilterError, on store: AppStore) {
+        store.dispatch(.filter(action: .error(error)))
     }
 
 }

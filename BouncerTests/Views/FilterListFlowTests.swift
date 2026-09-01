@@ -139,6 +139,26 @@ final class FilterListFlowTests: XCTestCase {
         XCTAssertNil(store.state.filters.filterError)
     }
 
+    /// The file-import failure path used to call `showError`, which set an
+    /// unread `@State` and let the alert disappear. The closure FilterListView
+    /// receives from FilterListContainerView must dispatch the same `.error`
+    /// action the reducer routes through, so a failed import actually
+    /// surfaces an alert to the user.
+    func testFileImportFailureSurfacesAlert() {
+        let store = makeStore()
+        XCTAssertNil(store.state.filters.filterError,
+                     "filterError starts nil so a subsequent error is unambiguously the import")
+
+        FilterListContainerView.show(.diskError(message: "couldn't read the file"),
+                                     on: store)
+
+        XCTAssertEqual(store.state.filters.filterError?.id, "ERROR_DISK",
+                       "A file-import failure must surface a FilterError the alert binding can render")
+        XCTAssertTrue(store.state.filters.filterError?.localizedMessage
+                        .contains("couldn't read the file") ?? false,
+                      "Disk error must carry the underlying file reason through to the user")
+    }
+
     func testImportingLeavesTheLiveRuleListUntouchedUntilConfirmed() {
         let existing = [filter("spam")]
         let store = makeStore(filters: existing)
