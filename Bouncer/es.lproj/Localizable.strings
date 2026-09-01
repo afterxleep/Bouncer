@@ -68,7 +68,7 @@
 
 /* Alertas de error de reglas */
 "ERROR_EMPTY_IMPORT_FILE" = "El archivo seleccionado no contiene reglas.";
-"ERROR_LOAD_FAILED" = "Bouncer no pudo leer tus reglas. Prueba a reiniciar la app; si no funciona, reinstala Bouncer.";
+"ERROR_LOAD_FAILED" = "Bouncer no pudo leer tus reglas y las ha restablecido. Las reglas que tenías antes se han perdido.";
 "ERROR_SAVE_FAILED" = "Bouncer no pudo guardar tu regla. Asegúrate de tener espacio libre e inténtalo de nuevo.";
 "ERROR_DELETE_FAILED" = "Bouncer no pudo eliminar esa regla. Inténtalo de nuevo en un momento.";
 "ERROR_DECODING_FAILED" = "El archivo seleccionado no es una lista de reglas de Bouncer. Elige un archivo exportado desde Bouncer e inténtalo de nuevo.";

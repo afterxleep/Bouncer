@@ -18,6 +18,7 @@
 		AA0200000000000000000004 /* OnboardingLocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0200000000000000000003 /* OnboardingLocalizationTests.swift */; };
 		AA0200000000000000000006 /* OnboardingCompletionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0200000000000000000005 /* OnboardingCompletionTests.swift */; };
 		AA0200000000000000000008 /* FilterListFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0200000000000000000007 /* FilterListFlowTests.swift */; };
+		AA1200000000000000000001 /* ErrorAlertLocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1200000000000000000000 /* ErrorAlertLocalizationTests.swift */; };
 		AA0300000000000000000002 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0300000000000000000001 /* DesignSystem.swift */; };
 		AA0300000000000000000004 /* OnboardingIllustrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0300000000000000000003 /* OnboardingIllustrations.swift */; };
 		AA0400000000000000000002 /* RuleListComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0400000000000000000001 /* RuleListComponents.swift */; };
@@ -139,6 +140,7 @@
 		AA0200000000000000000003 /* OnboardingLocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingLocalizationTests.swift; sourceTree = "<group>"; };
 		AA0200000000000000000005 /* OnboardingCompletionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCompletionTests.swift; sourceTree = "<group>"; };
 		AA0200000000000000000007 /* FilterListFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListFlowTests.swift; sourceTree = "<group>"; };
+		AA1200000000000000000000 /* ErrorAlertLocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertLocalizationTests.swift; sourceTree = "<group>"; };
 		AA0300000000000000000001 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
 		AA0300000000000000000003 /* OnboardingIllustrations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingIllustrations.swift; sourceTree = "<group>"; };
 		AA0400000000000000000001 /* RuleListComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleListComponents.swift; sourceTree = "<group>"; };
@@ -259,6 +261,7 @@
 			children = (
 				AA0200000000000000000001 /* OnboardingPageTests.swift */,
 				AA0200000000000000000007 /* FilterListFlowTests.swift */,
+				AA1200000000000000000000 /* ErrorAlertLocalizationTests.swift */,
 				AA0200000000000000000003 /* OnboardingLocalizationTests.swift */,
 				AA0200000000000000000005 /* OnboardingCompletionTests.swift */,
 			);
@@ -799,6 +802,7 @@
 				D6A3888D2D9A0FCA00CEA386 /* AnalyticsServiceTests.swift in Sources */,
 				AA0200000000000000000002 /* OnboardingPageTests.swift in Sources */,
 				AA0200000000000000000008 /* FilterListFlowTests.swift in Sources */,
+				AA1200000000000000000001 /* ErrorAlertLocalizationTests.swift in Sources */,
 				AA0200000000000000000004 /* OnboardingLocalizationTests.swift in Sources */,
 				AA0200000000000000000006 /* OnboardingCompletionTests.swift in Sources */,
 				D617B44A24EB19C8009E0D40 /* AppSettingsDefaultsTests.swift in Sources */,
@@ -846,7 +850,7 @@
 				CODE_SIGN_ENTITLEMENTS = SMSFilter/SMSFilter.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1390;
+				CURRENT_PROJECT_VERSION = 1393;
 				DEVELOPMENT_TEAM = J9F8F3PWTV;
 				INFOPLIST_FILE = SMSFilter/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
@@ -875,7 +879,7 @@
 				CODE_SIGN_ENTITLEMENTS = SMSFilter/SMSFilter.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1390;
+				CURRENT_PROJECT_VERSION = 1393;
 				DEVELOPMENT_TEAM = J9F8F3PWTV;
 				INFOPLIST_FILE = SMSFilter/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
@@ -1033,7 +1037,7 @@
 				CODE_SIGN_ENTITLEMENTS = Bouncer/Bouncer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1390;
+				CURRENT_PROJECT_VERSION = 1393;
 				DEVELOPMENT_ASSET_PATHS = "\"Bouncer/Preview Content\"";
 				DEVELOPMENT_TEAM = J9F8F3PWTV;
 				ENABLE_PREVIEWS = YES;
@@ -1067,7 +1071,7 @@
 				CODE_SIGN_ENTITLEMENTS = Bouncer/Bouncer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1390;
+				CURRENT_PROJECT_VERSION = 1393;
 				DEVELOPMENT_ASSET_PATHS = "\"Bouncer/Preview Content\"";
 				DEVELOPMENT_TEAM = J9F8F3PWTV;
 				ENABLE_PREVIEWS = YES;

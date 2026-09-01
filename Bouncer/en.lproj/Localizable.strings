@@ -68,7 +68,7 @@
 
 /* Filter error alerts */
 "ERROR_EMPTY_IMPORT_FILE" = "The file you selected contained no rules.";
-"ERROR_LOAD_FAILED" = "Bouncer couldn’t read your rules. Try restarting the app; if that doesn’t help, reinstall Bouncer.";
+"ERROR_LOAD_FAILED" = "Bouncer couldn’t read your rules and has reset them. Any rules you had before are gone.";
 "ERROR_SAVE_FAILED" = "Bouncer couldn’t save your rule. Make sure you have free storage and try again.";
 "ERROR_DELETE_FAILED" = "Bouncer couldn’t delete that rule. Try again in a moment.";
 "ERROR_DECODING_FAILED" = "The file you selected isn’t a Bouncer rule list. Pick a file exported from Bouncer and try again.";
