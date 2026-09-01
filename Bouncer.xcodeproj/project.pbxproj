@@ -18,6 +18,7 @@
 		AA0200000000000000000004 /* OnboardingLocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0200000000000000000003 /* OnboardingLocalizationTests.swift */; };
 		AA0200000000000000000006 /* OnboardingCompletionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0200000000000000000005 /* OnboardingCompletionTests.swift */; };
 		AA0200000000000000000008 /* FilterListFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0200000000000000000007 /* FilterListFlowTests.swift */; };
+		AA1200000000000000000001 /* ErrorAlertLocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1200000000000000000000 /* ErrorAlertLocalizationTests.swift */; };
 		AA0300000000000000000002 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0300000000000000000001 /* DesignSystem.swift */; };
 		AA0300000000000000000004 /* OnboardingIllustrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0300000000000000000003 /* OnboardingIllustrations.swift */; };
 		AA0400000000000000000002 /* RuleListComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0400000000000000000001 /* RuleListComponents.swift */; };
@@ -25,6 +26,7 @@
 		AA0500000000000000000003 /* RuleActivityStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0500000000000000000001 /* RuleActivityStore.swift */; };
 		AA0600000000000000000002 /* SystemSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0600000000000000000001 /* SystemSettings.swift */; };
 		AA0600000000000000000004 /* HelpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0600000000000000000003 /* HelpView.swift */; };
+		AA0600000000000000000020 /* PrivacyInfo.xcprivacy in Resources */ = {isa = PBXBuildFile; fileRef = AA0600000000000000000021 /* PrivacyInfo.xcprivacy */; };
 		D60A19C724A69F1F0002E8BD /* SMSMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60A19C624A69F1F0002E8BD /* SMSMessage.swift */; };
 		D60A19C824A6A2C80002E8BD /* SMSMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D60A19C624A69F1F0002E8BD /* SMSMessage.swift */; };
 		D61497E924E4430E00AF997E /* FilterAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = D61497E824E4430E00AF997E /* FilterAction.swift */; };
@@ -40,6 +42,10 @@
 		D6233A7624A650B700B37A6A /* SMSFilter.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = D6233A6F24A650B700B37A6A /* SMSFilter.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		D6233A7F24A651A200B37A6A /* SMSOfflineFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6233A7D24A651A200B37A6A /* SMSOfflineFilter.swift */; };
 		D6233A8124A6538D00B37A6A /* SMSOfflineFilter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6233A7D24A651A200B37A6A /* SMSOfflineFilter.swift */; };
+		AA0800000000000000000001 /* MessageFilterEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0800000000000000000000 /* MessageFilterEngine.swift */; };
+		AA1000000000000000000002 /* RegexValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000000000000000000000 /* RegexValidator.swift */; };
+		AA1000000000000000000003 /* RuleSaveValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1000000000000000000001 /* RuleSaveValidator.swift */; };
+		AA0800000000000000000002 /* MessageFilterEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0800000000000000000000 /* MessageFilterEngine.swift */; };
 		D6233A8324A653F200B37A6A /* FilterStoreFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6529FC824A54ADE009AE3FF /* FilterStoreFile.swift */; };
 		D62B331B24BAB16C002DFB81 /* ReviewService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62B331A24BAB16C002DFB81 /* ReviewService.swift */; };
 		D62B331D24BAB18E002DFB81 /* RatingServiceDefault.swift in Sources */ = {isa = PBXBuildFile; fileRef = D62B331C24BAB18E002DFB81 /* RatingServiceDefault.swift */; };
@@ -79,6 +85,11 @@
 		D6EA9A8424AD2244000135E7 /* FilterStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EA9A8324AD2244000135E7 /* FilterStore.swift */; };
 		D6EA9A8524AD2319000135E7 /* FilterStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6EA9A8324AD2244000135E7 /* FilterStore.swift */; };
 		D6F0621124EC69F800F47BA2 /* FilterStoreFileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F0621024EC69F800F47BA2 /* FilterStoreFileTests.swift */; };
+		AA0700000000000000000001 /* FilterStoreRobustnessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0700000000000000000000 /* FilterStoreRobustnessTests.swift */; };
+		AA0E00000000000000000001 /* FilterStoreCorruptRecoveryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0E00000000000000000000 /* FilterStoreCorruptRecoveryTests.swift */; };
+		AA1100000000000000000001 /* FilterStoreExtensionSafetyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1100000000000000000000 /* FilterStoreExtensionSafetyTests.swift */; };
+		AA0F00000000000000000001 /* ReviewServiceBundleVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0F00000000000000000000 /* ReviewServiceBundleVersionTests.swift */; };
+		AA0900000000000000000001 /* MessageFilterEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0900000000000000000000 /* MessageFilterEngineTests.swift */; };
 		D6F14E8824E8A1780029A0DF /* ReviewMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F14E8724E8A1780029A0DF /* ReviewMiddleware.swift */; };
 		D6F184BC29F490430018FB7F /* FilterStoreFileMigrator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D616A7F229F42EEC00D5523F /* FilterStoreFileMigrator.swift */; };
 		D6F184BD29F4904E0018FB7F /* FilterV1.swift in Sources */ = {isa = PBXBuildFile; fileRef = D616A7F029F42E2900D5523F /* FilterV1.swift */; };
@@ -129,12 +140,14 @@
 		AA0200000000000000000003 /* OnboardingLocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingLocalizationTests.swift; sourceTree = "<group>"; };
 		AA0200000000000000000005 /* OnboardingCompletionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCompletionTests.swift; sourceTree = "<group>"; };
 		AA0200000000000000000007 /* FilterListFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListFlowTests.swift; sourceTree = "<group>"; };
+		AA1200000000000000000000 /* ErrorAlertLocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertLocalizationTests.swift; sourceTree = "<group>"; };
 		AA0300000000000000000001 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
 		AA0300000000000000000003 /* OnboardingIllustrations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingIllustrations.swift; sourceTree = "<group>"; };
 		AA0400000000000000000001 /* RuleListComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleListComponents.swift; sourceTree = "<group>"; };
 		AA0500000000000000000001 /* RuleActivityStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleActivityStore.swift; sourceTree = "<group>"; };
 		AA0600000000000000000001 /* SystemSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SystemSettings.swift; sourceTree = "<group>"; };
 		AA0600000000000000000003 /* HelpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelpView.swift; sourceTree = "<group>"; };
+		AA0600000000000000000021 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = PrivacyInfo.xcprivacy; sourceTree = "<group>"; };
 		D60A19C624A69F1F0002E8BD /* SMSMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSMessage.swift; sourceTree = "<group>"; };
 		D61497E824E4430E00AF997E /* FilterAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterAction.swift; sourceTree = "<group>"; };
 		D61497EB24E4433800AF997E /* FilterReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterReducer.swift; sourceTree = "<group>"; };
@@ -150,6 +163,9 @@
 		D6233A7124A650B700B37A6A /* MessageFilterExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFilterExtension.swift; sourceTree = "<group>"; };
 		D6233A7324A650B700B37A6A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D6233A7D24A651A200B37A6A /* SMSOfflineFilter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SMSOfflineFilter.swift; sourceTree = "<group>"; };
+		AA0800000000000000000000 /* MessageFilterEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageFilterEngine.swift; sourceTree = "<group>"; };
+		AA1000000000000000000000 /* RegexValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexValidator.swift; sourceTree = "<group>"; };
+		AA1000000000000000000001 /* RuleSaveValidator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RuleSaveValidator.swift; sourceTree = "<group>"; };
 		D6233A8524A6553C00B37A6A /* Bouncer.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Bouncer.entitlements; sourceTree = "<group>"; };
 		D6233A8624A655BF00B37A6A /* SMSFilter.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SMSFilter.entitlements; sourceTree = "<group>"; };
 		D62B331A24BAB16C002DFB81 /* ReviewService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewService.swift; sourceTree = "<group>"; };
@@ -187,6 +203,11 @@
 		D6EA9A8124AD2201000135E7 /* SMSFiltering.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSFiltering.swift; sourceTree = "<group>"; };
 		D6EA9A8324AD2244000135E7 /* FilterStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterStore.swift; sourceTree = "<group>"; };
 		D6F0621024EC69F800F47BA2 /* FilterStoreFileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterStoreFileTests.swift; sourceTree = "<group>"; };
+		AA0700000000000000000000 /* FilterStoreRobustnessTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterStoreRobustnessTests.swift; sourceTree = "<group>"; };
+		AA0E00000000000000000000 /* FilterStoreCorruptRecoveryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterStoreCorruptRecoveryTests.swift; sourceTree = "<group>"; };
+		AA1100000000000000000000 /* FilterStoreExtensionSafetyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterStoreExtensionSafetyTests.swift; sourceTree = "<group>"; };
+		AA0F00000000000000000000 /* ReviewServiceBundleVersionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewServiceBundleVersionTests.swift; sourceTree = "<group>"; };
+		AA0900000000000000000000 /* MessageFilterEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFilterEngineTests.swift; sourceTree = "<group>"; };
 		D6F14E8724E8A1780029A0DF /* ReviewMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewMiddleware.swift; sourceTree = "<group>"; };
 		D6FC672824E49B2B0083C9FA /* FilterListContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListContainerView.swift; sourceTree = "<group>"; };
 		D6FC672D24E4ACCF0083C9FA /* FilterMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterMiddleware.swift; sourceTree = "<group>"; };
@@ -240,6 +261,7 @@
 			children = (
 				AA0200000000000000000001 /* OnboardingPageTests.swift */,
 				AA0200000000000000000007 /* FilterListFlowTests.swift */,
+				AA1200000000000000000000 /* ErrorAlertLocalizationTests.swift */,
 				AA0200000000000000000003 /* OnboardingLocalizationTests.swift */,
 				AA0200000000000000000005 /* OnboardingCompletionTests.swift */,
 			);
@@ -307,6 +329,11 @@
 				D617B44924EB19C8009E0D40 /* AppSettingsDefaultsTests.swift */,
 				D66A7C2824EB3F8C00349C3F /* SMSOfflineFilterTests.swift */,
 				D6F0621024EC69F800F47BA2 /* FilterStoreFileTests.swift */,
+				AA0700000000000000000000 /* FilterStoreRobustnessTests.swift */,
+				AA0E00000000000000000000 /* FilterStoreCorruptRecoveryTests.swift */,
+				AA1100000000000000000000 /* FilterStoreExtensionSafetyTests.swift */,
+				AA0F00000000000000000000 /* ReviewServiceBundleVersionTests.swift */,
+				AA0900000000000000000000 /* MessageFilterEngineTests.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -327,6 +354,9 @@
 				D60A19C624A69F1F0002E8BD /* SMSMessage.swift */,
 				D6EA9A8124AD2201000135E7 /* SMSFiltering.swift */,
 				D6233A7D24A651A200B37A6A /* SMSOfflineFilter.swift */,
+				AA0800000000000000000000 /* MessageFilterEngine.swift */,
+				AA1000000000000000000000 /* RegexValidator.swift */,
+				AA1000000000000000000001 /* RuleSaveValidator.swift */,
 			);
 			path = SMSFilter;
 			sourceTree = "<group>";
@@ -392,6 +422,7 @@
 				D67F583024E44B0E00165365 /* Views */,
 				D6233A8524A6553C00B37A6A /* Bouncer.entitlements */,
 				D664B24524AA92D200EB826D /* Assets.xcassets */,
+				AA0600000000000000000021 /* PrivacyInfo.xcprivacy */,
 				D6529F7B24A41372009AE3FF /* Info.plist */,
 				D6529F7824A41372009AE3FF /* Preview Content */,
 				D621CB4524ABABF6008883AA /* Localizable.strings */,
@@ -676,6 +707,7 @@
 				D6B2CC8D24EF16C6004F72C4 /* wordlist.filter in Resources */,
 				D6529F7A24A41372009AE3FF /* Preview Assets.xcassets in Resources */,
 				D6625F3C2D9A122C005D05BF /* Config.swift.example in Resources */,
+				AA0600000000000000000020 /* PrivacyInfo.xcprivacy in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -699,6 +731,7 @@
 				D6BE8B8828CFE230004E7274 /* OSLog.swift in Sources */,
 				D60A19C824A6A2C80002E8BD /* SMSMessage.swift in Sources */,
 				D6233A8124A6538D00B37A6A /* SMSOfflineFilter.swift in Sources */,
+				AA0800000000000000000002 /* MessageFilterEngine.swift in Sources */,
 				D6F184BC29F490430018FB7F /* FilterStoreFileMigrator.swift in Sources */,
 				D6F184BD29F4904E0018FB7F /* FilterV1.swift in Sources */,
 				D6233A7224A650B700B37A6A /* MessageFilterExtension.swift in Sources */,
@@ -712,6 +745,9 @@
 				AA0500000000000000000002 /* RuleActivityStore.swift in Sources */,
 				AA0400000000000000000002 /* RuleListComponents.swift in Sources */,
 				D6233A7F24A651A200B37A6A /* SMSOfflineFilter.swift in Sources */,
+				AA0800000000000000000001 /* MessageFilterEngine.swift in Sources */,
+				AA1000000000000000000002 /* RegexValidator.swift in Sources */,
+				AA1000000000000000000003 /* RuleSaveValidator.swift in Sources */,
 				AA0100000000000000000002 /* OnboardingPage.swift in Sources */,
 				AA0100000000000000000004 /* OnboardingComponents.swift in Sources */,
 				AA0100000000000000000006 /* OnboardingView.swift in Sources */,
@@ -766,11 +802,17 @@
 				D6A3888D2D9A0FCA00CEA386 /* AnalyticsServiceTests.swift in Sources */,
 				AA0200000000000000000002 /* OnboardingPageTests.swift in Sources */,
 				AA0200000000000000000008 /* FilterListFlowTests.swift in Sources */,
+				AA1200000000000000000001 /* ErrorAlertLocalizationTests.swift in Sources */,
 				AA0200000000000000000004 /* OnboardingLocalizationTests.swift in Sources */,
 				AA0200000000000000000006 /* OnboardingCompletionTests.swift in Sources */,
 				D617B44A24EB19C8009E0D40 /* AppSettingsDefaultsTests.swift in Sources */,
 				D6F0621124EC69F800F47BA2 /* FilterStoreFileTests.swift in Sources */,
 				D66A7C2924EB3F8C00349C3F /* SMSOfflineFilterTests.swift in Sources */,
+				AA0700000000000000000001 /* FilterStoreRobustnessTests.swift in Sources */,
+				AA0E00000000000000000001 /* FilterStoreCorruptRecoveryTests.swift in Sources */,
+				AA1100000000000000000001 /* FilterStoreExtensionSafetyTests.swift in Sources */,
+				AA0F00000000000000000001 /* ReviewServiceBundleVersionTests.swift in Sources */,
+				AA0900000000000000000001 /* MessageFilterEngineTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

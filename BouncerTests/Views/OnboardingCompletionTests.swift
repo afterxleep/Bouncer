@@ -70,12 +70,24 @@ final class OnboardingCompletionTests: XCTestCase {
         XCTAssertFalse(store.state.settings.hasLaunchedApp)
     }
 
-    /// Step 1 opens the Settings root via `App-Prefs:` and falls back to the
-    /// public per-app URL if the system refuses. Both URLs must stay well formed.
-    func testBothSettingsUrlsAreWellFormed() {
-        XCTAssertNotNil(URL(string: "App-Prefs:"))
-        XCTAssertEqual(UIApplication.openSettingsURLString, "app-settings:")
-        XCTAssertNotNil(URL(string: UIApplication.openSettingsURLString))
+    /// `SystemSettings.open()` must ask UIKit to open the public Settings URL —
+    /// not the private `App-Prefs:` scheme we dropped. The previous test only
+    /// asserted that UIKit's constant is well formed; nothing exercised the
+    /// app's own call, so reverting `open()` to the private scheme slipped
+    /// past it. This swaps in a recording opener and asserts on the URL it
+    /// was asked to open.
+    func testSystemSettingsOpensThePublicSettingsUrl() {
+        let spy = RecordingSettingsOpener()
+        let previous = SystemSettings.opener
+        SystemSettings.opener = spy
+        defer { SystemSettings.opener = previous }
+
+        SystemSettings.open()
+
+        XCTAssertEqual(spy.openedURLs, [URL(string: UIApplication.openSettingsURLString)])
+        XCTAssertEqual(spy.openedURLs.first?.absoluteString, UIApplication.openSettingsURLString)
+        XCTAssertNotEqual(spy.openedURLs.first?.absoluteString, "App-Prefs:",
+                          "Private App-Prefs scheme must not be used to launch Settings")
     }
 
     func testHelpModeDoesNotNeedToChangeLaunchState() {
@@ -83,5 +95,13 @@ final class OnboardingCompletionTests: XCTestCase {
         // dismissing it must leave that flag alone.
         let store = makeStore(hasLaunchedApp: true)
         XCTAssertTrue(store.state.settings.hasLaunchedApp)
+    }
+}
+
+private final class RecordingSettingsOpener: SystemSettingsOpening {
+    private(set) var openedURLs: [URL] = []
+
+    func open(_ url: URL, options: [UIApplication.OpenExternalURLOptionsKey: Any]) {
+        openedURLs.append(url)
     }
 }
