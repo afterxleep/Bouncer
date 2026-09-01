@@ -997,12 +997,120 @@ class SMSOfflineFilterTests: XCTestCase {
             "Catastrophic pattern must not take more than 50 ms; took \(elapsed)s. action=\(response.action)")
     }
 
+    // MARK: - ReDoS guard regression: safe patterns must not trip the guard
+
+    func testSafeQuantifiedGroupPatternsAreNotFlaggedCatastrophic() {
+        // Regression for the stuck `lastClosedHadQuantifier` flag. The earlier
+        // guard set this flag on any `)` whose group had a quantifier inside
+        // and never reset it, so any quantifier later in the pattern — even
+        // an unrelated one — tripped a false catastrophic verdict. The fix
+        // makes the flag one-shot: cleared on the first non-quantifier token.
+        let safePatterns = [
+            "(\\d+)\\s*USD",
+            "(a+)b*",
+            "code: (\\d+), qty [0-9]*",
+            "win.*.*prize"
+        ]
+        for pattern in safePatterns {
+            XCTAssertFalse(SMSOfflineFilter.containsNestedQuantifier(pattern),
+                           "Safe pattern must not be flagged catastrophic: \(pattern)")
+        }
+    }
+
+    func testCatastrophicPatternsAreStillFlagged() {
+        // Regression for the (`?`) group-header skip bug, which skipped past
+        // `(?:...` to the end of the pattern instead of just the `?:` marker,
+        // and for the stuck-flag bug in the `{n,m}` branch.
+        let catastrophicPatterns = [
+            "(a+)+",
+            "(.*)+",
+            "(?:a+)+",
+            "((a+)?)+",
+            "(a*)*"
+        ]
+        for pattern in catastrophicPatterns {
+            XCTAssertTrue(SMSOfflineFilter.containsNestedQuantifier(pattern),
+                          "Catastrophic pattern must be flagged: \(pattern)")
+        }
+    }
+
+    func testEscapedAndCharacterClassQuantifiersAreNotCatastrophic() {
+        // `\\(` and `\\)` are literal parens, not group delimiters. Quantifier
+        // characters inside `[...]` are literal members of the class, not
+        // quantifiers. None of these patterns has a quantified group, so none
+        // should be flagged.
+        let safePatterns = [
+            "\\(a\\)+",
+            "\\(a+\\)",
+            "[+*]",
+            "[(*)]",
+            "\\(+a\\)+",
+            "[a-z]+",
+            "(\\d+)"
+        ]
+        for pattern in safePatterns {
+            XCTAssertFalse(SMSOfflineFilter.containsNestedQuantifier(pattern),
+                           "Escaped/character-class pattern must not be flagged: \(pattern)")
+        }
+    }
+
+    func testNonCapturingAndOtherGroupHeadersAreHandled() {
+        // The `(?` skip must recognise the common header forms (?: (?= (?!
+        // (?<name> (?P<name> (?> and not eat the rest of the pattern, otherwise
+        // the matching `)` never gets tokenised and the trailing quantifier
+        // never causes a verdict.
+        let safePatterns = [
+            "(?:abc)",
+            "(?=foo)",
+            "(?!bar)",
+            "(?<x>foo)",
+            "(?P<x>foo)",
+            "(?>a+)"
+        ]
+        for pattern in safePatterns {
+            XCTAssertFalse(SMSOfflineFilter.containsNestedQuantifier(pattern),
+                           "Group-header pattern must not be flagged on its own: \(pattern)")
+        }
+
+        // And when such a group itself contains a quantifier AND is quantified
+        // from outside, it must still be flagged catastrophic.
+        let catastrophicPatterns = [
+            "(?:a+)+",
+            "(?:(?:a+))+",
+            "(?>a+)+"
+        ]
+        for pattern in catastrophicPatterns {
+            XCTAssertTrue(SMSOfflineFilter.containsNestedQuantifier(pattern),
+                          "Catastrophic group-header pattern must be flagged: \(pattern)")
+        }
+    }
+
+    func testStoredSafeRegexRuleStillMatchesMessagesAfterGuardFix() {
+        // The pre-fix guard silently dropped any regex rule whose body tripped
+        // the false-positive in `matchRegex`, so a saved `(\\d+)\\s*USD` rule
+        // would match nothing. After the fix, the rule must actually match.
+        let filter = SMSOfflineFilter(filterList: [
+            Filter(id: UUID(), phrase: "(\\d+)\\s*USD", type: .message,
+                   action: .transaction, useRegex: true)
+        ])
+        let matching = SMSMessage(sender: "Bank", text: "Charge 1234 USD confirmed")
+        XCTAssertEqual(filter.filterMessage(message: matching).action, .transaction,
+                       "A safe stored regex rule must still match after the guard fix")
+
+        let nonMatching = SMSMessage(sender: "Bank", text: "Charge 1234 EUR confirmed")
+        XCTAssertEqual(filter.filterMessage(message: nonMatching).action, .none,
+                       "A safe stored regex rule must not match unrelated text")
+    }
+
     // MARK: - Defect (3): The timeout abandons work and races on `var result`
 
     func testConcurrentRegexMatchesReturnConsistentResults() {
         // Hammer the engine from many threads with a mix of patterns and
         // messages. After the fix, the result must be deterministic and
-        // there must be no data race on the internal result.
+        // there must be no data race on the internal result. The test
+        // records every (message, response) pair produced across all 800
+        // concurrent calls and asserts that each message maps to exactly
+        // one response — i.e. matching is deterministic and not racy.
         let filter = SMSOfflineFilter(filterList: [
             Filter(id: UUID(), phrase: "\\d{4}", type: .message, action: .transaction, useRegex: true),
             Filter(id: UUID(), phrase: "win.*prize", type: .message, action: .junk, useRegex: true),
@@ -1019,7 +1127,10 @@ class SMSOfflineFilterTests: XCTestCase {
         let queue = DispatchQueue(label: "test.concurrent.regex", attributes: .concurrent)
         let group = DispatchGroup()
         let lock = NSLock()
-        var results = Set<String>()
+        // Key by message text — the property a real caller cares about.
+        // Each message text must map to exactly one response across all runs.
+        var responsesByMessage: [String: Set<String>] = [:]
+        var totalCalls = 0
 
         for _ in 0..<200 {
             for message in messages {
@@ -1028,7 +1139,8 @@ class SMSOfflineFilterTests: XCTestCase {
                     let r = filter.filterMessage(message: message)
                     let key = "\(r.action.rawValue)|\(r.subAction.rawValue)"
                     lock.lock()
-                    results.insert(key)
+                    responsesByMessage[message.text, default: []].insert(key)
+                    totalCalls += 1
                     lock.unlock()
                     group.leave()
                 }
@@ -1037,7 +1149,19 @@ class SMSOfflineFilterTests: XCTestCase {
 
         XCTAssertEqual(group.wait(timeout: .now() + 10), .success,
                       "All concurrent matches must complete within 10s")
-        XCTAssertGreaterThan(results.count, 0)
+
+        lock.lock()
+        let calls = totalCalls
+        let snapshot = responsesByMessage
+        lock.unlock()
+
+        XCTAssertEqual(calls, 800, "Every concurrent call must have completed")
+        XCTAssertEqual(snapshot.count, messages.count,
+                       "Every distinct message must have produced at least one response")
+        for (text, responses) in snapshot {
+            XCTAssertEqual(responses.count, 1,
+                           "Message \(text) must always produce the same response across threads; got \(responses)")
+        }
     }
 
     func testRepeatedCatastrophicPatternsDoNotAccumulateBackgroundWork() {

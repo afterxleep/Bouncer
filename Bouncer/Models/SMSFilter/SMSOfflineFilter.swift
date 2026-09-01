@@ -179,54 +179,113 @@ struct SMSOfflineFilter {
         var parenDepth = 0
         // For each open paren, whether the body seen so far contained a quantifier.
         var bodyHadQuantifier: [Bool] = []
-        var lastClosedHadQuantifier = false
+        // One-shot: set true on a `)` whose group had a quantifier inside, and
+        // cleared the moment any non-quantifier token is consumed. Prevents the
+        // stuck-flag bug where a later unrelated quantifier would trigger.
+        var pendingPostCloseQuantifier = false
 
         while index < chars.count {
             let ch = chars[index]
-            if escaped { escaped = false; index += 1; continue }
-            if ch == "\\" { escaped = true; index += 1; continue }
+            if escaped {
+                escaped = false
+                pendingPostCloseQuantifier = false
+                index += 1
+                continue
+            }
+            if ch == "\\" {
+                escaped = true
+                pendingPostCloseQuantifier = false
+                index += 1
+                continue
+            }
             if inCharClass {
                 if ch == "]" { inCharClass = false }
+                pendingPostCloseQuantifier = false
                 index += 1
                 continue
             }
             switch ch {
             case "[":
                 inCharClass = true
+                pendingPostCloseQuantifier = false
                 index += 1
             case "(":
-                let next = index + 1 < chars.count ? chars[index + 1] : Character(" ")
-                if next == "?" {
-                    var j = index + 2
-                    while j < chars.count {
-                        let c = chars[j]
-                        if c == ">" { j += 1; break }
-                        if c == "(" { break }
-                        j += 1
+                let nextIdx = index + 1
+                if nextIdx < chars.count, chars[nextIdx] == "?" {
+                    let markerIdx = index + 2
+                    if markerIdx < chars.count {
+                        let marker = chars[markerIdx]
+                        switch marker {
+                        case ":", "=", "!", ">":
+                            // (?:) (?=) (?!) (?>) — single-char group header.
+                            index = index + 3
+                        case "<":
+                            // (?<name> — skip up to and including the closing `>`.
+                            var j = index + 3
+                            while j < chars.count && chars[j] != ">" { j += 1 }
+                            if j < chars.count { j += 1 }
+                            index = j
+                        case "P":
+                            // (?P<name> — Python named group.
+                            var j = index + 3
+                            while j < chars.count && chars[j] != ">" { j += 1 }
+                            if j < chars.count { j += 1 }
+                            index = j
+                        default:
+                            // Unrecognised (?...) form (e.g. (?imsx) flags or
+                            // (?#comment)). Consume up to the matching close
+                            // paren and don't push a frame — the body isn't
+                            // real regex tokens, so it can't contain a
+                            // catastrophic quantifier nesting.
+                            var j = index + 2
+                            var depth = 0
+                            while j < chars.count {
+                                if chars[j] == "(" { depth += 1 }
+                                else if chars[j] == ")" {
+                                    if depth == 0 { j += 1; break }
+                                    depth -= 1
+                                }
+                                j += 1
+                            }
+                            pendingPostCloseQuantifier = false
+                            index = j
+                            continue
+                        }
+                    } else {
+                        index = nextIdx
                     }
-                    index = j
                 } else {
                     index += 1
                 }
                 bodyHadQuantifier.append(false)
                 parenDepth += 1
+                pendingPostCloseQuantifier = false
             case ")":
                 if parenDepth > 0 {
                     let insideHadQuantifier = bodyHadQuantifier.removeLast()
                     parenDepth -= 1
-                    lastClosedHadQuantifier = insideHadQuantifier
                     if parenDepth > 0 {
                         bodyHadQuantifier[parenDepth - 1] = bodyHadQuantifier[parenDepth - 1] || insideHadQuantifier
                     }
+                    pendingPostCloseQuantifier = insideHadQuantifier
+                } else {
+                    pendingPostCloseQuantifier = false
                 }
                 index += 1
             case "*", "+":
-                if lastClosedHadQuantifier { return true }
+                if pendingPostCloseQuantifier { return true }
                 if parenDepth > 0 {
                     bodyHadQuantifier[parenDepth - 1] = true
                 }
+                pendingPostCloseQuantifier = false
                 index += 1
             case "?":
+                // `?` after an atom is a 0-or-1 quantifier. `?` immediately
+                // after `(` was already handled as a group-header marker.
+                if parenDepth > 0 {
+                    bodyHadQuantifier[parenDepth - 1] = true
+                }
+                pendingPostCloseQuantifier = false
                 index += 1
             case "{":
                 var sawDigits = false
@@ -236,13 +295,15 @@ struct SMSOfflineFilter {
                     if c.isNumber || c == "," { sawDigits = true; j += 1 } else { break }
                 }
                 if sawDigits {
-                    if lastClosedHadQuantifier { return true }
+                    if pendingPostCloseQuantifier { return true }
                     if parenDepth > 0 {
                         bodyHadQuantifier[parenDepth - 1] = true
                     }
                 }
+                pendingPostCloseQuantifier = false
                 index = j
             default:
+                pendingPostCloseQuantifier = false
                 index += 1
             }
         }
