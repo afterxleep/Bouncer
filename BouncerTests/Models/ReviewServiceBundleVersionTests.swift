@@ -51,11 +51,13 @@ final class ReviewServiceBundleVersionTests: XCTestCase {
                        "requestReview() wrote lastVersionPromptedForReview despite the bundle version being missing — it should have early-returned")
     }
 
-    /// A non-string CFBundleVersion (the other path that used to fatalError
-    /// via the `as? String` cast) must take the same early-return. The
-    /// closure seam models both cases uniformly: any value that is not a
-    /// usable String is propagated as nil.
-    func test_NonStringBundleVersionDoesNotCrashOrPrompt() {
+    /// The closure seam models "non-string" and "missing" the same way:
+/// production uses `as? String` so either path collapses to `nil`. This
+/// test covers the non-string path: a prior `lastVersionPromptedForReview`
+/// must NOT be overwritten when the bundle version is unusable. The
+/// renamed method reflects that the seam does not actually distinguish
+/// the two cases, only the resulting nil.
+    func test_UnusableBundleVersionDoesNotOverwritePriorPrompt() {
         var service = ReviewServiceStoreKit(appSettings: appSettings)
         service.bundleVersion = { nil }
 

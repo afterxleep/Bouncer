@@ -154,42 +154,22 @@ final class FilterStoreRobustnessTests: XCTestCase {
     /// Finding #2: when migration is interrupted before it writes, the legacy
     /// data must remain intact on disk — the migration must not destroy the
     /// old state.
-    func test_MigrationLeavesLegacyIntactOnFailure() throws {
-        // Seed legacy data.
-        let legacy: [FilterV1] = [
-            FilterV1(id: UUID(), phrase: "keep-me", type: .any, action: .junk),
-            FilterV1(id: UUID(), phrase: "keep-me-too", type: .any, action: .junk),
-        ]
-        let originalBytes = try JSONEncoder().encode(legacy)
-        try originalBytes.write(to: FilterStoreFile.fileURL!)
-
-        // Hand-roll a migrator that "fails" mid-migration by throwing before
-        // writing. Use a temporary store that points to a non-writable URL so
-        // the atomic write is guaranteed to fail.
-        let badStore = FilterStoreFile()
-        // Force fileURL to be nil-equivalent: writeFile in saveToDisk returns
-        // an error if encoding succeeds but the directory is gone. The
-        // migration in production goes through the same code path — proving
-        // the contract here means production is correct when it can complete.
-        //
-        // Simpler check: take a snapshot of disk bytes before migration,
-        // perform migration, confirm the bytes at every observable moment are
-        // either the legacy V1 data or the final migrated V2 data — never [].
-        let preBytes = try Data(contentsOf: FilterStoreFile.fileURL!)
-        XCTAssertEqual(preBytes, originalBytes,
-                       "Pre-migration bytes differ from seeded legacy bytes")
-
-        // Run the real migration through the real store.
-        let migrator = FilterStoreFileMigrator(store: badStore)
-        _ = awaitPublisher(migrator.migrateV1(), timeout: 2)
-
-        // After a successful migration, the file holds the new format. The
-        // invariant we care about: never a partial/empty file. Verify the
-        // file is parseable as [Filter].
-        let postBytes = try Data(contentsOf: FilterStoreFile.fileURL!)
-        XCTAssertNoThrow(try JSONDecoder().decode([Filter].self, from: postBytes),
-                         "After migration the file is not a valid [Filter] (intermediate empty state?)")
-    }
+    ///
+    /// Deleted. The original test seeded legacy data, ran the real migration
+    /// through the real store, and asserted the file still parsed as
+    /// `[Filter]` — that is the happy path already covered by
+    /// `test_MigrationWritesAtomically` directly above. There was no seam
+    /// that would actually fail mid-migration; the test's own comment block
+    /// abandons the approach it describes.
+    ///
+    /// The atomic-write guarantee is covered transitively: the migrator
+    /// calls `FilterStoreFile.resolveMigration`, which calls the same
+    /// `saveToDisk` that `reset()` and `add()` use, and the
+    /// `test_WritesRemainParseableAfterSequenceOfAdds` atomic-write contract
+    /// pins that surface. Adding a real interruption test would require
+    /// either removing `final` from `FilterStoreFile` to subclass and stub
+    /// `resolveMigration`, or a non-trivial seam injection — neither is
+    /// in scope here, and the brief explicitly allows deletion.
 
     // MARK: - Finding #3 — errors wire through reducer
 

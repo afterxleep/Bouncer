@@ -18,6 +18,7 @@
 		AA0200000000000000000004 /* OnboardingLocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0200000000000000000003 /* OnboardingLocalizationTests.swift */; };
 		AA0200000000000000000006 /* OnboardingCompletionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0200000000000000000005 /* OnboardingCompletionTests.swift */; };
 		AA0200000000000000000008 /* FilterListFlowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0200000000000000000007 /* FilterListFlowTests.swift */; };
+		AA1200000000000000000001 /* ErrorAlertLocalizationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1200000000000000000000 /* ErrorAlertLocalizationTests.swift */; };
 		AA0300000000000000000002 /* DesignSystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0300000000000000000001 /* DesignSystem.swift */; };
 		AA0300000000000000000004 /* OnboardingIllustrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0300000000000000000003 /* OnboardingIllustrations.swift */; };
 		AA0400000000000000000002 /* RuleListComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0400000000000000000001 /* RuleListComponents.swift */; };
@@ -86,6 +87,7 @@
 		D6F0621124EC69F800F47BA2 /* FilterStoreFileTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F0621024EC69F800F47BA2 /* FilterStoreFileTests.swift */; };
 		AA0700000000000000000001 /* FilterStoreRobustnessTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0700000000000000000000 /* FilterStoreRobustnessTests.swift */; };
 		AA0E00000000000000000001 /* FilterStoreCorruptRecoveryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0E00000000000000000000 /* FilterStoreCorruptRecoveryTests.swift */; };
+		AA1100000000000000000001 /* FilterStoreExtensionSafetyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA1100000000000000000000 /* FilterStoreExtensionSafetyTests.swift */; };
 		AA0F00000000000000000001 /* ReviewServiceBundleVersionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0F00000000000000000000 /* ReviewServiceBundleVersionTests.swift */; };
 		AA0900000000000000000001 /* MessageFilterEngineTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA0900000000000000000000 /* MessageFilterEngineTests.swift */; };
 		D6F14E8824E8A1780029A0DF /* ReviewMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6F14E8724E8A1780029A0DF /* ReviewMiddleware.swift */; };
@@ -138,6 +140,7 @@
 		AA0200000000000000000003 /* OnboardingLocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingLocalizationTests.swift; sourceTree = "<group>"; };
 		AA0200000000000000000005 /* OnboardingCompletionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCompletionTests.swift; sourceTree = "<group>"; };
 		AA0200000000000000000007 /* FilterListFlowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterListFlowTests.swift; sourceTree = "<group>"; };
+		AA1200000000000000000000 /* ErrorAlertLocalizationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorAlertLocalizationTests.swift; sourceTree = "<group>"; };
 		AA0300000000000000000001 /* DesignSystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignSystem.swift; sourceTree = "<group>"; };
 		AA0300000000000000000003 /* OnboardingIllustrations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingIllustrations.swift; sourceTree = "<group>"; };
 		AA0400000000000000000001 /* RuleListComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RuleListComponents.swift; sourceTree = "<group>"; };
@@ -202,6 +205,7 @@
 		D6F0621024EC69F800F47BA2 /* FilterStoreFileTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterStoreFileTests.swift; sourceTree = "<group>"; };
 		AA0700000000000000000000 /* FilterStoreRobustnessTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterStoreRobustnessTests.swift; sourceTree = "<group>"; };
 		AA0E00000000000000000000 /* FilterStoreCorruptRecoveryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterStoreCorruptRecoveryTests.swift; sourceTree = "<group>"; };
+		AA1100000000000000000000 /* FilterStoreExtensionSafetyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterStoreExtensionSafetyTests.swift; sourceTree = "<group>"; };
 		AA0F00000000000000000000 /* ReviewServiceBundleVersionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewServiceBundleVersionTests.swift; sourceTree = "<group>"; };
 		AA0900000000000000000000 /* MessageFilterEngineTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageFilterEngineTests.swift; sourceTree = "<group>"; };
 		D6F14E8724E8A1780029A0DF /* ReviewMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewMiddleware.swift; sourceTree = "<group>"; };
@@ -257,6 +261,7 @@
 			children = (
 				AA0200000000000000000001 /* OnboardingPageTests.swift */,
 				AA0200000000000000000007 /* FilterListFlowTests.swift */,
+				AA1200000000000000000000 /* ErrorAlertLocalizationTests.swift */,
 				AA0200000000000000000003 /* OnboardingLocalizationTests.swift */,
 				AA0200000000000000000005 /* OnboardingCompletionTests.swift */,
 			);
@@ -326,6 +331,7 @@
 				D6F0621024EC69F800F47BA2 /* FilterStoreFileTests.swift */,
 				AA0700000000000000000000 /* FilterStoreRobustnessTests.swift */,
 				AA0E00000000000000000000 /* FilterStoreCorruptRecoveryTests.swift */,
+				AA1100000000000000000000 /* FilterStoreExtensionSafetyTests.swift */,
 				AA0F00000000000000000000 /* ReviewServiceBundleVersionTests.swift */,
 				AA0900000000000000000000 /* MessageFilterEngineTests.swift */,
 			);
@@ -796,6 +802,7 @@
 				D6A3888D2D9A0FCA00CEA386 /* AnalyticsServiceTests.swift in Sources */,
 				AA0200000000000000000002 /* OnboardingPageTests.swift in Sources */,
 				AA0200000000000000000008 /* FilterListFlowTests.swift in Sources */,
+				AA1200000000000000000001 /* ErrorAlertLocalizationTests.swift in Sources */,
 				AA0200000000000000000004 /* OnboardingLocalizationTests.swift in Sources */,
 				AA0200000000000000000006 /* OnboardingCompletionTests.swift in Sources */,
 				D617B44A24EB19C8009E0D40 /* AppSettingsDefaultsTests.swift in Sources */,
@@ -803,6 +810,7 @@
 				D66A7C2924EB3F8C00349C3F /* SMSOfflineFilterTests.swift in Sources */,
 				AA0700000000000000000001 /* FilterStoreRobustnessTests.swift in Sources */,
 				AA0E00000000000000000001 /* FilterStoreCorruptRecoveryTests.swift in Sources */,
+				AA1100000000000000000001 /* FilterStoreExtensionSafetyTests.swift in Sources */,
 				AA0F00000000000000000001 /* ReviewServiceBundleVersionTests.swift in Sources */,
 				AA0900000000000000000001 /* MessageFilterEngineTests.swift in Sources */,
 			);
