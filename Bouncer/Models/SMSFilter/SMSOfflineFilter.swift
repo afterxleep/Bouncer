@@ -12,6 +12,12 @@ typealias SMSOfflineFilterResponse = (action: ILMessageFilterAction,
 
 struct SMSOfflineFilter {
     
+    /// Hard cap on the text scanned per regex match. A catastrophic pattern
+    /// has bounded cost when the input is bounded, and SMS bodies are well
+    /// under this limit in practice. If a body exceeds the cap it is treated
+    /// as a non-match for regex rules — which is the safe failure mode.
+    static let maxRegexInputCharacters = 4096
+
     var filters: [Filter]
     
     //MARK: - Initializer
@@ -58,100 +64,37 @@ struct SMSOfflineFilter {
         return result
     }
 
-    private func isUnsafeRegexPattern(_ pattern: String) -> Bool {
-        // Check for common dangerous patterns
-        let dangerousPatterns = [
-            // Nested quantifiers
-            ".*.*", ".+.+", "(a+)+", "(a*)*", "(a?)?+", "((a+)?)+",
-            // Overlapping patterns with quantifiers
-            "(a|a)+", "(a|aa)+",
-            // Recursive patterns
-            "(?R)", "(?0)"
-        ]
-        
-        // Check if pattern contains any dangerous constructs
-        if dangerousPatterns.contains(where: { pattern.contains($0) }) {
-            return true
-        }
-        
-        // Check for excessive quantifiers
-        let quantifierPattern = "\\{\\d+,?\\d*\\}"
-        if let regex = try? NSRegularExpression(pattern: quantifierPattern) {
-            let matches = regex.matches(in: pattern, range: NSRange(pattern.startIndex..., in: pattern))
-            for match in matches {
-                let range = Range(match.range, in: pattern)!
-                let quantifier = pattern[range]
-                // Convert the quantifier range to string and split by comma
-                let quantifierStr = String(quantifier)
-                let numbers = quantifierStr.dropFirst().dropLast().split(separator: ",")
-                
-                // Parse the first number (minimum)
-                guard let firstNumber = Int(String(numbers[0])) else {
-                    return true // Invalid number format
-                }
-                
-                // If there's a second number (maximum), parse it
-                let secondNumber: Int?
-                if numbers.count > 1 {
-                    secondNumber = Int(String(numbers[1]))
-                } else {
-                    secondNumber = nil
-                }
-                
-                // Check if either number exceeds our limit
-                if firstNumber > 10000 || (secondNumber ?? 0) > 10000 {
-                    return true
-                }
-            }
-        }
-        
-        return false
-    }
-    
     private func matchRegex(text: String, filter: Filter) -> Bool {
         // Handle empty text or filter phrase
         if text.isEmpty || filter.phrase.isEmpty {
             return false
         }
-        
-        // Validate regex pattern
-        if isUnsafeRegexPattern(filter.phrase) {
-            os_log("FILTEREXTENSION - Unsafe regex pattern detected: %@", log: OSLog.messageFilterLog, type: .error, filter.phrase)
-            return false
+
+        let bounded = String(text.prefix(SMSOfflineFilter.maxRegexInputCharacters))
+
+        var compileOptions: NSRegularExpression.Options = []
+        if !filter.caseSensitive {
+            compileOptions.insert(.caseInsensitive)
         }
-        
-        // Try creating the regex first to validate it
+        let regex: NSRegularExpression
         do {
-            _ = try NSRegularExpression(pattern: filter.phrase)
+            regex = try NSRegularExpression(pattern: filter.phrase, options: compileOptions)
         } catch {
             os_log("FILTEREXTENSION - Invalid regex pattern: %@", log: OSLog.messageFilterLog, type: .error, filter.phrase)
             return false
         }
-        
-        // Set a reasonable timeout for regex matching
-        let timeout = DispatchTime.now() + .milliseconds(100)
-        var result = false
-        let group = DispatchGroup()
-        group.enter()
-        
-        DispatchQueue.global(qos: .userInitiated).async {
-            var matchOptions: String.CompareOptions = [.regularExpression]
-            if !filter.caseSensitive {
-                matchOptions.insert(.caseInsensitive)
-            }
-            result = (text.range(of: filter.phrase, options: matchOptions) != nil)
-            group.leave()
-        }
-        
-        // Wait with timeout
-        if group.wait(timeout: timeout) == .timedOut {
-            os_log("FILTEREXTENSION - Regex matching timed out for pattern: %@", log: OSLog.messageFilterLog, type: .error, filter.phrase)
+
+        if Self.containsNestedQuantifier(filter.phrase) {
+            os_log("FILTEREXTENSION - Rejected pattern with nested quantifier: %@", log: OSLog.messageFilterLog, type: .error, filter.phrase)
             return false
         }
-        
-        os_log("FILTEREXTENSION - -- Match: %@", log: OSLog.messageFilterLog, type: .info, "\(result)")
+
+        let nsRange = NSRange(bounded.startIndex..., in: bounded)
+        let didMatch = regex.firstMatch(in: bounded, options: [], range: nsRange) != nil
+
+        os_log("FILTEREXTENSION - -- Match: %@", log: OSLog.messageFilterLog, type: .info, "\(didMatch)")
         os_log("FILTEREXTENSION - -- Method: Regex", log: OSLog.messageFilterLog, type: .info)
-        return result
+        return didMatch
     }
     
     func action(for filter: Filter) -> ILMessageFilterAction {
@@ -177,6 +120,8 @@ struct SMSOfflineFilter {
             return .transactionalFinance
         case .transactionReminders:
             return .transactionalReminders
+        case .transactionHealth:
+            return .transactionalHealth
         case .promotionOffers:
             return .promotionalOffers
         case .promotionCoupons:
@@ -217,5 +162,152 @@ struct SMSOfflineFilter {
         return (action(for: filter), subAction(for: filter))
     }
 
-}
+    /// Structural detection of a nested-quantifier pattern: a group whose body
+    /// already contains a quantifier and which is itself quantified. That is
+    /// the shape of `(a+)+`, `(.*)+`, `(\d{1,9})+` — the canonical catastrophic
+    /// backtracking trap.
+    ///
+    /// Tokenised by hand so the check itself never depends on running a regex:
+    /// a guard for a regex bug cannot itself be implemented in terms of regex.
+    /// Respects backslash escapes and `[...]` character classes, and does not
+    /// mistake `?` in `(?:`/`?P<name>` group headers for a quantifier.
+    static func containsNestedQuantifier(_ pattern: String) -> Bool {
+        let chars = Array(pattern)
+        var index = 0
+        var inCharClass = false
+        var escaped = false
+        var parenDepth = 0
+        // For each open paren, whether the body seen so far contained a quantifier.
+        var bodyHadQuantifier: [Bool] = []
+        // One-shot: set true on a `)` whose group had a quantifier inside, and
+        // cleared the moment any non-quantifier token is consumed. Prevents the
+        // stuck-flag bug where a later unrelated quantifier would trigger.
+        var pendingPostCloseQuantifier = false
 
+        while index < chars.count {
+            let ch = chars[index]
+            if escaped {
+                escaped = false
+                pendingPostCloseQuantifier = false
+                index += 1
+                continue
+            }
+            if ch == "\\" {
+                escaped = true
+                pendingPostCloseQuantifier = false
+                index += 1
+                continue
+            }
+            if inCharClass {
+                if ch == "]" { inCharClass = false }
+                pendingPostCloseQuantifier = false
+                index += 1
+                continue
+            }
+            switch ch {
+            case "[":
+                inCharClass = true
+                pendingPostCloseQuantifier = false
+                index += 1
+            case "(":
+                let nextIdx = index + 1
+                if nextIdx < chars.count, chars[nextIdx] == "?" {
+                    let markerIdx = index + 2
+                    if markerIdx < chars.count {
+                        let marker = chars[markerIdx]
+                        switch marker {
+                        case ":", "=", "!", ">":
+                            // (?:) (?=) (?!) (?>) — single-char group header.
+                            index = index + 3
+                        case "<":
+                            // (?<name> — skip up to and including the closing `>`.
+                            var j = index + 3
+                            while j < chars.count && chars[j] != ">" { j += 1 }
+                            if j < chars.count { j += 1 }
+                            index = j
+                        case "P":
+                            // (?P<name> — Python named group.
+                            var j = index + 3
+                            while j < chars.count && chars[j] != ">" { j += 1 }
+                            if j < chars.count { j += 1 }
+                            index = j
+                        default:
+                            // Unrecognised (?...) form (e.g. (?imsx) flags or
+                            // (?#comment)). Consume up to the matching close
+                            // paren and don't push a frame — the body isn't
+                            // real regex tokens, so it can't contain a
+                            // catastrophic quantifier nesting.
+                            var j = index + 2
+                            var depth = 0
+                            while j < chars.count {
+                                if chars[j] == "(" { depth += 1 }
+                                else if chars[j] == ")" {
+                                    if depth == 0 { j += 1; break }
+                                    depth -= 1
+                                }
+                                j += 1
+                            }
+                            pendingPostCloseQuantifier = false
+                            index = j
+                            continue
+                        }
+                    } else {
+                        index = nextIdx
+                    }
+                } else {
+                    index += 1
+                }
+                bodyHadQuantifier.append(false)
+                parenDepth += 1
+                pendingPostCloseQuantifier = false
+            case ")":
+                if parenDepth > 0 {
+                    let insideHadQuantifier = bodyHadQuantifier.removeLast()
+                    parenDepth -= 1
+                    if parenDepth > 0 {
+                        bodyHadQuantifier[parenDepth - 1] = bodyHadQuantifier[parenDepth - 1] || insideHadQuantifier
+                    }
+                    pendingPostCloseQuantifier = insideHadQuantifier
+                } else {
+                    pendingPostCloseQuantifier = false
+                }
+                index += 1
+            case "*", "+":
+                if pendingPostCloseQuantifier { return true }
+                if parenDepth > 0 {
+                    bodyHadQuantifier[parenDepth - 1] = true
+                }
+                pendingPostCloseQuantifier = false
+                index += 1
+            case "?":
+                // `?` after an atom is a 0-or-1 quantifier. `?` immediately
+                // after `(` was already handled as a group-header marker.
+                if parenDepth > 0 {
+                    bodyHadQuantifier[parenDepth - 1] = true
+                }
+                pendingPostCloseQuantifier = false
+                index += 1
+            case "{":
+                var sawDigits = false
+                var j = index + 1
+                while j < chars.count {
+                    let c = chars[j]
+                    if c.isNumber || c == "," { sawDigits = true; j += 1 } else { break }
+                }
+                if sawDigits {
+                    if pendingPostCloseQuantifier { return true }
+                    if parenDepth > 0 {
+                        bodyHadQuantifier[parenDepth - 1] = true
+                    }
+                }
+                pendingPostCloseQuantifier = false
+                index = j
+            default:
+                pendingPostCloseQuantifier = false
+                index += 1
+            }
+        }
+        _ = bodyHadQuantifier
+        return false
+    }
+}

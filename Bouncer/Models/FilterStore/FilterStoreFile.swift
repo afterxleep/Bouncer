@@ -7,141 +7,214 @@ import Foundation
 import Combine
 import os.log
 
-private typealias DiskWriteError = String
-
 final class FilterStoreFile: FilterStore {
 
     static let filterListFile = "filters.json"
     static let groupContainer = "group.com.banshai.bouncer"
     static let filterListFileV1 = "wordlist.filter"
-    
+
+    /// Policy applied on a decode failure. The app may heal the store so the
+    /// next launch is clean; the MessageFilterExtension never gets a UI to
+    /// show the user, so it must use `.preserve` and leave the on-disk bytes
+    /// alone. A destructive write from the extension silently wipes every
+    /// rule.
+    enum FetchHealPolicy {
+        /// The store may quarantine the corrupt bytes and overwrite
+        /// `filters.json` with a fresh empty payload so the next launch is
+        /// clean. Reserved for the app process.
+        case heal
+        /// The store must never write `filters.json` and must never create
+        /// any sidecar. Required for the MessageFilterExtension: the user
+        /// is never told a heal happened, and silently destroying their
+        /// rules is data loss.
+        case preserve
+    }
+
     var filters: [Filter] = []
     var cancellables = [AnyCancellable]()
-    
+
     static var fileURL: URL? {
         return FileManager.default
             .containerURL(forSecurityApplicationGroupIdentifier: Self.groupContainer)?
             .appendingPathComponent(Self.filterListFile)
     }
-    
+
     private var fileURL: URL? {
         return Self.fileURL
     }
-    
+
     private func fileExists(url: URL) -> Bool {
         guard let url = self.fileURL else {
             return false
         }
         return FileManager.default.fileExists(atPath: url.path)
     }
-    
-    private func saveToDisk(filters: [Filter]) -> DiskWriteError? {
-        guard let url = fileURL else {
-            return nil
-        }
-        
+
+    /// Move the corrupt bytes at `url` to a sibling sidecar named
+    /// `filters.json.corrupt-<timestamp>` so a partially-recoverable file
+    /// can be salvaged by hand. The move uses `FileManager.moveItem` so
+    /// the original location is empty after the call and a subsequent
+    /// write at the original path succeeds.
+    ///
+    /// Failure is logged but never surfaced: a quarantine miss must not
+    /// block the heal that the user is waiting for. The worst case is the
+    /// user sees the alert and the bytes are gone, the same outcome as
+    /// before this fix.
+    private func quarantineCorruptBytes(at url: URL) {
+        let container = url.deletingLastPathComponent()
+        let timestamp = Self.quarantineTimestamp()
+        let sidecar = container.appendingPathComponent("filters.json.corrupt-\(timestamp)")
         do {
-            try JSONEncoder().encode(filters)
-                .write(to: url)
+            try FileManager.default.moveItem(at: url, to: sidecar)
+        } catch {
+            os_log("Failed to quarantine corrupt store: %s.", type: .error, error.localizedDescription)
+        }
+    }
+
+    private static func quarantineTimestamp() -> String {
+        let formatter = DateFormatter()
+        formatter.locale = Locale(identifier: "en_US_POSIX")
+        formatter.timeZone = TimeZone(secondsFromGMT: 0)
+        formatter.dateFormat = "yyyy-MM-dd'T'HH-mm-ss'Z'"
+        return formatter.string(from: Date())
+    }
+
+    /// Write the given filters atomically to the shared store.
+    ///
+    /// Returns `nil` on success; an error message on failure. A `nil`
+    /// `fileURL` is itself an error (the app-group container is missing) and
+    /// is reported as such, never as a silent success.
+    private func saveToDisk(filters: [Filter]) -> FilterStoreError? {
+        guard let url = fileURL else {
+            return .diskError("App group container unavailable")
+        }
+
+        do {
+            let data = try JSONEncoder().encode(filters)
+            try data.write(to: url, options: [.atomic])
             return nil
         } catch {
             let errorMessage = error.localizedDescription
-            os_log("Error: %s.", type: .error, errorMessage)            
-            return errorMessage
+            os_log("Error: %s.", type: .error, errorMessage)
+            return .diskError(errorMessage)
         }
     }
 
+    /// Decode the on-disk bytes. On a fresh-format failure, run the V1
+    /// migration. On any failure, complete exactly once with `.loadError`.
     private func decodeData(data: Data) -> AnyPublisher<[Filter], FilterStoreError> {
         return Future<[Filter], FilterStoreError> { promise in
-
-            // Decode with current version
-            guard let filters = try? JSONDecoder().decode([Filter].self, from: data) else {
-
-                // Try migrating the database if decoding fails
-                // TODO: For future versions, a more robust store might be needed - CoreData?
-                _ = self.migrateDatabase()
-                    .sink(receiveCompletion: { _ in }, receiveValue: { result in
-                        if result != [] {
-                            promise(.success(result))
-                        }
-                        else {
-                            promise(.failure(.decodingError))
-                        }
-                })
+            if let filters = try? JSONDecoder().decode([Filter].self, from: data) {
+                promise(.success(filters))
                 return
-
             }
-            promise(.success(filters))
 
-        }.eraseToAnyPublisher()
+            _ = self.migrateDatabase()
+                .sink(receiveCompletion: { completion in
+                    switch completion {
+                    case .finished:
+                        break
+                    case .failure:
+                        promise(.failure(.loadError))
+                    }
+                }, receiveValue: { result in
+                    promise(.success(result))
+                })
+        }
+        .eraseToAnyPublisher()
     }
 
-    private func migrateDatabase() -> Future<[Filter], FilterStoreMigrationError> {
+    private func migrateDatabase() -> AnyPublisher<[Filter], FilterStoreMigrationError> {
         let migrator = FilterStoreFileMigrator(store: self)
-        return Future<[Filter], FilterStoreMigrationError> { promise in
-            _ = migrator.migrateV1()
-                .sink(receiveCompletion: { _ in }, receiveValue: { filters in
-                    return promise(.success(filters))
-            })
-        }
+        return migrator.migrateV1()
     }
 }
 
 
 extension FilterStoreFile {
-    
+
     func fetch() -> AnyPublisher<[Filter], FilterStoreError> {
+        return fetch(policy: .heal)
+    }
+
+    /// Read the on-disk store, with a policy for what to do on a decode
+    /// failure. The app calls `fetch()` (heal); the MessageFilterExtension
+    /// calls `fetch(policy: .preserve)` so its failure path never writes.
+    func fetch(policy: FetchHealPolicy) -> AnyPublisher<[Filter], FilterStoreError> {
         return Future<[Filter], FilterStoreError> { [weak self] promise in
-            guard
-                let self = self,
-                let url = self.fileURL else {
+            guard let self = self else {
                 promise(.failure(.loadError))
                 return
             }
-            
-            // Create the filter store if it does not exist
-            if(!self.fileExists(url: url)) {
-                let filters = [Filter]()
-                
-                if let errorMessage = self.saveToDisk(filters: filters) {
-                    promise(.failure(.diskError(errorMessage)))
-                } else {
-                    promise(.success(filters))
+            guard let url = self.fileURL else {
+                promise(.failure(.loadError))
+                return
+            }
+
+            // First-launch bootstrap: create an empty file so the rest of the
+            // pipeline sees a parseable payload. Only the app does this —
+            // the extension's preserve policy keeps the store untouched.
+            if !self.fileExists(url: url) {
+                if policy == .preserve {
+                    promise(.success([]))
+                    return
                 }
+                if let error = self.saveToDisk(filters: []) {
+                    promise(.failure(error))
+                    return
+                }
+                promise(.success([]))
+                return
             }
-            
+
+            let data: Data
             do {
-                let data = try Data(contentsOf: url)
-               _ = decodeData(data: data)
-                    .sink(receiveCompletion: { _ in }, receiveValue: { result in
-                        promise(.success(result))
-                    })
+                data = try Data(contentsOf: url)
             } catch {
-                promise(.failure(.decodingError))
+                promise(.failure(.loadError))
+                return
             }
+
+            _ = self.decodeData(data: data)
+                .sink(receiveCompletion: { completion in
+                    if case .failure(let error) = completion {
+                        if policy == .heal {
+                            // Quarantine the corrupt bytes to a sidecar
+                            // before overwriting, so a partially-recoverable
+                            // file can still be salvaged. The extension
+                            // reaches this path only under .heal, never
+                            // .preserve, so a destructive write from the
+                            // extension process is impossible.
+                            self.quarantineCorruptBytes(at: url)
+                            _ = self.saveToDisk(filters: [])
+                        }
+                        promise(.failure(error))
+                    }
+                }, receiveValue: { result in
+                    promise(.success(result))
+                })
         }
         .eraseToAnyPublisher()
     }
-    
+
     func add(filter: Filter) -> AnyPublisher<Void, FilterStoreError> {
         return Future<Void, FilterStoreError> { promise in
             self.fetch()
-                .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] result in
-                    guard let self = self else { return }
-                    
-                    var filters: [Filter] = result
-
-                    var newFilter = filter
-                    
-                    // If the filter is not a regular expression
-                    if !newFilter.useRegex {
-                        newFilter.phrase = newFilter.phrase
+                .sink(receiveCompletion: { completion in
+                    if case .failure(let error) = completion {
+                        promise(.failure(error))
                     }
-                    filters.append(newFilter)
+                }, receiveValue: { [weak self] result in
+                    guard let self = self else {
+                        promise(.failure(.other))
+                        return
+                    }
+                    var filters: [Filter] = result
+                    filters.append(filter)
                     filters = filters.sorted(by: { $1.phrase > $0.phrase })
-                    
-                    if let errorMessage = self.saveToDisk(filters: filters) {
-                        promise(.failure(.diskError(errorMessage)))
+
+                    if let error = self.saveToDisk(filters: filters) {
+                        promise(.failure(error))
                     } else {
                         promise(.success(()))
                     }
@@ -149,17 +222,23 @@ extension FilterStoreFile {
                 .store(in: &self.cancellables)
         }.eraseToAnyPublisher()
     }
-    
+
     func addMany(filters: [Filter]) -> AnyPublisher<Void, FilterStoreError> {
         return Future<Void, FilterStoreError> { promise in
             self.fetch()
-                .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] result in
-                    guard let self = self else { return }
-                    
+                .sink(receiveCompletion: { completion in
+                    if case .failure(let error) = completion {
+                        promise(.failure(error))
+                    }
+                }, receiveValue: { [weak self] result in
+                    guard let self = self else {
+                        promise(.failure(.other))
+                        return
+                    }
                     var existingFilters: [Filter] = result
 
                     let newFilters = filters.map { f in
-                        if (existingFilters.contains(f)) {
+                        if existingFilters.contains(f) {
                             return Filter(
                                 id: UUID(),
                                 phrase: f.phrase,
@@ -172,13 +251,12 @@ extension FilterStoreFile {
                             return f
                         }
                     }
-                    
-                    
+
                     existingFilters.append(contentsOf: newFilters)
                     existingFilters = existingFilters.sorted(by: { $1.phrase > $0.phrase })
-                    
-                    if let errorMessage = self.saveToDisk(filters: existingFilters) {
-                        promise(.failure(.diskError(errorMessage)))
+
+                    if let error = self.saveToDisk(filters: existingFilters) {
+                        promise(.failure(error))
                     } else {
                         promise(.success(()))
                     }
@@ -186,37 +264,54 @@ extension FilterStoreFile {
                 .store(in: &self.cancellables)
         }.eraseToAnyPublisher()
     }
-    
+
     func update(filter: Filter) -> AnyPublisher<Void, FilterStoreError> {
         return Future<Void, FilterStoreError> { promise in
             self.fetch()
-                .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] result in
+                .sink(receiveCompletion: { completion in
+                    if case .failure(let error) = completion {
+                        promise(.failure(error))
+                    }
+                }, receiveValue: { [weak self] result in
+                    guard let self = self else {
+                        promise(.failure(.other))
+                        return
+                    }
                     var filters = result
-                    
-                    if let filterIndex = result.firstIndex(where: { $0.id == filter.id }) {
-                        filters[filterIndex] = filter
-                        
-                        if let errorMessage = self?.saveToDisk(filters: filters) {
-                            promise(.failure(.diskError(errorMessage)))
-                        } else {
-                            promise(.success(()))
-                        }
+                    guard let filterIndex = filters.firstIndex(where: { $0.id == filter.id }) else {
+                        promise(.failure(.updateError))
+                        return
+                    }
+                    filters[filterIndex] = filter
+
+                    if let error = self.saveToDisk(filters: filters) {
+                        promise(.failure(error))
+                    } else {
+                        promise(.success(()))
                     }
                 })
                 .store(in: &self.cancellables)
         }
         .eraseToAnyPublisher()
     }
-    
+
     func remove(uuid: UUID) -> AnyPublisher<Void, FilterStoreError> {
         return Future<Void, FilterStoreError> { promise in
             self.fetch()
-                .sink(receiveCompletion: { _ in }, receiveValue: { [weak self] result in
+                .sink(receiveCompletion: { completion in
+                    if case .failure(let error) = completion {
+                        promise(.failure(error))
+                    }
+                }, receiveValue: { [weak self] result in
+                    guard let self = self else {
+                        promise(.failure(.other))
+                        return
+                    }
                     var filters: [Filter] = result
-                    filters = filters.filter{$0.id != uuid}
-                    
-                    if let errorMessage = self?.saveToDisk(filters: filters) {
-                        promise(.failure(.diskError(errorMessage)))
+                    filters = filters.filter { $0.id != uuid }
+
+                    if let error = self.saveToDisk(filters: filters) {
+                        promise(.failure(error))
                     } else {
                         promise(.success(()))
                     }
@@ -224,11 +319,15 @@ extension FilterStoreFile {
                 .store(in: &self.cancellables)
         }.eraseToAnyPublisher()
     }
-    
+
     func reset() -> AnyPublisher<Void, FilterStoreError> {
         return Future<Void, FilterStoreError> { [weak self] promise in
-            if let errorMessage = self?.saveToDisk(filters: []) {
-                promise(.failure(.diskError(errorMessage)))
+            guard let self = self else {
+                promise(.failure(.other))
+                return
+            }
+            if let error = self.saveToDisk(filters: []) {
+                promise(.failure(error))
             } else {
                 promise(.success(()))
             }
@@ -237,10 +336,14 @@ extension FilterStoreFile {
 
     func decodeFromURL(url: URL) -> AnyPublisher<[Filter], FilterStoreError> {
         return Future<[Filter], FilterStoreError> { promise in
+            let accessed = url.startAccessingSecurityScopedResource()
+            defer {
+                if accessed {
+                    url.stopAccessingSecurityScopedResource()
+                }
+            }
             do {
-                _ = url.startAccessingSecurityScopedResource()
                 let filters = try JSONDecoder().decode([Filter].self, from: Data(contentsOf: url))
-                url.stopAccessingSecurityScopedResource()
                 promise(.success(filters))
             } catch {
                 promise(.failure(.decodingError))
@@ -248,6 +351,24 @@ extension FilterStoreFile {
         }.eraseToAnyPublisher()
     }
 
-    
-    
+    /// Used by the V1 migrator to write the fully-migrated array in a single
+    /// atomic write. Not on the public `FilterStore` protocol — it is a
+    /// filesystem-implementation seam that mirrors `reset()` but for a given
+    /// list, so the migration can replace the legacy payload in one operation
+    /// rather than one store call per filter.
+    func resolveMigration(filters: [Filter]) -> AnyPublisher<[Filter], FilterStoreError> {
+        return Future<[Filter], FilterStoreError> { [weak self] promise in
+            guard let self = self else {
+                promise(.failure(.other))
+                return
+            }
+            if let error = self.saveToDisk(filters: filters) {
+                promise(.failure(error))
+            } else {
+                self.filters = filters
+                promise(.success(filters))
+            }
+        }
+        .eraseToAnyPublisher()
+    }
 }

@@ -22,47 +22,61 @@ final class MessageFilterExtension: ILMessageFilterExtension {
         os_log("FILTEREXTENSION - Message filtering complete.", log: OSLog.messageFilterLog, type: .info)
     }
 
-    private func runFilters(_ queryRequest: ILMessageFilterQueryRequest,
-                             context: ILMessageFilterExtensionContext,
-                             completion: @escaping (ILMessageFilterQueryResponse) -> Void) {
-        let response = ILMessageFilterQueryResponse()
-        guard let sender = queryRequest.sender, let messageBody = queryRequest.messageBody else {
-            return
-        }
-        let engine = SMSOfflineFilter(filterList: filters)
-        let message = SMSMessage(sender: sender, text: messageBody)
-
-        if let matched = engine.matchingFilter(message: message) {
-            response.action = engine.action(for: matched)
-            response.subAction = engine.subAction(for: matched)
-            // Record that this rule earned its place. Counts only — no part of
-            // the message is written anywhere.
+    private func respond(queryRequest: ILMessageFilterQueryRequest,
+                         completion: @escaping (ILMessageFilterQueryResponse) -> Void) {
+        let outcome = MessageFilterEngine(filters: filters)
+            .decide(sender: queryRequest.sender,
+                    messageBody: queryRequest.messageBody)
+        if let matched = outcome.matched {
             RuleActivityStore.shared.record(match: matched.id)
-        } else {
-            response.action = .none
-            response.subAction = .none
         }
-        os_log("FILTEREXTENSION - Filtering action: %@", log: OSLog.messageFilterLog, type: .info, "\(response.action.rawValue)")
-        os_log("FILTEREXTENSION - Filtering sub-action: %@", log: OSLog.messageFilterLog, type: .info, "\(response.subAction.rawValue)")
+        os_log("FILTEREXTENSION - Filtering action: %@", log: OSLog.messageFilterLog, type: .info, "\(outcome.response.action.rawValue)")
+        os_log("FILTEREXTENSION - Filtering sub-action: %@", log: OSLog.messageFilterLog, type: .info, "\(outcome.response.subAction.rawValue)")
         os_log("FILTEREXTENSION - Filtering done", log: OSLog.messageFilterLog, type: .info)
-        completion(response)
+        completion(outcome.response)
     }
 
 }
 
 extension MessageFilterExtension: ILMessageFilterQueryHandling {
-    
+
     func handle(_ queryRequest: ILMessageFilterQueryRequest,
                 context: ILMessageFilterExtensionContext,
                 completion: @escaping (ILMessageFilterQueryResponse) -> Void) {
 
-        filterStore.fetch()
-            .receive(on: RunLoop.main)
-            .sink(receiveCompletion: {_ in
-            }, receiveValue: { [weak self] result in
+        let deliver: ([Filter]) -> Void = { [weak self] loadedFilters in
+            guard let self = self else {
+                let fallback = ILMessageFilterQueryResponse()
+                fallback.action = .none
+                fallback.subAction = .none
+                completion(fallback)
+                return
+            }
+            self.filters = loadedFilters
+            self.respond(queryRequest: queryRequest, completion: completion)
+        }
+
+        let deliverFailure: () -> Void = { [weak self] in
+            // fetch() never resolves on a missing container; the audit calls
+            // out that an empty list silently disables filtering. Deliver an
+            // allow verdict so the message reaches the user — they can
+            // address the underlying store problem separately.
+            _ = self
+            let fallback = ILMessageFilterQueryResponse()
+            fallback.action = .none
+            fallback.subAction = .none
+            completion(fallback)
+        }
+
+        filterStore.fetch(policy: .preserve)
+            .receive(on: DispatchQueue.main)
+            .sink(receiveCompletion: { completionCase in
+                if case .failure = completionCase {
+                    deliverFailure()
+                }
+            }, receiveValue: { result in
                 os_log("FILTEREXTENSION - Filter list loaded", log: OSLog.messageFilterLog, type: .info)
-                self?.filters = result
-                return self?.runFilters(queryRequest, context: context, completion: completion) ?? ()
+                deliver(result)
             })
             .store(in: &self.cancellables)
     }
@@ -70,17 +84,17 @@ extension MessageFilterExtension: ILMessageFilterQueryHandling {
 }
 
 extension MessageFilterExtension: ILMessageFilterCapabilitiesQueryHandling {
-    
+
     func handle(_ capabilitiesQueryRequest: ILMessageFilterCapabilitiesQueryRequest, context: ILMessageFilterExtensionContext, completion: @escaping (ILMessageFilterCapabilitiesQueryResponse) -> Void) {
         let response = ILMessageFilterCapabilitiesQueryResponse()
         response.transactionalSubActions = [.transactionalOrders,
                                             .transactionalOthers,
                                             .transactionalFinance,
-                                            .transactionalReminders]
+                                            .transactionalReminders,
+                                            .transactionalHealth]
         response.promotionalSubActions = [.promotionalOffers,
                                           .promotionalCoupons,
                                           .promotionalOthers]
         completion(response)
     }
 }
-

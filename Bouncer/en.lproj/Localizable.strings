@@ -25,6 +25,7 @@
 "TRANSACTION_ACTION_ORDERS" = "Orders";
 "TRANSACTION_ACTION_FINANCE" = "Finance";
 "TRANSACTION_ACTION_REMINDERS" = "Reminders";
+"TRANSACTION_ACTION_HEALTH" = "Health";
 "PROMOTIONS" = "Promotions";
 "PROMOTION_ACTION" = "Other Promotions";
 "PROMOTION_ACTION_OFFERS" = "Offers";
@@ -65,6 +66,15 @@
 "OK" = "OK";
 "GENERAL" = "General";
 
+/* Filter error alerts */
+"ERROR_EMPTY_IMPORT_FILE" = "The file you selected contained no rules.";
+"ERROR_LOAD_FAILED" = "Bouncer couldn’t read your rules and has reset them. Any rules you had before are gone.";
+"ERROR_SAVE_FAILED" = "Bouncer couldn’t save your rule. Make sure you have free storage and try again.";
+"ERROR_DELETE_FAILED" = "Bouncer couldn’t delete that rule. Try again in a moment.";
+"ERROR_DECODING_FAILED" = "The file you selected isn’t a Bouncer rule list. Pick a file exported from Bouncer and try again.";
+"ERROR_DISK %@" = "Bouncer couldn’t write to its storage: %@. Make sure you have free space and try again.";
+"ERROR_INVALID_REGEX %@" = "Bouncer couldn’t save that rule: %@";
+
 /* Onboarding */
 "ONBOARDING_WELCOME_TITLE" = "Welcome to Bouncer!";
 "ONBOARDING_WELCOME_BODY" = "Bouncer filters unwanted SMS before it reaches your inbox. Setting it up takes about a minute.";
@@ -80,13 +90,13 @@
 "ONBOARDING_STEP_COUNTER %1$d %2$d" = "Step %1$d of %2$d";
 "ONBOARDING_SCREENSHOT_PENDING" = "Screenshot coming soon";
 "ONBOARDING_STEP_1_TITLE" = "Open Settings";
-"ONBOARDING_STEP_1_BODY" = "Tap Open Settings below. The Settings app opens on its main page.";
-"ONBOARDING_STEP_2_TITLE" = "Go to Apps";
-"ONBOARDING_STEP_2_BODY" = "Scroll down and tap Apps.";
+"ONBOARDING_STEP_1_BODY" = "Tap Open Settings below. iOS opens the Settings app on its main page — that’s where you start, not Bouncer’s own pane.";
+"ONBOARDING_STEP_2_TITLE" = "Open Apps";
+"ONBOARDING_STEP_2_BODY" = "Scroll down past General, Privacy and the rest until you see Apps, then tap it. From there you’ll go to Messages → Unknown & Junk → Text Message Filtering → Bouncer.";
 "ONBOARDING_STEP_3_TITLE" = "Choose Messages";
 "ONBOARDING_STEP_3_BODY" = "In the list of apps, tap Messages.";
-"ONBOARDING_STEP_4_TITLE" = "Tap Text Message Filter";
-"ONBOARDING_STEP_4_BODY" = "Enable “Screen Unknown Senders” and then tap “Text Message Filter”.";
+"ONBOARDING_STEP_4_TITLE" = "Open Text Message Filtering";
+"ONBOARDING_STEP_4_BODY" = "In the Messages screen, scroll to Unknown & Junk, turn on Filter Unknown Senders, then tap Text Message Filtering.";
 "ONBOARDING_STEP_5_TITLE" = "Turn on Bouncer";
 "ONBOARDING_STEP_5_BODY" = "Select Bouncer and accept the notice. It's OK: we don't send your messages to a server. A checkmark means filtering is active.";
 
@@ -183,7 +193,7 @@
 "HELP_SUPPORT_SECTION" = "Support";
 "HELP_SUPPORT_FOOTER" = "Questions, bugs and feature requests all reach the developer directly.";
 "HELP_EMAIL_SUPPORT" = "Email support";
-"HELP_PRIVACY" = "Your messages are filtered on your iPhone and are never sent to a server. Not to Bouncer, not to anyone.";
+"HELP_PRIVACY" = "Your messages are filtered entirely on your iPhone and never leave it. Not to Bouncer, not to anyone. When you create, change, or delete a rule, the rule itself — the phrase, where to look, what it does — is sent to a server the developer controls, along with your general region and the time.";
 "HELP_VERSION %@" = "Bouncer %@";
 "DONE" = "Done";
 "LANE_WINDOW_CAPTION" = "messages handled in the last 30 days";

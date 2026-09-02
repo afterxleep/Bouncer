@@ -89,10 +89,21 @@ extension FilterDetailContainerView {
     /// than by colour alone.
     private var saveButton: some View {
         Button("SAVE") {
-            guard !filterTerm.isBlank else { return }
-            saveFilter()
-            onSave?(filterDestination)
-            dismiss()
+            let outcome = RuleSaveValidator.makeRule(
+                id: filterId,
+                phrase: filterTerm,
+                type: filterType,
+                destination: filterDestination,
+                useRegex: useRegex
+            )
+            switch outcome {
+            case .accept:
+                saveFilter()
+                onSave?(filterDestination)
+                dismiss()
+            case .reject(let message):
+                store.dispatch(.filter(action: .error(.invalidRegex(message))))
+            }
         }
         .buttonStyle(.borderedProminent)
         .buttonBorderShape(.capsule)

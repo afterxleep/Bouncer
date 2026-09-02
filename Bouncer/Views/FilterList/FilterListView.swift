@@ -196,7 +196,7 @@ struct FilterListView: View {
             case .success(let url):
                 importFiltersFromURL(url)
             case .failure(let error):
-                showError(.unknownError(error.localizedDescription))
+                showError(.diskError(message: error.localizedDescription))
             }
         }
         .sheet(isPresented: $shouldShowImportList) {

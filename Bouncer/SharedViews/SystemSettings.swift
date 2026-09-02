@@ -5,28 +5,33 @@
 
 import UIKit
 
+/// Thin seam over `UIApplication.shared.open` so a test can assert which URL
+/// `SystemSettings.open` asks the system to open. The production implementation
+/// is the only one used at runtime; tests substitute a recording spy.
+protocol SystemSettingsOpening {
+    func open(_ url: URL, options: [UIApplication.OpenExternalURLOptionsKey: Any])
+}
+
+private struct UIKitSystemSettingsOpening: SystemSettingsOpening {
+    func open(_ url: URL, options: [UIApplication.OpenExternalURLOptionsKey: Any]) {
+        UIApplication.shared.open(url, options: options, completionHandler: nil)
+    }
+}
+
 enum SystemSettings {
 
-    /// Opens the Settings app at its root rather than Bouncer's own page, so the
-    /// user lands where the setup steps expect them.
-    ///
-    /// `UIApplication.openSettingsURLString` always deep-links to the app's own
-    /// settings pane; there is no public API for the Settings root, so this uses
-    /// the `App-Prefs:` scheme and falls back to the public one if the system
-    /// refuses to open it.
-    static func open() {
-        guard let root = URL(string: "App-Prefs:") else {
-            openAppPane()
-            return
-        }
-        UIApplication.shared.open(root, options: [:]) { opened in
-            if !opened { openAppPane() }
-        }
-    }
+    /// Injected so tests can swap in a recording opener. Default is the real
+    /// `UIApplication.shared.open` call.
+    static var opener: SystemSettingsOpening = UIKitSystemSettingsOpening()
 
-    private static func openAppPane() {
+    /// Opens the Settings app. On the iOS versions we target this lands on
+    /// the Settings root — not on Bouncer's own pane — because the public
+    /// Settings URL is treated as a root navigation. The onboarding
+    /// walkthrough is written for that root: Apps → Messages →
+    /// Unknown & Junk → Text Message Filtering → Bouncer.
+    static func open() {
         guard let url = URL(string: UIApplication.openSettingsURLString) else { return }
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        opener.open(url, options: [:])
     }
 }
 

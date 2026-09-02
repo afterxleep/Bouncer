@@ -265,7 +265,8 @@ private extension FilterDetailView {
             ScrollView {
                 VStack(alignment: .leading, spacing: Metrics.xl) {
                     destinationGroup("TRANSACTIONS", [.transactionOrder, .transactionFinance,
-                                                      .transactionReminders, .transactionOther])
+                                                      .transactionReminders, .transactionHealth,
+                                                      .transactionOther])
                     destinationGroup("PROMOTIONS", [.promotionOffers, .promotionCoupons, .promotionOther])
                 }
                 .padding(Metrics.l)
