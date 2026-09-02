@@ -173,21 +173,8 @@ struct RuleCard: View {
             }
         }
         .padding(.vertical, 16)
-        .padding(.leading, Metrics.m + (showsCategory ? 0 : 2))
-        .padding(.trailing, Metrics.l - 2)
+        .padding(.horizontal, Metrics.l - 2)
         .stageCard()
-        // The spine only earns its place where the destination differs row to
-        // row. In Junk and Safe every rule shares one destination, so a spine
-        // there just restated the lane four different ways.
-        .overlay(alignment: .leading) {
-            if showsCategory {
-                Capsule()
-                    .fill(category.tint)
-                    .frame(width: 3)
-                    .padding(.vertical, 16)
-                    .padding(.leading, 1)
-            }
-        }
         .accessibilityElement(children: .combine)
     }
 

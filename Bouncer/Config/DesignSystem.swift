@@ -73,6 +73,16 @@ struct Category {
 
 extension FilterDestination {
 
+    /// True for the seven transaction/promotion destinations — the ones
+    /// tucked behind the "Categories" disclosure rather than shown as one of
+    /// the two primary General tiles.
+    var isCategory: Bool {
+        switch self {
+        case .allow, .junk, .none: return false
+        default: return true
+        }
+    }
+
     /// The category a rule belongs to, resolving sub-actions to their parent
     /// when a rule predates the sub-action model.
     var category: Category {

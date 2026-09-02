@@ -27,6 +27,10 @@ struct FilterDetailView<L: View, R: View>: View {
 
     @FocusState private var termIsFocused: Bool
     @State private var scrolled = false
+    @State private var showingCategoryPicker = false
+    // Starts collapsed and only opens itself if the rule being edited
+    // already uses it — a new rule shouldn't have to see it.
+    @State private var showingAdvanced = false
 
     private var accent: Color { filterDestination.category.tint }
 
@@ -99,6 +103,12 @@ private extension FilterDetailView {
         .animation(.smooth(duration: 0.25), value: filterDestination)
         .animation(.smooth(duration: 0.25), value: filterType)
         .animation(.smooth(duration: 0.25), value: useRegex)
+        .onAppear {
+            showingAdvanced = useRegex || isCaseSensitive
+        }
+        .sheet(isPresented: $showingCategoryPicker) {
+            categoryPicker
+        }
     }
 
     /// The phrase is the rule, so it gets the weight: a tall well, 20pt text,
@@ -134,7 +144,7 @@ private extension FilterDetailView {
     /// result — which keeps the emphasis wherever the sentence puts them.
     var summarySentence: some View {
         Text(summaryText)
-            .font(.footnote)
+            .font(.subheadline)
             .foregroundStyle(Stage.secondary)
             .fixedSize(horizontal: false, vertical: true)
             .padding(.horizontal, Metrics.xs)
@@ -157,7 +167,7 @@ private extension FilterDetailView {
                                 (destination, accent)] {
             if let range = text.range(of: value) {
                 text[range].foregroundColor = colour
-                text[range].font = .footnote.weight(.semibold)
+                text[range].font = .subheadline.weight(.semibold)
             }
         }
         return text
@@ -184,18 +194,92 @@ private extension FilterDetailView {
         }
     }
 
-    /// Twelve destinations as a chip grid rather than a 600pt checklist: the
-    /// whole colour system is visible at once and the sheet stops scrolling.
+    /// Three buttons, one decision: kept, blocked, or sorted. The first two
+    /// cover almost every rule anyone writes, so they're right here. The
+    /// third doesn't have a destination of its own — it pops the other ten
+    /// as a sheet, and once one's picked, becomes that category: its own
+    /// icon, name and colour, same as Safe and Junk.
     var sendToSection: some View {
         section("FILTER_ACTION_SECTION") {
-            VStack(alignment: .leading, spacing: Metrics.m) {
-                destinationGroup("GENERAL", [.allow, .junk])
-                destinationGroup("TRANSACTIONS", [.transactionOrder, .transactionFinance,
-                                                  .transactionReminders, .transactionOther])
-                destinationGroup("PROMOTIONS", [.promotionOffers, .promotionCoupons, .promotionOther])
+            HStack(spacing: Metrics.s) {
+                destinationTile(.allow)
+                destinationTile(.junk)
+                categoryTile
             }
             .accessibilityIdentifier("rule.destination")
         }
+    }
+
+    func destinationTile(_ destination: FilterDestination) -> some View {
+        tile(symbol: destination.category.symbol,
+             title: destination.category.title,
+             tint: destination.category.tint,
+             isSelected: filterDestination == destination) {
+            filterDestination = destination
+        }
+        .accessibilityIdentifier("rule.destination.\(destination.rawValue)")
+    }
+
+    var categoryTile: some View {
+        let isSelected = filterDestination.isCategory
+        let category = isSelected ? filterDestination.category : Category(
+            symbol: "square.grid.2x2.fill", tint: Brand.tint,
+            titleKey: "SCOPE_CATEGORIES", shortKey: "SCOPE_CATEGORIES")
+        return tile(symbol: category.symbol, title: category.title, tint: category.tint, isSelected: isSelected) {
+            showingCategoryPicker = true
+        }
+        .accessibilityIdentifier("rule.category.tile")
+    }
+
+    func tile(symbol: String, title: LocalizedStringKey, tint: Color,
+             isSelected: Bool, action: @escaping () -> Void) -> some View {
+        Button(action: action) {
+            VStack(spacing: 8) {
+                Image(systemName: symbol)
+                    .font(.system(size: 20, weight: .semibold))
+                Text(title)
+                    .font(.subheadline.weight(.semibold))
+                    .lineLimit(1)
+                    .minimumScaleFactor(0.8)
+            }
+            .foregroundStyle(isSelected ? tint : Stage.secondary)
+            .frame(maxWidth: .infinity)
+            .frame(height: 76)
+            .background(isSelected ? Stage.fill(tint) : Stage.card,
+                        in: .rect(cornerRadius: Metrics.cardRadius, style: .continuous))
+            .overlay {
+                RoundedRectangle(cornerRadius: Metrics.cardRadius, style: .continuous)
+                    .strokeBorder(isSelected ? Stage.edge(tint) : Stage.cardStroke,
+                                  lineWidth: isSelected ? 1.5 : 1)
+            }
+            .contentShape(.rect)
+        }
+        .buttonStyle(.plain)
+        .accessibilityAddTraits(isSelected ? [.isButton, .isSelected] : .isButton)
+    }
+
+    /// Picking a destination here dismisses the sheet immediately — there's
+    /// nothing else to decide once you've named the category.
+    var categoryPicker: some View {
+        NavigationStack {
+            ScrollView {
+                VStack(alignment: .leading, spacing: Metrics.xl) {
+                    destinationGroup("TRANSACTIONS", [.transactionOrder, .transactionFinance,
+                                                      .transactionReminders, .transactionOther])
+                    destinationGroup("PROMOTIONS", [.promotionOffers, .promotionCoupons, .promotionOther])
+                }
+                .padding(Metrics.l)
+            }
+            .background { BackgroundView() }
+            .navigationTitle(Text("SCOPE_CATEGORIES"))
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar {
+                ToolbarItem(placement: .cancellationAction) {
+                    Button("DONE") { showingCategoryPicker = false }
+                }
+            }
+        }
+        .presentationDetents([.medium, .large])
     }
 
     func destinationGroup(_ title: LocalizedStringKey, _ options: [FilterDestination]) -> some View {
@@ -212,6 +296,7 @@ private extension FilterDetailView {
                          tint: category.tint,
                          isSelected: filterDestination == option) {
                         filterDestination = option
+                        showingCategoryPicker = false
                     }
                 }
             }
@@ -234,16 +319,17 @@ private extension FilterDetailView {
         Button(action: action) {
             HStack(spacing: 7) {
                 Image(systemName: symbol)
-                    .font(.system(size: 12, weight: .semibold))
+                    .font(.system(size: 13, weight: .semibold))
                 Text(title)
-                    .font(.footnote.weight(.medium))
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.8)
+                    .font(.subheadline.weight(.medium))
+                    .lineLimit(2)
+                    .minimumScaleFactor(0.9)
                 Spacer(minLength: 0)
             }
             .foregroundStyle(isSelected ? tint : Stage.secondary)
             .padding(.horizontal, Metrics.m)
-            .frame(height: 44)
+            .padding(.vertical, 6)
+            .frame(minHeight: 46)
             .frame(maxWidth: .infinity, alignment: .leading)
             .background(isSelected ? Stage.fill(tint) : Stage.card,
                         in: .rect(cornerRadius: Metrics.badgeRadius + 2, style: .continuous))
@@ -257,9 +343,33 @@ private extension FilterDetailView {
         .accessibilityAddTraits(isSelected ? [.isButton, .isSelected] : .isButton)
     }
 
+    /// Regex and case-sensitivity are for the rules that need precision, not
+    /// the rule you're writing right now — collapsed unless the one you're
+    /// editing already turned one of them on.
     var advancedSection: some View {
-        section("ADVANCED") {
-            VStack(spacing: 0) {
+        VStack(spacing: 0) {
+            Button {
+                withAnimation(.smooth(duration: 0.22)) { showingAdvanced.toggle() }
+            } label: {
+                HStack(spacing: Metrics.s) {
+                    Text("ADVANCED")
+                        .font(.subheadline.weight(.semibold))
+                        .foregroundStyle(Stage.label)
+                    Spacer(minLength: 0)
+                    Image(systemName: "chevron.right")
+                        .font(.system(size: 11, weight: .bold))
+                        .foregroundStyle(Stage.quaternary)
+                        .rotationEffect(.degrees(showingAdvanced ? 90 : 0))
+                }
+                .padding(.horizontal, Metrics.l)
+                .frame(height: 52)
+                .contentShape(.rect)
+            }
+            .buttonStyle(.plain)
+            .accessibilityIdentifier("rule.advanced.toggle")
+
+            if showingAdvanced {
+                divider
                 optionToggle($useRegex,
                              title: "USE_REGULAR_EXPRESSIONS",
                              detail: "USE_REGULAR_EXPRESSIONS_DETAIL")
@@ -270,8 +380,9 @@ private extension FilterDetailView {
                              title: "IS_CASE_SENSITIVE",
                              detail: "IS_CASE_SENSITIVE_DETAIL")
             }
-            .stageCard()
         }
+        .stageCard()
+        .accessibilityIdentifier("rule.advanced")
     }
 
     /// Regular expressions are the one thing in this form that can't be
@@ -309,7 +420,7 @@ private extension FilterDetailView {
                                 @ViewBuilder content: () -> Content) -> some View {
         VStack(alignment: .leading, spacing: Metrics.s) {
             Text(title)
-                .font(.footnote.weight(.semibold))
+                .font(.subheadline.weight(.semibold))
                 .foregroundStyle(Stage.secondary)
                 .padding(.leading, Metrics.xs)
             content()

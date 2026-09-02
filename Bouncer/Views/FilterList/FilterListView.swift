@@ -82,6 +82,16 @@ enum RuleScope: String, CaseIterable, Identifiable {
         case .categories: return filter.action != .allow && filter.action != .junk
         }
     }
+
+    /// Which lane a save lands in, so the list can jump there right after —
+    /// a rule you just wrote shouldn't disappear into a tab you're not on.
+    init(destination: FilterDestination) {
+        switch destination {
+        case .allow: self = .allow
+        case .junk, .none: self = .junk
+        default: self = .categories
+        }
+    }
 }
 
 struct FilterListView: View {
@@ -157,7 +167,9 @@ struct FilterListView: View {
             .toolbarBackgroundVisibility(.hidden, for: .navigationBar)
             .navigationBarTitleDisplayMode(.inline)
             .navigationDestination(item: $editingFilter) { filter in
-                FilterDetailContainerView(interactionType: .update, filter: filter)
+                FilterDetailContainerView(interactionType: .update, filter: filter) { destination in
+                    scope = RuleScope(destination: destination)
+                }
             }
             .toolbar {
                 DefaultToolbarItem(kind: .search, placement: .bottomBar)
@@ -194,7 +206,9 @@ struct FilterListView: View {
             HelpView()
         }
         .sheet(isPresented: $showingFilterDetail) {
-            FilterDetailContainerView(selectedDestination: scope.defaultDestination)
+            FilterDetailContainerView(selectedDestination: scope.defaultDestination) { destination in
+                scope = RuleScope(destination: destination)
+            }
         }
     }
 }

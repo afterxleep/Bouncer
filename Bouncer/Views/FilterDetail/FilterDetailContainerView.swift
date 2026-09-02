@@ -15,6 +15,8 @@ struct FilterDetailContainerView: View {
     var interactionType: InteractionType
     var filterId: UUID?
     var selectedDestination: FilterDestination
+    /// Lets the list jump to whichever lane the saved rule landed in.
+    var onSave: ((FilterDestination) -> Void)?
 
     @State private var filterType: FilterType
     @State var filterDestination: FilterDestination
@@ -56,10 +58,12 @@ struct FilterDetailContainerView: View {
 
 extension FilterDetailContainerView {
     
-    init(interactionType: InteractionType = .add, filter: Filter? = nil, selectedDestination: FilterDestination = .junk) {
+    init(interactionType: InteractionType = .add, filter: Filter? = nil, selectedDestination: FilterDestination = .junk,
+         onSave: ((FilterDestination) -> Void)? = nil) {
         self.interactionType = interactionType
         self.filterId = filter?.id
         self.selectedDestination = selectedDestination
+        self.onSave = onSave
         self._filterType = .init(initialValue: filter?.type ?? .any)
         self._filterTerm = .init(initialValue: filter?.phrase ?? "")
         let action = filter?.subAction != FilterDestination.none && filter?.subAction != nil ? filter?.subAction : selectedDestination
@@ -87,6 +91,7 @@ extension FilterDetailContainerView {
         Button("SAVE") {
             guard !filterTerm.isBlank else { return }
             saveFilter()
+            onSave?(filterDestination)
             dismiss()
         }
         .buttonStyle(.borderedProminent)
