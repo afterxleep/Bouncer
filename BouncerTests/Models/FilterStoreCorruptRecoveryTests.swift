@@ -2,14 +2,7 @@
 //  FilterStoreCorruptRecoveryTests.swift
 //  BouncerTests
 //
-//  Regression for the QA finding that a corrupt filters.json on disk is
-//  never healed, so the "Bouncer couldn't read your rules" alert returns on
-//  every launch and the only escape is reinstall. The contract the user
-//  actually wants is: the first launch surfaces the error and the user is
-//  told, but the file is overwritten with a fresh empty payload so the next
-//  launch reaches a working app. The alert already explains that the rules
-//  could not be read; reaching a clean state without reinstalling is the
-//  priority.
+//  An unreadable rules file must be reported without destroying its bytes.
 //
 
 import XCTest
@@ -61,11 +54,7 @@ final class FilterStoreCorruptRecoveryTests: XCTestCase {
         return captured
     }
 
-    /// First launch on a corrupt file still surfaces the failure to the
-    /// caller (the UI shows the "couldn't read your rules" alert — that
-    /// behaviour is the intended first-launch UX). The thing that was
-    /// missing was the side effect of healing the file so the second launch
-    /// does not get the same result.
+    /// The caller needs an error so the UI can report the unreadable file.
     func test_CorruptFileFirstLaunchStillReportsError() throws {
         try Data("garbage".utf8).write(to: FilterStoreFile.fileURL!)
 
@@ -82,33 +71,20 @@ final class FilterStoreCorruptRecoveryTests: XCTestCase {
         }
     }
 
-    /// The bug QA reproduced: every subsequent launch kept seeing the same
-    /// corrupt file and re-showed the alert. After the fix the first launch
-    /// must overwrite the bad bytes with a fresh, parseable payload, so the
-    /// second launch returns success (no alert).
-    func test_CorruptFileSecondLaunchIsClean() throws {
-        try Data("garbage".utf8).write(to: FilterStoreFile.fileURL!)
+    /// The original bytes may be recoverable, so a failed read cannot reset them.
+    func test_UnreadableFileIsNotReplacedByEmptyRules() throws {
+        let original = Data("garbage".utf8)
+        let url = try XCTUnwrap(FilterStoreFile.fileURL)
+        try original.write(to: url)
 
-        // First launch: error path runs, file is healed.
         _ = awaitPublisher(filterStore.fetch())
 
-        // The on-disk bytes must now be a parseable empty filter list.
-        let onDisk = try Data(contentsOf: FilterStoreFile.fileURL!)
-        XCTAssertNoThrow(try JSONDecoder().decode([Filter].self, from: onDisk),
-                         "filters.json was not healed into a parseable payload after first launch")
-
-        // Second launch: a fresh store sees the now-valid file and returns
-        // success without surfacing an error to the UI.
-        let secondStore = FilterStoreFile()
-        let second = awaitPublisher(secondStore.fetch())
-        switch second {
-        case .success(let filters):
-            XCTAssertTrue(filters.isEmpty,
-                          "Healed store should surface an empty rule list, not the user's old rules")
-        case .failure(let error):
-            XCTFail("Second launch after healing must not surface .loadError; got \(error)")
-        case .none:
-            XCTFail("Second launch publisher did not resolve")
+        XCTAssertEqual(try Data(contentsOf: url), original)
+        let second = awaitPublisher(FilterStoreFile().fetch())
+        if case .failure(.loadError)? = second {
+            // Keep reporting the problem until the original data is recovered.
+        } else {
+            XCTFail("An unreadable store must not be silently replaced")
         }
     }
 }

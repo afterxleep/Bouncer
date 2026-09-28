@@ -186,6 +186,23 @@ class FilterStoreFileTests: XCTestCase {
 
 
     }
+
+    func test_PreviousVersionRulesKeepSubActionsOnUpgrade() throws {
+        let id = UUID()
+        let previousVersion = """
+        [{"id":"\(id.uuidString)","type":"sender","phrase":"discount",\
+        "action":"promotion","subAction":"promotionCoupons","useRegex":false}]
+        """
+        let url = try XCTUnwrap(FilterStoreFile.fileURL)
+        try Data(previousVersion.utf8).write(to: url)
+
+        let rules = fetchFilters()
+        XCTAssertEqual(rules.count, 1)
+        XCTAssertEqual(rules.first?.id, id)
+        XCTAssertEqual(rules.first?.subAction, .promotionCoupons)
+        XCTAssertEqual(rules.first?.caseSensitive, false)
+        XCTAssertEqual(try Data(contentsOf: url), Data(previousVersion.utf8))
+    }
     
     private func fetchFilters() -> [Filter] {
         let expectation = self.expectation(description: "Fetch Filters")
