@@ -1,0 +1,28 @@
+{
+  "com.banshai.bouncer-ios-1339" : {
+    "branch" : "main",
+    "buildNumber" : "1339",
+    "bundleId" : "com.banshai.bouncer",
+    "commit" : "9a212b4",
+    "platform" : "ios",
+    "uploadedAt" : "2026-09-17T13:26:50Z",
+    "versionString" : "2.9.1"
+  },
+  "com.banshai.bouncer-ios-1340" : {
+    "branch" : "main",
+    "buildNumber" : "1340",
+    "bundleId" : "com.banshai.bouncer",
+    "commit" : "9a212b4",
+    "platform" : "ios",
+    "uploadedAt" : "2026-09-17T14:22:26Z",
+    "versionString" : "2.9.1"
+  },
+  "ios-1338" : {
+    "branch" : "main",
+    "buildNumber" : "1338",
+    "commit" : "9a212b4",
+    "platform" : "ios",
+    "uploadedAt" : "2026-09-11T15:54:31Z",
+    "versionString" : "2.9.1"
+  }
+}
