@@ -2,17 +2,7 @@
 //  FilterStoreExtensionSafetyTests.swift
 //  BouncerTests
 //
-//  Regression for the BLOCKER finding that the corrupt-store heal lives
-//  inside MessageFilterExtension's fetch path: every incoming SMS triggers
-//  a destructive write over filters.json. There is no UI in the extension
-//  process, so a silent wipe deletes every rule the user ever wrote.
-//
-//  These tests pin the behaviour down:
-//  - The MessageFilterExtension's fetch must never destroy or rewrite the
-//    on-disk store on a decode failure.
-//  - The corrupt bytes are preserved in a quarantine sidecar before the
-//    app heals the store, so a partially-recoverable file can be salvaged.
-//  - The app's heal path still produces a clean second launch.
+//  Unreadable rules must stay on disk for recovery in both processes.
 //
 //
 
@@ -36,10 +26,6 @@ final class FilterStoreExtensionSafetyTests: XCTestCase {
     }
 
     override func tearDown() {
-        // Tear down must wipe any quarantined files left behind by the
-        // tests so the container does not accumulate stale
-        // filters.json.corrupt-* files run after run.
-        cleanupQuarantineFiles()
         _ = filterStore.reset()
         cancellables.removeAll()
         super.tearDown()
@@ -81,12 +67,6 @@ final class FilterStoreExtensionSafetyTests: XCTestCase {
             .map { dir.appendingPathComponent($0) }
     }
 
-    private func cleanupQuarantineFiles() {
-        for url in quarantineFiles() {
-            try? FileManager.default.removeItem(at: url)
-        }
-    }
-
     // MARK: - B3: extension path must not destroy the store
 
     /// The MessageFilterExtension process has no UI to show an alert on, so
@@ -101,6 +81,7 @@ final class FilterStoreExtensionSafetyTests: XCTestCase {
         }
         let garbage = Data("not a rule list at all".utf8)
         try garbage.write(to: url)
+        let existingSidecars = Set(quarantineFiles())
 
         let result = awaitPublisher(filterStore.fetch(policy: .preserve))
         XCTAssertNotNil(result, "fetch(policy: .preserve) never resolved on a corrupt file")
@@ -119,19 +100,11 @@ final class FilterStoreExtensionSafetyTests: XCTestCase {
         XCTAssertEqual(onDisk, garbage,
                        "filters.json was modified by fetch(policy: .preserve); the extension must never write to the store")
 
-        XCTAssertTrue(quarantineFiles().isEmpty,
+        XCTAssertEqual(Set(quarantineFiles()), existingSidecars,
                       "fetch(policy: .preserve) created a quarantine sidecar; preserve policy must be strictly read-only")
     }
 
-    // MARK: - S1: corrupt bytes preserved in a quarantine sidecar
-
-    /// The heal that the app runs on its first launch must move the bad
-    /// bytes to a sidecar file before overwriting filters.json with an
-    /// empty payload, so a partially-recoverable file can still be
-    /// salvaged. The quarantine file lives in the same group container
-    /// (the shared location for both the app and the extension) and is
-    /// named filters.json.corrupt-<timestamp>.
-    func test_AppHealQuarantinesCorruptBytesBeforeOverwrite() throws {
+    func test_AppFetchLeavesUnreadableBytesAndSidecarsUntouched() throws {
         guard let url = FilterStoreFile.fileURL else {
             XCTFail("filter store URL unavailable in test environment")
             return
@@ -139,67 +112,41 @@ final class FilterStoreExtensionSafetyTests: XCTestCase {
 
         let garbage = Data("{ \"phrase\": broken json, no closing brace".utf8)
         try garbage.write(to: url)
+        let existingSidecars = Set(quarantineFiles())
 
-        _ = awaitPublisher(filterStore.fetch())
-
-        let quarantine = quarantineFiles()
-        XCTAssertEqual(quarantine.count, 1,
-                       "Expected exactly one quarantine file after heal; got \(quarantine.count)")
+        let result = awaitPublisher(filterStore.fetch())
+        if case .failure(.loadError)? = result {
+            // The app can report the read error without changing the store.
+        } else {
+            XCTFail("Expected .loadError for unreadable rules")
+        }
 
         let onDisk = try Data(contentsOf: url)
-        XCTAssertNoThrow(try JSONDecoder().decode([Filter].self, from: onDisk),
-                         "filters.json was not healed into a parseable empty payload")
-
-        let quarantinedBytes = try Data(contentsOf: quarantine[0])
-        XCTAssertEqual(quarantinedBytes, garbage,
-                       "Quarantine file does not contain the original corrupt bytes")
-        XCTAssertTrue(quarantine[0].lastPathComponent.hasPrefix("filters.json.corrupt-"),
-                      "Quarantine file name does not match filters.json.corrupt-<timestamp>")
+        XCTAssertEqual(onDisk, garbage)
+        XCTAssertEqual(Set(quarantineFiles()), existingSidecars)
     }
 
-    // MARK: - App heal still works end-to-end
-
-    /// App heal contract: after the heal, a fresh store sees the freshly
-    /// written empty payload and returns success. This pins the behaviour
-    /// the user-visible alert relies on: the alert fires once, on the
-    /// first launch, and is silent on subsequent launches.
-    func test_AppHealLeavesSecondLaunchClean() throws {
+    func test_AppFetchReportsUnreadableRulesAfterRelaunch() throws {
         guard let url = FilterStoreFile.fileURL else {
             XCTFail("filter store URL unavailable in test environment")
             return
         }
-        try Data("garbage".utf8).write(to: url)
+        let original = Data("garbage".utf8)
+        try original.write(to: url)
 
-        // First launch: error path runs, file is healed (and quarantined).
         let first = awaitPublisher(filterStore.fetch())
-        if case .failure(let error)? = first {
-            switch error {
-            case .loadError:
-                break
-            default:
-                XCTFail("First launch on corrupt file must surface .loadError so the UI can show the alert; got \(error)")
-            }
+        if case .failure(.loadError)? = first {
+            // The first launch reports the unreadable file.
         } else {
-            XCTFail("First launch on a corrupt file returned success; the alert path is supposed to fire on launch #1")
+            XCTFail("First launch must report .loadError")
         }
 
-        // The on-disk bytes must now be a parseable empty filter list.
-        let onDisk = try Data(contentsOf: url)
-        XCTAssertNoThrow(try JSONDecoder().decode([Filter].self, from: onDisk),
-                         "filters.json was not healed into a parseable payload after first launch")
-
-        // Second launch: a fresh store sees the now-valid file and returns
-        // success without surfacing an error to the UI.
-        let secondStore = FilterStoreFile()
-        let second = awaitPublisher(secondStore.fetch())
-        switch second {
-        case .success(let filters):
-            XCTAssertTrue(filters.isEmpty,
-                          "Healed store should surface an empty rule list, not the user's old rules")
-        case .failure(let error):
-            XCTFail("Second launch after healing must not surface .loadError; got \(error)")
-        case .none:
-            XCTFail("Second launch publisher did not resolve")
+        let second = awaitPublisher(FilterStoreFile().fetch())
+        if case .failure(.loadError)? = second {
+            // Repeated launch cannot silently replace the original bytes.
+        } else {
+            XCTFail("Second launch must still report .loadError")
         }
+        XCTAssertEqual(try Data(contentsOf: url), original)
     }
 }

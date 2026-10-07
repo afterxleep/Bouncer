@@ -4,6 +4,8 @@
 //
 
 import XCTest
+import UIKit
+import SwiftUI
 @testable import Bouncer
 
 /// Covers the Rules-list state transitions that the UI drives: listing,
@@ -189,5 +191,67 @@ final class FilterListFlowTests: XCTestCase {
         let data = Data("[]".utf8)
         let decoded = try JSONDecoder().decode([Filter].self, from: data)
         XCTAssertTrue(decoded.isEmpty)
+    }
+}
+
+final class RuleListContrastTests: XCTestCase {
+    private let light = UITraitCollection(userInterfaceStyle: .light)
+
+    func testLightListTextHasReadableContrastAcrossStageAndCards() {
+        let surfaces = ["top": Stage.top, "bottom": Stage.bottom, "card": Stage.card]
+        let labels = ["secondary": Stage.secondary, "tertiary": Stage.tertiary]
+
+        for (surfaceName, surface) in surfaces {
+            for (labelName, label) in labels {
+                XCTAssertGreaterThanOrEqual(
+                    contrast(label, on: surface), 4.5,
+                    "\(labelName) text on the \(surfaceName) surface must remain readable"
+                )
+            }
+        }
+    }
+
+    func testLightRuleCategoryLabelsHaveReadableContrastOnCards() {
+        let categoryTints = [
+            "Junk": Brand.junk, "Safe": Brand.safe, "Orders": Brand.orders,
+            "Finance": Brand.finance, "Reminders": Brand.reminders,
+            "Health": Brand.health, "Offers": Brand.offers,
+            "Coupons": Brand.coupons, "Promotions": Brand.promotionOther,
+            "Transactions": Brand.transactionOther, "Categories": Brand.tint
+        ]
+
+        for (name, tint) in categoryTints {
+            XCTAssertGreaterThanOrEqual(
+                contrast(tint, on: Stage.card), 4.5,
+                "\(name) label must remain readable on a rule card"
+            )
+        }
+    }
+
+    private func contrast(_ foreground: Color, on background: Color) -> CGFloat {
+        let front = rgba(UIColor(foreground).resolvedColor(with: light))
+        let back = rgba(UIColor(background).resolvedColor(with: light))
+        let composed = zip(front.rgb, back.rgb).map { frontChannel, backChannel in
+            frontChannel * front.alpha + backChannel * (1 - front.alpha)
+        }
+        let first = luminance(composed)
+        let second = luminance(back.rgb)
+        return (max(first, second) + 0.05) / (min(first, second) + 0.05)
+    }
+
+    private func rgba(_ color: UIColor) -> (rgb: [CGFloat], alpha: CGFloat) {
+        var red: CGFloat = 0
+        var green: CGFloat = 0
+        var blue: CGFloat = 0
+        var alpha: CGFloat = 0
+        XCTAssertTrue(color.getRed(&red, green: &green, blue: &blue, alpha: &alpha))
+        return ([red, green, blue], alpha)
+    }
+
+    private func luminance(_ channels: [CGFloat]) -> CGFloat {
+        let linear = channels.map { channel in
+            channel <= 0.04045 ? channel / 12.92 : pow((channel + 0.055) / 1.055, 2.4)
+        }
+        return 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2]
     }
 }

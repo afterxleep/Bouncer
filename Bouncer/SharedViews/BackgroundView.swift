@@ -2,12 +2,7 @@
 //  BackgroundView.swift
 //  Bouncer
 //
-//  Bouncer's stage. The app is a doorway: a room with a single light on the
-//  door. Everything else — cards, chips, controls — is lit by it.
-//
-//  The room follows the system appearance. It used to be pinned dark, which
-//  made light mode identical to dark mode; the identity is the slate tint and
-//  the single light source, not the absence of light.
+//  Shared surfaces and text colors for the app's screens.
 //
 
 import SwiftUI
@@ -25,32 +20,26 @@ enum Stage {
         })
     }
 
-    /// The room, top to bottom. Slate in both appearances, so the brand reads
-    /// the same either way.
-    // Light mode is a room with the lights on, not a sheet of paper: still
-    // slate, still tinted, just lit. White cards then have something to sit on.
-    static let top = adaptive(light: Color(red: 0.894, green: 0.910, blue: 0.941),   // #E4E8F0
+    /// White gives the dark text and category colors their strongest light-mode contrast.
+    static let top = adaptive(light: .white,
                               dark: Color(red: 0.157, green: 0.184, blue: 0.239))   // #282F3D
-    static let bottom = adaptive(light: Color(red: 0.804, green: 0.827, blue: 0.875), // #CDD3DF
+    static let bottom = adaptive(light: .white,
                                  dark: Color(red: 0.063, green: 0.075, blue: 0.098)) // #101319
 
     /// Surfaces standing on the stage.
-    static let card = adaptive(light: .white, dark: Color.white.opacity(0.055))
-    // Hairlines only. On a light stage a black stroke reads far heavier than
-    // the same value of white does on a dark one, so the light side is pulled
-    // well back and the card is left to separate by fill instead.
-    static let cardStroke = adaptive(light: Color.black.opacity(0.045),
+    static let card = adaptive(light: Color(red: 0.965, green: 0.969, blue: 0.976),
+                               dark: Color.white.opacity(0.055))
+    static let cardStroke = adaptive(light: Color.black.opacity(0.08),
                                      dark: Color.white.opacity(0.09))
     static let cardStrokeLit = adaptive(light: Color.black.opacity(0.075),
                                         dark: Color.white.opacity(0.16))
-    static let well = adaptive(light: Color.black.opacity(0.045),
+    static let well = adaptive(light: Color.black.opacity(0.065),
                                dark: Color.white.opacity(0.08))
 
     static let label = adaptive(light: Color(red: 0.09, green: 0.11, blue: 0.15), dark: .white)
-    static let secondary = adaptive(light: Color.black.opacity(0.52),
+    static let secondary = adaptive(light: Color.black.opacity(0.62),
                                     dark: Color.white.opacity(0.64))
-    /// Caption text. Anything fainter than this fails AA at caption size.
-    static let tertiary = adaptive(light: Color.black.opacity(0.44),
+    static let tertiary = adaptive(light: Color.black.opacity(0.58),
                                    dark: Color.white.opacity(0.55))
     /// Chevrons, hairlines, disclosure marks — never text.
     static let quaternary = adaptive(light: Color.black.opacity(0.20),
@@ -63,13 +52,10 @@ enum Stage {
     /// Matches the foot of the room, for fading content under a floating bar.
     static let bottomFade = bottom
 
-    /// Drop shadows have to be softer on a light stage, where a heavy one reads
-    /// as dirt rather than as depth.
+    /// Drop shadows stay soft on the light surface.
     static var isDarkFallbackShadow: Double { 0.12 }
 
-    /// A category tint softened into a fill. The light hues are far denser than
-    /// their dark counterparts, so the same opacity lands much heavier and each
-    /// side needs its own value.
+    /// A category tint softened into a fill.
     static func fill(_ tint: Color, weight: Double = 1) -> Color {
         adaptive(light: tint.opacity(0.12 * weight), dark: tint.opacity(0.22 * weight))
     }
@@ -85,13 +71,13 @@ enum Stage {
                                dark: .white)
 }
 
-/// The room. A vertical wash with a narrow highlight along the top edge.
+/// A neutral light canvas and a dark vertical wash.
 struct BackgroundView: View {
     var body: some View {
         LinearGradient(colors: [Stage.top, Stage.bottom],
                        startPoint: .top, endPoint: .bottom)
             .overlay(alignment: .top) {
-                LinearGradient(colors: [Stage.adaptive(light: Color.white.opacity(0.4),
+                LinearGradient(colors: [Stage.adaptive(light: .clear,
                                                        dark: Color.white.opacity(0.06)),
                                         .clear],
                                startPoint: .top, endPoint: .bottom)
@@ -124,7 +110,7 @@ extension View {
     }
 }
 
-#Preview {
+#Preview("Bouncer stage") {
     ZStack {
         BackgroundView()
         VStack(spacing: 16) {
@@ -135,4 +121,9 @@ extension View {
         }
         .padding()
     }
+}
+
+#Preview("FlowDeck verification") {
+    Color.clear
+        .frame(width: 320, height: 200)
 }
