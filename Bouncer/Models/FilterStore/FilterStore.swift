@@ -41,6 +41,29 @@ struct Filter: Hashable, Identifiable, Equatable, Codable {
     var caseSensitive: Bool = false
     var useRegex: Bool = false
 
+    private enum CodingKeys: String, CodingKey {
+        case id, type, phrase, action, subAction, caseSensitive, useRegex
+    }
+
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: CodingKeys.self)
+        id = try values.decode(UUID.self, forKey: .id)
+        type = try values.decode(FilterType.self, forKey: .type)
+        phrase = try values.decode(String.self, forKey: .phrase)
+        action = try values.decode(FilterDestination.self, forKey: .action)
+        if let storedSubAction = try values.decodeIfPresent(FilterDestination.self, forKey: .subAction) {
+            subAction = storedSubAction
+        } else {
+            switch action {
+            case .promotion: subAction = .promotionOther
+            case .transaction: subAction = .transactionOther
+            default: subAction = .none
+            }
+        }
+        caseSensitive = try values.decodeIfPresent(Bool.self, forKey: .caseSensitive) ?? false
+        useRegex = try values.decodeIfPresent(Bool.self, forKey: .useRegex) ?? false
+    }
+
     init(id: UUID,
          phrase: String,
          type: FilterType = .any,
