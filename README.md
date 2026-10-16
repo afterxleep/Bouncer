@@ -50,4 +50,4 @@ The production version of Bouncer stores basic analytics for filter creation/upd
 Feel free to report any issues, fork the repo, and open pull requests with fixes, features, or updates.
 
 ## License
-Bouncer is distributed under the [MIT license](https://github.com/afterxleep/Bouncer/blob/master/LICENSE).
+Bouncer is distributed under the [MIT license](https://github.com/afterxleep/Bouncer/blob/main/LICENSE).
