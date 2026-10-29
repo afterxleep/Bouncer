@@ -94,6 +94,15 @@ enum RuleScope: String, CaseIterable, Identifiable {
     }
 }
 
+extension Filter {
+    /// Surrounding spaces are ignored: a trailing space from the keyboard
+    /// shouldn't turn "mom " into "No results".
+    func matchesSearch(_ query: String) -> Bool {
+        let trimmed = query.trimmed
+        return trimmed.isEmpty || phrase.localizedCaseInsensitiveContains(trimmed)
+    }
+}
+
 struct FilterListView: View {
     var filters: [Filter]
     let onDelete: (UUID) -> Void
@@ -128,9 +137,9 @@ struct FilterListView: View {
     /// order you want the moment a list grows past a screenful. Ties fall back
     /// to alphabetical so the order is stable.
     private var visibleFilters: [Filter] {
-        let matching = searchText.isEmpty
+        let matching = searchText.trimmed.isEmpty
             ? scopedFilters
-            : scopedFilters.filter { $0.phrase.localizedCaseInsensitiveContains(searchText) }
+            : scopedFilters.filter { $0.matchesSearch(searchText) }
         let today = RuleActivityStore.dayIndex()
         return matching.sorted { first, second in
             let a = activity.rules[first.id.uuidString]?.recentTotal(endingOn: today) ?? 0
@@ -384,8 +393,8 @@ private extension FilterListView {
     }
 
     @ViewBuilder var emptyState: some View {
-        if !searchText.isEmpty {
-            NoResultsStage(query: searchText)
+        if !searchText.trimmed.isEmpty {
+            NoResultsStage(query: searchText.trimmed)
         } else {
             EmptyStage(scope: scope) {
                 analytics.track(.addRuleTapped(source: .emptyState, lane: scope))
