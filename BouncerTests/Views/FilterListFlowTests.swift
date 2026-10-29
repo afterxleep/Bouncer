@@ -192,6 +192,21 @@ final class FilterListFlowTests: XCTestCase {
         let decoded = try JSONDecoder().decode([Filter].self, from: data)
         XCTAssertTrue(decoded.isEmpty)
     }
+
+    // MARK: - Search matching
+
+    func testSearchIgnoresSurroundingSpaces() {
+        XCTAssertTrue(filter("mom").matchesSearch("mom "))
+        XCTAssertTrue(filter("winnerz").matchesSearch("  winnerz"))
+    }
+
+    func testSearchIsCaseInsensitive() {
+        XCTAssertTrue(filter("Bank Alert").matchesSearch("bank"))
+    }
+
+    func testSearchStillRejectsNonMatches() {
+        XCTAssertFalse(filter("mom").matchesSearch("dad"))
+    }
 }
 
 final class RuleListContrastTests: XCTestCase {
@@ -254,4 +269,5 @@ final class RuleListContrastTests: XCTestCase {
         }
         return 0.2126 * linear[0] + 0.7152 * linear[1] + 0.0722 * linear[2]
     }
+
 }
