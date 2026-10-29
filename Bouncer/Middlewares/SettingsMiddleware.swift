@@ -38,6 +38,9 @@ func settingsMiddleware(appSettings: AppSettingsStore) -> Middleware<AppState, A
             case .settings(action: .setDatabaseVersion(let version)):
                 settings.databaseVersion = version
 
+            case .settings(action: .setAnalyticsConsent(let consent)):
+                settings.analyticsConsent = consent
+
             default:
                 break
 

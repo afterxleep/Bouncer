@@ -17,6 +17,7 @@ struct ImportFilterListView: View {
     private let duplicateFilters: [Filter]
 
     @State private var selectedFilters: Set<Filter> = []
+    @Environment(\.analytics) private var analytics
 
     init(existingFilters: [Filter],
          filters: [Filter],
@@ -42,7 +43,10 @@ struct ImportFilterListView: View {
                 .navigationBarTitleDisplayMode(.inline)
                 .toolbar {
                     ToolbarItem(placement: .cancellationAction) {
-                        Button("CANCEL", role: .cancel) { onCancel() }
+                        Button("CANCEL", role: .cancel) {
+                            analytics.track(.importCancelled)
+                            onCancel()
+                        }
                     }
                     ToolbarItem(placement: .topBarTrailing) { selectionMenu }
                     ToolbarItem(placement: .confirmationAction) {
@@ -141,12 +145,15 @@ private extension ImportFilterListView {
     var selectionMenu: some View {
         Menu {
             Button("SELECT_ALL", systemImage: "checklist.checked") {
+                analytics.track(.importSelectionChanged(.all))
                 selectedFilters = Set(filters)
             }
             Button("SELECT_NEW", systemImage: "checklist") {
+                analytics.track(.importSelectionChanged(.new))
                 selectedFilters = Set(newFilters)
             }
             Button("SELECT_NONE", systemImage: "checklist.unchecked") {
+                analytics.track(.importSelectionChanged(.none))
                 selectedFilters = []
             }
         } label: {

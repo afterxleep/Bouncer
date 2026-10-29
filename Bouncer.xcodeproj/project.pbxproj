@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA3000000000000000000320 /* PostHogConfigurationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3000000000000000000220 /* PostHogConfigurationTests.swift */; };
+		AA3000000000000000000300 /* AnalyticsEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3000000000000000000200 /* AnalyticsEvent.swift */; };
+		AA3000000000000000000301 /* AnalyticsTracking.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3000000000000000000201 /* AnalyticsTracking.swift */; };
+		AA3000000000000000000302 /* AnalyticsConsent.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3000000000000000000202 /* AnalyticsConsent.swift */; };
+		AA3000000000000000000303 /* InstallCohort.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3000000000000000000203 /* InstallCohort.swift */; };
+		AA3000000000000000000304 /* AnalyticsMiddleware.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3000000000000000000204 /* AnalyticsMiddleware.swift */; };
+		AA3000000000000000000305 /* AnalyticsConsentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3000000000000000000205 /* AnalyticsConsentView.swift */; };
+		AA3000000000000000000306 /* SpyAnalyticsTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3000000000000000000206 /* SpyAnalyticsTracker.swift */; };
+		AA3000000000000000000307 /* AnalyticsMiddlewareTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3000000000000000000207 /* AnalyticsMiddlewareTests.swift */; };
+		AA3000000000000000000308 /* InstallCohortTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3000000000000000000208 /* InstallCohortTests.swift */; };
+		AA3000000000000000000309 /* AnalyticsConsentTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3000000000000000000209 /* AnalyticsConsentTests.swift */; };
+		AA3000000000000000000310 /* AnalyticsEventTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA3000000000000000000210 /* AnalyticsEventTests.swift */; };
 		09491AEF261D30A400CF8073 /* String+Empty.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09491AEE261D30A400CF8073 /* String+Empty.swift */; };
 		5B7EED97293D903A002A44D0 /* ImportFilterListContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7EED96293D903A002A44D0 /* ImportFilterListContainerView.swift */; };
 		5B7EED99293D9061002A44D0 /* ImportFilterListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5B7EED98293D9061002A44D0 /* ImportFilterListView.swift */; };
@@ -64,6 +76,7 @@
 		D6625F3A2D9A122C005D05BF /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6625F342D9A122C005D05BF /* Config.swift */; };
 		D6625F3B2D9A122C005D05BF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = D6625F362D9A122C005D05BF /* Constants.swift */; };
 		D6625F3C2D9A122C005D05BF /* Config.swift.example in Resources */ = {isa = PBXBuildFile; fileRef = D6625F352D9A122C005D05BF /* Config.swift.example */; };
+		AABBCCDD0000000000000004 /* PostHogConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = AABBCCDD0000000000000005 /* PostHogConfiguration.swift */; };
 		D664B24624AA92D200EB826D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D664B24524AA92D200EB826D /* Assets.xcassets */; };
 		D66A7C2924EB3F8C00349C3F /* SMSOfflineFilterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D66A7C2824EB3F8C00349C3F /* SMSOfflineFilterTests.swift */; };
 		D66E4EB92D99CD1F007244FA /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = D66E4EB82D99CD1F007244FA /* Auth */; };
@@ -72,6 +85,7 @@
 		D66E4EBF2D99CD1F007244FA /* Realtime in Frameworks */ = {isa = PBXBuildFile; productRef = D66E4EBE2D99CD1F007244FA /* Realtime */; };
 		D66E4EC12D99CD1F007244FA /* Storage in Frameworks */ = {isa = PBXBuildFile; productRef = D66E4EC02D99CD1F007244FA /* Storage */; };
 		D66E4ECA2D99CF2B007244FA /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = D66E4EC92D99CF2B007244FA /* Supabase */; };
+		AABBCCDD0000000000000001 /* PostHog in Frameworks */ = {isa = PBXBuildFile; productRef = AABBCCDD0000000000000002 /* PostHog */; };
 		D67F582E24E4496300165365 /* AppSettingsDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67F582C24E4496300165365 /* AppSettingsDefaults.swift */; };
 		D67F582F24E4496300165365 /* AppSettingsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D67F582D24E4496300165365 /* AppSettingsStore.swift */; };
 		D696D0C528D92153002FB15E /* AppIcon.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D696D0C428D92153002FB15E /* AppIcon.xcassets */; };
@@ -129,6 +143,19 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AA3000000000000000000400 /* Analytics.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Analytics.xcconfig; sourceTree = "<group>"; };
+		AA3000000000000000000220 /* PostHogConfigurationTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHogConfigurationTests.swift; sourceTree = "<group>"; };
+		AA3000000000000000000200 /* AnalyticsEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEvent.swift; sourceTree = "<group>"; };
+		AA3000000000000000000201 /* AnalyticsTracking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsTracking.swift; sourceTree = "<group>"; };
+		AA3000000000000000000202 /* AnalyticsConsent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsConsent.swift; sourceTree = "<group>"; };
+		AA3000000000000000000203 /* InstallCohort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallCohort.swift; sourceTree = "<group>"; };
+		AA3000000000000000000204 /* AnalyticsMiddleware.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsMiddleware.swift; sourceTree = "<group>"; };
+		AA3000000000000000000205 /* AnalyticsConsentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsConsentView.swift; sourceTree = "<group>"; };
+		AA3000000000000000000206 /* SpyAnalyticsTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpyAnalyticsTracker.swift; sourceTree = "<group>"; };
+		AA3000000000000000000207 /* AnalyticsMiddlewareTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsMiddlewareTests.swift; sourceTree = "<group>"; };
+		AA3000000000000000000208 /* InstallCohortTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InstallCohortTests.swift; sourceTree = "<group>"; };
+		AA3000000000000000000209 /* AnalyticsConsentTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsConsentTests.swift; sourceTree = "<group>"; };
+		AA3000000000000000000210 /* AnalyticsEventTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalyticsEventTests.swift; sourceTree = "<group>"; };
 		09491AEE261D30A400CF8073 /* String+Empty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Empty.swift"; sourceTree = "<group>"; };
 		5B7EED96293D903A002A44D0 /* ImportFilterListContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFilterListContainerView.swift; sourceTree = "<group>"; };
 		5B7EED98293D9061002A44D0 /* ImportFilterListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImportFilterListView.swift; sourceTree = "<group>"; };
@@ -188,6 +215,7 @@
 		D6529FC824A54ADE009AE3FF /* FilterStoreFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterStoreFile.swift; sourceTree = "<group>"; };
 		D6625F342D9A122C005D05BF /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
 		D6625F352D9A122C005D05BF /* Config.swift.example */ = {isa = PBXFileReference; lastKnownFileType = text; path = Config.swift.example; sourceTree = "<group>"; };
+		AABBCCDD0000000000000005 /* PostHogConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostHogConfiguration.swift; sourceTree = "<group>"; };
 		D6625F362D9A122C005D05BF /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		D664B24524AA92D200EB826D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D66A7C2824EB3F8C00349C3F /* SMSOfflineFilterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SMSOfflineFilterTests.swift; sourceTree = "<group>"; };
@@ -225,6 +253,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AABBCCDD0000000000000001 /* PostHog in Frameworks */,
 				D66E4EBD2D99CD1F007244FA /* PostgREST in Frameworks */,
 				D66E4EBB2D99CD1F007244FA /* Functions in Frameworks */,
 				D66E4ECA2D99CF2B007244FA /* Supabase in Frameworks */,
@@ -244,6 +273,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		AA3000000000000000000100 /* Analytics */ = {
+			isa = PBXGroup;
+			children = (
+				AA3000000000000000000203 /* InstallCohort.swift */,
+				AA3000000000000000000202 /* AnalyticsConsent.swift */,
+				AA3000000000000000000201 /* AnalyticsTracking.swift */,
+				AA3000000000000000000200 /* AnalyticsEvent.swift */,
+			);
+			path = Analytics;
+			sourceTree = "<group>";
+		};
+		AA3000000000000000000101 /* Privacy */ = {
+			isa = PBXGroup;
+			children = (
+				AA3000000000000000000205 /* AnalyticsConsentView.swift */,
+			);
+			path = Privacy;
+			sourceTree = "<group>";
+		};
 		AA0100000000000000000005 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -307,6 +355,7 @@
 		D61497F124E443C300AF997E /* Middlewares */ = {
 			isa = PBXGroup;
 			children = (
+				AA3000000000000000000204 /* AnalyticsMiddleware.swift */,
 				D6CC124E24E47C3900388160 /* SettingsMiddleware.swift */,
 				D6FC672D24E4ACCF0083C9FA /* FilterMiddleware.swift */,
 				D6F14E8724E8A1780029A0DF /* ReviewMiddleware.swift */,
@@ -325,6 +374,12 @@
 		D617B44824EB199B009E0D40 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				AA3000000000000000000220 /* PostHogConfigurationTests.swift */,
+				AA3000000000000000000210 /* AnalyticsEventTests.swift */,
+				AA3000000000000000000209 /* AnalyticsConsentTests.swift */,
+				AA3000000000000000000208 /* InstallCohortTests.swift */,
+				AA3000000000000000000207 /* AnalyticsMiddlewareTests.swift */,
+				AA3000000000000000000206 /* SpyAnalyticsTracker.swift */,
 				D6A3888C2D9A0FCA00CEA386 /* AnalyticsServiceTests.swift */,
 				D617B44924EB19C8009E0D40 /* AppSettingsDefaultsTests.swift */,
 				D66A7C2824EB3F8C00349C3F /* SMSOfflineFilterTests.swift */,
@@ -492,6 +547,7 @@
 		D6529FD324A550A9009AE3FF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				AA3000000000000000000100 /* Analytics */,
 				D6A3888B2D9A0F1300CEA386 /* AnalyticsService */,
 				D6B2CC8524EED357004F72C4 /* Mocks */,
 				D67F582B24E4495700165365 /* AppSettings */,
@@ -506,8 +562,10 @@
 		D6625F3E2D9A123E005D05BF /* Config */ = {
 			isa = PBXGroup;
 			children = (
+				AA3000000000000000000400 /* Analytics.xcconfig */,
 				D6625F342D9A122C005D05BF /* Config.swift */,
 				D6625F352D9A122C005D05BF /* Config.swift.example */,
+				AABBCCDD0000000000000005 /* PostHogConfiguration.swift */,
 				D6625F362D9A122C005D05BF /* Constants.swift */,
 				AA0300000000000000000001 /* DesignSystem.swift */,
 			);
@@ -554,6 +612,7 @@
 		D67F583024E44B0E00165365 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				AA3000000000000000000101 /* Privacy */,
 				AA0100000000000000000005 /* Onboarding */,
 				AA0600000000000000000010 /* Help */,
 				D6529F9D24A4139A009AE3FF /* Tutorial */,
@@ -615,6 +674,7 @@
 			);
 			name = Bouncer;
 			packageProductDependencies = (
+				AABBCCDD0000000000000002 /* PostHog */,
 			);
 			productName = Bouncer;
 			productReference = D6529F6F24A41371009AE3FF /* Bouncer.app */;
@@ -676,6 +736,7 @@
 			);
 			mainGroup = D6529F6624A41371009AE3FF;
 			packageReferences = (
+				AABBCCDD0000000000000003 /* XCRemoteSwiftPackageReference "posthog-ios" */,
 				D66E4EB72D99CD1F007244FA /* XCRemoteSwiftPackageReference "supabase-swift" */,
 			);
 			productRefGroup = D6529F7024A41371009AE3FF /* Products */;
@@ -742,6 +803,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA3000000000000000000305 /* AnalyticsConsentView.swift in Sources */,
+				AA3000000000000000000304 /* AnalyticsMiddleware.swift in Sources */,
+				AA3000000000000000000303 /* InstallCohort.swift in Sources */,
+				AA3000000000000000000302 /* AnalyticsConsent.swift in Sources */,
+				AA3000000000000000000301 /* AnalyticsTracking.swift in Sources */,
+				AA3000000000000000000300 /* AnalyticsEvent.swift in Sources */,
 				AA0500000000000000000002 /* RuleActivityStore.swift in Sources */,
 				AA0400000000000000000002 /* RuleListComponents.swift in Sources */,
 				D6233A7F24A651A200B37A6A /* SMSOfflineFilter.swift in Sources */,
@@ -761,6 +828,7 @@
 				D6CC125124E4837800388160 /* SettingsReducer.swift in Sources */,
 				D6625F3A2D9A122C005D05BF /* Config.swift in Sources */,
 				D6625F3B2D9A122C005D05BF /* Constants.swift in Sources */,
+				AABBCCDD0000000000000004 /* PostHogConfiguration.swift in Sources */,
 				AA0300000000000000000002 /* DesignSystem.swift in Sources */,
 				D6FC672924E49B2B0083C9FA /* FilterListContainerView.swift in Sources */,
 				D6529FCB24A54ADE009AE3FF /* FilterStoreFile.swift in Sources */,
@@ -799,6 +867,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA3000000000000000000320 /* PostHogConfigurationTests.swift in Sources */,
+				AA3000000000000000000310 /* AnalyticsEventTests.swift in Sources */,
+				AA3000000000000000000309 /* AnalyticsConsentTests.swift in Sources */,
+				AA3000000000000000000308 /* InstallCohortTests.swift in Sources */,
+				AA3000000000000000000307 /* AnalyticsMiddlewareTests.swift in Sources */,
+				AA3000000000000000000306 /* SpyAnalyticsTracker.swift in Sources */,
 				D6A3888D2D9A0FCA00CEA386 /* AnalyticsServiceTests.swift in Sources */,
 				AA0200000000000000000002 /* OnboardingPageTests.swift in Sources */,
 				AA0200000000000000000008 /* FilterListFlowTests.swift in Sources */,
@@ -850,7 +924,7 @@
 				CODE_SIGN_ENTITLEMENTS = SMSFilter/SMSFilter.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1466;
+				CURRENT_PROJECT_VERSION = 1480;
 				DEVELOPMENT_TEAM = J9F8F3PWTV;
 				INFOPLIST_FILE = SMSFilter/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
@@ -879,7 +953,7 @@
 				CODE_SIGN_ENTITLEMENTS = SMSFilter/SMSFilter.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1466;
+				CURRENT_PROJECT_VERSION = 1480;
 				DEVELOPMENT_TEAM = J9F8F3PWTV;
 				INFOPLIST_FILE = SMSFilter/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 26.0;
@@ -1030,6 +1104,7 @@
 		};
 		D6529F9524A41372009AE3FF /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA3000000000000000000400 /* Analytics.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = Default;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1037,7 +1112,7 @@
 				CODE_SIGN_ENTITLEMENTS = Bouncer/Bouncer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1466;
+				CURRENT_PROJECT_VERSION = 1480;
 				DEVELOPMENT_ASSET_PATHS = "\"Bouncer/Preview Content\"";
 				DEVELOPMENT_TEAM = J9F8F3PWTV;
 				ENABLE_PREVIEWS = YES;
@@ -1064,6 +1139,7 @@
 		};
 		D6529F9624A41372009AE3FF /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AA3000000000000000000400 /* Analytics.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = Default;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1071,7 +1147,7 @@
 				CODE_SIGN_ENTITLEMENTS = Bouncer/Bouncer.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1466;
+				CURRENT_PROJECT_VERSION = 1480;
 				DEVELOPMENT_ASSET_PATHS = "\"Bouncer/Preview Content\"";
 				DEVELOPMENT_TEAM = J9F8F3PWTV;
 				ENABLE_PREVIEWS = YES;
@@ -1192,6 +1268,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		AABBCCDD0000000000000003 /* XCRemoteSwiftPackageReference "posthog-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/PostHog/posthog-ios.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 3.59.3;
+			};
+		};
 		D66E4EB72D99CD1F007244FA /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/supabase/supabase-swift.git";
@@ -1203,6 +1287,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		AABBCCDD0000000000000002 /* PostHog */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AABBCCDD0000000000000003 /* XCRemoteSwiftPackageReference "posthog-ios" */;
+			productName = PostHog;
+		};
 		D66E4EB82D99CD1F007244FA /* Auth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = D66E4EB72D99CD1F007244FA /* XCRemoteSwiftPackageReference "supabase-swift" */;

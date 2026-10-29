@@ -10,6 +10,7 @@ enum AppSettingsKeys: String {
     case numberOfLaunches
     case lastVersionPromptedForReview
     case databaseVersion
+    case analyticsConsent
 }
 
 protocol AppSettingsStore {
@@ -18,4 +19,5 @@ protocol AppSettingsStore {
     var numberOfLaunches: Int { get set }
     var lastVersionPromptedForReview: String { get set }
     var databaseVersion: Int { get set }
+    var analyticsConsent: AnalyticsConsent { get set }
 }

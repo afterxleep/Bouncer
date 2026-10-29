@@ -47,6 +47,9 @@ struct RulesHeader: View {
 struct ScopeSelector: View {
     @Binding var selection: RuleScope
     var counts: (RuleScope) -> Int
+    /// Called only for a tap on a different lane, not when the selection is
+    /// moved programmatically (e.g. after saving a rule into another lane).
+    var onSelect: (RuleScope) -> Void = { _ in }
 
     @Namespace private var lane
 
@@ -66,6 +69,7 @@ struct ScopeSelector: View {
         let isSelected = selection == scope
         let count = counts(scope)
         return Button {
+            if !isSelected { onSelect(scope) }
             withAnimation(.snappy(duration: 0.3, extraBounce: 0.1)) {
                 selection = scope
             }

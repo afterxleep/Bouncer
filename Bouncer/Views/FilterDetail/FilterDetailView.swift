@@ -25,6 +25,7 @@ struct FilterDetailView<L: View, R: View>: View {
     @Binding var useRegex: Bool
     @Binding var isCaseSensitive: Bool
 
+    @Environment(\.analytics) private var analytics
     @FocusState private var termIsFocused: Bool
     @State private var scrolled = false
     @State private var showingCategoryPicker = false
@@ -105,6 +106,12 @@ private extension FilterDetailView {
         .animation(.smooth(duration: 0.25), value: useRegex)
         .onAppear {
             showingAdvanced = useRegex || isCaseSensitive
+        }
+        .onChange(of: useRegex) { _, enabled in
+            analytics.track(.ruleOptionToggled(.regex, enabled: enabled))
+        }
+        .onChange(of: isCaseSensitive) { _, enabled in
+            analytics.track(.ruleOptionToggled(.caseSensitive, enabled: enabled))
         }
         .sheet(isPresented: $showingCategoryPicker) {
             categoryPicker
@@ -215,6 +222,7 @@ private extension FilterDetailView {
              title: destination.category.title,
              tint: destination.category.tint,
              isSelected: filterDestination == destination) {
+            analytics.track(.ruleDestinationSelected(destination: destination.rawValue))
             filterDestination = destination
         }
         .accessibilityIdentifier("rule.destination.\(destination.rawValue)")
@@ -226,6 +234,7 @@ private extension FilterDetailView {
             symbol: "square.grid.2x2.fill", tint: Brand.tint,
             titleKey: "SCOPE_CATEGORIES", shortKey: "SCOPE_CATEGORIES")
         return tile(symbol: category.symbol, title: category.title, tint: category.tint, isSelected: isSelected) {
+            analytics.track(.ruleCategoryPickerOpened)
             showingCategoryPicker = true
         }
         .accessibilityIdentifier("rule.category.tile")
@@ -296,6 +305,7 @@ private extension FilterDetailView {
                          symbol: category.symbol,
                          tint: category.tint,
                          isSelected: filterDestination == option) {
+                        analytics.track(.ruleDestinationSelected(destination: option.rawValue))
                         filterDestination = option
                         showingCategoryPicker = false
                     }
@@ -351,6 +361,7 @@ private extension FilterDetailView {
         VStack(spacing: 0) {
             Button {
                 withAnimation(.smooth(duration: 0.22)) { showingAdvanced.toggle() }
+                analytics.track(.ruleAdvancedToggled(expanded: showingAdvanced))
             } label: {
                 HStack(spacing: Metrics.s) {
                     Text("ADVANCED")
@@ -411,6 +422,10 @@ private extension FilterDetailView {
                 .padding(.vertical, Metrics.m)
                 .contentShape(.rect)
             }
+            .environment(\.openURL, OpenURLAction { _ in
+                analytics.track(.regexHelpOpened)
+                return .systemAction
+            })
             .accessibilityIdentifier("rule.regexHelp")
         }
     }

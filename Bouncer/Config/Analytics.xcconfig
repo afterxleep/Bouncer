@@ -1,0 +1,13 @@
+// PostHog project settings, baked into Info.plist so shipped builds have them
+// (they have no process environment).
+//
+// Values come from, in order of precedence:
+//   1. the build command: xcodebuild ... POSTHOG_PROJECT_TOKEN=phc_... POSTHOG_HOST=eu.i.posthog.com
+//   2. Analytics.local.xcconfig (git-ignored; copy Analytics.local.xcconfig.example)
+//   3. the empty defaults below, which turn analytics off
+//
+// Write the host without "https://": xcconfig treats "//" as a comment.
+POSTHOG_PROJECT_TOKEN =
+POSTHOG_HOST =
+
+#include? "Analytics.local.xcconfig"

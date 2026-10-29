@@ -25,6 +25,7 @@ struct SettingsState {
     var numberOfLaunches: Int = 0
     var lastVersionPromptedForReview: String = ""
     var databaseVersion: Int = 0
+    var analyticsConsent: AnalyticsConsent = .unknown
 }
 
 extension SettingsState {
@@ -39,5 +40,6 @@ extension SettingsState {
         self.numberOfLaunches = store.numberOfLaunches
         self.lastVersionPromptedForReview = store.lastVersionPromptedForReview
         self.databaseVersion = store.databaseVersion
+        self.analyticsConsent = store.analyticsConsent
     }
 }
