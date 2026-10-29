@@ -31,6 +31,14 @@ struct AppSettingsDefaults: AppSettingsStore {
         get { return value(for: AppSettingsKeys.databaseVersion.rawValue) ?? 0 }
         set { updateDefaults(for: AppSettingsKeys.databaseVersion.rawValue, value: newValue) }
     }
+
+    var analyticsConsent: AnalyticsConsent {
+        get {
+            let raw: String? = value(for: AppSettingsKeys.analyticsConsent.rawValue)
+            return raw.flatMap(AnalyticsConsent.init(rawValue:)) ?? .unknown
+        }
+        set { updateDefaults(for: AppSettingsKeys.analyticsConsent.rawValue, value: newValue.rawValue) }
+    }
     
 }
 

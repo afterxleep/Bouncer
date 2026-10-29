@@ -24,5 +24,11 @@ func settingsReducer(state: inout SettingsState, action: SettingsAction) -> Void
         case .setDatabaseVersion(let version):
             state.databaseVersion = version
 
+        case .setAnalyticsConsent(let consent):
+            state.analyticsConsent = consent
+
+        case .appLaunched:
+            break
+
     }
 }

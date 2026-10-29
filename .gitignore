@@ -7,3 +7,5 @@ Bouncer/Config/Config.swift
 # xcode-build-server files
 buildServer.json
 .compile
+.env
+Bouncer/Config/Analytics.local.xcconfig

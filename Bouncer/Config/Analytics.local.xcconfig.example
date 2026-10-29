@@ -1,0 +1,2 @@
+POSTHOG_PROJECT_TOKEN = phc_your_project_token
+POSTHOG_HOST = your-region.i.posthog.com

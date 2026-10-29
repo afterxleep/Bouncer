@@ -27,8 +27,16 @@ struct FilterDetailContainerView: View {
 
     @EnvironmentObject var store: AppStore
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.analytics) private var analytics
 
     var body: some View {
+        editor
+            .onAppear {
+                analytics.track(.ruleEditorOpened(interactionType == .add ? .add : .edit))
+            }
+    }
+
+    @ViewBuilder private var editor: some View {
         switch interactionType {
         case .add:
             FilterDetailView(title: "NEW_FILTER",
@@ -77,6 +85,7 @@ extension FilterDetailContainerView {
     /// "Cancel" read in the same green that means "allow".
     private var cancelButton: some View {
         Button("CANCEL", role: .cancel) {
+            analytics.track(.ruleEditorCancelled)
             dismiss()
         }
         .tint(Stage.secondary)

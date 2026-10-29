@@ -13,6 +13,8 @@ import MessageUI
 
 struct HelpView: View {
     @Environment(\.dismiss) private var dismiss
+    @Environment(\.analytics) private var analytics
+    @EnvironmentObject private var store: AppStore
 
     @State private var isShowingWalkthrough = false
     @State private var isShowingContact = false
@@ -62,6 +64,7 @@ private extension HelpView {
                 intro
                 setupSection
                 supportSection
+                privacySection
                 privacyNote
                 versionFooter
             }
@@ -105,12 +108,14 @@ private extension HelpView {
                     actionRow(title: "HELP_OPEN_SETTINGS",
                               symbol: "arrow.up.forward.app",
                               tint: Brand.tint) {
+                        analytics.track(.helpActionTapped(.openSettings))
                         SystemSettings.open()
                     }
                     divider
                     actionRow(title: "HELP_SHOW_WALKTHROUGH",
                               symbol: "list.number",
                               tint: Brand.tint) {
+                        analytics.track(.helpActionTapped(.walkthrough))
                         isShowingWalkthrough = true
                     }
                 }
@@ -147,6 +152,8 @@ private extension HelpView {
                 actionRow(title: "HELP_EMAIL_SUPPORT",
                           symbol: "envelope.fill",
                           tint: Brand.safe) {
+                    analytics.track(.helpActionTapped(.emailSupport))
+                    analytics.track(.supportRequested(source: .help, mailAvailable: canSendMail))
                     // Without a mail account the compose sheet appears and does
                     // nothing, so offer the address instead.
                     if canSendMail {
@@ -157,6 +164,32 @@ private extension HelpView {
                 }
             }
             .stageCard()
+        }
+    }
+
+    // MARK: Privacy
+
+    var analyticsConsent: Binding<Bool> {
+        Binding(
+            get: { store.state.settings.analyticsConsent.isGranted },
+            set: { isOn in
+                let choice: AnalyticsConsent = isOn ? .granted : .denied
+                store.dispatch(.settings(action: .setAnalyticsConsent(choice)))
+                // Dropped by the consent gate when the answer is "no".
+                analytics.track(.privacyChoiceMade(choice, source: .help))
+            }
+        )
+    }
+
+    var privacySection: some View {
+        section("HELP_PRIVACY_SECTION", footer: "HELP_ANALYTICS_FOOTER") {
+            Toggle("HELP_ANALYTICS_TOGGLE", isOn: analyticsConsent)
+                .font(.body)
+                .foregroundStyle(Stage.label)
+                .padding(.horizontal, Metrics.l)
+                .frame(minHeight: 52)
+                .stageCard()
+                .accessibilityIdentifier("help.analytics")
         }
     }
 
@@ -261,4 +294,6 @@ private enum SetupStep: CaseIterable {
 
 #Preview {
     HelpView()
+        .environmentObject(AppStore(initialState: AppState(settings: SettingsState(), filters: FilterState()),
+                                    reducer: appReducer))
 }

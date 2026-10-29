@@ -14,4 +14,7 @@ enum SettingsAction {
     case setNumberOfLaunches(number: Int)
     case setLastVersionPromptedForReview(version: String)
     case setDatabaseVersion(version: Int)
+    case setAnalyticsConsent(AnalyticsConsent)
+    /// Dispatched once per process, after the launch counter has been bumped.
+    case appLaunched
 }

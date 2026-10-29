@@ -117,6 +117,7 @@ struct FilterListView: View {
     /// extension runs while we're in the background.
     @State private var activity = RuleActivityLog()
     @Environment(\.scenePhase) private var scenePhase
+    @Environment(\.analytics) private var analytics
 
     private var scopedFilters: [Filter] {
         filters.filter { scope.contains($0) }
@@ -186,6 +187,9 @@ struct FilterListView: View {
         .textInputAutocapitalization(.never)
         .autocorrectionDisabled()
         .task { refreshActivity() }
+        .onChange(of: searchText) { old, new in
+            if old.isEmpty, !new.isEmpty { analytics.track(.ruleSearchStarted(lane: scope)) }
+        }
         .onChange(of: scenePhase) { _, phase in
             if phase == .active { refreshActivity() }
         }
@@ -286,7 +290,9 @@ private extension FilterListView {
             Group {
                 header
 
-                ScopeSelector(selection: $scope, counts: count)
+                ScopeSelector(selection: $scope, counts: count) { lane in
+                    analytics.track(.ruleLaneChanged(lane: lane, laneRuleCount: count(lane)))
+                }
                     .padding(.horizontal, Metrics.l)
                     .padding(.bottom, Metrics.m)
 
@@ -350,6 +356,7 @@ private extension FilterListView {
     /// card, so every row had two chevrons.
     func ruleRow(_ filter: Filter, peak: Int) -> some View {
         Button {
+            analytics.track(.ruleOpened(filter))
             editingFilter = filter
         } label: {
             RuleCard(filter: filter,
@@ -362,13 +369,13 @@ private extension FilterListView {
         // Safe lane would be actively misleading.
         .swipeActions(edge: .trailing, allowsFullSwipe: true) {
             Button("DELETE", systemImage: "trash", role: .destructive) {
-                delete(filter)
+                delete(filter, method: .swipe)
             }
             .tint(.red)
         }
         .contextMenu {
             Button("DELETE", systemImage: "trash", role: .destructive) {
-                delete(filter)
+                delete(filter, method: .contextMenu)
             }
         }
         .transition(.asymmetric(
@@ -380,7 +387,10 @@ private extension FilterListView {
         if !searchText.isEmpty {
             NoResultsStage(query: searchText)
         } else {
-            EmptyStage(scope: scope) { showingFilterDetail = true }
+            EmptyStage(scope: scope) {
+                analytics.track(.addRuleTapped(source: .emptyState, lane: scope))
+                showingFilterDetail = true
+            }
         }
     }
 }
@@ -391,6 +401,7 @@ private extension FilterListView {
 
     var addButton: some View {
         Button("ADD_RULE", systemImage: "plus") {
+            analytics.track(.addRuleTapped(source: .toolbar, lane: scope))
             showingFilterDetail = true
         }
         // Always the brand tint: coloured by lane, the "+" turned red in Junk,
@@ -401,6 +412,7 @@ private extension FilterListView {
     var libraryMenu: some View {
         Menu {
             Button("IMPORT_BLOCK_LIST", systemImage: "square.and.arrow.down") {
+                analytics.track(.importStarted)
                 showingFileImporter = true
             }
             if let fileURL = FilterStoreFile.fileURL {
@@ -410,6 +422,7 @@ private extension FilterListView {
             }
             Divider()
             Button("HELP", systemImage: "questionmark.circle") {
+                analytics.track(.helpOpened(source: .libraryMenu))
                 showingHelp = true
             }
         } label: {
@@ -418,7 +431,8 @@ private extension FilterListView {
         .tint(Stage.label)
     }
 
-    func delete(_ filter: Filter) {
+    func delete(_ filter: Filter, method: RuleDeleteMethod) {
+        analytics.track(.ruleDeleteTapped(method))
         deleteCount += 1
         withAnimation(.smooth(duration: 0.3)) {
             onDelete(filter.id)

@@ -193,9 +193,25 @@
 "HELP_SUPPORT_SECTION" = "Soporte";
 "HELP_SUPPORT_FOOTER" = "Preguntas, errores y sugerencias llegan directamente al desarrollador.";
 "HELP_EMAIL_SUPPORT" = "Escribir a soporte";
-"HELP_PRIVACY" = "Tus mensajes se filtran por completo en tu iPhone y nunca salen de él. Ni a Bouncer ni a nadie. Cuando creas, cambias o eliminas una regla, la regla en sí — la frase, dónde buscar y qué hace — se envía a un servidor que controla el desarrollador, junto con tu región general y la hora.";
+"HELP_PRIVACY" = "Tus mensajes se filtran por completo en tu iPhone y nunca salen de él. Ni a Bouncer ni a nadie. Si decides compartir el uso de forma anónima, al crear, cambiar o eliminar una regla también se envía la regla en sí — la frase, dónde buscar y qué hace — a un servidor que controla el desarrollador, junto con tu región general y la hora.";
 "HELP_VERSION %@" = "Bouncer %@";
 "DONE" = "OK";
 "LANE_WINDOW_CAPTION" = "mensajes filtrados en los últimos 30 días";
 "RULE_SECTION_HEADER %lld" = "^[%lld regla](inflect: true)";
 "REGEX_LEARN_MORE" = "¿Qué es una expresión regular?";
+
+/* Privacy */
+"PRIVACY_TITLE" = "Bouncer no te rastrea";
+"PRIVACY_SUBTITLE" = "Tu privacidad es lo primero. Así están las cosas exactamente.";
+"PRIVACY_NO_TRACKING_TITLE" = "Sin rastreo";
+"PRIVACY_NO_TRACKING_BODY" = "Bouncer nunca te sigue por otras apps ni sitios web, no usa identificador publicitario y no vende nada.";
+"PRIVACY_ON_DEVICE_TITLE" = "Los mensajes se quedan en tu iPhone";
+"PRIVACY_ON_DEVICE_BODY" = "El filtrado ocurre por completo en tu dispositivo. Bouncer nunca lee ni sube tus mensajes.";
+"PRIVACY_USAGE_TITLE" = "Ayuda a mejorar Bouncer";
+"PRIVACY_USAGE_BODY" = "Comparte un uso anónimo — qué funciones usas y cuántas reglas tienes — para saber qué construir a continuación.";
+"PRIVACY_ACCEPT" = "Compartir uso anónimo";
+"PRIVACY_DECLINE" = "No compartir";
+"PRIVACY_CHANGE_ANYTIME" = "Puedes cambiarlo cuando quieras en Ayuda.";
+"HELP_PRIVACY_SECTION" = "Privacidad";
+"HELP_ANALYTICS_TOGGLE" = "Compartir uso anónimo";
+"HELP_ANALYTICS_FOOTER" = "Cuenta qué funciones usas y cuántas reglas tienes. Sin rastreo en otras apps y nunca tus mensajes.";

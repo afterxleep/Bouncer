@@ -193,9 +193,25 @@
 "HELP_SUPPORT_SECTION" = "Support";
 "HELP_SUPPORT_FOOTER" = "Questions, bugs and feature requests all reach the developer directly.";
 "HELP_EMAIL_SUPPORT" = "Email support";
-"HELP_PRIVACY" = "Your messages are filtered entirely on your iPhone and never leave it. Not to Bouncer, not to anyone. When you create, change, or delete a rule, the rule itself — the phrase, where to look, what it does — is sent to a server the developer controls, along with your general region and the time.";
+"HELP_PRIVACY" = "Your messages are filtered entirely on your iPhone and never leave it. Not to Bouncer, not to anyone. If you choose to share anonymous usage, creating, changing, or deleting a rule also sends the rule itself — the phrase, where to look, what it does — to a server the developer controls, along with your general region and the time.";
 "HELP_VERSION %@" = "Bouncer %@";
 "DONE" = "Done";
 "LANE_WINDOW_CAPTION" = "messages handled in the last 30 days";
 "RULE_SECTION_HEADER %lld" = "^[%lld rule](inflect: true)";
 "REGEX_LEARN_MORE" = "What is a regular expression?";
+
+/* Privacy */
+"PRIVACY_TITLE" = "Bouncer doesn’t track you";
+"PRIVACY_SUBTITLE" = "Your privacy comes first. Here’s exactly where things stand.";
+"PRIVACY_NO_TRACKING_TITLE" = "No tracking";
+"PRIVACY_NO_TRACKING_BODY" = "Bouncer never follows you across other apps or websites, uses no advertising ID, and sells nothing.";
+"PRIVACY_ON_DEVICE_TITLE" = "Messages stay on your iPhone";
+"PRIVACY_ON_DEVICE_BODY" = "Filtering happens entirely on your device. Bouncer never reads or uploads your messages.";
+"PRIVACY_USAGE_TITLE" = "Help improve Bouncer";
+"PRIVACY_USAGE_BODY" = "Share anonymous usage — which features you use and how many rules you have — so we know what to build next.";
+"PRIVACY_ACCEPT" = "Share anonymous usage";
+"PRIVACY_DECLINE" = "Don’t share";
+"PRIVACY_CHANGE_ANYTIME" = "You can change this any time in Help.";
+"HELP_PRIVACY_SECTION" = "Privacy";
+"HELP_ANALYTICS_TOGGLE" = "Share anonymous usage";
+"HELP_ANALYTICS_FOOTER" = "Counts which features you use and how many rules you have. No tracking across other apps, and never your messages.";

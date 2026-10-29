@@ -16,6 +16,8 @@ enum FilterMiddlewareError {
     case unknown(String)
 }
 
+/// `analyticsService` uploads rule contents to the developer's server, so it only
+/// runs for users who agreed to share usage data.
 func filterMiddleware(filterStore: FilterStore, analyticsService: AnalyticsService) -> Middleware<AppState, AppAction> {
     var cancellables = Set<AnyCancellable>()
     
@@ -49,24 +51,26 @@ func filterMiddleware(filterStore: FilterStore, analyticsService: AnalyticsServi
         case .filter(action: .add(let filter)):
             // Track analytics event for filter creation
             print("Analytics: Saving filter creation event - \(filter.phrase)")
-            analyticsService.saveEvent(filter: filter, eventType: .filterCreated)
-                .sink(
-                    receiveCompletion: { completion in
-                        if case .failure(let error) = completion {
-                            print("Analytics ERROR: Failed to save filter creation event")
-                            print("Analytics ERROR details: \(error)")
+            if state.settings.analyticsConsent.isGranted {
+                analyticsService.saveEvent(filter: filter, eventType: .filterCreated)
+                    .sink(
+                        receiveCompletion: { completion in
+                            if case .failure(let error) = completion {
+                                print("Analytics ERROR: Failed to save filter creation event")
+                                print("Analytics ERROR details: \(error)")
 
-                            // Check Supabase configuration
-                            print("Analytics DEBUG: Service initialized with client: \(analyticsService.hasValidClient ? "YES" : "NO")")
-                            print("Analytics DEBUG: Supabase URL value: \(AppConfig.supabaseURL)")
-                            print("Analytics DEBUG: Supabase Key valid: \(!AppConfig.supabaseKey.isEmpty && !AppConfig.supabaseKey.contains("YOUR_") ? "YES" : "NO")")
+                                // Check Supabase configuration
+                                print("Analytics DEBUG: Service initialized with client: \(analyticsService.hasValidClient ? "YES" : "NO")")
+                                print("Analytics DEBUG: Supabase URL value: \(AppConfig.supabaseURL)")
+                                print("Analytics DEBUG: Supabase Key valid: \(!AppConfig.supabaseKey.isEmpty && !AppConfig.supabaseKey.contains("YOUR_") ? "YES" : "NO")")
+                            }
+                        },
+                        receiveValue: { _ in
+                            print("Analytics: Successfully saved filter creation event")
                         }
-                    },
-                    receiveValue: { _ in
-                        print("Analytics: Successfully saved filter creation event")
-                    }
-                )
-                .store(in: &cancellables)
+                    )
+                    .store(in: &cancellables)
+            }
 
             return filterStore.add(filter: filter)
                 .map { AppAction.filter(action: .fetch) }
@@ -98,24 +102,26 @@ func filterMiddleware(filterStore: FilterStore, analyticsService: AnalyticsServi
         case .filter(action: .update(filter: let filter)):
             // Track analytics event for filter update
             print("Analytics: Saving filter update event - \(filter.phrase)")
-            analyticsService.saveEvent(filter: filter, eventType: .filterUpdated)
-                .sink(
-                    receiveCompletion: { completion in
-                        if case .failure(let error) = completion {
-                            print("Analytics ERROR: Failed to save filter update event")
-                            print("Analytics ERROR details: \(error)")
+            if state.settings.analyticsConsent.isGranted {
+                analyticsService.saveEvent(filter: filter, eventType: .filterUpdated)
+                    .sink(
+                        receiveCompletion: { completion in
+                            if case .failure(let error) = completion {
+                                print("Analytics ERROR: Failed to save filter update event")
+                                print("Analytics ERROR details: \(error)")
 
-                            // Check Supabase configuration
-                            print("Analytics DEBUG: Service initialized with client: \(analyticsService.hasValidClient ? "YES" : "NO")")
-                            print("Analytics DEBUG: Supabase URL value: \(AppConfig.supabaseURL)")
-                            print("Analytics DEBUG: Supabase Key valid: \(!AppConfig.supabaseKey.isEmpty && !AppConfig.supabaseKey.contains("YOUR_") ? "YES" : "NO")")
+                                // Check Supabase configuration
+                                print("Analytics DEBUG: Service initialized with client: \(analyticsService.hasValidClient ? "YES" : "NO")")
+                                print("Analytics DEBUG: Supabase URL value: \(AppConfig.supabaseURL)")
+                                print("Analytics DEBUG: Supabase Key valid: \(!AppConfig.supabaseKey.isEmpty && !AppConfig.supabaseKey.contains("YOUR_") ? "YES" : "NO")")
+                            }
+                        },
+                        receiveValue: { _ in
+                            print("Analytics: Successfully saved filter update event")
                         }
-                    },
-                    receiveValue: { _ in
-                        print("Analytics: Successfully saved filter update event")
-                    }
-                )
-                .store(in: &cancellables)
+                    )
+                    .store(in: &cancellables)
+            }
 
             return filterStore.update(filter: filter)
                 .map { AppAction.filter(action: .fetch) }
@@ -134,24 +140,26 @@ func filterMiddleware(filterStore: FilterStore, analyticsService: AnalyticsServi
             // Track analytics event for filter deletion
             if let filter = state.filters.filters.first(where: { $0.id == uuid }) {
                 print("Analytics: Saving filter deletion event - \(filter.phrase)")
-                analyticsService.saveEvent(filter: filter, eventType: .filterDeleted)
-                    .sink(
-                        receiveCompletion: { completion in
-                            if case .failure(let error) = completion {
-                                print("Analytics ERROR: Failed to save filter deletion event")
-                                print("Analytics ERROR details: \(error)")
+                if state.settings.analyticsConsent.isGranted {
+                    analyticsService.saveEvent(filter: filter, eventType: .filterDeleted)
+                        .sink(
+                            receiveCompletion: { completion in
+                                if case .failure(let error) = completion {
+                                    print("Analytics ERROR: Failed to save filter deletion event")
+                                    print("Analytics ERROR details: \(error)")
 
-                                // Check Supabase configuration
-                                print("Analytics DEBUG: Service initialized with client: \(analyticsService.hasValidClient ? "YES" : "NO")")
-                                print("Analytics DEBUG: Supabase URL value: \(AppConfig.supabaseURL)")
-                                print("Analytics DEBUG: Supabase Key valid: \(!AppConfig.supabaseKey.isEmpty && !AppConfig.supabaseKey.contains("YOUR_") ? "YES" : "NO")")
+                                    // Check Supabase configuration
+                                    print("Analytics DEBUG: Service initialized with client: \(analyticsService.hasValidClient ? "YES" : "NO")")
+                                    print("Analytics DEBUG: Supabase URL value: \(AppConfig.supabaseURL)")
+                                    print("Analytics DEBUG: Supabase Key valid: \(!AppConfig.supabaseKey.isEmpty && !AppConfig.supabaseKey.contains("YOUR_") ? "YES" : "NO")")
+                                }
+                            },
+                            receiveValue: { _ in
+                                print("Analytics: Successfully saved filter deletion event")
                             }
-                        },
-                        receiveValue: { _ in
-                            print("Analytics: Successfully saved filter deletion event")
-                        }
-                    )
-                    .store(in: &cancellables)
+                        )
+                        .store(in: &cancellables)
+                }
             }
 
             return filterStore.remove(uuid: uuid)

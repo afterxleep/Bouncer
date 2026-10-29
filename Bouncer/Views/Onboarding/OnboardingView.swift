@@ -16,6 +16,7 @@ struct OnboardingView: View {
     @State private var selection: OnboardingPage
     @State private var isShowingContactView = false
     @State private var isShowingMailAlert = false
+    @Environment(\.analytics) private var analytics
 
     init(mode: Mode,
          canSendMail: Bool,
@@ -32,6 +33,10 @@ struct OnboardingView: View {
         mode == .help
             ? OnboardingPage.allCases.filter { $0 != .welcome }
             : OnboardingPage.allCases
+    }
+
+    private var analyticsMode: OnboardingMode {
+        mode == .help ? .help : .firstRun
     }
 
     private var selectedIndex: Int {
@@ -74,6 +79,7 @@ struct OnboardingView: View {
         HStack(alignment: .center, spacing: 0) {
             if selection != pages.first, let previous = OnboardingPage(rawValue: selection.rawValue - 1) {
                 Button {
+                    analytics.track(.onboardingBackTapped(fromStep: selection.rawValue))
                     advance(to: previous)
                 } label: {
                     Image(systemName: "chevron.backward")
@@ -92,6 +98,7 @@ struct OnboardingView: View {
             // every page, not just the last one.
             if mode == .help {
                 Button("ONBOARDING_CLOSE", systemImage: "xmark") {
+                    analytics.track(.onboardingClosed(step: selection.rawValue))
                     onFinish()
                 }
                 .labelStyle(.iconOnly)
@@ -103,6 +110,7 @@ struct OnboardingView: View {
                 .accessibilityIdentifier("onboarding.close")
             } else if selection == .welcome {
                 Button("ONBOARDING_SKIP") {
+                    analytics.track(.onboardingSkipped)
                     onFinish()
                 }
                 .buttonStyle(.plain)
@@ -126,10 +134,16 @@ struct OnboardingView: View {
     private var ctaRow: some View {
         switch selection {
         case .welcome:
-            primaryButton("ONBOARDING_GET_STARTED") { advance(to: .step1) }
+            primaryButton("ONBOARDING_GET_STARTED") {
+                analytics.track(.onboardingStarted)
+                advance(to: .step1)
+            }
         case .step1:
             HStack(spacing: 12) {
-                primaryButton("ONBOARDING_OPEN_SETTINGS") { onOpenSettings() }
+                primaryButton("ONBOARDING_OPEN_SETTINGS") {
+                    analytics.track(.onboardingSettingsOpened(step: selection.rawValue))
+                    onOpenSettings()
+                }
                 secondaryButton("ONBOARDING_NEXT") { advance(to: .step2) }
             }
         case .step2:
@@ -139,7 +153,10 @@ struct OnboardingView: View {
         case .step4:
             primaryButton("ONBOARDING_NEXT") { advance(to: .step5) }
         case .step5:
-            primaryButton("ONBOARDING_DONE") { onFinish() }
+            primaryButton("ONBOARDING_DONE") {
+                analytics.track(.onboardingCompleted(mode: analyticsMode))
+                onFinish()
+            }
         }
     }
 
@@ -179,6 +196,7 @@ struct OnboardingView: View {
 
     private var supportLink: some View {
         Button("NEED_HELP") {
+            analytics.track(.supportRequested(source: .onboarding, mailAvailable: canSendMail))
             if canSendMail {
                 isShowingContactView = true
             } else {
@@ -216,6 +234,12 @@ struct OnboardingView: View {
                 pager
                 bottomBar
             }
+        }
+        .onAppear {
+            analytics.track(.onboardingStepViewed(step: selection.rawValue, mode: analyticsMode))
+        }
+        .onChange(of: selection) { _, page in
+            analytics.track(.onboardingStepViewed(step: page.rawValue, mode: analyticsMode))
         }
         .sheet(isPresented: $isShowingContactView) {
             ContactView(result: $isShowingContactView)

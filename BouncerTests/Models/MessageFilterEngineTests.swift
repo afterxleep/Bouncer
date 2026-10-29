@@ -20,6 +20,13 @@ import Combine
 
 final class MessageFilterEngineTests: XCTestCase {
 
+    /// The store-failure test writes garbage into the real app-group file,
+    /// which the app shares when tests run hosted on a simulator.
+    override func tearDown() {
+        _ = FilterStoreFile().reset()
+        super.tearDown()
+    }
+
     private func describe(_ response: ILMessageFilterQueryResponse) -> String {
         return "action=\(response.action.rawValue),subAction=\(response.subAction.rawValue)"
     }
