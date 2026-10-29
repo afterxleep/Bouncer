@@ -74,6 +74,7 @@
 "ERROR_DECODING_FAILED" = "El archivo seleccionado no es una lista de reglas de Bouncer. Elige un archivo exportado desde Bouncer e inténtalo de nuevo.";
 "ERROR_DISK %@" = "Bouncer no pudo escribir en su almacenamiento: %@. Asegúrate de tener espacio libre e inténtalo de nuevo.";
 "ERROR_INVALID_REGEX %@" = "Bouncer no pudo guardar esa regla: %@";
+"ERROR_DUPLICATE_RULE" = "Ya tienes una regla exactamente igual a esta.";
 
 /* Onboarding */
 "ONBOARDING_WELCOME_TITLE" = "¡Bienvenido a Bouncer!";
@@ -180,6 +181,8 @@
 
 "OTHER_SHORT" = "Otros";
 "RULE_SENTENCE %1$@ %2$@ %3$@" = "Los mensajes donde %1$@ contenga %2$@ van a %3$@.";
+"RULE_SENTENCE_REGEX %1$@ %2$@ %3$@" = "Los mensajes donde %1$@ coincida con el patrón %2$@ van a %3$@.";
+"RULE_SENTENCE_CASE_SENSITIVE" = "Las mayúsculas deben coincidir.";
 "LANE_IDLE_ONE %@" = "«%@» no ha coincidido con nada. Quizá convenga cambiarla o eliminarla.";
 "LANE_IDLE_MANY %lld" = "^[%lld regla](inflect: true) aquí no han coincidido con nada.";
 
@@ -208,10 +211,10 @@
 "PRIVACY_ON_DEVICE_TITLE" = "Los mensajes se quedan en tu iPhone";
 "PRIVACY_ON_DEVICE_BODY" = "El filtrado ocurre por completo en tu dispositivo. Bouncer nunca lee ni sube tus mensajes.";
 "PRIVACY_USAGE_TITLE" = "Ayuda a mejorar Bouncer";
-"PRIVACY_USAGE_BODY" = "Comparte un uso anónimo — qué funciones usas y cuántas reglas tienes — para saber qué construir a continuación.";
+"PRIVACY_USAGE_BODY" = "Comparte un uso anónimo — qué funciones usas, cuántas reglas tienes y las reglas que creas — para saber qué construir a continuación. Nunca tus mensajes.";
 "PRIVACY_ACCEPT" = "Compartir uso anónimo";
 "PRIVACY_DECLINE" = "No compartir";
 "PRIVACY_CHANGE_ANYTIME" = "Puedes cambiarlo cuando quieras en Ayuda.";
 "HELP_PRIVACY_SECTION" = "Privacidad";
 "HELP_ANALYTICS_TOGGLE" = "Compartir uso anónimo";
-"HELP_ANALYTICS_FOOTER" = "Cuenta qué funciones usas y cuántas reglas tienes. Sin rastreo en otras apps y nunca tus mensajes.";
+"HELP_ANALYTICS_FOOTER" = "Cuenta qué funciones usas y cuántas reglas tienes, y envía las reglas que creas. Sin rastreo en otras apps y nunca tus mensajes.";

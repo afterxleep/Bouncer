@@ -25,13 +25,9 @@ enum RegexValidator {
             _ = try NSRegularExpression(pattern: pattern)
             return .valid
         } catch {
-            return .invalid(humanReadable(error: error, pattern: pattern))
+            // The system's own description only repeats the pattern back
+            // ("The value … is invalid"), so it adds nothing for the user.
+            return .invalid("“\(pattern)” isn’t a valid regular expression.")
         }
-    }
-
-    private static func humanReadable(error: Error, pattern: String) -> String {
-        let nsError = error as NSError
-        let detail = nsError.localizedDescription
-        return "“\(pattern)” is not a valid regular expression. \(detail)"
     }
 }

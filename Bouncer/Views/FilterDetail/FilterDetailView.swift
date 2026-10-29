@@ -165,9 +165,14 @@ private extension FilterDetailView {
             : "“\(filterTerm.trimmed)”"
         let destination = filterDestination.category.name
 
-        var text = AttributedString(
-            String(format: String(localized: "RULE_SENTENCE %1$@ %2$@ %3$@"),
-                   scope, phrase, destination))
+        let sentence = useRegex
+            ? String(localized: "RULE_SENTENCE_REGEX %1$@ %2$@ %3$@")
+            : String(localized: "RULE_SENTENCE %1$@ %2$@ %3$@")
+        var plain = String(format: sentence, scope, phrase, destination)
+        if isCaseSensitive {
+            plain += " " + String(localized: "RULE_SENTENCE_CASE_SENSITIVE")
+        }
+        var text = AttributedString(plain)
 
         for (value, colour) in [(scope, Stage.label),
                                 (phrase, Stage.label),
@@ -197,6 +202,7 @@ private extension FilterDetailView {
                     }
                 }
             }
+            .accessibilityElement(children: .contain)
             .accessibilityIdentifier("rule.scope")
         }
     }
@@ -213,6 +219,7 @@ private extension FilterDetailView {
                 destinationTile(.junk)
                 categoryTile
             }
+            .accessibilityElement(children: .contain)
             .accessibilityIdentifier("rule.destination")
         }
     }
@@ -246,11 +253,15 @@ private extension FilterDetailView {
             VStack(spacing: 8) {
                 Image(systemName: symbol)
                     .font(.system(size: 20, weight: .semibold))
+                // Two lines so "Other Promotions" fits whole; one line
+                // shrunk to fit either truncated it or ran into the border.
                 Text(title)
                     .font(.subheadline.weight(.semibold))
-                    .lineLimit(1)
-                    .minimumScaleFactor(0.8)
+                    .lineLimit(2)
+                    .multilineTextAlignment(.center)
+                    .minimumScaleFactor(0.85)
             }
+            .padding(.horizontal, Metrics.xs)
             .foregroundStyle(isSelected ? tint : Stage.secondary)
             .frame(maxWidth: .infinity)
             .frame(height: 76)
@@ -385,15 +396,18 @@ private extension FilterDetailView {
                 optionToggle($useRegex,
                              title: "USE_REGULAR_EXPRESSIONS",
                              detail: "USE_REGULAR_EXPRESSIONS_DETAIL")
+                    .accessibilityIdentifier("rule.option.regex")
                 divider
                 regexPrimerLink
                 divider
                 optionToggle($isCaseSensitive,
                              title: "IS_CASE_SENSITIVE",
                              detail: "IS_CASE_SENSITIVE_DETAIL")
+                    .accessibilityIdentifier("rule.option.caseSensitive")
             }
         }
         .stageCard()
+        .accessibilityElement(children: .contain)
         .accessibilityIdentifier("rule.advanced")
     }
 
