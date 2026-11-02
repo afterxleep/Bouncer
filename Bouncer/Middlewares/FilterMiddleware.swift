@@ -50,7 +50,7 @@ func filterMiddleware(filterStore: FilterStore, analyticsService: AnalyticsServi
 
         case .filter(action: .add(let filter)):
             // Track analytics event for filter creation
-            print("Analytics: Saving filter creation event - \(filter.phrase)")
+            print("Analytics: Saving filter creation event")
             if state.settings.analyticsConsent.isGranted {
                 analyticsService.saveEvent(filter: filter, eventType: .filterCreated)
                     .sink(
@@ -101,7 +101,7 @@ func filterMiddleware(filterStore: FilterStore, analyticsService: AnalyticsServi
 
         case .filter(action: .update(filter: let filter)):
             // Track analytics event for filter update
-            print("Analytics: Saving filter update event - \(filter.phrase)")
+            print("Analytics: Saving filter update event")
             if state.settings.analyticsConsent.isGranted {
                 analyticsService.saveEvent(filter: filter, eventType: .filterUpdated)
                     .sink(
@@ -139,7 +139,7 @@ func filterMiddleware(filterStore: FilterStore, analyticsService: AnalyticsServi
         case .filter(action: .delete(let uuid)):
             // Track analytics event for filter deletion
             if let filter = state.filters.filters.first(where: { $0.id == uuid }) {
-                print("Analytics: Saving filter deletion event - \(filter.phrase)")
+                print("Analytics: Saving filter deletion event")
                 if state.settings.analyticsConsent.isGranted {
                     analyticsService.saveEvent(filter: filter, eventType: .filterDeleted)
                         .sink(

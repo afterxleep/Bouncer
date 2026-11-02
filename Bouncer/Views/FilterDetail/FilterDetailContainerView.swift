@@ -34,6 +34,21 @@ struct FilterDetailContainerView: View {
             .onAppear {
                 analytics.track(.ruleEditorOpened(interactionType == .add ? .add : .edit))
             }
+            // The list's alert can't present over this sheet, so a rejected
+            // save would otherwise look like a Save button that does nothing.
+            // Pushed for editing, the list's alert is already in front.
+            .alert(item: sheetErrorBinding) { error in
+                Alert(title: Text("ERROR"), message: error.textView)
+            }
+            // A swipe shouldn't silently throw away a rule being written.
+            .interactiveDismissDisabled(interactionType == .add && !filterTerm.isBlank)
+    }
+
+    private var sheetErrorBinding: Binding<FilterError?> {
+        Binding(
+            get: { interactionType == .add ? store.state.filters.filterError : nil },
+            set: { _ in store.dispatch(.filter(action: .clearError)) }
+        )
     }
 
     @ViewBuilder private var editor: some View {
@@ -103,7 +118,8 @@ extension FilterDetailContainerView {
                 phrase: filterTerm,
                 type: filterType,
                 destination: filterDestination,
-                useRegex: useRegex
+                useRegex: useRegex,
+                existing: store.state.filters.filters
             )
             switch outcome {
             case .accept:
@@ -112,6 +128,8 @@ extension FilterDetailContainerView {
                 dismiss()
             case .reject(let message):
                 store.dispatch(.filter(action: .error(.invalidRegex(message))))
+            case .duplicate:
+                store.dispatch(.filter(action: .error(.duplicateRule)))
             }
         }
         .buttonStyle(.borderedProminent)

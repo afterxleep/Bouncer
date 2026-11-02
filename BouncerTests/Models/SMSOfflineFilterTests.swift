@@ -881,7 +881,7 @@ class SMSOfflineFilterTests: XCTestCase {
         let initialCount = store.state.filters.filters.count
 
         switch outcome {
-        case .accept:
+        case .accept, .duplicate:
             XCTFail("An invalid regex must not be accepted by the save validator")
         case .reject(let message):
             store.dispatch(.filter(action: .error(.invalidRegex(message))))
@@ -917,6 +917,8 @@ class SMSOfflineFilterTests: XCTestCase {
             XCTAssertEqual(rule.action, .junk)
         case .reject(let message):
             XCTFail("win.*.*prize should be accepted, got: \(message)")
+        case .duplicate:
+            XCTFail("win.*.*prize should be accepted, got .duplicate")
         }
     }
 
@@ -929,12 +931,41 @@ class SMSOfflineFilterTests: XCTestCase {
             useRegex: true
         )
         switch outcome {
-        case .accept:
+        case .accept, .duplicate:
             XCTFail("(win+)+! is catastrophic and must be rejected at save time")
         case .reject(let message):
             XCTAssertTrue(message.contains("nested quantifiers"),
                           "Rejection message should explain why: \(message)")
         }
+    }
+
+    func testInvalidRegexMessageNamesThePatternOnce() {
+        guard case .invalid(let message) = RegexValidator.validate("([a-z") else {
+            return XCTFail("([a-z must be invalid")
+        }
+        XCTAssertEqual(message.components(separatedBy: "([a-z").count - 1, 1,
+                       "The pattern should appear once, not echoed by the system detail: \(message)")
+    }
+
+    func testExactDuplicateIsRejectedAtSave() {
+        let existing = Filter(id: UUID(), phrase: "mom", type: .any, action: .allow, subAction: .allow)
+        let outcome = RuleSaveValidator.makeRule(id: nil, phrase: "  Mom ", type: .any,
+                                                 destination: .allow, useRegex: false, existing: [existing])
+        XCTAssertEqual(outcome, .duplicate)
+    }
+
+    func testEditingARuleIsNotADuplicateOfItself() {
+        let existing = Filter(id: UUID(), phrase: "mom", type: .any, action: .allow, subAction: .allow)
+        let outcome = RuleSaveValidator.makeRule(id: existing.id, phrase: "mom", type: .any,
+                                                 destination: .allow, useRegex: false, existing: [existing])
+        guard case .accept = outcome else { return XCTFail("Re-saving the same rule must be accepted, got \(outcome)") }
+    }
+
+    func testSamePhraseWithADifferentDestinationIsNotADuplicate() {
+        let existing = Filter(id: UUID(), phrase: "mom", type: .any, action: .allow, subAction: .allow)
+        let outcome = RuleSaveValidator.makeRule(id: nil, phrase: "mom", type: .any,
+                                                 destination: .junk, useRegex: false, existing: [existing])
+        guard case .accept = outcome else { return XCTFail("A different destination is a different rule, got \(outcome)") }
     }
 
     func testBlankPhraseIsRejectedAtSave() {
@@ -946,7 +977,7 @@ class SMSOfflineFilterTests: XCTestCase {
             useRegex: false
         )
         switch outcome {
-        case .accept:
+        case .accept, .duplicate:
             XCTFail("Blank phrase must be rejected")
         case .reject:
             break

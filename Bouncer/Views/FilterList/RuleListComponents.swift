@@ -146,22 +146,13 @@ struct RuleCard: View {
                 // Destination first when it varies, then how the rule matches.
                 // Keeping it on this line leaves the trailing column free for
                 // the one thing that changes row to row: what it has caught.
-                HStack(spacing: 5) {
-                    if showsCategory {
-                        Text(category.title)
-                            .foregroundStyle(category.tint)
-                        Circle().frame(width: 2.5, height: 2.5)
-                    }
-                    ForEach(Array(detail.enumerated()), id: \.offset) { index, part in
-                        if index > 0 {
-                            Circle().frame(width: 2.5, height: 2.5)
-                        }
-                        Text(part)
-                    }
+                // Long pairs ("Other Transactions • Message text") step down a
+                // size, then drop the match details, rather than truncating.
+                ViewThatFits(in: .horizontal) {
+                    detailLine(font: .caption, includesDetails: true)
+                    detailLine(font: .caption2, includesDetails: true)
+                    detailLine(font: .caption, includesDetails: false)
                 }
-                .font(.caption)
-                .foregroundStyle(Stage.tertiary)
-                .lineLimit(1)
             }
 
             Spacer(minLength: Metrics.s)
@@ -180,6 +171,29 @@ struct RuleCard: View {
         .padding(.horizontal, Metrics.l - 2)
         .stageCard()
         .accessibilityElement(children: .combine)
+    }
+
+    private func detailLine(font: Font, includesDetails: Bool) -> some View {
+        HStack(spacing: 5) {
+            if showsCategory {
+                Text(category.title)
+                    .foregroundStyle(category.tint)
+                if includesDetails {
+                    Circle().frame(width: 2.5, height: 2.5)
+                }
+            }
+            if includesDetails || !showsCategory {
+                ForEach(Array(detail.enumerated()), id: \.offset) { index, part in
+                    if index > 0 {
+                        Circle().frame(width: 2.5, height: 2.5)
+                    }
+                    Text(part)
+                }
+            }
+        }
+        .font(font)
+        .foregroundStyle(Stage.tertiary)
+        .lineLimit(1)
     }
 
     private var iconWell: some View {

@@ -13,6 +13,7 @@ enum FilterError: Identifiable {
     case deleteFailed
     case diskError(message: String)
     case invalidRegex(String)
+    case duplicateRule
 
     /// Stable identifier used for tests, analytics, and any external caller
     /// comparing errors. Localised strings live in en.lproj / es.lproj with
@@ -26,6 +27,7 @@ enum FilterError: Identifiable {
         case .deleteFailed:          return "ERROR_DELETE_FAILED"
         case .diskError:             return "ERROR_DISK"
         case .invalidRegex(let str): return "ERROR_INVALID_REGEX_\(str)"
+        case .duplicateRule:         return "ERROR_DUPLICATE_RULE"
         }
     }
 
@@ -48,6 +50,8 @@ enum FilterError: Identifiable {
                 NSLocalizedString("ERROR_DISK %@", comment: ""),
                 message
             )
+        case .duplicateRule:
+            return NSLocalizedString("ERROR_DUPLICATE_RULE", comment: "")
         case .invalidRegex(let message):
             return String.localizedStringWithFormat(
                 NSLocalizedString("ERROR_INVALID_REGEX %@", comment: ""),

@@ -146,6 +146,7 @@ extension FilterError {
         case .deleteFailed: return "delete_failed"
         case .diskError: return "disk_error"
         case .invalidRegex: return "invalid_regex"
+        case .duplicateRule: return "duplicate_rule"
         }
     }
 }

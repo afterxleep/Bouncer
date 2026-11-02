@@ -16,6 +16,9 @@ enum RuleSaveValidator {
     enum Outcome: Equatable {
         case accept(Filter)
         case reject(String)
+        /// Another rule already does exactly this; saving would only add a
+        /// second row that can never change an outcome.
+        case duplicate
     }
 
     /// Build a rule from the editor's bound state, applying any save-time
@@ -26,7 +29,8 @@ enum RuleSaveValidator {
                          phrase: String,
                          type: FilterType,
                          destination: FilterDestination,
-                         useRegex: Bool) -> Outcome {
+                         useRegex: Bool,
+                         existing: [Filter] = []) -> Outcome {
         let trimmed = phrase.trimmingCharacters(in: .whitespacesAndNewlines)
         guard !trimmed.isEmpty else {
             return .reject("The phrase cannot be empty.")
@@ -50,7 +54,23 @@ enum RuleSaveValidator {
                           subAction: subAction,
                           useRegex: useRegex,
                           caseSensitive: false)
+        if existing.contains(where: { $0.duplicates(rule) }) {
+            return .duplicate
+        }
         return .accept(rule)
+    }
+}
+
+private extension Filter {
+    /// Same phrase (ignoring case), same place to look, same destination and
+    /// matching mode — but a different rule, so editing a rule in place is fine.
+    func duplicates(_ other: Filter) -> Bool {
+        id != other.id
+            && phrase.caseInsensitiveCompare(other.phrase) == .orderedSame
+            && type == other.type
+            && action == other.action
+            && subAction == other.subAction
+            && useRegex == other.useRegex
     }
 }
 
