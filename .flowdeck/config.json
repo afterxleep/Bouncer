@@ -1,6 +1,12 @@
 {
-  "ship" : {
-    "account" : "0cc9c11e-0f7b-4c70-83ad-d55edfcf7c58"
+  "appLaunch" : {
+    "args" : [
+
+    ],
+    "env" : {
+      "POSTHOG_HOST" : "https:\/\/eu.i.posthog.com",
+      "POSTHOG_PROJECT_TOKEN" : "phc_CUhfv4n6YVuQU5tdVEXH7b6EskJEcM7oE7bv7w5MezF2"
+    }
   },
   "version" : 1
 }
